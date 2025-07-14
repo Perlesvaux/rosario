@@ -24,11 +24,6 @@ export default function Home() {
       leyenda={senal}
     /> 
 
-    <Introductio 
-      titulo="Señal de la Cruz"
-      leyenda={senal}
-    /> 
-
     <Introductio
       titulo="Invocación del Espiritu Santo"
       leyenda={invocacion}

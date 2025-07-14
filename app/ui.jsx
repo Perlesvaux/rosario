@@ -1,5 +1,5 @@
-const css_lead = "bg-yellow-50 border-l-4 border-yellow-400 px-4 py-2 text-yellow-800"
-const css_response = "bg-green-50 border-l-4 border-green-400 px-4 py-2 text-green-800"
+const css_lead = "bg-teal-50 border-l-4 border-teal-400 px-4 py-2 text-teal-800 "
+const css_response = "bg-red-50 border-l-4 border-red-400 px-4 py-2 text-red-900"
 const css_title = "text-2xl font-bold text-gray-900"
 const css_header = "text-4xl font-bold text-gray-900"
 const css_article = "pb-4"
