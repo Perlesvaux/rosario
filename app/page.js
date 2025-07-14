@@ -3,20 +3,58 @@ import { senal, invocacion, contricion, credo,
   padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 
 import Mistery from './Mistery.jsx'
+import { Introductio } from './ui.jsx'
+
+const lead = "bg-yellow-50 border-l-4 border-yellow-400 px-4 py-2 text-yellow-800"
+const response = "bg-green-50 border-l-4 border-green-400 px-4 py-2 text-green-800"
+const title = "text-2xl font-bold text-gray-900"
+const header = "text-4xl font-bold text-gray-900"
+const article = "pb-4"
 
 export default function Home() {
 
 
   return (
-  <div className="bg-white text-white px-4 py-2 rounded flex flex-col w-full ">
-      <div className="text-black">{senal}</div>
-      <div className="text-black">{invocacion}</div>
-      <div className="text-black">{contricion}</div>
-      <div className="text-black">{credo}</div>
+  <div className="bg-white text-white px-4 py-2 rounded flex flex-col w-full  space-y-8 ">
 
+    <h1 className={header}>Santo Rosario</h1>
 
-       <Mistery />
+    <Introductio 
+      titulo="Señal de la Cruz"
+      leyenda={senal}
+    /> 
 
+    <Introductio 
+      titulo="Señal de la Cruz"
+      leyenda={senal}
+    /> 
+
+    <Introductio
+      titulo="Invocación del Espiritu Santo"
+      leyenda={invocacion}
+    />
+
+    <Introductio
+      titulo="Acto de Contrición"
+      leyenda={contricion}
+    />
+
+    <Introductio
+      titulo="Credo de los Apóstoles"
+      leyenda={credo}
+    />
+
+     <Mistery />
+
+<div className="pb-4"> 
+  <h3 className={title}>Details</h3>
+  <div className={lead}>
+    Heads up! This needs your eyes.
+  </div>
+  <div className={response}>
+    Heads up! This needs your eyes.
+  </div>
+</div>
 
 <div className="text-gray-700 font-normal text-base leading-relaxed">
   This is standard content. It’s clear, readable, and blends into the flow.
@@ -24,41 +62,17 @@ export default function Home() {
  <div className="text-indigo-600 font-medium text-lg leading-snug">
   This is important! Pay attention, but don’t feel pressured.
 </div>     
-<div className="bg-yellow-50 border-l-4 border-yellow-400 px-4 py-2 text-yellow-800">
+<div className={lead}>
   Heads up! This needs your eyes.
 </div>
 
-<div className="bg-green-50 border-l-4 border-green-400 px-4 py-2 text-green-800">
-  Heads up! This needs your eyes.
-</div>
-
-<div className="text-purple-800 font-serif italic text-lg leading-tight">
-  "Let us begin. The Lord is with you."
-</div>
-
-<h2 className="text-xl text-gray-800 font-medium">How It Works</h2>
-<p  className="text-gray-600 mt-2">
-  The slightly lighter text color makes the paragraph feel subordinate.
-</p>
-
-<h3 className="text-lg font-medium text-gray-800">Details</h3>
-<p  className="text-gray-600 ml-4 pl-2 mt-1">
-  This indented paragraph feels like a child of the heading.
-</p>
-<h3 className="text-lg font-medium text-gray-800">Details</h3>
-<div className="bg-green-50 border-l-4 border-green-400 px-4 py-2 text-green-800">
+<div className={response}>
   Heads up! This needs your eyes.
 </div>
 
 
-<div className="space-y-2"> 
-  <h2 className="text-2xl font-bold text-gray-900">Section Title</h2>
-  <p className="text-gray-700">This paragraph feels naturally connected to the title above.</p>
-</div>
-<div className="space-y-1"> 
-  <h2 className="text-2xl font-bold text-gray-900">Section Title</h2>
-  <p className="text-gray-700">This paragraph feels naturally connected to the title above.</p>
-</div>
+
+
 
   </div>
 

@@ -1,5 +1,7 @@
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 import  { gozosos } from './misterios.js'
+import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx' 
+
 
 export default function Mistery() {
   const misterios_de_hoy = misterio_del_dia()
@@ -7,29 +9,43 @@ export default function Mistery() {
   return (<>
     {
       misterios_de_hoy.map((misterio, indx)=>
-        <div key={indx}>
-          <div className="text-cyan-500">{misterio.titulo}</div>
-          <div className="text-cyan-500">{misterio.fruto}</div>
-          <div className="text-cyan-500">{misterio.leyenda}</div>
-          <div className="text-cyan-500">{misterio.l}</div>
-          <div className="text-green-700">{misterio.r}</div>
+        <section className="bg-rose-50  px-4 py-2 text-rose-800 rounded"  key={indx}>
 
-          <div className="text-cyan-700">{padreNuestro.l}</div>
-          <div className="text-green-700">{padreNuestro.r}</div>
+          <Mysterium {...misterio} />
 
-          <div className="text-cyan-700">{aveMaria.l}</div>
-          <div className="text-green-700">{aveMaria.r}</div>
+          <Dialogus>
+            <Titulus>Padre Nuestro</Titulus>
+            <Vox lider={padreNuestro.l}  respuesta={padreNuestro.r} />
+          </Dialogus>
 
-          <div className="text-cyan-700" >{gloria.l}</div>
-          <div className="text-green-700" >{gloria.r}</div>
+          <Dialogus>
+            <Titulus>Ave María (x10)</Titulus>
+            <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
+          </Dialogus>
 
-          <div className="text-cyan-700" > {jaculatoria_1.l}</div>
-          <div className="text-green-700" >{jaculatoria_1.r}</div>
+          <Dialogus>
+            <Titulus>Gloria</Titulus>
+            <Vox lider={ gloria.l } respuesta={ gloria.r } />
+          </Dialogus>
 
-          <div className="text-cyan-700" > {jaculatoria_2.l}</div>
-          <div className="text-green-700" >{jaculatoria_2.r}</div>
+          <Dialogus>
 
-        </div>
+            <Titulus>Jaculatorias</Titulus>
+
+            <Vox
+              lider={jaculatoria_1.l}
+              respuesta={jaculatoria_1.r}
+            />
+
+            <Vox
+              lider={jaculatoria_2.l}
+              respuesta={jaculatoria_2.r}
+            />
+
+        </Dialogus>
+
+
+        </section>
 
       )
     }
@@ -45,8 +61,6 @@ export default function Mistery() {
 const misterio_del_dia = () => {
   const today = new Date().getDay()
   if (today === 1 || today === 6) return gozosos
-
-
   if (today === 2 || today === 5) return 
   if (today === 3 || today === 0) return
   if (today === 4) return
