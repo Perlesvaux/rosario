@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { senal, invocacion, contricion, credo,    
-  padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
+  padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2, misterio_del_dia } from './prayers.js'
 
 
-import Mistery, { misterio_del_dia } from './Mystery.jsx'
+import Mystery from './Mystery.jsx'
 import { Introductio } from './ui.jsx'
 
 const lead = "bg-yellow-50 border-l-4 border-yellow-400 px-4 py-2 text-yellow-800"
@@ -15,13 +15,14 @@ const article = "pb-4"
 export default function Home() {
 
 
-  const misterio_de_hoy = misterio_del_dia()
+  const { lista:misterios, nombre } = misterio_del_dia()
+  //const misterio_de_hoy = misterio_del_dia()
 
 
   return (
   <div className="bg-white text-white px-4 py-2 rounded flex flex-col w-full  space-y-8 ">
 
-    <h1 className={header}>Santo Rosario | {misterio_de_hoy.nombre.toUpperCase()} </h1>
+    <h1 className={header}>Santo Rosario | {nombre} </h1>
 
     <Introductio 
       titulo="Señal de la Cruz"
@@ -43,7 +44,7 @@ export default function Home() {
       leyenda={credo}
     />
 
-    <Mistery mistery={misterio_de_hoy} />
+    <Mystery misterios={misterios} />
 
   
 

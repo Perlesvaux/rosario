@@ -1,3 +1,5 @@
+import  { gozosos } from './misterios.js'
+
 export const aveMaria = {
   "l" : "Dios te salve María, llena eres de gracia, el Señor es contigo. Bendita eres entre todas las mujeres y bendito es el fruto de tu vientre, Jesús.",
   "r" : "Santa María, Madre de Dios, ruega por nosotros, pecadores, ahora y en la hora de nuestra muerte. Amén."
@@ -33,7 +35,16 @@ export const contricion = "Jesús, mi Señor y redentor, yo me arrepiento de tod
 export const credo = "Creo en Dios Padre Todopoderoso, Creador del cielo y de la tierra. Creo en Jesucristo, su único Hijo, nuestro Señor; que fue concebido por obra y gracia del Espíritu Santo,  nació de Santa María virgen. Padeció bajo el poder de Poncio Pilato; fue crucificado, muerto y sepultado; descendió a los infiernos. Al tercer día resucitó de entre los muertos. Subió al cielo, y está sentado a la diestra de Dios Padre Todopoderoso. Desde allí vendrá a juzgar a los vivos y a los muertos. Creo en el Espíritu Santo, la Santa Iglesia Católica, la comunión de los santos, el perdón de los pecados, la resurrección de la carne y la vida eterna. Amén."
 
 
+export const misterio_del_dia = () => {
+  const today = new Date().getDay()
+  if (today === 1 || today === 6) return gozosos
+  if (today === 2 || today === 5) return 
+  if (today === 3 || today === 0) return
+  if (today === 4) return
 
+
+
+}
 
 
 

@@ -1,14 +1,12 @@
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
-import  { gozosos } from './misterios.js'
 import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx' 
 
 
-export default function Mystery() {
-  const { lista:misterios_de_hoy } = misterio_del_dia()
+export default function Mystery({ misterios }) {
 
   return (<>
     {
-      misterios_de_hoy.map((misterio, indx)=>
+      misterios.map((misterio, indx)=>
         <section className="bg-rose-50  px-4 py-2 text-rose-800 rounded"  key={indx}>
 
           <Mysterium {...misterio} />
@@ -58,13 +56,3 @@ export default function Mystery() {
 
 
 
-export const misterio_del_dia = () => {
-  const today = new Date().getDay()
-  if (today === 1 || today === 6) return gozosos
-  if (today === 2 || today === 5) return 
-  if (today === 3 || today === 0) return
-  if (today === 4) return
-
-
-
-}

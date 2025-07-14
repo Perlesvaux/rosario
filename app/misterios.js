@@ -1,5 +1,5 @@
 export const gozosos = {
-  nombre:"gozosos",
+  nombre:"GOZOSOS",
   lista: [
   {
     titulo: "EN EL PRIMER MISTERIO GOZOSO: CONTEMPLAMOS “LA ANUNCIACIÓN”",
