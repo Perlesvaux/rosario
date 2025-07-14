@@ -25,6 +25,10 @@ export default function Intro () {
       leyenda={credo}
     />
 
+    <Introductio 
+      titulo="Agradecimiento y peticiones nuestras, incluyendo por las almas del purgatorio."
+    />
+
   </>
 
 }

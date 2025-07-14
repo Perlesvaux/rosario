@@ -34,6 +34,17 @@ export const contricion = "Jesús, mi Señor y redentor, yo me arrepiento de tod
 
 export const credo = "Creo en Dios Padre Todopoderoso, Creador del cielo y de la tierra. Creo en Jesucristo, su único Hijo, nuestro Señor; que fue concebido por obra y gracia del Espíritu Santo,  nació de Santa María virgen. Padeció bajo el poder de Poncio Pilato; fue crucificado, muerto y sepultado; descendió a los infiernos. Al tercer día resucitó de entre los muertos. Subió al cielo, y está sentado a la diestra de Dios Padre Todopoderoso. Desde allí vendrá a juzgar a los vivos y a los muertos. Creo en el Espíritu Santo, la Santa Iglesia Católica, la comunión de los santos, el perdón de los pecados, la resurrección de la carne y la vida eterna. Amén."
 
+export const fe = "Dios te Salve María Santísima, hija de Dios Padre, auméntanos la fe, llena eres de gracia, el Señor es contigo. Bendita eres entre todas las mujeres y bendito es el fruto de tu vientre, Jesús."
+
+export const esperanza = "Dios te Salve María Santísima,  madre de Dios hijo, auméntanos la esperanza, llena eres de gracia, el Señor es contigo. Bendita eres entre todas las mujeres y bendito es el fruto de tu vientre, Jesús."
+
+export const caridad = "Dios te Salve María Santísima,  esposa de Dios Espíritu Santo, auméntanos la caridad, llena eres de gracia, el Señor es contigo. Bendita eres entre todas las mujeres y bendito es el fruto de tu vientre, Jesús."
+
+export const salve = { 
+  "l":"Dios te salve, reina y madre de misericordia; vida, dulzura y esperanza nuestra; Dios te salve. A ti clamamos los desterrados hijos de Eva. A ti suspiramos, gimiendo y llorando en este valle de lágrimas. Ea, pues señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos y después de este destierro, muéstranos a Jesús, fruto bendito de tu vientre. ¡Oh clemente! ¡Oh piadosa! !Oh Dulce Virgen María! Ruega por nosotros, Santa Madre de Dios.",
+  "r":"Para que seamos dignos de alcanzar las promesas de nuestro Señor Jesucristo. Amén."
+}
+
 
 export const misterio_del_dia = () => {
   const today = new Date().getDay()
@@ -41,9 +52,6 @@ export const misterio_del_dia = () => {
   if (today === 2 || today === 5) return 
   if (today === 3 || today === 0) return
   if (today === 4) return
-
-
-
 }
 
 
