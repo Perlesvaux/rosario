@@ -7,7 +7,7 @@ export default function Mystery({ misterios }) {
   return (<>
     {
       misterios.map((misterio, indx)=>
-        <section className="bg-rose-50  px-4 py-2 text-rose-800 rounded"  key={indx}>
+        <section className="bg-rose-50  px-4 py-2 text-rose-800 rounded-xl"  key={indx}>
 
           <Mysterium {...misterio} />
 

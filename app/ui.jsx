@@ -7,7 +7,7 @@ const css_important = "text-indigo-600 font-medium text-lg leading-snug"
 const css_misterio = "text-2xl font-bold text-rose-700 text-center"
 
 export function Introductio ({titulo, leyenda}) {
-  return <article className={css_article}> 
+  return <article className="pb-4 bg-blue-50  px-4 py-2 text-rose-800 rounded-xl"> 
     <h2 className={css_title}> {titulo} </h2>
     <div className="text-black">{leyenda}</div>
   </article>
@@ -15,7 +15,7 @@ export function Introductio ({titulo, leyenda}) {
 
 export function Dialogus ({titulo, lider, respuesta, children}) {
   return <article className={css_article}> 
-    <h2 className={css_title}> {titulo} </h2>
+    {titulo && <h2 className={css_title}> {titulo} </h2>}
     {lider && respuesta && <Vox lider={lider} respuesta={respuesta}/>}
     {children && children}
   </article>
@@ -36,14 +36,14 @@ export function Mysterium ({ titulo, fruto, leyenda, l, r }){
       <div className={css_lead}>{leyenda}</div>
       <Vox lider={l} respuesta={r}/>
     </article>
-
   </>
-
 }
 
 export function Titulus ({children}){
   return <h3 className="text-1xl font-bold text-rose-700"> {children} </h3>
 }
+
+
 
 
 
