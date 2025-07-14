@@ -2,22 +2,26 @@ import Image from "next/image";
 import { senal, invocacion, contricion, credo,    
   padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 
-import Mistery from './Mistery.jsx'
+
+import Mistery, { misterio_del_dia } from './Mystery.jsx'
 import { Introductio } from './ui.jsx'
 
 const lead = "bg-yellow-50 border-l-4 border-yellow-400 px-4 py-2 text-yellow-800"
 const response = "bg-green-50 border-l-4 border-green-400 px-4 py-2 text-green-800"
 const title = "text-2xl font-bold text-gray-900"
-const header = "text-4xl font-bold text-gray-900"
+const header = "text-4xl font-bold text-gray-900 text-center"
 const article = "pb-4"
 
 export default function Home() {
 
 
+  const misterio_de_hoy = misterio_del_dia()
+
+
   return (
   <div className="bg-white text-white px-4 py-2 rounded flex flex-col w-full  space-y-8 ">
 
-    <h1 className={header}>Santo Rosario</h1>
+    <h1 className={header}>Santo Rosario | {misterio_de_hoy.nombre.toUpperCase()} </h1>
 
     <Introductio 
       titulo="Señal de la Cruz"
@@ -39,31 +43,10 @@ export default function Home() {
       leyenda={credo}
     />
 
-     <Mistery />
+    <Mistery mistery={misterio_de_hoy} />
 
-<div className="pb-4"> 
-  <h3 className={title}>Details</h3>
-  <div className={lead}>
-    Heads up! This needs your eyes.
-  </div>
-  <div className={response}>
-    Heads up! This needs your eyes.
-  </div>
-</div>
+  
 
-<div className="text-gray-700 font-normal text-base leading-relaxed">
-  This is standard content. It’s clear, readable, and blends into the flow.
-</div>
- <div className="text-indigo-600 font-medium text-lg leading-snug">
-  This is important! Pay attention, but don’t feel pressured.
-</div>     
-<div className={lead}>
-  Heads up! This needs your eyes.
-</div>
-
-<div className={response}>
-  Heads up! This needs your eyes.
-</div>
 
 
 

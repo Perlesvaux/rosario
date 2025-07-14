@@ -3,8 +3,8 @@ import  { gozosos } from './misterios.js'
 import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx' 
 
 
-export default function Mistery() {
-  const misterios_de_hoy = misterio_del_dia()
+export default function Mystery() {
+  const { lista:misterios_de_hoy } = misterio_del_dia()
 
   return (<>
     {
@@ -58,7 +58,7 @@ export default function Mistery() {
 
 
 
-const misterio_del_dia = () => {
+export const misterio_del_dia = () => {
   const today = new Date().getDay()
   if (today === 1 || today === 6) return gozosos
   if (today === 2 || today === 5) return 

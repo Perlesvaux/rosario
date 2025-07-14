@@ -1,4 +1,6 @@
-export const gozosos = [
+export const gozosos = {
+  nombre:"gozosos",
+  lista: [
   {
     titulo: "EN EL PRIMER MISTERIO GOZOSO: CONTEMPLAMOS “LA ANUNCIACIÓN”",
     fruto: "¡Por el amor y la humildad!",
@@ -34,5 +36,6 @@ export const gozosos = [
     l: "¡Palabra del Señor,",
     r: "gloria a ti Señor Jesús!"
   }
-]
+  ]
+}
 
