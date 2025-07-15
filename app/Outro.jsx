@@ -1,5 +1,5 @@
-import { Dialogus, Extra, Facio, Susurri  } from './ui.jsx'
-import {padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve} from './prayers.js'
+import { Dialogus, Extra, Facio, Susurri, Dictum  } from './ui.jsx'
+import {padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2} from './prayers.js'
 
 export default function Outro (){
 
@@ -43,8 +43,9 @@ return <>
 
     <Extra titulo="Oración previa a Letanías" leyenda="¡Oh Señor! Ten misericordia de nosotros. Escucha nuestras súplicas." />
 
-  <section className="bg-amber-100  px-4 py-2 text-amber-800 rounded-xl"  >
-
+  <section className="bg-amber-100  px-4 py-2 text-amber-800 rounded-xl space-y-1 "  >
+      {letanias_1.map((letania, indx)=><Dictum key={indx} lider={letania.l} respuesta={letania.r} />)}
+      {letanias_2.map((letania, indx)=><Dictum key={indx} lider={letania.l} respuesta={letania.r} />)}
   </section>
   </>
 

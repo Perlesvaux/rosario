@@ -1,4 +1,4 @@
-import  { gozosos } from './misterios.js'
+import  { gozosos, dolorosos } from './misterios.js'
 
 export const aveMaria = {
   "l" : "Dios te salve María, llena eres de gracia, el Señor es contigo. Bendita eres entre todas las mujeres y bendito es el fruto de tu vientre, Jesús.",
@@ -45,11 +45,33 @@ export const salve = {
   "r":"Para que seamos dignos de alcanzar las promesas de nuestro Señor Jesucristo. Amén."
 }
 
+export const letanias_1 = [
+  {"l":" Señor, ten piedad,", "r":"Señor, ten piedad"},
+  {"l":" Cristo, ten piedad,", "r":"Cristo, ten piedad"},
+  {"l":" Señor, ten piedad,", "r":"Señor, ten piedad."},
+  {"l":" Cristo, óyenos,", "r":"Cristo, óyenos."},
+  {"l":" Cristo, escúchanos,", "r":"Cristo, escúchanos."},
+]
+
+export const letanias_2 =  [
+{"l":"Dios Padre celestial, creador del mundo","r":"ten piedad de nosotros."},
+{"l":"Dios Hijo, Redentor del mundo,","r":"Ten piedad de nosotros."},
+{"l":"Dios, Espíritu Santo,", "r":"Ten piedad de nosotros."},
+{"l":"Santísima Trinidad, un solo Dios,", "r":"Ten misericordia de nosotros."}
+]
+
+
+
+
+
+
+
+
 
 export const misterio_del_dia = () => {
   const today = new Date().getDay()
   if (today === 1 || today === 6) return gozosos
-  if (today === 2 || today === 5) return 
+  if (today === 2 || today === 5) return dolorosos
   if (today === 3 || today === 0) return
   if (today === 4) return
 }
