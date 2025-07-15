@@ -61,7 +61,7 @@ export const letanias_2 =  [
 ]
 
 export const letanias_3 = [
-"Santa María, ruega por nosotros.",
+"Santa María,",
 "Santa Madre de Dios,",
 "Santa Virgen de las Vírgenes,",
 "Madre de Cristo,",
