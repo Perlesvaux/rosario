@@ -80,3 +80,88 @@ export const dolorosos = {
 ]
 
 }
+
+
+export const gloriosos = {
+  nombre: "GLORIOSOS",
+  lista: [
+  {
+    titulo: "EN EL PRIMER MISTERIO GLORIOSO: CONTEMPLAMOS “LA RESURRECCIÓN”",
+    fruto: "¡Por la virtud de la fe!",
+    leyenda: "El Ángel se dirigió a las mujeres y les dijo: “No se turben. El que buscan, Jesús Nazareno, el crucificado, resucitó; no está aquí. Vean el lugar en que lo pusieron”. (Mateo 28: 5-7)",
+    l: "¡Palabra del Señor,",
+    r: "gloria a ti Señor Jesús!"
+  },
+  {
+    titulo: "EN EL SEGUNDO MISTERIO GLORIOSO:  CONTEMPLAMOS “LA ASCENSIÓN”",
+    fruto: "¡Por la virtud de la esperanza!",
+    leyenda: "El Señor Jesús, después de haber hablado con ellos, fue elevado al cielo, y se sentó a la diestra de Dios Padre. (San Marcos 16: 19)",
+    l: "¡Palabra del Señor,",
+    r: "gloria a ti Señor Jesús!"
+  },
+  {
+    titulo: "EN EL TERCER MISTERIO GLORIOSO: CONTEMPLAMOS LA VENIDA DEL ESPÍRITU SANTO",
+    fruto: "Por el amor hacia Dios.",
+    leyenda: "...Se les aparecieron unas lenguas como de fuego que se repartieron y se posaron sobre cada uno de ellos; todos quedaron  llenos del Espíritu Santo, y comenzaron a hablar en otras lenguas, según el Espíritu les movía a expresarse. (Hechos 2:4)",
+    l: "¡Palabra de Dios,",
+    r: "¡Te alabamos Señor!"
+  },
+  {
+    titulo: "EN EL CUARTO MISTERIO GLORIOSO: CONTEMPLAMOS LA ASUNCIÓN DE MARÍA AL CIELO",
+    fruto: "¡Por la devoción a María!",
+    leyenda: "La santísima Virgen María, cumplido el curso de su vida terrena, fue llevada en cuerpo y alma a la gloria del cielo. Y se abrió el Santuario de Dios en el cielo, y apareció el arca de su alianza en el Santuario. (Apocalipsis 11: 19)",
+    l: "¡Palabra de Dios,",
+    r: "te alabamos Señor!"
+  },
+  {
+    titulo: "EN EL QUINTO MISTERIO GLORIOSO: CONTEMPLAMOS LA CORONACIÓN DE LA SANTA VIRGEN MARÍA",
+    fruto: "¡Por la felicidad eterna!",
+    leyenda: "Una gran señal apareció en el cielo: Una mujer revestida de sol con la luna bajo sus pies y una corona de doce estrellas sobre su cabeza. (Eclesiástico 24: 22-28, 30-31)",
+    l: "¡Palabra de Dios,",
+    r: "te alabamos Señor!"
+  }
+]
+}
+
+
+
+export const luminosos = {
+  nombre: "LUMINOSOS",
+  lista: [
+  {
+    titulo: "EN EL PRIMER MISTERIO LUMINOSO:  CONTEMPLAMOS EL BAUTISMO DE JESÚS (JUEVES)",
+    fruto: "Por la docilidad a la voluntad divina.",
+    leyenda: "Una vez bautizado Jesús, salió del agua; y en esto se abrieron los cielos y se vio al Espíritu de Dios que bajaba en forma de paloma y venía sobre Él. Y una voz que provenía del cielo decía: “Éste es mi hijo amado, en quien me complazco”. (Mateo 3: 13-17)",
+    l: "¡Palabra del Señor,",
+    r: "gloria a ti Señor Jesús!"
+  },
+  {
+    titulo: "EN EL SEGUNDO MISTERIO LUMINOSO:  CONTEMPLAMOS LA REVELACIÓN DE JESÚS EN LAS BODAS DE CANÁ",
+    fruto: "¡Por la devoción a María!",
+    leyenda: "Le dice a Jesús su madre: “No tienen vino”… Dice su madre a los sirvientes: “Haced lo que Él os diga”. (Juan 2: 1-11)",
+    l: "¡Palabra del Señor,",
+    r: "gloria a ti Señor Jesús!"
+  },
+  {
+    titulo: "EN EL TERCER MISTERIO LUMINOSO:  CONTEMPLAMOS EL “ANUNCIO DEL REINO DE DIOS”",
+    fruto: "¡Por la gracia de la conversión!",
+    leyenda: "Después que Juan fue entregado, marchó Jesús a Galilea; y proclamaba la Buena Nueva de Dios: “El tiempo se ha cumplido y el Reino de Dios está cerca; convertíos y creed en la Buena Nueva”. (Lucas 7: 36-50)",
+    l: "¡Palabra del Señor,",
+    r: "gloria a ti Señor Jesús!"
+  },
+  {
+    titulo: "EN EL CUARTO MISTERIO LUMINOSO:  CONTEMPLAMOS LA “TRANSFIGURACIÓN DE JESÚS”",
+    fruto: "¡Por el Santo temor de Dios!",
+    leyenda: "Seis días después, toma Jesús consigo a Pedro, a Santiago y a su hermano Juan, y los lleva aparte, a un monte alto. Y se transfiguró delante de ellos: Su rostro se puso brillante como el sol y sus vestidos se volvieron blancos como la luz. (Mateo 17: 1-5)",
+    l: "¡Palabra del Señor,",
+    r: "gloria a ti Señor Jesús!"
+  },
+  {
+    titulo: "EN EL QUINTO MISTERIO LUMINOSO:  CONTEMPLAMOS “LA INSTITUCIÓN DE LA EUCARISTÍA”",
+    fruto: "¡Por el agradecimiento a Dios!",
+    leyenda: "Tomó luego pan, dio gracias, lo partió y se lo dio diciendo: “Este es mi cuerpo que se entrega por vosotros; haced esto en recuerdo mío”. (Mateo 26: 26-29)",
+    l: "¡Palabra del Señor,",
+    r: "gloria a ti Señor Jesús!"
+  }
+]
+}
