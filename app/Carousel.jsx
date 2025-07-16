@@ -13,7 +13,7 @@ export default function Carousel({ items }) {
     <div className="flex flex-col items-center gap-2">
       <div className="p-4 border rounded w-full">
 
-      <Mystery misterio={items[index]} />
+      <Mystery misterio={items[index]} index={index} />
 
 
 

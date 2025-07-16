@@ -3,14 +3,12 @@ import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx'
 //import Mysteries from './Mysteries.jsx'
 
 
-export default function Mystery({ misterio }) {
-  return <section className="bg-rose-50  px-4 py-2 text-rose-800 rounded-xl">
+export default function Mystery({ misterio, index }) {
+  return <>
 
-    <Mysterium {...misterio} />
+    <Mysterium {...misterio} index={index} />
 
-
-
-  </section>
+  </>
 
 }
 

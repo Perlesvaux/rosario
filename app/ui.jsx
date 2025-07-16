@@ -56,9 +56,11 @@ export function Dictum ({lider, respuesta}){
   </article>
 }
 
-export function Mysterium ({ titulo, fruto, leyenda, l, r }){
+export function Mysterium ({ titulo, fruto, leyenda, l, r, index }){
+  //const bgColors = ['bg-pink-50', 'bg-pink-100', 'bg-rose-50', 'bg-rose-100', 'bg-rose-200']
+  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
   // key prop trick to avoid useEffect used here! =D
-  return <>
+  return <section className={ `${bgColors[index]}  px-4 py-2 text-rose-800 rounded-xl` }>
     <article className={css_article}>
       <div className={css_misterio}>{titulo}</div>
       <div className={css_lead}>Fruto del misterio: {fruto}</div>
@@ -67,7 +69,7 @@ export function Mysterium ({ titulo, fruto, leyenda, l, r }){
     </article>
 
     <Mysteries key={titulo}  />
-  </>
+  </section>
 }
 
 export function Titulus ({children}){
