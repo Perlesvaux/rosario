@@ -2,6 +2,7 @@ import Image from "next/image";
 import Mystery from './Mystery.jsx'
 import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
+import Carousel from './Carousel.jsx'
 import { misterio_del_dia } from './prayers.js'
 
 const lead = "bg-yellow-50 border-l-4 border-yellow-400 px-4 py-2 text-yellow-800"
@@ -14,6 +15,14 @@ export default function Home() {
 
   const { lista:misterios, nombre } = misterio_del_dia()
 
+  const m = [
+    "Primer Misterio: La Anunciación",
+    "Segundo Misterio: La Visitación",
+    "Tercer Misterio: El Nacimiento de Jesús",
+    "Cuarto Misterio: La Presentación",
+    "Quinto Misterio: El Niño Perdido"
+  ]
+
   return (
   <div className="bg-white text-white px-4 py-2 rounded flex flex-col w-full  space-y-8 ">
 
@@ -21,7 +30,8 @@ export default function Home() {
 
     <Intro />
 
-    <Mystery misterios={misterios} />
+    <Carousel items={misterios} />
+
 
     <Outro />
 

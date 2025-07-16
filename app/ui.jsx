@@ -1,3 +1,5 @@
+import Mysteries from './Mysteries.jsx'
+
 const css_lead = "bg-teal-50 border-l-4 border-teal-400 px-4 py-2 text-teal-800 "
 const css_response = "bg-red-50 border-l-4 border-red-400 px-4 py-2 text-red-900"
 const css_title = "text-1xl font-bold text-gray-900"
@@ -55,6 +57,7 @@ export function Dictum ({lider, respuesta}){
 }
 
 export function Mysterium ({ titulo, fruto, leyenda, l, r }){
+  // key prop trick to avoid useEffect used here! =D
   return <>
     <article className={css_article}>
       <div className={css_misterio}>{titulo}</div>
@@ -62,6 +65,8 @@ export function Mysterium ({ titulo, fruto, leyenda, l, r }){
       <div className={css_lead}>{leyenda}</div>
       <Vox lider={l} respuesta={r}/>
     </article>
+
+    <Mysteries key={titulo}  />
   </>
 }
 
