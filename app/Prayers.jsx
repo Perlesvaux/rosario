@@ -40,15 +40,15 @@ export default function Prayers() {
   return (
     <div className="flex flex-col items-center gap-2 relative">
 
-    <article className="h-[22vh] overflow-hidden">
+    <article className="h-[30vh] overflow-hidden">
         { prayers[index] }
     </article>
 
-      <div key={index} className="flex gap-2 absolute  bottom-0 right-0">
-
+      <div key={index} className="flex gap-2 absolute bottom-2 right-1">
         { index!==prayers.length-1 && <>
-            <button onClick={prev} className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition">Prev</button>
-              <button onClick={next} className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-blue-500 transition">Next</button>
+            <button onClick={next} className="px-4 py-2 rounded-full hover:scale-110 transition-transform duration-300">
+              <img src="/right.svg"/>
+            </button>
           </>
         }
       </div>
@@ -56,3 +56,4 @@ export default function Prayers() {
   )
 }
 
+            //<button onClick={prev} className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition">Prev</button>

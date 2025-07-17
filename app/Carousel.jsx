@@ -10,15 +10,16 @@ export default function Carousel({ items }) {
   const next = () => setIndex(i => (i + 1) % items.length)
 
   return (
-    <div className="flex flex-col items-center gap-2 w-full">
+    <div className="flex flex-col items-center gap-2 w-full relative">
       <Mystery misterio={items[index]} index={index} />
-      <div className="flex gap-2">
-        <button onClick={prev} className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition">Prev</button>
-        <button onClick={next} className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-blue-500 transition">Next</button>
+      <div className="flex gap-2 absolute top-20 right-3 mx-auto">
+        <button onClick={next} className="px-4 py-2 rounded-full hover:scale-110 transition-transform duration-300"><img src="/right-clear.svg"/></button>
       </div>
     </div>
   )
 }
+        //<button onClick={prev} className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition">Prev</button>
+        //<button onClick={next} className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-blue-500 transition">Next</button>
 
 //export default function Carousel({ items }) {
 //  const [index, setIndex] = useState(0)
