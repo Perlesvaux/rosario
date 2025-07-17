@@ -22,9 +22,9 @@ export default function Home() {
     "Cuarto Misterio: La Presentación",
     "Quinto Misterio: El Niño Perdido"
   ]
-
+//px-4 py-2 
   return (
-  <div className="bg-white text-white px-4 py-2 rounded flex flex-col w-full  space-y-8 ">
+  <div className="bg-white text-white rounded flex flex-col w-full  space-y-8 ">
 
     <h1 className={header}>Santo Rosario | {nombre} </h1>
 

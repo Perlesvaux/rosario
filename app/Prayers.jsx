@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx' 
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
+import Beads from './Beads.jsx'
 
 
 const prayers = [
@@ -9,10 +10,13 @@ const prayers = [
     <Titulus>Padre Nuestro</Titulus>
     <Vox lider={padreNuestro.l}  respuesta={padreNuestro.r} />
   </Dialogus>,
+  <>
   <Dialogus>
     <Titulus>Ave María (x10)</Titulus>
     <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
-  </Dialogus>,
+  </Dialogus>
+    <Beads />
+  </>,
   <Dialogus>
     <Titulus>Gloria</Titulus>
     <Vox lider={ gloria.l } respuesta={ gloria.r } />
@@ -25,7 +29,7 @@ const prayers = [
 ]
 
 
-export default function Mysteries() {
+export default function Prayers() {
   const [index, setIndex] = useState(0)
 
   
@@ -34,17 +38,13 @@ export default function Mysteries() {
   const next = () => setIndex(i => (i + 1) % prayers.length)
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="p-4 border rounded w-full">
+    <div className="flex flex-col items-center gap-2 relative">
 
-
+    <article className="h-[22vh] overflow-hidden">
         { prayers[index] }
+    </article>
 
-
-
-
-      </div>
-      <div key={index} className="flex gap-2">
+      <div key={index} className="flex gap-2 absolute  bottom-0 right-0">
 
         { index!==prayers.length-1 && <>
             <button onClick={prev} className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition">Prev</button>

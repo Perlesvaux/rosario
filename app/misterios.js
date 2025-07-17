@@ -129,7 +129,8 @@ export const luminosos = {
   nombre: "LUMINOSOS",
   lista: [
   {
-    titulo: "EN EL PRIMER MISTERIO LUMINOSO:  CONTEMPLAMOS EL BAUTISMO DE JESÚS (JUEVES)",
+    titulo: "EN EL PRIMER MISTERIO LUMINOSO:  CONTEMPLAMOS EL BAUTISMO DE JESÚS",
+    imagen: "/luminosos1.jpg",
     fruto: "Por la docilidad a la voluntad divina.",
     leyenda: "Una vez bautizado Jesús, salió del agua; y en esto se abrieron los cielos y se vio al Espíritu de Dios que bajaba en forma de paloma y venía sobre Él. Y una voz que provenía del cielo decía: “Éste es mi hijo amado, en quien me complazco”. (Mateo 3: 13-17)",
     l: "¡Palabra del Señor,",
@@ -137,6 +138,7 @@ export const luminosos = {
   },
   {
     titulo: "EN EL SEGUNDO MISTERIO LUMINOSO:  CONTEMPLAMOS LA REVELACIÓN DE JESÚS EN LAS BODAS DE CANÁ",
+    imagen: "/luminosos2.jpg",
     fruto: "¡Por la devoción a María!",
     leyenda: "Le dice a Jesús su madre: “No tienen vino”… Dice su madre a los sirvientes: “Haced lo que Él os diga”. (Juan 2: 1-11)",
     l: "¡Palabra del Señor,",
@@ -144,6 +146,7 @@ export const luminosos = {
   },
   {
     titulo: "EN EL TERCER MISTERIO LUMINOSO:  CONTEMPLAMOS EL “ANUNCIO DEL REINO DE DIOS”",
+    imagen: "/luminosos3.jpg",
     fruto: "¡Por la gracia de la conversión!",
     leyenda: "Después que Juan fue entregado, marchó Jesús a Galilea; y proclamaba la Buena Nueva de Dios: “El tiempo se ha cumplido y el Reino de Dios está cerca; convertíos y creed en la Buena Nueva”. (Lucas 7: 36-50)",
     l: "¡Palabra del Señor,",
@@ -151,6 +154,7 @@ export const luminosos = {
   },
   {
     titulo: "EN EL CUARTO MISTERIO LUMINOSO:  CONTEMPLAMOS LA “TRANSFIGURACIÓN DE JESÚS”",
+    imagen: "/luminosos4.jpg",
     fruto: "¡Por el Santo temor de Dios!",
     leyenda: "Seis días después, toma Jesús consigo a Pedro, a Santiago y a su hermano Juan, y los lleva aparte, a un monte alto. Y se transfiguró delante de ellos: Su rostro se puso brillante como el sol y sus vestidos se volvieron blancos como la luz. (Mateo 17: 1-5)",
     l: "¡Palabra del Señor,",
@@ -158,6 +162,7 @@ export const luminosos = {
   },
   {
     titulo: "EN EL QUINTO MISTERIO LUMINOSO:  CONTEMPLAMOS “LA INSTITUCIÓN DE LA EUCARISTÍA”",
+    imagen: "/luminosos5.jpg",
     fruto: "¡Por el agradecimiento a Dios!",
     leyenda: "Tomó luego pan, dio gracias, lo partió y se lo dio diciendo: “Este es mi cuerpo que se entrega por vosotros; haced esto en recuerdo mío”. (Mateo 26: 26-29)",
     l: "¡Palabra del Señor,",
