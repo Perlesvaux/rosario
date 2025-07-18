@@ -15,13 +15,6 @@ export default function Home() {
 
   const { lista:misterios, nombre } = misterio_del_dia()
 
-  const m = [
-    "Primer Misterio: La Anunciación",
-    "Segundo Misterio: La Visitación",
-    "Tercer Misterio: El Nacimiento de Jesús",
-    "Cuarto Misterio: La Presentación",
-    "Quinto Misterio: El Niño Perdido"
-  ]
 //px-4 py-2 
   return (
   <div className="bg-white text-white rounded flex flex-col w-full  space-y-8 ">
