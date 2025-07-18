@@ -185,31 +185,3 @@ function Beads ({getter, setter}){
     
 
 }
-//export default function Prayers() {
-//  const [index, setIndex] = useState(0)
-//
-//
-//
-//  const prev = () => setIndex(i => (i - 1 + prayers.length) % prayers.length)
-//  const next = () => setIndex(i => (i + 1) % prayers.length)
-//
-//  return (
-//    <div className="flex flex-col items-center gap-2 relative">
-//
-//    <article className="h-[30vh] overflow-hidden">
-//        { prayers[index] }
-//    </article>
-//
-//
-//
-//      <div key={index} className="flex gap-2 absolute bottom-2 right-1">
-//        { index!==prayers.length-1 && <>
-//            <button onClick={next} className="px-4 py-2 rounded-full hover:scale-110 transition-transform duration-300">
-//              <img src="/right.svg"/>
-//            </button>
-//          </>
-//        }
-//      </div>
-//    </div>
-//  )
-//}

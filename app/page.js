@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Mystery from './Mystery.jsx'
 import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
 import Carousel from './Carousel.jsx'
@@ -17,7 +16,7 @@ export default function Home() {
 
 //px-4 py-2 
   return (
-  <div className="bg-white text-white rounded flex flex-col w-full  space-y-8 ">
+  <div className="bg-white text-white rounded flex flex-col w-full  space-y-8">
 
     <h1 className={header}>Santo Rosario | {nombre} </h1>
 
