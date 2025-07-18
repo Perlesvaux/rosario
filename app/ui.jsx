@@ -61,15 +61,16 @@ export function Mysterium ({ titulo, imagen, fruto, leyenda, l, r, index }){
   //const bgColors = ['bg-pink-50', 'bg-pink-100', 'bg-rose-50', 'bg-rose-100', 'bg-rose-200']
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
   // key prop trick to avoid useEffect used here! =D
-  return <section className={ `${bgColors[index]}  px-4 py-2 text-rose-800 h-[96vh] overflow-hidden w-full` }>
+//h-[95vh]
+  return <section className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full` }>
 
     <article className="rounded-xl w-full bg-gray-900">
       <Image
-        className="mx-auto  h-[206px] w-[150px]"
+        className="mx-auto h-[400px] w-[306px] sm:h-[500px] sm:w-[406px]"
         src={imagen}
         alt={titulo}
-        width={101}
-        height={206}
+        width={812}
+        height={998}
         priority
       />
     </article>
