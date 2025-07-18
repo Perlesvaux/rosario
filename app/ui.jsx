@@ -57,7 +57,7 @@ export function Dictum ({lider, respuesta}){
   </article>
 }
 
-export function Mysterium ({ titulo, imagen, fruto, leyenda, l, r, index }){
+export function Mysterium ({ misterio, index }){
   //const bgColors = ['bg-pink-50', 'bg-pink-100', 'bg-rose-50', 'bg-rose-100', 'bg-rose-200']
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
   // key prop trick to avoid useEffect used here! =D
@@ -67,24 +67,17 @@ export function Mysterium ({ titulo, imagen, fruto, leyenda, l, r, index }){
     <article className="rounded-xl w-full bg-gray-900">
       <Image
         className="mx-auto h-[400px] w-[306px] sm:h-[500px] sm:w-[406px]"
-        src={imagen}
-        alt={titulo}
+        src={misterio.imagen}
+        alt={misterio.titulo}
         width={812}
         height={998}
         priority
       />
     </article>
 
-    <article className="pb-4 pt-4 h-[35vh] overflow-hidden">
-        <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{titulo}</div>
-        <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {fruto}</div>
-        <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">{leyenda}</div>
-        <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">{l}</div>
-        <div className=" bg-red-50 border-l-4  border-red-400 px-4 py-1  text-red-800 text-sm md:text-base">{r}</div>
-    </article>
 
 
-    <Prayers key={titulo}  />
+    <Prayers misterio={misterio} index={index} key={index}  />
   </section>
 }
       //<div className="font-bold text-rose-700 text-center text-sm md:text-lg">{titulo}</div>
