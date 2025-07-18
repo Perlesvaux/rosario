@@ -33,7 +33,7 @@ const reducer = (state, action) => {
   }
 }
 
-export default function Prayers({misterio}) {
+export default function Prayers({misterio, index}) {
   const [state, set] = useReducer(reducer, all_prayers)
   
   const markComplete = (e) => {
@@ -48,7 +48,7 @@ export default function Prayers({misterio}) {
   return (
     <div className="flex flex-col gap-1 relative">
 
-      <Prayer getter={state} setter={markComplete} title={misterio.titulo} > 
+      <Prayer getter={state} setter={markComplete} title={misterio.titulo} index={index} > 
         <article className="pb-4 pt-4">
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
@@ -58,23 +58,23 @@ export default function Prayers({misterio}) {
         </article>
       </Prayer>
 
-        <Prayer getter={state} setter={markComplete} title="Padre Nuestro" > 
+        <Prayer getter={state} setter={markComplete} title="Padre Nuestro" index={index} > 
           <Titulus>Padre Nuestro</Titulus>
           <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
         </Prayer>
 
-        <Prayer getter={state} rosary={advance} title="Ave Maria">
+        <Prayer getter={state} rosary={advance} title="Ave Maria" index={index}>
           <Titulus>Ave María (x10)</Titulus>
           <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
           <Beads getter={state} setter={advance} />
         </Prayer>
       
-      <Prayer getter={state} setter={markComplete} title="Gloria">
+      <Prayer getter={state} setter={markComplete} title="Gloria" index={index}>
         <Titulus>Gloria</Titulus>
         <Vox lider={ gloria.l } respuesta={ gloria.r } />
       </Prayer>
 
-      <Prayer getter={state} setter={markComplete} title="Jaculatorias">
+      <Prayer getter={state} setter={markComplete} title="Jaculatorias" index={index}>
         <Titulus>Jaculatorias</Titulus>
         <Vox lider={jaculatoria_1.l}  respuesta={jaculatoria_1.r} />
         <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
@@ -85,14 +85,15 @@ export default function Prayers({misterio}) {
 }
 
 
-function Prayer ({children, getter, setter, title, rosary}) {
+function Prayer ({children, getter, setter, title, rosary, index}) {
+  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
   const to = title.toLowerCase().replace(/\s+/g, "")
 
   const pending = "bg-gray-600"
   const clear = "bg-teal-600"
 
   return <article className="">
-      <div popover="auto" id={to} className="border p-4 rounded shadow">
+      <div popover="auto" id={to} className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full border p-4 rounded shadow` }>
         <article className="flex flex-col">
           {children}
         { setter && <>
@@ -110,8 +111,8 @@ function Prayer ({children, getter, setter, title, rosary}) {
 
       <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
 
-        <button popoverTarget={to} className={`mt-4 px-4 py-2 col-span-2 ${ getter[to]? clear : pending } text-white rounded text-sm`}>
-          {title}
+        <button popoverTarget={to} className={`mt-4 px-4 py-2 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2 px-2 py-1 rounded hover:opacity-75 focus:outline-none`}>
+          <img className="inline pr-1" src='/title.svg'/>{title}
         </button>
 
         { setter && <>
