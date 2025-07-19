@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx' 
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
-import {useReducer} from 'react'
+import {useReducer, useRef} from 'react'
 
 const all_prayers = {
   misterio: false,
@@ -16,7 +16,7 @@ const all_prayers = {
 
 const reducer = (state, action) => {
 
-  const { prayer, type } = action;
+  const { prayer, type, fun } = action;
 
   switch (type) {
     case "done":
@@ -28,8 +28,14 @@ const reducer = (state, action) => {
       return {...state, avemaria:status, cuenta:count}
     }
 
-    case "next":
-    return {...state, actual: state.actual+1}
+    case "next":{
+      const actual = state.actual +1;
+
+      
+
+    return {...state, actual: actual}
+    }
+
 
     default:
     return `undefined case: ${type}`
@@ -41,7 +47,6 @@ export default function Prayers({misterio, index}) {
   const [state, set] = useReducer(reducer, all_prayers)
   
   const markComplete = (e) => {
-    console.log(e.currentTarget.name)
     set({type:"done", prayer:e.currentTarget.name}) 
   }
 
@@ -52,14 +57,10 @@ export default function Prayers({misterio, index}) {
   const singlePress = () => {
     const {misterio, padrenuestro, avemaria, gloria, jaculatorias} = state
 
-    console.log(state.actual)
     set({type:"next"})
     if (state.actual === 0)  set({type:"done", prayer:"misterio"})
     if (state.actual === 1)  set({type:"done", prayer:"padrenuestro"})
     if ( state.actual >1 && state.actual <= 11)  set({type:"increase"})
-
-
-
     if (state.actual === 12) set({type:"done", prayer:"gloria"})
     if (state.actual === 13) set({type:"done", prayer:"jaculatorias"})
     
@@ -76,7 +77,7 @@ export default function Prayers({misterio, index}) {
     <div className="flex flex-col gap-1 relative">
       <button onClick={singlePress}> next </button>
 
-      <Prayer getter={state} setter={markComplete} title="Misterio" index={index} > 
+      <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
         <article className="pb-4 pt-4">
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
@@ -86,23 +87,22 @@ export default function Prayers({misterio, index}) {
         </article>
       </Prayer>
 
-        <Prayer getter={state} setter={markComplete} title="Padre Nuestro" index={index} > 
+        <Prayer getter={state} setter={singlePress} title="Padre Nuestro" index={index} > 
           <Titulus>Padre Nuestro</Titulus>
           <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
         </Prayer>
 
-        <Prayer getter={state} rosary={advance} title="Ave Maria" index={index}>
+        <Prayer getter={state} rosary={singlePress} title="Ave Maria" index={index}>
           <Titulus>Ave María (x10)</Titulus>
           <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
-          <Beads getter={state} setter={advance} />
         </Prayer>
       
-      <Prayer getter={state} setter={markComplete} title="Gloria" index={index}>
+      <Prayer getter={state} setter={singlePress} title="Gloria" index={index}>
         <Titulus>Gloria</Titulus>
         <Vox lider={ gloria.l } respuesta={ gloria.r } />
       </Prayer>
 
-      <Prayer getter={state} setter={markComplete} title="Jaculatorias" index={index}>
+      <Prayer getter={state} setter={singlePress} title="Jaculatorias" index={index}>
         <Titulus>Jaculatorias</Titulus>
         <Vox lider={jaculatoria_1.l}  respuesta={jaculatoria_1.r} />
         <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
@@ -114,28 +114,61 @@ export default function Prayers({misterio, index}) {
 
 
 function Prayer ({children, getter, setter, title, rosary, index}) {
+  const ref = useRef(null)
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
   const to = title.toLowerCase().replace(/\s+/g, "")
 
   const pending = "bg-gray-600"
   const clear = "bg-teal-600"
 
+  let isShown = false
+  if (to === "misterio" && getter.actual == 0) isShown = true
+  if (to === "padrenuestro" && getter.actual == 1) isShown = true
+  if (to === "avemaria" && getter.actual >1 && getter.actual <= 11) isShown = true
+  if (to === "gloria" && getter.actual == 12) isShown = true
+  if (to === "jaculatorias" && getter.actual == 13) isShown = true
+
+console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
+
+  const setAndClose =() => {
+    setter(); 
+
+
+
+    ref.current.hidePopover();
+  }
+
+  const setAndCloseRosary =() => {
+    rosary(); 
+    
+    console.log(getter)
+
+    
+    if (getter.actual == 11) ref.current.hidePopover();
+  }
+
   return <article className="">
-      <div popover="auto" id={to} className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full border p-4 rounded shadow` }>
+
+
+
+      <div ref={ref} popover="auto" id={to} className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full border p-4 rounded shadow` }>
         <article className="flex flex-col">
           {children}
-        { setter && <>
-          {getter[to]? 
-            <button onClick={setter} name={to} className="mt-4 px-4 py-2 col-span-1 bg-teal-600 text-white rounded text-sm">
-              <img className="mx-auto" src="/check.svg" />
-            </button>
+        { isShown && setter && <>
+          { getter[to]? 
+            <></>
             : 
-            <button onClick={setter} name={to} className="mt-4 px-4 py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
+            <button onClick={setAndClose} name={to} className="mt-4 px-4 py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
               <img className="mx-auto" src="/cross.svg" />
             </button> 
         } </>}
+
+        { rosary && isShown &&  <Beads getter={getter} setter={setAndCloseRosary} /> }
         </article>
       </div>
+
+
+
 
       <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
 
