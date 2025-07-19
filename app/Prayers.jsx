@@ -11,6 +11,7 @@ const all_prayers = {
   gloria: false,
   jaculatorias: false,
   cuenta: 0,
+  actual: 0,
 }
 
 const reducer = (state, action) => {
@@ -26,6 +27,9 @@ const reducer = (state, action) => {
       const status = (count<10) ? false : true
       return {...state, avemaria:status, cuenta:count}
     }
+
+    case "next":
+    return {...state, actual: state.actual+1}
 
     default:
     return `undefined case: ${type}`
@@ -45,10 +49,34 @@ export default function Prayers({misterio, index}) {
     set({type:"increase"})
   }
 
+  const singlePress = () => {
+    const {misterio, padrenuestro, avemaria, gloria, jaculatorias} = state
+
+    console.log(state.actual)
+    set({type:"next"})
+    if (state.actual === 0)  set({type:"done", prayer:"misterio"})
+    if (state.actual === 1)  set({type:"done", prayer:"padrenuestro"})
+    if ( state.actual >1 && state.actual <= 11)  set({type:"increase"})
+
+
+
+    if (state.actual === 12) set({type:"done", prayer:"gloria"})
+    if (state.actual === 13) set({type:"done", prayer:"jaculatorias"})
+    
+
+
+    
+
+  }
+
+
+
+
   return (
     <div className="flex flex-col gap-1 relative">
+      <button onClick={singlePress}> next </button>
 
-      <Prayer getter={state} setter={markComplete} title={misterio.titulo} index={index} > 
+      <Prayer getter={state} setter={markComplete} title="Misterio" index={index} > 
         <article className="pb-4 pt-4">
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>

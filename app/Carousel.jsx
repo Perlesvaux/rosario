@@ -12,7 +12,7 @@ export default function Carousel({ items }) {
   return (
     <div className="flex flex-col items-center gap-2 w-full relative">
       <Mysterium misterio={items[index]} index={index} />
-      <div className="flex gap-2 absolute top-20 right-1 mx-auto">
+      <div className="flex gap-2 absolute top-40 right-1 mx-auto">
         <button onClick={next} className="px-4 py-2 rounded-full hover:scale-110 transition-transform duration-300"><img src="/right-clear.svg"/></button>
       </div>
     </div>
