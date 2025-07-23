@@ -10,10 +10,17 @@ export default function Carousel({ items }) {
   const next = () => setIndex(i => (i + 1) % items.length)
 
   return (
-    <div className="flex flex-col items-center gap-2 w-full relative">
-      <Mysterium misterio={items[index]} index={index} />
-      <div className="flex gap-2 absolute top-40 right-1 mx-auto">
-        <button onClick={next} className="px-4 py-2 rounded-full hover:scale-110 transition-transform duration-300"><img src="/right-clear.svg"/></button>
+    <div className="flex justify-center items-center h-screen bg-black">
+      <div className="max-w-lg">
+
+      <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden">
+        <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
+          {['/gloriosos1.jpg', '/gozosos2.jpg', '/dolorosos5.jpg', '/luminosos3.jpg', '/gozosos4.jpg'].map((elem, indx)=><img key={indx} src={elem} />)}
+        </div>
+        <div className="flex gap-2 absolute top-40 right-1 mx-auto">
+          <button onClick={next} className="px-4 py-2 rounded-full hover:scale-110 transition-transform duration-300"><img src="/right-clear.svg"/></button>
+        </div>
+      </div>
       </div>
     </div>
   )
