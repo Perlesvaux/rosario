@@ -66,7 +66,7 @@ export function Mysterium ({ misterio, index }){
 
     <article className="rounded-xl w-full bg-gray-900">
       <Image
-        className="mx-auto h-[400px] w-[306px] sm:h-[500px] sm:w-[406px]"
+        className="mx-auto h-[400px] w-full sm:h-[500px] sm:w-full"
         src={misterio.imagen}
         alt={misterio.titulo}
         width={812}
