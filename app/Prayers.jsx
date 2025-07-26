@@ -69,7 +69,6 @@ export default function Prayers({misterio, index}) {
       <button onClick={singlePress}> next </button>
       <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
         <article className="pb-4 pt-4">
-          <div> {misterio.titulo} {index} </div>
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">{misterio.leyenda}</div>
