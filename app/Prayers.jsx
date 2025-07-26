@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react'
 import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx' 
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
-import {useReducer, useRef} from 'react'
+import { useReducer, useRef } from 'react'
+import Beads from './Beads.jsx'
 
 const all_prayers = {
   misterio: false,
@@ -30,16 +31,11 @@ const reducer = (state, action) => {
 
     case "next":{
       const actual = state.actual +1;
-
-      
-
-    return {...state, actual: actual}
+      return {...state, actual: actual}
     }
-
 
     default:
     return `undefined case: ${type}`
-
   }
 }
 
@@ -63,11 +59,6 @@ export default function Prayers({misterio, index}) {
     if ( state.actual >1 && state.actual <= 11)  set({type:"increase"})
     if (state.actual === 12) set({type:"done", prayer:"gloria"})
     if (state.actual === 13) set({type:"done", prayer:"jaculatorias"})
-    
-
-
-    
-
   }
 
 
@@ -76,7 +67,6 @@ export default function Prayers({misterio, index}) {
   return (
     <div className="flex flex-col gap-1 relative" >
       <button onClick={singlePress}> next </button>
-          <div> {misterio.titulo}  {index}</div>
       <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
         <article className="pb-4 pt-4">
           <div> {misterio.titulo} {index} </div>
@@ -93,10 +83,10 @@ export default function Prayers({misterio, index}) {
           <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
         </Prayer>
 
-        <Prayer getter={state} rosary={singlePress} title="Ave Maria" index={index}>
+        <Beads getter={state} setter={singlePress} index={index}>
           <Titulus>Ave María (x10)</Titulus>
           <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
-        </Prayer>
+        </Beads>
       
       <Prayer getter={state} setter={singlePress} title="Gloria" index={index}>
         <Titulus>Gloria</Titulus>
@@ -126,7 +116,7 @@ function Prayer ({children, getter, setter, title, rosary, index}) {
   let isShown = false
   if (to === "misterio" && getter.actual == 0) isShown = true
   if (to === "padrenuestro" && getter.actual == 1) isShown = true
-  if (to === "avemaria" && getter.actual >1 && getter.actual <= 11) isShown = true
+  //if (to === "avemaria" && getter.actual >1 && getter.actual <= 11) isShown = true
   if (to === "gloria" && getter.actual == 12) isShown = true
   if (to === "jaculatorias" && getter.actual == 13) isShown = true
 
@@ -159,12 +149,8 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
             </button> 
         } </>}
 
-        { rosary && isShown &&  <Beads getter={getter} setter={setAndCloseRosary} /> }
         </article>
       </div>
-
-
-
 
       <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
 
@@ -178,7 +164,6 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
           </button>
         }
 
-        { rosary &&  <Beads getter={getter} setter={rosary} /> }
         
       </div>
 
@@ -186,52 +171,52 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
 
 }
        
-function Beads ({getter, setter}){
-
-  const icon = () => {
-    switch (getter.cuenta) {
-
-      case 0:
-        return '/counter_0.svg'
-
-      case 1:
-        return '/counter_1.svg'
-
-      case 2:
-        return '/counter_2.svg'
-
-      case 3:
-        return '/counter_3.svg'
-
-      case 4:
-        return '/counter_4.svg'
-
-      case 5:
-        return '/counter_5.svg'
-
-      case 6:
-        return '/counter_6.svg'
-
-      case 7:
-        return '/counter_7.svg'
-
-      case 8:
-        return '/counter_8.svg'
-
-      case 9:
-        return '/counter_9.svg'
-
-      default:
-        return '/love.svg'
-    }
-  }
-
-  return <button 
-    className={` ${getter.cuenta>=10? 'bg-rose-700 ':'bg-gray-800'}  mt-4 px-4 py-2 col-span-1 text-white rounded hover:bg-blue-500 transition`}
-    onClick={setter}
-    > 
-      <img className="px-4 py-2 rounded transition mx-auto" src={icon()}/> 
-  </button>
-    
-
-}
+//function Beads ({getter, setter}){
+//
+//  const icon = () => {
+//    switch (getter.cuenta) {
+//
+//      case 0:
+//        return '/counter_0.svg'
+//
+//      case 1:
+//        return '/counter_1.svg'
+//
+//      case 2:
+//        return '/counter_2.svg'
+//
+//      case 3:
+//        return '/counter_3.svg'
+//
+//      case 4:
+//        return '/counter_4.svg'
+//
+//      case 5:
+//        return '/counter_5.svg'
+//
+//      case 6:
+//        return '/counter_6.svg'
+//
+//      case 7:
+//        return '/counter_7.svg'
+//
+//      case 8:
+//        return '/counter_8.svg'
+//
+//      case 9:
+//        return '/counter_9.svg'
+//
+//      default:
+//        return '/love.svg'
+//    }
+//  }
+//
+//  return <button 
+//    className={` ${getter.cuenta>=10? 'bg-rose-700 ':'bg-gray-800'}  mt-4 px-4 py-2 col-span-1 text-white rounded hover:bg-blue-500 transition`}
+//    onClick={setter}
+//    > 
+//      <img className="px-4 py-2 rounded transition mx-auto" src={icon()}/> 
+//  </button>
+//
+//
+//}

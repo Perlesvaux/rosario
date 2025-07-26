@@ -1,53 +1,105 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
-export default function Beads({ items }) {
-  const [index, setIndex] = useState(0)
-  const [count, setCount] = useState(0)
+export default function Beads ({children, getter, setter, index}) {
+  const ref = useRef(null)
+  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
+  const identifier = `avemaria-${index}`
 
-  const advance = () => {
-    setCount(prev => prev +1)
+  const pending = "bg-gray-600"
+  const clear = "bg-teal-600"
+
+  let isShown = false
+  if (getter.actual > 1 && getter.actual <= 11) isShown = true
+
+  console.log(`is shown ${isShown} actual = ${getter.actual} ROSARY`)
+
+  const setAndCloseRosary =() => {
+    setter()
+    console.log(getter)
+    if (getter.actual == 11) ref.current.hidePopover();
   }
 
-  const prev = () => setIndex(i => (i - 1 + items.length) % items.length)
-  const next = () => setIndex(i => (i + 1) % items.length)
+  return <article className="">
 
-  return (
-    <div className="flex flex-col items-center gap-2">
+      <div ref={ref} popover="auto" id={identifier} className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full border p-4 rounded shadow` }>
+        <article className="flex flex-col">
+          {children}
+          { isShown && <Bead getter={getter} setter={setAndCloseRosary} /> }
+        </article>
+      </div>
 
-        
-        {count<10? <button 
-            className={`bg-gray-800 px-4 py-2 text-white rounded hover:bg-blue-500 transition`}
-            onClick={advance}
-          > faltan {10-count} </button>
-          :
-          <button 
-            className={`bg-rose-700 px-4 py-2 text-white rounded transition`}
-            onClick={advance}
-          > Completado </button>
+      <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
+        <button popoverTarget={identifier} className={`mt-4 px-4 py-2 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2 px-2 py-1 rounded hover:opacity-75 focus:outline-none`}>
+          <img className="inline pr-1" src='/title.svg'/>Ave Maria
+        </button>
+        <Bead getter={getter} setter={setter} />
+      </div>
 
-        }
+    </article>
 
-
-
-    </div>
-  )
 }
 
-function Bead(){
-  const [count, setCount] = useState(false)
 
-  const advance = () => {
-    setCount(true)
+//<Beads getter={state} setter={singlePress} index={index}>
+//  <Titulus>Ave María (x10)</Titulus>
+//  <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
+//</Beads>
+
+
+
+
+
+function Bead ({getter, setter}){
+
+  const icon = () => {
+    switch (getter.cuenta) {
+
+      case 0:
+        return '/counter_0.svg'
+
+      case 1:
+        return '/counter_1.svg'
+
+      case 2:
+        return '/counter_2.svg'
+
+      case 3:
+        return '/counter_3.svg'
+
+      case 4:
+        return '/counter_4.svg'
+
+      case 5:
+        return '/counter_5.svg'
+
+      case 6:
+        return '/counter_6.svg'
+
+      case 7:
+        return '/counter_7.svg'
+
+      case 8:
+        return '/counter_8.svg'
+
+      case 9:
+        return '/counter_9.svg'
+
+      default:
+        return '/love.svg'
+    }
   }
 
   return <button 
-    className={`${count?'bg-black':'bg-gray-800'} px-4 py-2 text-white rounded hover:bg-blue-500 transition`}
-    onClick={advance}
-  >
-    o 
+    onClick={setter}
+    className={`${getter.cuenta>=10? 'bg-rose-700 ':'bg-gray-800'} mt-4 px-4 py-2 col-span-1 text-white rounded hover:bg-blue-500 transition`}
+    > 
+      <img className="px-4 py-2 rounded transition mx-auto" src={icon()}/> 
   </button>
+    
+
 }
+
 
 
 
