@@ -4,6 +4,7 @@ import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx'
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 import { useReducer, useRef } from 'react'
 import Beads from './Beads.jsx'
+import Image from "next/image";
 
 const all_prayers = {
   misterio: false,
@@ -61,12 +62,22 @@ export default function Prayers({misterio, index}) {
     if (state.actual === 13) set({type:"done", prayer:"jaculatorias"})
   }
 
-
-
+  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
 
   return (
-    <div className="flex flex-col gap-1 relative" >
+    <div className={ `${bgColors[index]} flex flex-col gap-1 relative overflow-hidden w-full flex-shrink-0` } >
+
+        <Image
+          className="w-full object-contain"
+          src={misterio.imagen}
+          alt={misterio.titulo}
+          width={812}
+          height={998}
+          priority
+        />
+
       <button onClick={singlePress}> next </button>
+
       <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
         <article className="pb-4 pt-4">
           <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
@@ -77,15 +88,15 @@ export default function Prayers({misterio, index}) {
         </article>
       </Prayer>
 
-        <Prayer getter={state} setter={singlePress} title="Padre Nuestro" index={index} > 
-          <Titulus>Padre Nuestro</Titulus>
-          <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
-        </Prayer>
+      <Prayer getter={state} setter={singlePress} title="Padre Nuestro" index={index} > 
+        <Titulus>Padre Nuestro</Titulus>
+        <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
+      </Prayer>
 
-        <Beads getter={state} setter={singlePress} index={index}>
-          <Titulus>Ave María (x10)</Titulus>
-          <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
-        </Beads>
+      <Beads getter={state} setter={singlePress} index={index}>
+        <Titulus>Ave María (x10)</Titulus>
+        <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
+      </Beads>
       
       <Prayer getter={state} setter={singlePress} title="Gloria" index={index}>
         <Titulus>Gloria</Titulus>
@@ -94,7 +105,7 @@ export default function Prayers({misterio, index}) {
 
       <Prayer getter={state} setter={singlePress} title="Jaculatorias" index={index}>
         <Titulus>Jaculatorias</Titulus>
-        <Vox lider={jaculatoria_1.l}  respuesta={jaculatoria_1.r} />
+        <Vox lider={jaculatoria_1.l} respuesta={jaculatoria_1.r} />
         <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
       </Prayer>
 

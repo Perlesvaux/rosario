@@ -2,21 +2,29 @@
 import { useState } from 'react'
 import { Mysterium } from './ui.jsx'
 import Image from "next/image";
+import Prayers from './Prayers.jsx'
 
 export default function Carousel({ items }) {
   const [index, setIndex] = useState(0)
 
-  const prev = () => setIndex(i => (i - 1 + items.length) % items.length)
-  const next = () => setIndex(i => (i + 1) % items.length)
+  const len = items.length+6
+  const prev = () => setIndex(i => (i - 1 + len) % len)
+  const next = () => setIndex(i => (i + 1) % len)
 
   return (
-    <div className="flex justify-center items-center h-screen bg-black">
+    <div className="flex justify-center items-center bg-black">
       <div className="max-w-lg">
 
       <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden">
         <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
 
-          {items.map((item, indx)=><Mysterium key={indx} misterio={item} index={indx} />)}
+          {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} />)}
+            <Prayers misterio={items[1]} />
+            <Prayers misterio={items[1]} />
+            <Prayers misterio={items[1]} />
+            <Prayers misterio={items[1]} />
+            <Prayers misterio={items[1]} />
+            <div> holas </div>
 
         </div>
         <div className="flex gap-2 absolute top-40 right-1 mx-auto">
