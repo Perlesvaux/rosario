@@ -65,7 +65,7 @@ export default function Prayers({misterio, index}) {
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
 
   return (
-    <div className={ `${bgColors[index]} flex flex-col gap-1 relative overflow-hidden w-full flex-shrink-0` } >
+    <div className={ `${bgColors[index]} flex flex-col gap-0 relative overflow-hidden w-full flex-shrink-0` } >
 
         <Image
           className="w-full object-contain"
@@ -165,22 +165,27 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
       <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
 
         <button popoverTarget={identifier} className={`mt-4 px-4 py-2 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2 px-2 py-1 rounded hover:opacity-75 focus:outline-none`}>
-          <img className="inline pr-1" src='/title.svg'/>{title}
+          <img className="inline pr-1" src={getter[to]? "/rose.svg" : "/title.svg"} />{title}
         </button>
 
-        { setter &&
-          <button onClick={setter} name={identifier} className={`mt-4 px-4 py-2 col-span-1 bg-gray-700 text-white rounded text-sm transition duration-300 ${getter[to] ? "opacity-100" : "opacity-25"}`}>
-            <img className="mx-auto" src="/check.svg" />
-          </button>
-        }
-
-        
       </div>
 
     </article>
 
 }
        
+// deactivated right-handed button altogether
+//
+        //{ setter &&
+        //  <button onClick={setter} name={identifier} className={`mt-4 px-4 py-2 col-span-1 bg-gray-700 text-white rounded text-sm transition duration-300 ${getter[to] ? "opacity-100" : "opacity-25"}`}>
+        //    <img className="mx-auto" src="/check.svg" />
+        //  </button>
+        //}
+
+        
+
+
+
 //function Beads ({getter, setter}){
 //
 //  const icon = () => {
