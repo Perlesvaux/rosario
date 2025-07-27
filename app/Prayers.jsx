@@ -65,16 +65,17 @@ export default function Prayers({misterio, index}) {
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
 
   return (
-    <div className={ `${bgColors[index]} flex flex-col gap-0 relative overflow-hidden w-full flex-shrink-0` } >
+    <div className={ `${bgColors[index]} flex flex-col gap-0 relative overflow-hidden w-full h-screen flex-shrink-0` } >
 
+      <div className="relative w-full aspect-[812/880]">
         <Image
-          className="w-full object-contain"
           src={misterio.imagen}
           alt={misterio.titulo}
-          width={812}
-          height={998}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           priority
         />
+      </div>
 
       <button onClick={singlePress}> next </button>
 
