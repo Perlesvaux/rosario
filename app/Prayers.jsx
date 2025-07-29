@@ -28,25 +28,48 @@ const reducer = (state, action) => {
     return {...state, [prayer]:false}
 
     case "increase": {
-      const count = state.cuenta<10? state.cuenta + 1 : 10;
-      const status = (count<10) ? false : true
+      const count =  state.cuenta + 1;
+      const status = (count<10) ? false : true;
       return {...state, avemaria:status, cuenta:count}
     }
 
     case "decrease": {
-      const count = state.cuenta==0? 0 : state.cuenta - 1
-      const status = (count<10) ? false : true
+      if (state.actual<2) return {...state, avemaria:false, count:0}
+      const count =  state.cuenta - 1;
+      const status = (count<10) ? false : true;
       return {...state, avemaria:status, cuenta:count}
     }
 
-    case "next":{
-      const actual = state.actual<13? state.actual + 1 : 13;
-      return {...state, actual: actual}
+    case "next": {
+      const actual = state.actual < 14 ? state.actual + 1 : 14;
+      const updates = {
+        1: { misterio: true },
+        2: { padrenuestro: true },
+        12: { avemaria: true },
+        13: { gloria: true },
+        14: { jaculatorias: true },
+      };
+      return {
+        ...state,
+        actual,
+        ...updates[actual] // only applies if match
+      };
     }
 
-    case "previous" :{
-      const actual = state.actual<=0 ? 0 : state.actual - 1;
-      return {...state, actual: actual}
+    case "previous": {
+      const actual = state.actual > 0 ? state.actual - 1 : 0;
+      const updates = {
+        0: { misterio: false },
+        1: { padrenuestro: false },
+        11: { avemaria: false },
+        12: { gloria: false },
+        13: { jaculatorias: false },
+      };
+      return {
+        ...state,
+        actual,
+        ...updates[actual] // only applies if match
+      };
     }
 
     default:
@@ -65,27 +88,9 @@ export default function Prayers({misterio, index}) {
     set({type:"increase"})
   }
 
-  const singlePress = () => {
+const singlePress = () => set({type: "next"})
 
-    set({type:"next"})
-    if (state.actual === 0)  set({type:"done", prayer:"misterio"})
-    if (state.actual === 1)  set({type:"done", prayer:"padrenuestro"})
-    if ( state.actual >1 && state.actual <= 11)  set({type:"increase"})
-    if (state.actual === 12) set({type:"done", prayer:"gloria"})
-    if (state.actual === 13) set({type:"done", prayer:"jaculatorias"})
-    console.log(`-> cuenta: ${state.cuenta}, actual: ${state.actual}`)
-  }
-
-  const goBack = () =>{
-    set({type:"previous"})
-    if (state.actual === 0)  set({type:"pending", prayer:"misterio"})
-    if (state.actual === 1)  set({type:"pending", prayer:"padrenuestro"})
-    if ( state.actual >1 && state.actual <= 11)  set({type:"decrease"})
-    if (state.actual === 12) set({type:"pending", prayer:"gloria"})
-    if (state.actual === 13) set({type:"pending", prayer:"jaculatorias"})
-
-    console.log(`<- cuenta: ${state.cuenta}, actual: ${state.actual}`)
-  }
+  const goBack = () => set({type:"previous"})
 
 
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
@@ -105,6 +110,7 @@ export default function Prayers({misterio, index}) {
       </div>
 
       <h2 className="col-span-3  text-xs text-white/70 text-center bg-gray-800">{misterio.titulo.replace(/^.*?CONTEMPLAMOS\s*/, '')}</h2>
+      <h2 className="col-span-3  text-xs text-white/70 text-center bg-gray-800">{state.actual}</h2>
 
       <div className="col-span-3 grid grid-cols-3 ">
         <div className="col-span-2 grid gap-2">
