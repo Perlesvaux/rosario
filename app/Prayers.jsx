@@ -65,10 +65,11 @@ export default function Prayers({misterio, index}) {
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
 
   return (
-    <div className={ `${bgColors[index]} flex flex-col gap-0 relative overflow-hidden w-full h-screen flex-shrink-0` } >
+    <div className={ `${bgColors[index]} grid grid-cols-3 gap-0 relative overflow-hidden w-full flex-shrink-0` } >
 
-      <div className="relative w-full aspect-[812/880]">
+      <div className="relative w-full aspect-[812/899] col-span-3">
         <Image
+          className=""
           src={misterio.imagen}
           alt={misterio.titulo}
           fill
@@ -77,44 +78,45 @@ export default function Prayers({misterio, index}) {
         />
       </div>
 
-      <div className="grid grid-cols-1">
-        <h2 className="text-xs text-white/70 text-center bg-gray-800">{misterio.titulo.replace(/^.*?CONTEMPLAMOS\s*/, '')}</h2>
+      <h2 className="col-span-3  text-xs text-white/70 text-center bg-gray-800">{misterio.titulo.replace(/^.*?CONTEMPLAMOS\s*/, '')}</h2>
+
+      <div className="col-span-3 grid grid-cols-3">
+        <div className="col-span-2">
+          <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
+            <article className="pb-4 pt-4">
+              <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
+              <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
+              <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">{misterio.leyenda}</div>
+              <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">{misterio.l}</div>
+              <div className=" bg-red-50 border-l-4  border-red-400 px-4 py-1  text-red-800 text-sm md:text-base">{misterio.r}</div>
+            </article>
+          </Prayer>
+
+          <Prayer getter={state} setter={singlePress} title="Padre Nuestro" index={index} > 
+            <Titulus>Padre Nuestro</Titulus>
+            <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
+          </Prayer>
+
+          <Beads getter={state} setter={singlePress} index={index}>
+            <Titulus>Ave María (x10)</Titulus>
+            <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
+          </Beads>
+
+          <Prayer getter={state} setter={singlePress} title="Gloria" index={index}>
+            <Titulus>Gloria</Titulus>
+            <Vox lider={ gloria.l } respuesta={ gloria.r } />
+          </Prayer>
+
+          <Prayer getter={state} setter={singlePress} title="Jaculatorias" index={index}>
+            <Titulus>Jaculatorias</Titulus>
+            <Vox lider={jaculatoria_1.l} respuesta={jaculatoria_1.r} />
+            <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
+          </Prayer>
+
+        </div>
+
+        <button className="bg-teal-300 text-black" onClick={singlePress}> next </button>
       </div>
-
-      <div className="grid grid-cols-1">
-        <button className="p-4 bg-teal-50 text-black" onClick={singlePress}> next </button>
-      </div>
-
-      <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
-        <article className="pb-4 pt-4">
-          <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
-          <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
-          <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">{misterio.leyenda}</div>
-          <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">{misterio.l}</div>
-          <div className=" bg-red-50 border-l-4  border-red-400 px-4 py-1  text-red-800 text-sm md:text-base">{misterio.r}</div>
-        </article>
-      </Prayer>
-
-      <Prayer getter={state} setter={singlePress} title="Padre Nuestro" index={index} > 
-        <Titulus>Padre Nuestro</Titulus>
-        <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
-      </Prayer>
-
-      <Beads getter={state} setter={singlePress} index={index}>
-        <Titulus>Ave María (x10)</Titulus>
-        <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
-      </Beads>
-      
-      <Prayer getter={state} setter={singlePress} title="Gloria" index={index}>
-        <Titulus>Gloria</Titulus>
-        <Vox lider={ gloria.l } respuesta={ gloria.r } />
-      </Prayer>
-
-      <Prayer getter={state} setter={singlePress} title="Jaculatorias" index={index}>
-        <Titulus>Jaculatorias</Titulus>
-        <Vox lider={jaculatoria_1.l} respuesta={jaculatoria_1.r} />
-        <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
-      </Prayer>
 
     </div>
   )
@@ -161,7 +163,7 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
           { getter[to]? 
             <></>
             : 
-            <button onClick={setAndClose} name={identifier} className="mt-4 px-4 py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
+            <button onClick={setAndClose} name={identifier} className="px-4 py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
               <img className="mx-auto" src="/cross.svg" />
             </button> 
         } </>}
@@ -171,7 +173,7 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
 
       <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
 
-        <button popoverTarget={identifier} className={`mt-4 px-4 py-2 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2 px-2 py-1 rounded hover:opacity-75 focus:outline-none`}>
+        <button popoverTarget={identifier} className={`px-4 py-2 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2 px-2 py-1 rounded hover:opacity-75 focus:outline-none`}>
           <img className="inline pr-1" src={getter[to]? "/rose.svg" : "/title.svg"} />{title}
         </button>
 
