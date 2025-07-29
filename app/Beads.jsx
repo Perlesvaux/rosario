@@ -20,7 +20,7 @@ export default function Beads ({children, getter, setter, index}) {
     if (getter.actual == 11) ref.current.hidePopover();
   }
 
-  return <article className="">
+  return <>
 
       <div ref={ref} popover="auto" id={identifier} className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full border p-4 rounded shadow` }>
         <article className="flex flex-col">
@@ -30,7 +30,7 @@ export default function Beads ({children, getter, setter, index}) {
       </div>
 
       <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
-        <button popoverTarget={identifier} className={` px-4 py-2 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2 px-2 py-1 rounded hover:opacity-75 focus:outline-none`}>
+        <button popoverTarget={identifier} className={` px-4 py-2 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2  rounded hover:opacity-75 focus:outline-none`}>
 
       { getter.cuenta === 0 && <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Zm-40 200h80q33 0 56.5-23.5T600-360v-240q0-33-23.5-56.5T520-680h-80q-33 0-56.5 23.5T360-600v240q0 33 23.5 56.5T440-280Zm0-320h80v240h-80v-240Z"/></svg>}
       { getter.cuenta === 1 && <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Zm-20 200h80v-400H380v80h80v320Z"/></svg>}
@@ -49,7 +49,7 @@ export default function Beads ({children, getter, setter, index}) {
 
       </div>
 
-    </article>
+    </>
 
 }
 

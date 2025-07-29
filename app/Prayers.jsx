@@ -155,7 +155,7 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
     if (getter.actual == 11) ref.current.hidePopover();
   }
 
-  return <article className="">
+  return <>
       <div ref={ref} popover="auto" id={identifier} className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full border p-4 rounded shadow` }>
         <article className="flex flex-col">
           {children}
@@ -163,7 +163,7 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
           { getter[to]? 
             <></>
             : 
-            <button onClick={setAndClose} name={identifier} className="px-4 py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
+            <button onClick={setAndClose} name={identifier} className="py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
               <img className="mx-auto" src="/cross.svg" />
             </button> 
         } </>}
@@ -173,13 +173,13 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
 
       <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
 
-        <button popoverTarget={identifier} className={`px-4 py-2 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2 px-2 py-1 rounded hover:opacity-75 focus:outline-none`}>
+        <button popoverTarget={identifier} className={`px-4 py-4 col-span-2 text-black rounded text-base text-left text-sm underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
           <img className="inline pr-1" src={getter[to]? "/rose.svg" : "/title.svg"} />{title}
         </button>
 
       </div>
 
-    </article>
+    </>
 
 }
        
