@@ -77,7 +77,13 @@ export default function Prayers({misterio, index}) {
         />
       </div>
 
-      <button onClick={singlePress}> next </button>
+      <div className="grid grid-cols-1">
+        <h2 className="text-xs text-white/70 text-center bg-gray-800">{misterio.titulo.replace(/^.*?CONTEMPLAMOS\s*/, '')}</h2>
+      </div>
+
+      <div className="grid grid-cols-1">
+        <button className="p-4 bg-teal-50 text-black" onClick={singlePress}> next </button>
+      </div>
 
       <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
         <article className="pb-4 pt-4">
