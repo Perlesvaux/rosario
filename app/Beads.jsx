@@ -12,11 +12,11 @@ export default function Beads ({children, getter, setter, index}) {
   let isShown = false
   if (getter.actual > 1 && getter.actual <= 11) isShown = true
 
-  console.log(`is shown ${isShown} actual = ${getter.actual} ROSARY`)
+  //console.log(`is shown ${isShown} actual = ${getter.actual} ROSARY`)
 
   const setAndCloseRosary =() => {
     setter()
-    console.log(getter)
+    //console.log(getter)
     if (getter.actual == 11) ref.current.hidePopover();
   }
 

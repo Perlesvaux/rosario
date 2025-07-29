@@ -23,15 +23,29 @@ const reducer = (state, action) => {
   switch (type) {
     case "done":
     return {...state, [prayer]:true}
+    
+    case "pending":
+    return {...state, [prayer]:false}
 
     case "increase": {
-      const count = state.cuenta + 1
+      const count = state.cuenta<10? state.cuenta + 1 : 10;
+      const status = (count<10) ? false : true
+      return {...state, avemaria:status, cuenta:count}
+    }
+
+    case "decrease": {
+      const count = state.cuenta==0? 0 : state.cuenta - 1
       const status = (count<10) ? false : true
       return {...state, avemaria:status, cuenta:count}
     }
 
     case "next":{
-      const actual = state.actual +1;
+      const actual = state.actual<13? state.actual + 1 : 13;
+      return {...state, actual: actual}
+    }
+
+    case "previous" :{
+      const actual = state.actual<=0 ? 0 : state.actual - 1;
       return {...state, actual: actual}
     }
 
@@ -52,7 +66,6 @@ export default function Prayers({misterio, index}) {
   }
 
   const singlePress = () => {
-    const {misterio, padrenuestro, avemaria, gloria, jaculatorias} = state
 
     set({type:"next"})
     if (state.actual === 0)  set({type:"done", prayer:"misterio"})
@@ -60,7 +73,20 @@ export default function Prayers({misterio, index}) {
     if ( state.actual >1 && state.actual <= 11)  set({type:"increase"})
     if (state.actual === 12) set({type:"done", prayer:"gloria"})
     if (state.actual === 13) set({type:"done", prayer:"jaculatorias"})
+    console.log(`-> cuenta: ${state.cuenta}, actual: ${state.actual}`)
   }
+
+  const goBack = () =>{
+    set({type:"previous"})
+    if (state.actual === 0)  set({type:"pending", prayer:"misterio"})
+    if (state.actual === 1)  set({type:"pending", prayer:"padrenuestro"})
+    if ( state.actual >1 && state.actual <= 11)  set({type:"decrease"})
+    if (state.actual === 12) set({type:"pending", prayer:"gloria"})
+    if (state.actual === 13) set({type:"pending", prayer:"jaculatorias"})
+
+    console.log(`<- cuenta: ${state.cuenta}, actual: ${state.actual}`)
+  }
+
 
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
 
@@ -115,7 +141,10 @@ export default function Prayers({misterio, index}) {
 
         </div>
 
-        <button className="bg-teal-300 text-black" onClick={singlePress}> next </button>
+        <div className="grid  col-span-1">
+        <button className="grid-cols-3 bg-teal-500 text-black" onClick={goBack}> next </button>
+        <button className="grid-cols-3 bg-teal-300 text-black" onClick={singlePress}> next </button>
+        </div>
       </div>
 
     </div>
@@ -139,7 +168,7 @@ function Prayer ({children, getter, setter, title, rosary, index}) {
   if (to === "gloria" && getter.actual == 12) isShown = true
   if (to === "jaculatorias" && getter.actual == 13) isShown = true
 
-console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
+//console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
 
   const setAndClose =() => {
     setter(); 
@@ -150,7 +179,7 @@ console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
   const setAndCloseRosary =() => {
     rosary(); 
     
-    console.log(getter)
+    //console.log(getter)
     
     if (getter.actual == 11) ref.current.hidePopover();
   }
