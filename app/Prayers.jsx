@@ -147,9 +147,13 @@ const singlePress = () => set({type: "next"})
 
         </div>
 
-        <div className="grid  col-span-1">
-        <button className="grid-cols-3 bg-teal-500 text-black" onClick={goBack}> next </button>
-        <button className="grid-cols-3 bg-teal-300 text-black" onClick={singlePress}> next </button>
+        <div className="grid col-span-1">
+        <button className="flex items-center justify-center bg-gray-500 text-black" onClick={goBack}> 
+            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg>
+          </button>
+        <button className="flex items-center justify-center  bg-gray-800 text-black" onClick={singlePress}> 
+<svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+          </button>
         </div>
       </div>
 
