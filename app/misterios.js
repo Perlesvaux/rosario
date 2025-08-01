@@ -2,6 +2,7 @@ export const gozosos = {
   nombre:"GOZOSOS",
   lista: [
   {
+    encabezado: "GOZOSO I - La anunciación",   
     titulo: "EN EL PRIMER MISTERIO GOZOSO: CONTEMPLAMOS “LA ANUNCIACIÓN”",
     imagen: "/gozosos1.jpg",
     fruto: "¡Por el amor y la humildad!",
@@ -10,6 +11,7 @@ export const gozosos = {
     r: "gloria a Ti Señor Jesús!"
   },
   {
+    encabezado: "GOZOSO II - La visitación",   
     titulo: "EN EL SEGUNDO MISTERIO GOZOSO:  CONTEMPLAMOS “LA VISITACIÓN”",
     imagen: "/gozosos2.jpg",
     fruto: "¡Por amor al prójimo!",
@@ -18,6 +20,7 @@ export const gozosos = {
     r: "gloria a Ti Señor Jesús!"
   },
   {
+    encabezado: "GOZOSO III - El nacimiento de Jesús",   
     titulo: "EN EL TERCER MISTERIO GOZOSO:  CONTEMPLAMOS EL NACIMIENTO DE JESÚS",
     imagen: "/gozosos3.jpg",
     fruto: "¡El espíritu de pobreza!",
@@ -26,7 +29,8 @@ export const gozosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
-    titulo: "EN EL CUARTO MISTERIO GOZOSO:  CONTEMPLAMOS “LA PRESENTACIÓN”",
+    encabezado: "GOZOSO IV - La presentación",   
+    titulo: "EN EL CUARTO MISTERIO GOZOSO:  CONTEMPLAMOS LA PRESENTACIÓN",
     imagen: "/gozosos4.jpg",
     fruto: "¡Por la virtud de la obediencia!",
     leyenda: "Cuando se cumplieron los días de la purificación, según la Ley de Moisés, llevaron a Jesús a Jerusalén. Está escrito: “Todo varón primogénito será consagrado al Señor”. (Lucas 2: 22-35)",
@@ -34,7 +38,8 @@ export const gozosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
-    titulo: "EN EL QUINTO MISTERIO GOZOSO:  CONTEMPLAMOS “EL NIÑO PERDIDO Y HALLADO EN EL TEMPLO”",
+    encabezado: "GOZOSO V - El niño perdido y hallado en el templo",   
+    titulo: "EN EL QUINTO MISTERIO GOZOSO:  CONTEMPLAMOS EL NIÑO PERDIDO Y HALLADO EN EL TEMPLO",
     imagen: "/gozosos5.jpg",
     fruto: "¡Por la virtud de la piedad!",
     leyenda: "A los tres días lo encontraron en el templo, sentado en medio de los Maestros, oyéndolos y haciéndoles preguntas. Todos los que escuchaban a Jesús se  asombraban de su inteligencia y de sus respuestas. (Lucas 2: 41-52)",
@@ -48,6 +53,7 @@ export const dolorosos = {
   nombre: "DOLOROSOS",
   lista: [
   {
+    encabezado: "DOLOROSO I - la oración en el huerto",   
     titulo: "EN EL PRIMER MISTERIO DOLOROSO: CONTEMPLAMOS LA ORACIÓN EN EL HUERTO",
     imagen: "/dolorosos1.jpg",
     fruto: "¡Por el verdadero arrepentimiento de los pecados!",
@@ -56,7 +62,8 @@ export const dolorosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
-    titulo: "EN EL SEGUNDO MISTERIO DOLOROSO:  CONTEMPLAMOS “LA FLAGELACIÓN”",
+    encabezado: "DOLOROSO II - La flagelación",   
+    titulo: "EN EL SEGUNDO MISTERIO DOLOROSO:  CONTEMPLAMOS LA FLAGELACIÓN",
     imagen: "/dolorosos2.jpg",
     fruto: "¡Por la virtud de la pureza!",
     leyenda: "Entonces, Pilato tomó a Jesús y mandó que fuera azotado. (Juan 19: 1)",
@@ -64,6 +71,7 @@ export const dolorosos = {
     r: "gloria a Ti Señor Jesús!"
   },
   {
+    encabezado: "DOLOROSO III - La coronación de espinas",   
     titulo: "EN EL TERCER MISTERIO DOLOROSO:  CONTEMPLAMOS LA CORONACIÓN DE ESPINAS",
     imagen: "/dolorosos3.jpg",
     fruto: "¡Por el valor moral!",
@@ -72,7 +80,8 @@ export const dolorosos = {
     r: "gloria a Ti Señor Jesús!"
   },
   {
-    titulo: "EN EL CUARTO MISTERIO DOLOROSO:  CONTEMPLAMOS A “JESÚS CON LA CRUZ A CUESTAS”",
+    encabezado: "DOLOROSO IV - Jesús con la cruz a cuestas",   
+    titulo: "EN EL CUARTO MISTERIO DOLOROSO:  CONTEMPLAMOS A JESÚS CON LA CRUZ A CUESTAS",
     imagen: "/dolorosos4.jpg",
     fruto: "¡Por la virtud de la paciencia!",
     leyenda: "...Cargando Él la cruz, salió hacia el lugar llamado Calvario, en hebreo Gólgota. (Lucas 23: 26-32)",
@@ -80,7 +89,8 @@ export const dolorosos = {
     r: "¡gloria a ti Señor Jesús!"
   },
   {
-    titulo: "EN EL QUINTO MISTERIO DOLOROSO:   CONTEMPLAMOS “LA CRUCIFIXIÓN”",
+    encabezado: "DOLOROSO V - La crucifixión",   
+    titulo: "EN EL QUINTO MISTERIO DOLOROSO:   CONTEMPLAMOS LA CRUCIFIXIÓN",
     imagen: "/dolorosos5.jpg",
     fruto: "¡Por la perseverancia final!",
     leyenda: "Y Jesús, dijo «Padre, perdónalos, porque no saben lo que hacen»... El cielo se oscureció, y Jesús, con su último aliento dijo: “Padre, en tus manos pongo mi espíritu”. Y habiendo dicho esto, expiró. (Lucas 23: 33-46)",
@@ -96,7 +106,8 @@ export const gloriosos = {
   nombre: "GLORIOSOS",
   lista: [
   {
-    titulo: "EN EL PRIMER MISTERIO GLORIOSO: CONTEMPLAMOS “LA RESURRECCIÓN”",
+    encabezado: "GLORIOSO I - La resurrección",   
+    titulo: "EN EL PRIMER MISTERIO GLORIOSO: CONTEMPLAMOS LA RESURRECCIÓN",
     imagen: "/gloriosos1.jpg",
     fruto: "¡Por la virtud de la fe!",
     leyenda: "El Ángel se dirigió a las mujeres y les dijo: “No se turben. El que buscan, Jesús Nazareno, el crucificado, resucitó; no está aquí. Vean el lugar en que lo pusieron”. (Mateo 28: 5-7)",
@@ -104,7 +115,8 @@ export const gloriosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
-    titulo: "EN EL SEGUNDO MISTERIO GLORIOSO:  CONTEMPLAMOS “LA ASCENSIÓN”",
+    encabezado: "GLORIOSO II - La ascensión",   
+    titulo: "EN EL SEGUNDO MISTERIO GLORIOSO:  CONTEMPLAMOS LA ASCENSIÓN",
     imagen: "/gloriosos2.jpg",
     fruto: "¡Por la virtud de la esperanza!",
     leyenda: "El Señor Jesús, después de haber hablado con ellos, fue elevado al cielo, y se sentó a la diestra de Dios Padre. (San Marcos 16: 19)",
@@ -112,6 +124,7 @@ export const gloriosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
+    encabezado: "GLORIOSO III - La venida del espíritu santo",   
     titulo: "EN EL TERCER MISTERIO GLORIOSO: CONTEMPLAMOS LA VENIDA DEL ESPÍRITU SANTO",
     imagen: "/gloriosos3.jpg",
     fruto: "Por el amor hacia Dios.",
@@ -120,6 +133,7 @@ export const gloriosos = {
     r: "¡Te alabamos Señor!"
   },
   {
+    encabezado: "GLORIOSO IV - La asunción de maría al cielo",   
     titulo: "EN EL CUARTO MISTERIO GLORIOSO: CONTEMPLAMOS LA ASUNCIÓN DE MARÍA AL CIELO",
     imagen: "/gloriosos4.jpg",
     fruto: "¡Por la devoción a María!",
@@ -128,6 +142,7 @@ export const gloriosos = {
     r: "te alabamos Señor!"
   },
   {
+    encabezado: "GLORIOSO V - La coronación de la santa virgen maría",   
     titulo: "EN EL QUINTO MISTERIO GLORIOSO: CONTEMPLAMOS LA CORONACIÓN DE LA SANTA VIRGEN MARÍA",
     imagen: "/gloriosos5.jpg",
     fruto: "¡Por la felicidad eterna!",
@@ -144,6 +159,7 @@ export const luminosos = {
   nombre: "LUMINOSOS",
   lista: [
   {
+    encabezado: "LUMINOSO I - El bautismo de jesús",   
     titulo: "EN EL PRIMER MISTERIO LUMINOSO:  CONTEMPLAMOS EL BAUTISMO DE JESÚS",
     imagen: "/luminosos1.jpg",
     fruto: "Por la docilidad a la voluntad divina.",
@@ -152,6 +168,7 @@ export const luminosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
+    encabezado: "LUMINOSO II - La revelación de jesús en las bodas de caná",   
     titulo: "EN EL SEGUNDO MISTERIO LUMINOSO:  CONTEMPLAMOS LA REVELACIÓN DE JESÚS EN LAS BODAS DE CANÁ",
     imagen: "/luminosos2.jpg",
     fruto: "¡Por la devoción a María!",
@@ -160,7 +177,8 @@ export const luminosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
-    titulo: "EN EL TERCER MISTERIO LUMINOSO:  CONTEMPLAMOS EL “ANUNCIO DEL REINO DE DIOS”",
+    encabezado: "LUMINOSO III - El anuncio del reino de dios",   
+    titulo: "EN EL TERCER MISTERIO LUMINOSO:  CONTEMPLAMOS EL ANUNCIO DEL REINO DE DIOS",
     imagen: "/luminosos3.jpg",
     fruto: "¡Por la gracia de la conversión!",
     leyenda: "Después que Juan fue entregado, marchó Jesús a Galilea; y proclamaba la Buena Nueva de Dios: “El tiempo se ha cumplido y el Reino de Dios está cerca; convertíos y creed en la Buena Nueva”. (Lucas 7: 36-50)",
@@ -168,7 +186,8 @@ export const luminosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
-    titulo: "EN EL CUARTO MISTERIO LUMINOSO:  CONTEMPLAMOS LA “TRANSFIGURACIÓN DE JESÚS”",
+    encabezado: "LUMINOSO IV - Transfiguración de jesús",   
+    titulo: "EN EL CUARTO MISTERIO LUMINOSO:  CONTEMPLAMOS LA TRANSFIGURACIÓN DE JESÚS",
     imagen: "/luminosos4.jpg",
     fruto: "¡Por el Santo temor de Dios!",
     leyenda: "Seis días después, toma Jesús consigo a Pedro, a Santiago y a su hermano Juan, y los lleva aparte, a un monte alto. Y se transfiguró delante de ellos: Su rostro se puso brillante como el sol y sus vestidos se volvieron blancos como la luz. (Mateo 17: 1-5)",
@@ -176,7 +195,8 @@ export const luminosos = {
     r: "gloria a ti Señor Jesús!"
   },
   {
-    titulo: "EN EL QUINTO MISTERIO LUMINOSO:  CONTEMPLAMOS “LA INSTITUCIÓN DE LA EUCARISTÍA”",
+    encabezado: "LUMINOSO V - La institución de la eucaristía",   
+    titulo: "EN EL QUINTO MISTERIO LUMINOSO:  CONTEMPLAMOS LA INSTITUCIÓN DE LA EUCARISTÍA",
     imagen: "/luminosos5.jpg",
     fruto: "¡Por el agradecimiento a Dios!",
     leyenda: "Tomó luego pan, dio gracias, lo partió y se lo dio diciendo: “Este es mi cuerpo que se entrega por vosotros; haced esto en recuerdo mío”. (Mateo 26: 26-29)",
