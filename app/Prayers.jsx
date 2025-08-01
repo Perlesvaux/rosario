@@ -165,7 +165,13 @@ export function Prayer ({children, getter, setter, title, index}) {
   if (to === "credodelosapóstoles" && getter.actual == 3) isShown = true
   if (to === "peticiones" && getter.actual == 4) isShown = true
 
-
+  if (to === "peticiones" && getter.actual == 0 ) isShown = true
+  if (to === "padrenuestro" && getter.actual == 1) isShown = true
+  if (to === "avemaríaporlafe" && getter.actual == 2) isShown = true
+  if (to === "avemaríaporlaesperanza" && getter.actual ==3) isShown = true
+  if (to === "avemaríaporlacaridad" && getter.actual ==4) isShown = true
+  if (to === "gloria" && getter.actual == 5) isShown = true
+  if (to === "salve" && getter.actual == 6) isShown = true
 
 
 

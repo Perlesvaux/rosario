@@ -74,7 +74,7 @@ export default function Outro ({prev, next}){
 return <Slide> 
   <Frame src="/outro.webp" alt="Que renueve la faz de la tierra!" />
 
-    <Steps up={goBack} down={singlePress} header="algo" left={prev} right={next} >
+    <Steps up={goBack} down={singlePress} header="Santo Rosario" left={prev} right={next} >
 
       <Prayer title="Peticiones" getter={state} setter={singlePress} index={0}>
         <Extra titulo="Peticiones. por los pedidos anteriores, por la iglesia, etc." />

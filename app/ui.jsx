@@ -115,15 +115,15 @@ export function Add ({ onClick, name }){
 
 
 export function Slide ({ children }){
-  return <div className={ `bg-gray-300 grid grid-cols-3 gap-0 relative overflow-hidden w-full flex-shrink-0` } >
+  return <div className={ `bg-gray-300 relative overflow-hidden w-full flex-shrink-0` } >
     {children}
   </div>
 }
 
 export function Frame ({src, alt}){
-  return <section className="col-span-3 relative w-full aspect-[812/899] overflow-hidden">
+  return <section className="relative w-full aspect-[812/899]">
     <Image
-      className=""
+      className="object-cover object-top"
       src={src}
       alt={alt}
       fill

@@ -22,13 +22,6 @@ export default function Home() {
     <Carousel items={misterios} name={nombre} />
 
 
-    <Outro />
-
-
-
-
-
-
   </div>
 
   )
