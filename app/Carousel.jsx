@@ -3,11 +3,14 @@ import { useState } from 'react'
 import { Mysterium } from './ui.jsx'
 import Image from "next/image";
 import Prayers from './Prayers.jsx'
+import Intro from './Intro.jsx'
+import Outro from './Outro.jsx'
 
-export default function Carousel({ items }) {
+export default function Carousel({ items, name }) {
   const [index, setIndex] = useState(0)
 
-  const len = items.length+6
+  //const len = items.length+6
+  const len = items.length+2
   const prev = () => setIndex(i => (i - 1 + len) % len)
   const next = () => setIndex(i => (i + 1) % len)
 
@@ -15,16 +18,12 @@ export default function Carousel({ items }) {
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
-        <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-[100svh] bg-gray-300 rounded-lg">
+        <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-[100svh] bg-gray-300">
           <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
 
+            <Intro header={name} prev={prev} next={next} />
             {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} prev={prev} next={next} />)}
-              <Prayers misterio={items[1]}  prev={prev} next={next} />
-              <Prayers misterio={items[1]}  prev={prev} next={next} />
-              <Prayers misterio={items[1]}  prev={prev} next={next} />
-              <Prayers misterio={items[1]}  prev={prev} next={next} />
-              <Prayers misterio={items[1]}  prev={prev} next={next} />
-              <div> holas </div>
+            <Outro prev={prev} next={next} />
 
           </div>
         </div>

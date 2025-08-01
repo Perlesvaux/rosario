@@ -19,11 +19,7 @@ export default function Home() {
   return (
   <div className="bg-white text-white rounded flex flex-col w-full  space-y-8">
 
-    <h1 className={header}>Santo Rosario | {nombre} </h1>
-
-    <Intro />
-
-    <Carousel items={misterios} />
+    <Carousel items={misterios} name={nombre} />
 
 
     <Outro />

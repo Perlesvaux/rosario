@@ -98,16 +98,10 @@ const singlePress = () => set({type: "next"})
   return (
     <Slide>
 
-      <Frame>
-        <Image
-          className=""
-          src={misterio.imagen}
-          alt={misterio.titulo}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          priority
-        />
-      </Frame>
+      <Frame
+        src={misterio.imagen}
+        alt={misterio.titulo}
+      />
 
       <Steps header={misterio.encabezado} up={goBack} down={singlePress} left={prev} right={next} >
 
@@ -149,7 +143,7 @@ const singlePress = () => set({type: "next"})
 }
 
 
-function Prayer ({children, getter, setter, title, rosary, index}) {
+export function Prayer ({children, getter, setter, title, index}) {
   const ref = useRef(null)
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
   const to = title.toLowerCase().replace(/\s+/g, "")
@@ -164,6 +158,16 @@ function Prayer ({children, getter, setter, title, rosary, index}) {
   //if (to === "avemaria" && getter.actual >1 && getter.actual <= 11) isShown = true
   if (to === "gloria" && getter.actual == 12) isShown = true
   if (to === "jaculatorias" && getter.actual == 13) isShown = true
+  
+  if (to === "señaldelacruz" && getter.actual == 0) isShown = true
+  if (to === "invocacióndelespiritusanto" && getter.actual == 1) isShown = true
+  if (to === "actodecontrición" && getter.actual == 2) isShown = true
+  if (to === "credodelosapóstoles" && getter.actual == 3) isShown = true
+  if (to === "peticiones" && getter.actual == 4) isShown = true
+
+
+
+
 
   const setAndClose =() => {
     setter(); 

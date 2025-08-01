@@ -120,9 +120,16 @@ export function Slide ({ children }){
   </div>
 }
 
-export function Frame ({children}){
-  return <section className="col-span-3 relative w-full aspect-[812/899]">
-    {children}
+export function Frame ({src, alt}){
+  return <section className="col-span-3 relative w-full aspect-[812/899] overflow-hidden">
+    <Image
+      className=""
+      src={src}
+      alt={alt}
+      fill
+      sizes="(max-width: 768px) 100vw, 50vw"
+      priority
+    />
   </section>
 }
 
@@ -135,7 +142,7 @@ export function Steps({children, header, up, down, left, right}) {
       <Right onClick={right}/>
     </div>
 
-    <div className="col-span-2 grid gap-2">
+    <div className="col-span-2 grid gap-2 ">
       {children}
     </div>
 
@@ -147,6 +154,23 @@ export function Steps({children, header, up, down, left, right}) {
   </section>
 
 }
+//overflow-y-auto h-50
 
+export function List({children, header, left, right}) {
+  return <section className="col-span-3 grid grid-cols-3 gap-4">
+
+    <div className="col-span-3 grid grid-cols-7 text-xs text-white/70 text-center bg-gray-800">
+      <Left onClick={left}/>
+      <div className="col-span-5 h-10 flex items-center justify-center">{header} </div>
+      <Right onClick={right}/>
+    </div>
+
+    <div className="col-span-2 grid gap-2">
+      {children}
+    </div>
+
+  </section>
+
+}
 
 
