@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'

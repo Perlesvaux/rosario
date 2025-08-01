@@ -15,7 +15,7 @@ export default function Carousel({ items }) {
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
-        <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-screen bg-gray-300 rounded-lg">
+        <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-[100svh] bg-gray-300 rounded-lg">
           <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
 
             {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} prev={prev} next={next} />)}
