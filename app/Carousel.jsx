@@ -15,22 +15,19 @@ export default function Carousel({ items }) {
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
-      <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-screen bg-gray-300 rounded-lg">
-        <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
+        <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-screen bg-gray-300 rounded-lg">
+          <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
 
-          {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} />)}
-            <Prayers misterio={items[1]} />
-            <Prayers misterio={items[1]} />
-            <Prayers misterio={items[1]} />
-            <Prayers misterio={items[1]} />
-            <Prayers misterio={items[1]} />
-            <div> holas </div>
+            {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} prev={prev} next={next} />)}
+              <Prayers misterio={items[1]}  prev={prev} next={next} />
+              <Prayers misterio={items[1]}  prev={prev} next={next} />
+              <Prayers misterio={items[1]}  prev={prev} next={next} />
+              <Prayers misterio={items[1]}  prev={prev} next={next} />
+              <Prayers misterio={items[1]}  prev={prev} next={next} />
+              <div> holas </div>
 
+          </div>
         </div>
-        <div className="flex gap-2 absolute top-40 right-1 mx-auto">
-          <button onClick={next} className="px-4 py-2 rounded-full hover:scale-110 transition-transform duration-300"><img src="/right-clear.svg"/></button>
-        </div>
-      </div>
       </div>
     </div>
   )
