@@ -5,6 +5,7 @@ import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './
 import { useReducer, useRef } from 'react'
 import Beads from './Beads.jsx'
 import Image from "next/image";
+import { MysteryPrayer } from './ui-client.jsx'
 
 const all_prayers = {
   misterio: false,
@@ -105,7 +106,7 @@ const singlePress = () => set({type: "next"})
 
       <Steps header={misterio.encabezado} up={goBack} down={singlePress} left={prev} right={next} >
 
-        <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
+        <MysteryPrayer getter={state} setter={singlePress} title="Misterio" to="misterio" header={misterio.encabezado} > 
           <article className="pb-4 pt-4">
             <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
             <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
@@ -113,28 +114,28 @@ const singlePress = () => set({type: "next"})
             <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">{misterio.l}</div>
             <div className=" bg-red-50 border-l-4  border-red-400 px-4 py-1  text-red-800 text-sm md:text-base">{misterio.r}</div>
           </article>
-        </Prayer>
+        </MysteryPrayer>
 
-        <Prayer getter={state} setter={singlePress} title="Padre Nuestro" index={index} > 
+        <MysteryPrayer getter={state} setter={singlePress} title="Padre Nuestro" to="padrenuestro" header={misterio.encabezado} > 
           <Titulus>Padre Nuestro</Titulus>
           <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
-        </Prayer>
+        </MysteryPrayer>
 
-        <Beads getter={state} setter={singlePress} index={index}>
+        <Beads getter={state} setter={singlePress} index={index} >
           <Titulus>Ave María (x10)</Titulus>
           <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
         </Beads>
 
-        <Prayer getter={state} setter={singlePress} title="Gloria" index={index}>
+        <MysteryPrayer getter={state} setter={singlePress} title="Gloria" to="gloria" header={misterio.encabezado} >
           <Titulus>Gloria</Titulus>
           <Vox lider={ gloria.l } respuesta={ gloria.r } />
-        </Prayer>
+        </MysteryPrayer>
 
-        <Prayer getter={state} setter={singlePress} title="Jaculatorias" index={index}>
+        <MysteryPrayer getter={state} setter={singlePress} title="Jaculatorias" to="jaculatorias" header={misterio.encabezado}>
           <Titulus>Jaculatorias</Titulus>
           <Vox lider={jaculatoria_1.l} respuesta={jaculatoria_1.r} />
           <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
-        </Prayer>
+        </MysteryPrayer>
 
       </Steps>
 
@@ -143,61 +144,61 @@ const singlePress = () => set({type: "next"})
 }
 
 
-export function Prayer ({children, getter, setter, title, index}) {
-  const ref = useRef(null)
-  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
-  const to = title.toLowerCase().replace(/\s+/g, "")
-  const identifier = `${to}-${index}`
-
-  const pending = "bg-gray-600"
-  const clear = "bg-teal-600"
-
-  let isShown = false
-  if (to === "misterio" && getter.actual == 0) isShown = true
-  if (to === "padrenuestro" && getter.actual == 1) isShown = true
-  //if (to === "avemaria" && getter.actual >1 && getter.actual <= 11) isShown = true
-  if (to === "gloria" && getter.actual == 12) isShown = true
-  if (to === "jaculatorias" && getter.actual == 13) isShown = true
-  
-  if (to === "señaldelacruz" && getter.actual == 0) isShown = true
-  if (to === "invocacióndelespiritusanto" && getter.actual == 1) isShown = true
-  if (to === "actodecontrición" && getter.actual == 2) isShown = true
-  if (to === "credodelosapóstoles" && getter.actual == 3) isShown = true
-  if (to === "peticiones" && getter.actual == 4) isShown = true
-
-  if (to === "peticiones" && getter.actual == 0 ) isShown = true
-  if (to === "padrenuestro" && getter.actual == 1) isShown = true
-  if (to === "avemaríaporlafe" && getter.actual == 2) isShown = true
-  if (to === "avemaríaporlaesperanza" && getter.actual ==3) isShown = true
-  if (to === "avemaríaporlacaridad" && getter.actual ==4) isShown = true
-  if (to === "gloria" && getter.actual == 5) isShown = true
-  if (to === "salve" && getter.actual == 6) isShown = true
-
-
-
-  const setAndClose =() => {
-    setter(); 
-
-    ref.current.hidePopover();
-  }
-
-  return <>
-      <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
-        <article className="flex flex-col">
-          {children}
-          { isShown && <Add onClick={setAndClose} name={identifier} /> }
-        </article>
-      </div>
-
-      <button popoverTarget={identifier} className={`${getter[to]? 'text-black/90' : 'text-gray-500/60'} px-4   text-black rounded text-xs text-left  underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
-        {getter[to]
-        ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
-        : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".33" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
-        {title}
-      </button>
-    </>
-
-}
+//export function Prayer ({children, getter, setter, title, index}) {
+//  const ref = useRef(null)
+//  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
+//  const to = title.toLowerCase().replace(/\s+/g, "")
+//  const identifier = `${to}-${index}`
+//
+//  const pending = "bg-gray-600"
+//  const clear = "bg-teal-600"
+//
+//  let isShown = false
+//  if (to === "misterio" && getter.actual == 0) isShown = true
+//  if (to === "padrenuestro" && getter.actual == 1) isShown = true
+//  //if (to === "avemaria" && getter.actual >1 && getter.actual <= 11) isShown = true
+//  if (to === "gloria" && getter.actual == 12) isShown = true
+//  if (to === "jaculatorias" && getter.actual == 13) isShown = true
+//
+//  if (to === "señaldelacruz" && getter.actual == 0) isShown = true
+//  if (to === "invocacióndelespiritusanto" && getter.actual == 1) isShown = true
+//  if (to === "actodecontrición" && getter.actual == 2) isShown = true
+//  if (to === "credodelosapóstoles" && getter.actual == 3) isShown = true
+//  if (to === "peticiones" && getter.actual == 4) isShown = true
+//
+//  if (to === "peticiones" && getter.actual == 0 ) isShown = true
+//  if (to === "padrenuestro" && getter.actual == 1) isShown = true
+//  if (to === "avemaríaporlafe" && getter.actual == 2) isShown = true
+//  if (to === "avemaríaporlaesperanza" && getter.actual ==3) isShown = true
+//  if (to === "avemaríaporlacaridad" && getter.actual ==4) isShown = true
+//  if (to === "gloria" && getter.actual == 5) isShown = true
+//  if (to === "salve" && getter.actual == 6) isShown = true
+//
+//
+//
+//  const setAndClose =() => {
+//    setter(); 
+//
+//    ref.current.hidePopover();
+//  }
+//
+//  return <>
+//      <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
+//        <article className="flex flex-col">
+//          {children}
+//          { isShown && <Add onClick={setAndClose} name={identifier} /> }
+//        </article>
+//      </div>
+//
+//      <button popoverTarget={identifier} className={`${getter[to]? 'text-black/90' : 'text-gray-500/60'} px-4   text-black rounded text-xs text-left  underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
+//        {getter[to]
+//        ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
+//        : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".33" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
+//        {title}
+//      </button>
+//    </>
+//
+//}
        
 // deactivated right-handed button altogether
 //

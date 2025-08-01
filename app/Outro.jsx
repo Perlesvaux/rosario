@@ -4,14 +4,15 @@ import { Prayer } from './Prayers.jsx'
 import { useReducer } from 'react'
 import Image from "next/image";
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
+import { OutroPrayer } from './ui-client.jsx'
 
 
 const outro = {
   peticiones: false,
   padrenuestro: false,
-  avemariaporlafe: false,
-  avemaríaporlaesperanza: false,
-  avemaríaporlacaridad: false,
+  fe: false,
+  esperanza: false,
+  caridad: false,
   gloria: false,
   salve: false,
   actual: 0,
@@ -27,9 +28,9 @@ const reducer = (state, action)=> {
       const updates = {
         1: { peticiones: true },
         2: { padrenuestro: true },
-        3: { avemaríaporlafe: true },
-        4: { avemaríaporlaesperanza: true },
-        5: { avemaríaporlacaridad: true },
+        3: { fe: true },
+        4: { esperanza: true },
+        5: { caridad: true },
         6: { gloria: true },
         7: { salve: true },
       };
@@ -45,9 +46,9 @@ const reducer = (state, action)=> {
       const updates = {
         0: { peticiones: false },
         1: { padrenuestro: false },
-        2: { avemaríaporlafe: false },
-        3: { avemaríaporlaesperanza: false },
-        4: { avemaríaporlacaridad: false },
+        2: { fe: false },
+        3: { esperanza: false },
+        4: { caridad: false },
         5: { gloria: false },
         6: { salve: false },
       };
@@ -76,52 +77,51 @@ return <Slide>
 
     <Steps up={goBack} down={singlePress} header="Santo Rosario" left={prev} right={next} >
 
-      <Prayer title="Peticiones" getter={state} setter={singlePress} index={0}>
+      <OutroPrayer title="Peticiones" getter={state} setter={singlePress} to="peticiones">
         <Extra titulo="Peticiones. por los pedidos anteriores, por la iglesia, etc." />
-      </Prayer>
+      </OutroPrayer>
 
-
-      <Prayer title="Padre Nuestro" getter={state} setter={singlePress} index={0}>
+      <OutroPrayer title="Padre Nuestro" getter={state} setter={singlePress} to="padrenuestro">
       <Dialogus>
         <Facio>  Padre Nuestro</Facio>
         <Susurri lider={padreNuestro.l} respuesta={padreNuestro.r} />
       </Dialogus>
-      </Prayer>
+      </OutroPrayer>
 
-      <Prayer title="Ave María por la Fe" getter={state} setter={singlePress} index={0}>
+      <OutroPrayer title="Ave María por la Fe" getter={state} setter={singlePress} to="fe">
       <Dialogus>
         <Facio>  Ave María por la Fe</Facio>
         <Susurri lider={fe} respuesta={aveMaria.r} />
       </Dialogus>
-      </Prayer>
+      </OutroPrayer>
 
-      <Prayer title="Ave María por la Esperanza" getter={state} setter={singlePress} index={0}>
+      <OutroPrayer title="Ave María por la Esperanza" getter={state} setter={singlePress} to="esperanza">
       <Dialogus>
         <Facio>  Ave María por la Esperanza</Facio>
         <Susurri lider={esperanza} respuesta={aveMaria.r} />
       </Dialogus>
-      </Prayer>
+      </OutroPrayer>
 
-      <Prayer title="Ave María por la Caridad" getter={state} setter={singlePress} index={0}>
+      <OutroPrayer title="Ave María por la Caridad" getter={state} setter={singlePress} to="caridad">
       <Dialogus>
         <Facio>  Ave María por la Caridad</Facio>
         <Susurri lider={caridad} respuesta={aveMaria.r} />
       </Dialogus>
-      </Prayer>
+      </OutroPrayer>
 
-      <Prayer title="Gloria" getter={state} setter={singlePress} index={0}>
+      <OutroPrayer title="Gloria" getter={state} setter={singlePress} to="gloria">
       <Dialogus>
         <Facio>  Gloria </Facio>
         <Susurri lider={gloria.l} respuesta={gloria.r} />
       </Dialogus>
-      </Prayer>
+      </OutroPrayer>
 
-      <Prayer title="Salve" getter={state} setter={singlePress} index={0}>
+      <OutroPrayer title="Salve" getter={state} setter={singlePress} to="salve">
       <Dialogus>
         <Facio>  Salve </Facio>
         <Susurri lider={salve.l} respuesta={salve.r} />
       </Dialogus>
-      </Prayer>
+      </OutroPrayer>
 
     </Steps>
 

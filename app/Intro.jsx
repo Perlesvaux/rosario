@@ -1,7 +1,7 @@
 "use client"
 import { senal, invocacion, contricion, credo } from './prayers.js'
 import { Introductio, Slide, Frame, List, Steps } from './ui.jsx'
-import { Prayer } from './Prayers.jsx'
+import { IntroPrayer } from './ui-client.jsx'
 import { useReducer } from 'react'
 import Image from "next/image";
 
@@ -23,10 +23,10 @@ const reducer = (state, action) => {
     case "next": {
       const actual = state.actual < 5 ? state.actual + 1 : 5;
       const updates = {
-        1: { señaldelacruz: true },
-        2: { invocacióndelespiritusanto: true },
-        3: { actodecontrición: true },
-        4: { credodelosapóstoles: true },
+        1: { senal: true },
+        2: { invocacion: true },
+        3: { contricion: true },
+        4: { credo: true },
         5: { peticiones: true },
       };
       return {
@@ -39,10 +39,10 @@ const reducer = (state, action) => {
     case "previous": {
       const actual = state.actual > 0 ? state.actual - 1 : 0;
       const updates = {
-        0: { señaldelacruz: false },
-        1: { invocacióndelespiritusanto: false },
-        2: { actodecontrición: false },
-        3: { credodelosapóstoles: false },
+        0: { senal: false },
+        1: { invocacion: false },
+        2: { contricion: false },
+        3: { credo: false },
         4: { peticiones: false },
       };
       return {
@@ -71,40 +71,40 @@ export default function Intro ({header, prev, next}) {
 
     <Steps  up={goBack} down={singlePress} header={header} left={prev} right={next} >
 
-      <Prayer title="Señal de la Cruz" getter={state} setter={singlePress} index={0}>
+      <IntroPrayer title="Señal de la Cruz" getter={state} setter={singlePress} to="senal">
         <Introductio 
           titulo="Señal de la Cruz"
           leyenda={senal}
         /> 
-      </Prayer>
+      </IntroPrayer>
 
-      <Prayer title="Invocación del Espiritu Santo" getter={state} setter={singlePress} index={1}>
+      <IntroPrayer title="Invocación del Espiritu Santo" getter={state} setter={singlePress} to="invocacion">
         <Introductio
           titulo="Invocación del Espiritu Santo"
           leyenda={invocacion}
         />
-      </Prayer>
+      </IntroPrayer>
 
-      <Prayer title="Acto de Contrición" getter={state} setter={singlePress} index={2}>
+      <IntroPrayer title="Acto de Contrición" getter={state} setter={singlePress} to="contricion" >
         <Introductio
           titulo="Acto de Contrición"
           leyenda={contricion}
         />
-      </Prayer>
+      </IntroPrayer>
 
-      <Prayer title="Credo de los Apóstoles" getter={state} setter={singlePress} index={3}>
+      <IntroPrayer title="Credo de los Apóstoles" getter={state} setter={singlePress} to="credo" >
       <Introductio
         titulo="Credo de los Apóstoles"
         leyenda={credo}
       />
-      </Prayer>
+      </IntroPrayer>
 
-      <Prayer title="Peticiones" getter={state} setter={singlePress} index={3}>
+      <IntroPrayer title="Peticiones" getter={state} setter={singlePress} to="peticiones" >
         <Introductio 
           titulo="Peticiones"
           leyenda="Agradecimiento y peticiones, incluyendo por las almas del purgatorio."
         />
-      </Prayer>
+      </IntroPrayer>
     </Steps>
   </Slide>
 
