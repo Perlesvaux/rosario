@@ -81,7 +81,25 @@ export function Facio ({children}) {
 
 
 
+export function Up ({ onClick }){
+  return <button  onClick={onClick} className="flex items-center justify-center bg-gray-500 text-black"> 
+    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg>
+  </button>
+}
 
+export function Down ({ onClick }){
+  return <button className="flex items-center justify-center  bg-gray-800 text-black" onClick={onClick}> 
+    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+  </button>
+}
+
+
+export function Add ({ onClick, name }){
+  return <button onClick={onClick} name={name} className="py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
+    <svg className="mx-auto" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+  </button> 
+
+}
 
 
 

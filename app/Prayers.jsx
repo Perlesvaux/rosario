@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Dialogus, Vox, Mysterium, Titulus } from './ui.jsx' 
+import { Dialogus, Vox, Mysterium, Titulus, Up, Down, Add } from './ui.jsx' 
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 import { useReducer, useRef } from 'react'
 import Beads from './Beads.jsx'
@@ -113,7 +113,7 @@ const singlePress = () => set({type: "next"})
       <h2 className="col-span-3  text-xs text-white/70 text-center bg-gray-800">{state.actual}</h2>
 
       <div className="col-span-3 grid grid-cols-3 ">
-        <div className="col-span-2 grid gap-2">
+        <div className="col-span-2 grid gap-4">
           <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
             <article className="pb-4 pt-4">
               <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
@@ -148,12 +148,8 @@ const singlePress = () => set({type: "next"})
         </div>
 
         <div className="grid col-span-1">
-        <button className="flex items-center justify-center bg-gray-500 text-black" onClick={goBack}> 
-            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg>
-          </button>
-        <button className="flex items-center justify-center  bg-gray-800 text-black" onClick={singlePress}> 
-<svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-          </button>
+          <Up onClick={goBack} />
+          <Down onClick={singlePress}/>
         </div>
       </div>
 
@@ -198,14 +194,7 @@ function Prayer ({children, getter, setter, title, rosary, index}) {
       <div ref={ref} popover="auto" id={identifier} className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
         <article className="flex flex-col">
           {children}
-        { isShown && setter && <>
-          { getter[to]? 
-            <></>
-            : 
-            <button onClick={setAndClose} name={identifier} className="py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
-              <img className="mx-auto" src="/cross.svg" />
-            </button> 
-        } </>}
+          { isShown && <Add onClick={setAndClose} name={identifier} /> }
 
         </article>
       </div>

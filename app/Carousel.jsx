@@ -12,10 +12,10 @@ export default function Carousel({ items }) {
   const next = () => setIndex(i => (i + 1) % len)
 
   return (
-    <div className="flex justify-center items-center bg-black">
+    <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
-      <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden">
+      <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-screen bg-gray-100">
         <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
 
           {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} />)}
