@@ -96,9 +96,9 @@ const singlePress = () => set({type: "next"})
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
 
   return (
-    <div className={ `${bgColors[index]} grid grid-cols-3 gap-0 relative overflow-hidden w-full flex-shrink-0` } >
+    <div className={ `bg-gray-300 grid grid-cols-3 gap-0 relative overflow-hidden w-full flex-shrink-0` } >
 
-      <div className="relative w-full aspect-[812/899] col-span-3">
+      <div className="col-span-3 relative w-full aspect-[812/899]">
         <Image
           className=""
           src={misterio.imagen}
@@ -113,7 +113,7 @@ const singlePress = () => set({type: "next"})
       <h2 className="col-span-3  text-xs text-white/70 text-center bg-gray-800">{state.actual}</h2>
 
       <div className="col-span-3 grid grid-cols-3 ">
-        <div className="col-span-2 grid gap-4">
+        <div className="col-span-2 grid gap-2">
           <Prayer getter={state} setter={singlePress} title="Misterio" index={index} > 
             <article className="pb-4 pt-4">
               <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
@@ -147,7 +147,7 @@ const singlePress = () => set({type: "next"})
 
         </div>
 
-        <div className="grid col-span-1">
+        <div className="col-span-1 grid ">
           <Up onClick={goBack} />
           <Down onClick={singlePress}/>
         </div>
@@ -174,42 +174,26 @@ function Prayer ({children, getter, setter, title, rosary, index}) {
   if (to === "gloria" && getter.actual == 12) isShown = true
   if (to === "jaculatorias" && getter.actual == 13) isShown = true
 
-//console.log(`is shown ${isShown} actual = ${getter.actual} misterio = ${to}`)
-
   const setAndClose =() => {
     setter(); 
 
     ref.current.hidePopover();
   }
 
-  const setAndCloseRosary =() => {
-    rosary(); 
-    
-    //console.log(getter)
-    
-    if (getter.actual == 11) ref.current.hidePopover();
-  }
-
   return <>
-      <div ref={ref} popover="auto" id={identifier} className={ `${bgColors[index]}  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
+      <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
         <article className="flex flex-col">
           {children}
           { isShown && <Add onClick={setAndClose} name={identifier} /> }
-
         </article>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 w-full max-w-md mx-auto">
-
-        <button popoverTarget={identifier} className={`${getter[to]? 'text-black/90' : 'text-gray-500/60'} px-4 col-span-2 text-black rounded text-xs text-left  underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
-          {getter[to]
-          ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
-          : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".33" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
-          {title}
-        </button>
-
-      </div>
-
+      <button popoverTarget={identifier} className={`${getter[to]? 'text-black/90' : 'text-gray-500/60'} px-4   text-black rounded text-xs text-left  underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
+        {getter[to]
+        ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
+        : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".33" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
+        {title}
+      </button>
     </>
 
 }
