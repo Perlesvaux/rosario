@@ -6,97 +6,15 @@ import { useReducer, useRef } from 'react'
 import Beads from './Beads.jsx'
 import Image from "next/image";
 import { MysteryPrayer } from './ui-client.jsx'
+import { MysteryContext, useMystery } from './hooks.js'
 
-const all_prayers = {
-  misterio: false,
-  padrenuestro: false,
-  avemaria: false,
-  gloria: false,
-  jaculatorias: false,
-  cuenta: 0,
-  actual: 0,
-}
-
-const reducer = (state, action) => {
-
-  const { prayer, type, fun } = action;
-
-  switch (type) {
-    case "done":
-    return {...state, [prayer]:true}
-    
-    case "pending":
-    return {...state, [prayer]:false}
-
-    case "increase": {
-      const count =  state.cuenta + 1;
-      const status = (count<10) ? false : true;
-      return {...state, avemaria:status, cuenta:count}
-    }
-
-    case "decrease": {
-      if (state.actual<2) return {...state, avemaria:false, count:0}
-      const count =  state.cuenta - 1;
-      const status = (count<10) ? false : true;
-      return {...state, avemaria:status, cuenta:count}
-    }
-
-    case "next": {
-      const actual = state.actual < 14 ? state.actual + 1 : 14;
-      const updates = {
-        1: { misterio: true },
-        2: { padrenuestro: true },
-        12: { avemaria: true },
-        13: { gloria: true },
-        14: { jaculatorias: true },
-      };
-      return {
-        ...state,
-        actual,
-        ...updates[actual] // only applies if match
-      };
-    }
-
-    case "previous": {
-      const actual = state.actual > 0 ? state.actual - 1 : 0;
-      const updates = {
-        0: { misterio: false },
-        1: { padrenuestro: false },
-        11: { avemaria: false },
-        12: { gloria: false },
-        13: { jaculatorias: false },
-      };
-      return {
-        ...state,
-        actual,
-        ...updates[actual] // only applies if match
-      };
-    }
-
-    default:
-    return `undefined case: ${type}`
-  }
-}
 
 export default function Prayers({misterio, index, prev, next}) {
-  const [state, set] = useReducer(reducer, all_prayers)
-  
-  const markComplete = (e) => {
-    set({type:"done", prayer:e.currentTarget.name}) 
-  }
-
-  const advance = () => {
-    set({type:"increase"})
-  }
-
-const singlePress = () => set({type: "next"})
-
-  const goBack = () => set({type:"previous"})
-
+  const {state, goBack, singlePress} = useMystery()
 
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
 
-  return (
+  return ( <MysteryContext.Provider value={{state, singlePress, header:misterio.encabezado}}>
     <Slide>
 
       <Frame
@@ -106,7 +24,7 @@ const singlePress = () => set({type: "next"})
 
       <Steps header={misterio.encabezado} up={goBack} down={singlePress} left={prev} right={next} >
 
-        <MysteryPrayer getter={state} setter={singlePress} title="Misterio" to="misterio" header={misterio.encabezado} > 
+        <MysteryPrayer title="Misterio" to="misterio"  > 
           <article className="pb-4 pt-4">
             <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
             <div className="bg-teal-50 border-l-4 border-teal-400 px-4 py-1 text-teal-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
@@ -116,7 +34,7 @@ const singlePress = () => set({type: "next"})
           </article>
         </MysteryPrayer>
 
-        <MysteryPrayer getter={state} setter={singlePress} title="Padre Nuestro" to="padrenuestro" header={misterio.encabezado} > 
+        <MysteryPrayer title="Padre Nuestro" to="padrenuestro" > 
           <Titulus>Padre Nuestro</Titulus>
           <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
         </MysteryPrayer>
@@ -126,12 +44,12 @@ const singlePress = () => set({type: "next"})
           <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
         </Beads>
 
-        <MysteryPrayer getter={state} setter={singlePress} title="Gloria" to="gloria" header={misterio.encabezado} >
+        <MysteryPrayer title="Gloria" to="gloria"  >
           <Titulus>Gloria</Titulus>
           <Vox lider={ gloria.l } respuesta={ gloria.r } />
         </MysteryPrayer>
 
-        <MysteryPrayer getter={state} setter={singlePress} title="Jaculatorias" to="jaculatorias" header={misterio.encabezado}>
+        <MysteryPrayer title="Jaculatorias" to="jaculatorias" >
           <Titulus>Jaculatorias</Titulus>
           <Vox lider={jaculatoria_1.l} respuesta={jaculatoria_1.r} />
           <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
@@ -140,7 +58,7 @@ const singlePress = () => set({type: "next"})
       </Steps>
 
     </Slide>
-  )
+  </MysteryContext.Provider>)
 }
 
 
