@@ -2,14 +2,21 @@ import { createContext, useContext,
 useReducer
 } from 'react'
 
-
 export const MysteryContext = createContext()
 
 export function useMysteryContext () {
   return useContext(MysteryContext)
 }
 
-//export const OutroContext = createContext()
+export const OutroContext = createContext()
+
+export function useOutroContext() {
+  return useContext(OutroContext)
+}
+
+
+
+
 
 
 const mysteries = {

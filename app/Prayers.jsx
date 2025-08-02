@@ -39,7 +39,7 @@ export default function Prayers({misterio, index, prev, next}) {
           <Vox lider={ padreNuestro.l } respuesta={ padreNuestro.r } />
         </MysteryPrayer>
 
-        <Beads getter={state} setter={singlePress} index={index} >
+        <Beads>
           <Titulus>Ave María (x10)</Titulus>
           <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
         </Beads>
