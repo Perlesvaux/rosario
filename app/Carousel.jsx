@@ -19,7 +19,7 @@ export default function Carousel({ items, name }) {
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
-        <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-[100svh] bg-gray-300">
+        <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-[100svh] w-[100svw] bg-gray-300">
           <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
 
             <Intro header={name} prev={prev} next={next} />

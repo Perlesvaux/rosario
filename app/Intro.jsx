@@ -3,6 +3,7 @@ import { senal, invocacion, contricion, credo } from './prayers.js'
 import { Introductio, Slide, Frame, List } from './ui.jsx'
 import { IntroPrayer, Steps } from './ui-client.jsx'
 import { HolyContext, useIntro } from './hooks.js'
+import introImg from '../public/intro.webp'
 
 
 
@@ -13,7 +14,7 @@ export default function Intro ({header, prev, next}) {
     <Slide>
 
       <Frame
-        src="/intro.webp"
+        src={introImg}
         alt="Oh señor. Envia tu Espiritu."
       />
 
