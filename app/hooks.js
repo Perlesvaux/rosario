@@ -200,3 +200,62 @@ export function useIntro () {
 }
 
 
+
+const litany = {
+  inicio: false,
+  letanias: false,
+  oremos: false,
+  final: false,
+  actual: 0,
+}
+
+
+const litanyReducer = (state, action) => {
+
+  const { type } = action;
+
+  switch (type) {
+
+    case "next": {
+      const actual = state.actual < 5 ? state.actual + 1 : 5;
+      const updates = {
+        1: { inicio: true },
+        2: { letanias: true },
+        3: { oremos: true },
+        4: { avemariapurisima: true },
+        5: { final: true },
+      };
+      return {
+        ...state,
+        actual,
+        ...updates[actual] // only applies if match
+      };
+    }
+
+    case "previous": {
+      const actual = state.actual > 0 ? state.actual - 1 : 0;
+      const updates = {
+        0: { inicio: false },
+        1: { letanias: false },
+        2: { oremos: false },
+        3: { avemariapurisima: false },
+        4: { final: false },
+      };
+      return {
+        ...state,
+        actual,
+        ...updates[actual] // only applies if match
+      };
+    }
+
+}
+}
+
+
+export function useLitany () {
+  const [state, dispatch] = useReducer( litanyReducer, litany)
+  const singlePress = () => dispatch({type: "next"})
+  const goBack = () => dispatch({type:"previous"})
+  return {state, singlePress, goBack }
+}
+

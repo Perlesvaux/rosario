@@ -5,12 +5,13 @@ import Image from "next/image";
 import Prayers from './Prayers.jsx'
 import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
+import Litany from './Litany.jsx'
 
 export default function Carousel({ items, name }) {
   const [index, setIndex] = useState(0)
 
   //const len = items.length+6
-  const len = items.length+2
+  const len = items.length+3
   const prev = () => setIndex(i => (i - 1 + len) % len)
   const next = () => setIndex(i => (i + 1) % len)
 
@@ -24,6 +25,7 @@ export default function Carousel({ items, name }) {
             <Intro header={name} prev={prev} next={next} />
             {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} prev={prev} next={next} />)}
             <Outro prev={prev} next={next} />
+            <Litany prev={prev} next={next} />
 
           </div>
         </div>
