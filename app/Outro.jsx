@@ -1,78 +1,15 @@
 "use client"
 import { Dialogus, Extra, Facio, Susurri, Dictum, Slide, Frame,  Steps   } from './ui.jsx'
-import { Prayer } from './Prayers.jsx'
-import { useReducer } from 'react'
-import Image from "next/image";
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { OutroPrayer } from './ui-client.jsx'
-
-
-const outro = {
-  peticiones: false,
-  padrenuestro: false,
-  fe: false,
-  esperanza: false,
-  caridad: false,
-  gloria: false,
-  salve: false,
-  actual: 0,
-}
-
-const reducer = (state, action)=> {
-  const {type} = action
-
-  switch (type){
-
-    case "next": {
-      const actual = state.actual < 7 ? state.actual + 1 : 7;
-      const updates = {
-        1: { peticiones: true },
-        2: { padrenuestro: true },
-        3: { fe: true },
-        4: { esperanza: true },
-        5: { caridad: true },
-        6: { gloria: true },
-        7: { salve: true },
-      };
-      return {
-        ...state,
-        actual,
-        ...updates[actual] // only applies if match
-      };
-    }
-
-    case "previous": {
-      const actual = state.actual > 0 ? state.actual - 1 : 0;
-      const updates = {
-        0: { peticiones: false },
-        1: { padrenuestro: false },
-        2: { fe: false },
-        3: { esperanza: false },
-        4: { caridad: false },
-        5: { gloria: false },
-        6: { salve: false },
-      };
-      return {
-        ...state,
-        actual,
-        ...updates[actual] // only applies if match
-      };
-    }
-
-
-
-  }
-
-
-}
+import { useOutro, OutroContext } from './hooks.js'
 
 
 export default function Outro ({prev, next}){
-  const [state, set] = useReducer(reducer, outro)
-  const singlePress = () => set({type: "next"})
-  const goBack = () => set({type:"previous"})
+  const {state, goBack, singlePress} = useOutro()
 
-return <Slide> 
+return <OutroContext.Provider value={{ state, goBack, singlePress }}>
+  <Slide> 
   <Frame src="/outro.webp" alt="Que renueve la faz de la tierra!" />
 
     <Steps up={goBack} down={singlePress} header="Santo Rosario" left={prev} right={next} >
@@ -125,7 +62,7 @@ return <Slide>
 
     </Steps>
 
-  </Slide>
+  </Slide></OutroContext.Provider>
 }
 
 
