@@ -1,9 +1,9 @@
 'use client'
 import { useState, useRef } from 'react'
-import { useMysteryContext } from "./hooks.js"
+import { useHolyContext } from "./hooks.js"
 
 export default function Beads ({children}) {
-  const {state, singlePress, header} = useMysteryContext()
+  const {state, singlePress, header} = useHolyContext()
   const ref = useRef(null)
   const identifier = `avemaria-${header}`
 
@@ -67,7 +67,7 @@ export default function Beads ({children}) {
 
 
 function Bead ({onClick}){
-  const { state } = useMysteryContext()
+  const { state } = useHolyContext()
   return <button 
     onClick={onClick}
     className={`${state.cuenta>=10? 'bg-rose-700 ':'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}

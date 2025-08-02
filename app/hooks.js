@@ -21,6 +21,12 @@ export function useIntroContext () {
   return useContext(IntroContext)
 }
 
+export const HolyContext = createContext()
+
+export function useHolyContext () {
+  return useContext(HolyContext)
+}
+
 
 
 

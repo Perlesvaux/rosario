@@ -6,7 +6,7 @@ import { useReducer, useRef } from 'react'
 import Beads from './Beads.jsx'
 import Image from "next/image";
 import { MysteryPrayer } from './ui-client.jsx'
-import { MysteryContext, useMystery } from './hooks.js'
+import { HolyContext, useMystery } from './hooks.js'
 
 
 export default function Prayers({misterio, index, prev, next}) {
@@ -14,7 +14,7 @@ export default function Prayers({misterio, index, prev, next}) {
 
   const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
 
-  return ( <MysteryContext.Provider value={{state, singlePress, header:misterio.encabezado}}>
+  return ( <HolyContext.Provider value={{state, singlePress, header:misterio.encabezado}}>
     <Slide>
 
       <Frame
@@ -58,7 +58,7 @@ export default function Prayers({misterio, index, prev, next}) {
       </Steps>
 
     </Slide>
-  </MysteryContext.Provider>)
+  </HolyContext.Provider>)
 }
 
 

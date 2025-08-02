@@ -2,14 +2,14 @@
 import { senal, invocacion, contricion, credo } from './prayers.js'
 import { Introductio, Slide, Frame, List, Steps } from './ui.jsx'
 import { IntroPrayer } from './ui-client.jsx'
-import { IntroContext, useIntro } from './hooks.js'
+import { HolyContext, useIntro } from './hooks.js'
 
 
 
 export default function Intro ({header, prev, next}) {
   const { state, singlePress, goBack } = useIntro()
 
-  return <IntroContext.Provider value={{state, singlePress}}>
+  return <HolyContext.Provider value={{state, singlePress}}>
     <Slide>
 
       <Frame
@@ -56,6 +56,6 @@ export default function Intro ({header, prev, next}) {
       </Steps>
 
     </Slide>
-  </IntroContext.Provider>
+  </HolyContext.Provider>
 
 }

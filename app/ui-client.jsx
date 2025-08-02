@@ -1,11 +1,11 @@
 "use client"
 import { Add } from "./ui.jsx"
-import { useMysteryContext, useOutroContext, useIntroContext } from "./hooks.js"
+import { useHolyContext } from "./hooks.js"
 
 import {useRef} from 'react'
 
 export function MysteryPrayer ({children, to, title}) {
-  const {state, singlePress, header} = useMysteryContext()
+  const {state, singlePress, header} = useHolyContext()
   const ref = useRef(null)
   const identifier = `${header}-${to}`
 
@@ -44,7 +44,7 @@ export function MysteryPrayer ({children, to, title}) {
 
 
 export function IntroPrayer ({children, to, title}) {
-  const {state, singlePress} = useIntroContext()
+  const {state, singlePress} = useHolyContext()
   const ref = useRef(null)
   const identifier = `intro-${to}`
 
@@ -84,7 +84,7 @@ export function IntroPrayer ({children, to, title}) {
 
 
 export function OutroPrayer ({children, to, title}) {
-  const {state, singlePress} = useOutroContext()
+  const {state, singlePress} = useHolyContext()
   const ref = useRef(null)
   const identifier = `outro-${to}`
 
