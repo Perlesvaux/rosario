@@ -1,7 +1,7 @@
 "use client"
 import { senal, invocacion, contricion, credo } from './prayers.js'
-import { Introductio, Slide, Frame, List, Steps } from './ui.jsx'
-import { IntroPrayer } from './ui-client.jsx'
+import { Introductio, Slide, Frame, List } from './ui.jsx'
+import { IntroPrayer, Steps } from './ui-client.jsx'
 import { HolyContext, useIntro } from './hooks.js'
 
 
@@ -9,7 +9,7 @@ import { HolyContext, useIntro } from './hooks.js'
 export default function Intro ({header, prev, next}) {
   const { state, singlePress, goBack } = useIntro()
 
-  return <HolyContext.Provider value={{state, singlePress}}>
+  return <HolyContext.Provider value={{state, singlePress, goBack, header, prev, next}}>
     <Slide>
 
       <Frame
@@ -17,7 +17,7 @@ export default function Intro ({header, prev, next}) {
         alt="Oh señor. Envia tu Espiritu."
       />
 
-      <Steps  up={goBack} down={singlePress} header={header} left={prev} right={next} >
+      <Steps>
 
         <IntroPrayer title="Señal de la Cruz" to="senal">
           <Introductio 

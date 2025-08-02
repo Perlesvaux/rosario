@@ -3,23 +3,6 @@ useReducer,
 useRef,
 } from 'react'
 
-export const MysteryContext = createContext()
-
-export function useMysteryContext () {
-  return useContext(MysteryContext)
-}
-
-export const OutroContext = createContext()
-
-export function useOutroContext() {
-  return useContext(OutroContext)
-}
-
-export const IntroContext = createContext()
-
-export function useIntroContext () {
-  return useContext(IntroContext)
-}
 
 export const HolyContext = createContext()
 

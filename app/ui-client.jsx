@@ -124,3 +124,27 @@ export function OutroPrayer ({children, to, title}) {
 }
 
 
+import {Left, Right, Up, Down} from './ui.jsx'
+export function Steps({children}) {
+  //const {state, singlePress} = useHolyContext()
+  const {state, singlePress, goBack, prev, next, header} = useHolyContext()
+  return <section className="col-span-3 grid grid-cols-3 gap-4">
+
+    <div className="col-span-3 grid grid-cols-7 text-xs text-white/70 text-center bg-gray-800">
+      <Left onClick={prev}/>
+      <div className="col-span-5 h-10 flex items-center justify-center">{header} </div>
+      <Right onClick={next}/>
+    </div>
+
+    <div className="col-span-2 grid gap-2 ">
+      {children}
+    </div>
+
+    <div className="col-span-1 grid ">
+      <Up onClick={goBack} />
+      <Down onClick={singlePress} />
+    </div>
+
+  </section>
+
+}

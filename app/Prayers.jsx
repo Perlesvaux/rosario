@@ -1,20 +1,18 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Dialogus, Vox, Mysterium, Titulus, Up, Down, Left, Right, Add, Slide, Frame, Steps } from './ui.jsx' 
+import { Dialogus, Vox, Mysterium, Titulus, Up, Down, Left, Right, Add, Slide, Frame } from './ui.jsx' 
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 import { useReducer, useRef } from 'react'
 import Beads from './Beads.jsx'
 import Image from "next/image";
-import { MysteryPrayer } from './ui-client.jsx'
+import { MysteryPrayer, Steps } from './ui-client.jsx'
 import { HolyContext, useMystery } from './hooks.js'
 
 
 export default function Prayers({misterio, index, prev, next}) {
   const {state, goBack, singlePress} = useMystery()
 
-  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
-
-  return ( <HolyContext.Provider value={{state, singlePress, header:misterio.encabezado}}>
+  return ( <HolyContext.Provider value={{state, singlePress, goBack, header:misterio.encabezado, prev, next}}>
     <Slide>
 
       <Frame
@@ -22,7 +20,7 @@ export default function Prayers({misterio, index, prev, next}) {
         alt={misterio.titulo}
       />
 
-      <Steps header={misterio.encabezado} up={goBack} down={singlePress} left={prev} right={next} >
+      <Steps>
 
         <MysteryPrayer title="Misterio" to="misterio"  > 
           <article className="pb-4 pt-4">
