@@ -57,7 +57,7 @@ export const letanias_2 =  [
   {"l":"Dios Padre celestial, creador del mundo","r":"ten piedad de nosotros."},
   {"l":"Dios Hijo, Redentor del mundo,","r":"Ten piedad de nosotros."},
   {"l":"Dios, Espíritu Santo,", "r":"Ten piedad de nosotros."},
-  {"l":"Santísima Trinidad, un solo Dios,", "r":"Ten misericordia de nosotros."}
+  {"l":"Santísima Trinidad, un solo Dios,", "r":"Ten piedad de nosotros."}
 ]
 
 export const letanias_3 = [
