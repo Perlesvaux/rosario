@@ -3,7 +3,9 @@ import Image from "next/image";
 import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
 import Carousel from './Carousel.jsx'
+//import {requestWakeLock, releaseWakeLock} from './wakelock.js'
 import { misterio_del_dia } from './prayers.js'
+import { useWakeLock } from './hooks.js'
 
 const lead = "bg-yellow-50 border-l-4 border-yellow-400 px-4 py-2 text-yellow-800"
 const response = "bg-green-50 border-l-4 border-green-400 px-4 py-2 text-green-800"
@@ -12,6 +14,8 @@ const header = "text-4xl font-bold text-gray-900 text-center"
 const article = "pb-4"
 
 export default function Home() {
+
+  useWakeLock()
 
   const { lista:misterios, nombre } = misterio_del_dia()
 
