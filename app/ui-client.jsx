@@ -5,14 +5,14 @@ import { useHolyContext, usePrayerContext } from "./hooks.js"
 import {useRef} from 'react'
 
 export function MysteryPrayer ({children, to, title}) {
-  const {state, advance, index} = useHolyContext()
-  const {header} = usePrayerContext()
+  const {state, advance} = useHolyContext()
+  const {header, index} = usePrayerContext()
   const ref = useRef(null)
-  const identifier = `${header}-${to}-${index}`
+  const identifier = `${header}-${to}`
 
-  const current = (index>0 && index<6)? index-1 : 0
+  //const current = (index>0 && index<6)? index-1 : 0
 
-  const mystery = state.mysteries[current]
+  const mystery = state.mysteries[index]
   //console.log(mystery)
 
   const pending = "bg-gray-600"

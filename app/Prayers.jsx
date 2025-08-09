@@ -14,7 +14,7 @@ export default function Prayers({misterio, index, prev, next}) {
 
   //return ( <HolyContext.Provider value={{state, singlePress, goBack, header:misterio.encabezado, prev, next}}>
   //return ( <>
-  return ( <PrayerContext.Provider value={{header:misterio.encabezado}}>
+  return ( <PrayerContext.Provider value={{header:misterio.encabezado, index}}>
     <Slide>
 
       <Frame

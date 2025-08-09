@@ -34,7 +34,9 @@ export default function Carousel({ items, name }) {
 
 
           </div>
-            <button onClick={ ()=>advance(index) }> next </button>
+            <button onClick={ ()=>advance(index) }> advance </button>
+            <button onClick={ next }> next </button>
+            <button onClick={ prev }> prev </button>
         </div>
       </div>
     </div></HolyContext.Provider>
