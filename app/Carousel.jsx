@@ -36,8 +36,8 @@ export default function Carousel({ items, name }) {
           </div>
             <div className="absolute w-full z-20">
               <div className="relative w-full aspect-[812/899] flex ">
-              <div className="w-1/2 " onClick={()=>retrocede(index)}></div>
-              <div className="w-1/2 " onClick={()=>advance(index)}></div>
+              <div className="w-1/2 " onDoubleClick={()=>retrocede(index)}></div>
+              <div className="w-1/2 " onDoubleClick={()=>advance(index)}></div>
             </div>
               <div className="flex justify-between items-center h-[2.5em]"> 
                 <Left onClick={ prev } />
