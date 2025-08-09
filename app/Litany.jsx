@@ -7,7 +7,8 @@ import { useLitany, HolyContext } from './hooks.js'
 export default function Outro ({prev, next}){
   const {state, goBack, singlePress} = useLitany()
 
-return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Letanías", prev, next }}>
+//return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Letanías", prev, next }}>
+return <>
   <Slide> 
     <Frame src="/litany.webp" alt="Que renueve la faz de la tierra!" />
 
@@ -58,7 +59,8 @@ return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Letan�
       </Steps>
 
     </Slide>
+  </>
 
-  </HolyContext.Provider>
 }
 
+  //</HolyContext.Provider>
