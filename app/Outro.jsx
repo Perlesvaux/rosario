@@ -9,7 +9,8 @@ import outroImg from '../public/outro.webp'
 export default function Outro ({prev, next}){
   const {state, goBack, singlePress} = useOutro()
 
-return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Santo Rosario", prev, next }}>
+//return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Santo Rosario", prev, next }}>
+return <>
   <Slide> 
     <Frame src={outroImg} alt="Que renueve la faz de la tierra!" />
 
@@ -64,10 +65,11 @@ return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Santo 
       </Steps>
 
     </Slide>
+  </>
 
-  </HolyContext.Provider>
 }
 
+  //</HolyContext.Provider>
 
 
 

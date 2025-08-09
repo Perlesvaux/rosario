@@ -20,7 +20,7 @@ export default function Carousel({ items, name }) {
   const prev = () => setIndex(i => (i - 1 + len) % len)
   const next = () => setIndex(i => (i + 1) % len)
 
-  return (<HolyContext.Provider value={{ state, advance, prev, next }}>
+  return (<HolyContext.Provider value={{ state, advance, index,  prev, next }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
