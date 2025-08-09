@@ -12,6 +12,181 @@ export function useHolyContext () {
   return useContext(HolyContext)
 }
 
+const all = {
+  intro : {
+    senal: false,
+    invocacion: false,
+    contricion: false,
+    credo: false,
+    peticiones: false,
+    actual: 0,
+  },
+  mysteries: [
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      jaculatorias: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      jaculatorias: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      jaculatorias: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      jaculatorias: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      jaculatorias: false,
+      actual: 0,
+    },
+
+
+  ],
+  outro:{
+    peticiones: false,
+    padrenuestro: false,
+    fe: false,
+    esperanza: false,
+    caridad: false,
+    gloria: false,
+    salve: false,
+    actual: 0,
+  },
+  litany: {
+    inicio: false,
+    letanias: false,
+    oremos: false,
+    final: false,
+    actual: 0,
+  }
+
+}
+
+
+const allReducer = (state, action) => {
+
+  // index is an int: 0 1 2 3 4 pointing to a mystery
+  const { type, index } = action;
+
+  switch (type) {
+
+    case "advance mystery": {
+      //const mysteries = state.mysteries
+      //const mystery = mysteries[index]
+
+
+      //console.log(mysteries)
+      //console.log(index)
+      //console.log(mysteries[index])
+      
+      //state.mysteries[index].actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
+      //console.log(state.mysteries[index].actual)
+      
+      const actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
+
+      console.log(state.mysteries[index])
+      console.log(actual)
+      
+      const updates = {
+        1: { misterio: true },
+        2: { padrenuestro: true },
+        12: { avemaria: true },
+        13: { gloria: true },
+        14: { jaculatorias: true },
+      };
+
+      //const result = [...mysteries,  ]
+      return {
+        ...state,
+        mysteries: state.mysteries.map((mystery, i) => 
+          index === i ? { ...mystery, ...updates[actual], actual  } : mystery
+        )
+
+      };
+    }
+
+    case "previous mystery": {
+      //const actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
+      const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
+      //const actual = state.actual > 0 ? state.actual - 1 : 0;
+      const updates = {
+        0: { misterio: false },
+        1: { padrenuestro: false },
+        11: { avemaria: false },
+        12: { gloria: false },
+        13: { jaculatorias: false },
+      };
+      return {
+        ...state,
+        mysteries: state.mysteries.map((mystery, i) => 
+          index === i ? { ...mystery, ...updates[actual], actual  } : mystery
+        )
+
+      };
+    }
+
+    case "advance intro":{
+
+      //const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
+      //const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
+      const actual = state.intro.actual < 5 ? state.intro.actual + 1 : 5;
+      console.log(state.intro)
+      console.log(actual)
+
+      const updates = {
+        1: { senal: true },
+        2: { invocacion: true },
+        3: { contricion: true },
+        4: { credo: true },
+        5: { peticiones: true },
+      };
+
+      return {
+        ...state,
+        intro: { ...state.intro, ...updates[actual], actual } 
+
+      };
+
+
+    }
+
+    default:
+    return `undefined case: ${type}`
+  }
+}
+
+
+export function useAll(){
+  const [state, dispatch] = useReducer( allReducer, all )
+  const singlePress = (index) => dispatch({type: "advance mystery", index:index })
+  const goBack = () => dispatch({type:"previous"})
+
+  const introAdvance = (index) => dispatch({type: "advance intro" })
+  return {state, singlePress, goBack, introAdvance }
+}
 
 
 

@@ -2,7 +2,7 @@
 import { Dialogus, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { OutroPrayer, Steps } from './ui-client.jsx'
-import { useOutro, HolyContext } from './hooks.js'
+import { HolyContext, useOutro, useHolyContext } from './hooks.js'
 import outroImg from '../public/outro.webp'
 
 
