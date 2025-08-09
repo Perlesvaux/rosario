@@ -12,6 +12,12 @@ export function useHolyContext () {
   return useContext(HolyContext)
 }
 
+export const PrayerContext = createContext()
+
+export function usePrayerContext () {
+  return useContext(PrayerContext)
+}
+
 const all = {
   intro : {
     senal: false,

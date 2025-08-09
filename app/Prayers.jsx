@@ -6,13 +6,15 @@ import { useReducer, useRef } from 'react'
 import Beads from './Beads.jsx'
 import Image from "next/image";
 import { MysteryPrayer, Steps } from './ui-client.jsx'
-import { HolyContext, useMystery } from './hooks.js'
+import { PrayerContext, useMystery } from './hooks.js'
 
 
 export default function Prayers({misterio, index, prev, next}) {
-  const {state, goBack, singlePress} = useMystery()
+  //const {state, goBack, singlePress} = useMystery()
 
-  return ( <HolyContext.Provider value={{state, singlePress, goBack, header:misterio.encabezado, prev, next}}>
+  //return ( <HolyContext.Provider value={{state, singlePress, goBack, header:misterio.encabezado, prev, next}}>
+  //return ( <>
+  return ( <PrayerContext.Provider value={{header:misterio.encabezado}}>
     <Slide>
 
       <Frame
@@ -56,9 +58,11 @@ export default function Prayers({misterio, index, prev, next}) {
       </Steps>
 
     </Slide>
-  </HolyContext.Provider>)
+  </PrayerContext.Provider>)
+  //</>)
 }
 
+  //</HolyContext.Provider>)
 
 //export function Prayer ({children, getter, setter, title, index}) {
 //  const ref = useRef(null)

@@ -2,7 +2,7 @@
 import { Dialogus, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { OutroPrayer, Steps } from './ui-client.jsx'
-import { HolyContext, useOutro, useHolyContext } from './hooks.js'
+import { HolyContext, useOutro, useHolyContext, PrayerContext } from './hooks.js'
 import outroImg from '../public/outro.webp'
 
 
@@ -10,7 +10,8 @@ export default function Outro ({prev, next}){
   const {state, goBack, singlePress} = useOutro()
 
 //return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Santo Rosario", prev, next }}>
-return <>
+//return <>
+  return ( <PrayerContext.Provider value={{header:"Glow"}}>
   <Slide> 
     <Frame src={outroImg} alt="Que renueve la faz de la tierra!" />
 
@@ -65,7 +66,8 @@ return <>
       </Steps>
 
     </Slide>
-  </>
+  </PrayerContext.Provider>)
+  //</>
 
 }
 

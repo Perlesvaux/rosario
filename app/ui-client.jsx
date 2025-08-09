@@ -1,25 +1,31 @@
 "use client"
 import { Add } from "./ui.jsx"
-import { useHolyContext } from "./hooks.js"
+import { useHolyContext, usePrayerContext } from "./hooks.js"
 
 import {useRef} from 'react'
 
 export function MysteryPrayer ({children, to, title}) {
-  const {state, singlePress, header} = useHolyContext()
+  const {state, advance, index} = useHolyContext()
+  const {header} = usePrayerContext()
   const ref = useRef(null)
-  const identifier = `${header}-${to}`
+  const identifier = `${header}-${to}-${index}`
+
+  const current = (index>0 && index<6)? index-1 : 0
+
+  const mystery = state.mysteries[current]
+  //console.log(mystery)
 
   const pending = "bg-gray-600"
   const clear = "bg-teal-600"
 
   let isShown = false
-  if (to === "misterio" && state.actual == 0) isShown = true
-  if (to === "padrenuestro" && state.actual == 1) isShown = true
-  if (to === "gloria" && state.actual == 12) isShown = true
-  if (to === "jaculatorias" && state.actual == 13) isShown = true
+  if (to === "misterio" && mystery?.actual == 0) isShown = true
+  if (to === "padrenuestro" && mystery?.actual == 1) isShown = true
+  if (to === "gloria" && mystery?.actual == 12) isShown = true
+  if (to === "jaculatorias" && mystery?.actual == 13) isShown = true
 
   const setAndClose =() => {
-    singlePress(); 
+    advance(index-1); 
     ref.current.hidePopover();
   }
 
@@ -31,8 +37,8 @@ export function MysteryPrayer ({children, to, title}) {
       </article>
     </div>
 
-    <button popoverTarget={identifier} className={`${state[to]? 'text-black/90' : 'text-gray-500/60'} px-4   text-black rounded text-xs text-left  underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
-      {state[to]
+    <button popoverTarget={identifier} className={`${mystery[to]? 'text-black/90' : 'text-gray-500/60'} px-4   text-black rounded text-xs text-left  underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
+      {mystery[to]
       ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
       : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".33" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
       {title}
@@ -131,7 +137,8 @@ export function OutroPrayer ({children, to, title}) {
 import {Left, Right, Up, Down} from './ui.jsx'
 export function Steps({children}) {
   //const {state, singlePress} = useHolyContext()
-  const {state, singlePress, goBack, prev, next, header} = useHolyContext()
+  const {state, singlePress, goBack, prev, next} = useHolyContext()
+  const {header} = usePrayerContext()
   return <section className="col-span-3 grid grid-cols-3 gap-4">
 
     <div className="col-span-3 grid grid-cols-7 text-xs text-white/70 text-center bg-gray-800">

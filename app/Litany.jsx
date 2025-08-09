@@ -1,14 +1,15 @@
 import { Dialogus, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { OutroPrayer, LitanyPrayer, Steps } from './ui-client.jsx'
-import { useLitany, HolyContext } from './hooks.js'
+import { useLitany, HolyContext, PrayerContext } from './hooks.js'
 
 
 export default function Outro ({prev, next}){
   const {state, goBack, singlePress} = useLitany()
 
 //return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Letanías", prev, next }}>
-return <>
+//return <>
+  return ( <PrayerContext.Provider value={{header:"Glow"}}>
   <Slide> 
     <Frame src="/litany.webp" alt="Que renueve la faz de la tierra!" />
 
@@ -59,7 +60,7 @@ return <>
       </Steps>
 
     </Slide>
-  </>
+  </PrayerContext.Provider>)
 
 }
 
