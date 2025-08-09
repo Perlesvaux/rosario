@@ -88,28 +88,12 @@ const all = {
 
 const allReducer = (state, action) => {
 
-  // index is an int: 0 1 2 3 4 pointing to a mystery
   const { type, index } = action;
 
   switch (type) {
 
     case "advance mystery": {
-      //const mysteries = state.mysteries
-      //const mystery = mysteries[index]
-
-
-      //console.log(mysteries)
-      //console.log(index)
-      //console.log(mysteries[index])
-      
-      //state.mysteries[index].actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
-      //console.log(state.mysteries[index].actual)
-      
       const actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
-
-      console.log(state.mysteries[index])
-      console.log(actual)
-      
       const updates = {
         1: { misterio: true },
         2: { padrenuestro: true },
@@ -117,21 +101,16 @@ const allReducer = (state, action) => {
         13: { gloria: true },
         14: { jaculatorias: true },
       };
-
-      //const result = [...mysteries,  ]
       return {
         ...state,
         mysteries: state.mysteries.map((mystery, i) => 
           index === i ? { ...mystery, ...updates[actual], actual  } : mystery
         )
-
       };
     }
 
     case "previous mystery": {
-      //const actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
       const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
-      //const actual = state.actual > 0 ? state.actual - 1 : 0;
       const updates = {
         0: { misterio: false },
         1: { padrenuestro: false },
@@ -144,18 +123,11 @@ const allReducer = (state, action) => {
         mysteries: state.mysteries.map((mystery, i) => 
           index === i ? { ...mystery, ...updates[actual], actual  } : mystery
         )
-
       };
     }
 
     case "advance intro":{
-
-      //const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
-      //const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
       const actual = state.intro.actual < 5 ? state.intro.actual + 1 : 5;
-      console.log(state.intro)
-      console.log(actual)
-
       const updates = {
         1: { senal: true },
         2: { invocacion: true },
@@ -163,15 +135,96 @@ const allReducer = (state, action) => {
         4: { credo: true },
         5: { peticiones: true },
       };
-
       return {
         ...state,
         intro: { ...state.intro, ...updates[actual], actual } 
-
       };
-
-
     }
+
+    case "previous intro": {
+      const actual = state.intro.actual > 0 ? state.intro.actual - 1 : 0;
+      const updates = {
+        0: { peticiones: false },
+        1: { padrenuestro: false },
+        2: { fe: false },
+        3: { esperanza: false },
+        4: { caridad: false },
+        5: { gloria: false },
+        6: { salve: false },
+      };
+      return {
+        ...state,
+        intro: { ...state.intro, ...updates[actual], actual } 
+      };
+    }
+
+    case "advance outro": {
+      const actual = state.outro.actual < 7 ? state.outro.actual + 1 : 7;
+      const updates = {
+        1: { peticiones: true },
+        2: { padrenuestro: true },
+        3: { fe: true },
+        4: { esperanza: true },
+        5: { caridad: true },
+        6: { gloria: true },
+        7: { salve: true },
+      };
+      return {
+        ...state,
+        outro: { ...state.outro, ...updates[actual], actual } 
+      };
+    }
+
+    case "previous outro": {
+      const actual = state.outro.actual > 0 ? state.outro.actual - 1 : 0;
+      const updates = {
+        0: { peticiones: false },
+        1: { padrenuestro: false },
+        2: { fe: false },
+        3: { esperanza: false },
+        4: { caridad: false },
+        5: { gloria: false },
+        6: { salve: false },
+      };
+      return {
+        ...state,
+        outro: { ...state.outro, ...updates[actual], actual } 
+      };
+    }
+
+
+    case "advance litany": {
+      const actual = state.litany.actual < 5 ? state.litany.actual + 1 : 5;
+      const updates = {
+        1: { inicio: true },
+        2: { letanias: true },
+        3: { oremos: true },
+        4: { avemariapurisima: true },
+        5: { final: true },
+      };
+      return {
+        ...state,
+        litany: { ...state.litany, ...updates[actual], actual } 
+      };
+    }
+
+    case "previous litany": {
+      const actual = state.litany.actual > 0 ? state.litany.actual - 1 : 0;
+      const updates = {
+        0: { inicio: false },
+        1: { letanias: false },
+        2: { oremos: false },
+        3: { avemariapurisima: false },
+        4: { final: false },
+      };
+      return {
+        ...state,
+        litany: { ...state.litany, ...updates[actual], actual } 
+      };
+    }
+
+
+
 
     default:
     return `undefined case: ${type}`
@@ -181,11 +234,43 @@ const allReducer = (state, action) => {
 
 export function useAll(){
   const [state, dispatch] = useReducer( allReducer, all )
-  const singlePress = (index) => dispatch({type: "advance mystery", index:index })
-  const goBack = () => dispatch({type:"previous"})
+  //const singlePress = (index) => dispatch({type: "advance mystery", index:index })
+  //const goBack = () => dispatch({type:"previous"})
 
-  const introAdvance = (index) => dispatch({type: "advance intro" })
-  return {state, singlePress, goBack, introAdvance }
+  //const mysteryAdvance = (index) => dispatch({type: "advance mystery", index:index })
+  //const introAdvance  = () => dispatch({type: "advance intro" })
+  //const outroAdvance  = () => dispatch({type: "advance outro" })
+  //const litanyAdvance = () => dispatch({type: "advance litany" })
+  //
+  //const mysteryPrevious = (index) => dispatch({type: "previous mystery", index:index })
+  //const introPrevious  = () => dispatch({type: "previous intro" })
+  //const outroPrevious  = () => dispatch({type: "previous outro" })
+  //const litanyPrevious = () => dispatch({type: "previous litany" })
+
+  const advance = (index) => {
+    if (index===0) {
+      dispatch({type: "advance intro" })
+      console.log(`intro [${index}]`)
+    }
+
+    if (index>0 && index<6){
+      console.log(`${index} indx -> i ${index-1}`)
+      dispatch({type: "advance mystery", index:index-1 })
+      console.log(`mystery ${index-1} [${index}]`)
+    }
+
+    if (index===6) {
+      dispatch({type: "advance outro" })
+      console.log(`outro [${index}]`)
+    }
+
+    if (index===7) {
+      dispatch({type: "advance litany"})
+      console.log(`litany [${index}]`)
+    }
+  }
+
+  return { state, advance }
 }
 
 

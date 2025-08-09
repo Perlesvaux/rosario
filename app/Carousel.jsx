@@ -13,14 +13,14 @@ export default function Carousel({ items, name }) {
   const [index, setIndex] = useState(0)
   //const { state, singlePress, goBack } = useIntro()
   //const { state, singlePress, goBack } = useAll()
-  const { state, singlePress, goBack, introAdvance } = useAll()
+  const { state, advance } = useAll()
 
   //const len = items.length+6
   const len = items.length+3
   const prev = () => setIndex(i => (i - 1 + len) % len)
   const next = () => setIndex(i => (i + 1) % len)
 
-  return (<HolyContext.Provider value={{ state, singlePress, goBack, prev, next }}>
+  return (<HolyContext.Provider value={{ state, prev, next }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
@@ -35,22 +35,7 @@ export default function Carousel({ items, name }) {
 
           </div>
             <button onClick={()=>{ 
-
-            if (index===0) {
-              introAdvance()
-              
-            }
-
-            if (index>0 && index<6){
-              const i = index-1
-              console.log(`${index} indx -> i ${i}`)
-              singlePress(i) 
-            }
-
-
-            
-
-
+              advance(index)
           }}> next </button>
         </div>
       </div>
