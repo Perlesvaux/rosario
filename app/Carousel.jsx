@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Mysterium } from './ui.jsx'
+import { Mysterium, Left, Up, Down, Right } from './ui.jsx'
 import Image from "next/image";
 import Prayers from './Prayers.jsx'
 import Intro from './Intro.jsx'
@@ -34,9 +34,14 @@ export default function Carousel({ items, name }) {
 
 
           </div>
-            <button onClick={ ()=>advance(index) }> advance </button>
-            <button onClick={ next }> next </button>
-            <button onClick={ prev }> prev </button>
+            <Down onClick={ ()=>advance(index) } /> 
+            <div className="absolute w-full">
+              <div className="relative w-full aspect-[812/899]"></div>
+              <div className="flex justify-between items-center h-[2.5em]"> 
+                <Left onClick={ prev } />
+                <Right onClick={ next } /> 
+              </div>
+            </div>
         </div>
       </div>
     </div></HolyContext.Provider>

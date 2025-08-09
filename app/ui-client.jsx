@@ -19,13 +19,13 @@ export function MysteryPrayer ({children, to, title}) {
   const clear = "bg-teal-600"
 
   let isShown = false
-  if (to === "misterio" && mystery?.actual == 0) isShown = true
-  if (to === "padrenuestro" && mystery?.actual == 1) isShown = true
-  if (to === "gloria" && mystery?.actual == 12) isShown = true
-  if (to === "jaculatorias" && mystery?.actual == 13) isShown = true
+  if (to === "misterio" && mystery.actual == 0) isShown = true
+  if (to === "padrenuestro" && mystery.actual == 1) isShown = true
+  if (to === "gloria" && mystery.actual == 12) isShown = true
+  if (to === "jaculatorias" && mystery.actual == 13) isShown = true
 
   const setAndClose =() => {
-    advance(index-1); 
+    advance(index+1); 
     ref.current.hidePopover();
   }
 
@@ -142,9 +142,9 @@ export function Steps({children}) {
   return <section className="col-span-3 grid grid-cols-3 gap-4">
 
     <div className="col-span-3 grid grid-cols-7 text-xs text-white/70 text-center bg-gray-800">
-      <Left onClick={prev}/>
+      <div className="col-span-1"></div>
       <div className="col-span-5 h-10 flex items-center justify-center">{header} </div>
-      <Right onClick={next}/>
+      <div className="col-span-1"></div>
     </div>
 
     <div className="col-span-2 grid gap-2 ">
@@ -152,14 +152,18 @@ export function Steps({children}) {
     </div>
 
     <div className="col-span-1 grid ">
-      <Up onClick={goBack} />
-      <Down onClick={singlePress} />
+
     </div>
 
   </section>
 
 }
 
+      //<Left onClick={prev}/>
+
+
+      //<Up onClick={goBack} />
+      //<Down onClick={singlePress} />
 
 
 export function LitanyPrayer ({children, to, title}) {
