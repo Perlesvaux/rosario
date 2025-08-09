@@ -9,7 +9,7 @@ export default function Outro ({prev, next}){
 
 //return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Letanías", prev, next }}>
 //return <>
-  return ( <PrayerContext.Provider value={{header:"Glow"}}>
+  return ( <PrayerContext.Provider value={{header:"Letanías Lauretanas"}}>
   <Slide> 
     <Frame src="/litany.webp" alt="Que renueve la faz de la tierra!" />
 

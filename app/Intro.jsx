@@ -12,7 +12,7 @@ export default function Intro ({header, prev, next}) {
   //const { state, advance, goback } = useHolyContext()
 
   //return <>
-  return ( <PrayerContext.Provider value={{header:"Glow"}}>
+  return ( <PrayerContext.Provider value={{header}}>
     <Slide>
 
       <Frame

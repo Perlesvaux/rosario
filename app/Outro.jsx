@@ -11,7 +11,7 @@ export default function Outro ({prev, next}){
 
 //return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Santo Rosario", prev, next }}>
 //return <>
-  return ( <PrayerContext.Provider value={{header:"Glow"}}>
+  return ( <PrayerContext.Provider value={{header:"* * * * *"}}>
   <Slide> 
     <Frame src={outroImg} alt="Que renueve la faz de la tierra!" />
 
