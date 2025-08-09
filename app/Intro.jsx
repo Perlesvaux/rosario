@@ -9,7 +9,7 @@ import introImg from '../public/intro.webp'
 
 export default function Intro ({header, prev, next}) {
   //const { state, singlePress, goBack } = useIntro()
-  const { state, singlePress, goback } = useHolyContext()
+  const { state, advance, goback } = useHolyContext()
 
   return <>
     <Slide>
