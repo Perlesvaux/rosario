@@ -150,13 +150,11 @@ const allReducer = (state, action) => {
     case "previous intro": {
       const actual = state.intro.actual > 0 ? state.intro.actual - 1 : 0;
       const updates = {
-        0: { peticiones: false },
-        1: { padrenuestro: false },
-        2: { fe: false },
-        3: { esperanza: false },
-        4: { caridad: false },
-        5: { gloria: false },
-        6: { salve: false },
+        0: { senal: false },
+        1: { invocacion: false },
+        2: { contricion: false },
+        3: { credo: false },
+        4: { peticiones: false },
       };
       return {
         ...state,
@@ -276,7 +274,30 @@ export function useAll(){
     }
   }
 
-  return { state, advance }
+  const retrocede = (index) => {
+    if (index===0) {
+      dispatch({type: "previous intro" })
+      console.log(`intro [${index}]`)
+    }
+
+    if (index>0 && index<6){
+      console.log(`${index} indx -> i ${index-1}`)
+      dispatch({type: "previous mystery", index:index-1 })
+      console.log(`mystery ${index-1} [${index}]`)
+    }
+
+    if (index===6) {
+      dispatch({type: "previous outro" })
+      console.log(`outro [${index}]`)
+    }
+
+    if (index===7) {
+      dispatch({type: "previous litany"})
+      console.log(`litany [${index}]`)
+    }
+  }
+
+  return { state, advance, retrocede }
 }
 
 

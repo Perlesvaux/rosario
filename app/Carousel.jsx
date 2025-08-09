@@ -13,7 +13,7 @@ export default function Carousel({ items, name }) {
   const [index, setIndex] = useState(0)
   //const { state, singlePress, goBack } = useIntro()
   //const { state, singlePress, goBack } = useAll()
-  const { state, advance } = useAll()
+  const { state, advance, retrocede } = useAll()
 
   //const len = items.length+6
   const len = items.length+3
@@ -34,9 +34,11 @@ export default function Carousel({ items, name }) {
 
 
           </div>
-            <Down onClick={ ()=>advance(index) } /> 
-            <div className="absolute w-full">
-              <div className="relative w-full aspect-[812/899]"></div>
+            <div className="absolute w-full z-20">
+              <div className="relative w-full aspect-[812/899] flex ">
+              <div className="w-1/2 " onClick={()=>retrocede(index)}>Left</div>
+              <div className="w-1/2 " onClick={()=>advance(index)}>Right</div>
+            </div>
               <div className="flex justify-between items-center h-[2.5em]"> 
                 <Left onClick={ prev } />
                 <Right onClick={ next } /> 
