@@ -4,7 +4,7 @@ import { useHolyContext, usePrayerContext } from "./hooks.js"
 
 export default function Beads ({children}) {
   //const {state, singlePress, header} = useHolyContext()
-  const {state, advance} = useHolyContext()
+  const {state, dispatch} = useHolyContext()
   const {header, index} = usePrayerContext()
   const ref = useRef(null)
   const identifier = `avemaria-${header}`
@@ -18,7 +18,7 @@ export default function Beads ({children}) {
   if (mystery.actual > 1 && mystery.actual <= 11) isShown = true
 
   const setAndCloseRosary =() => {
-    advance(index+1)
+    dispatch({type:"advance mystery", index:index})
     if (mystery.actual == 11) ref.current.hidePopover();
   }
 
