@@ -297,7 +297,7 @@ export function useAll(){
     }
   }
 
-  return { state, advance, retrocede }
+  return { state, advance, retrocede, dispatch }
 }
 
 

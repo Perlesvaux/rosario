@@ -7,13 +7,20 @@ import outroImg from '../public/outro.webp'
 
 
 export default function Outro ({prev, next}){
-  const {state, goBack, singlePress} = useOutro()
+  //const {state, goBack, singlePress} = useOutro()
+  const {dispatch} = useHolyContext()
 
 //return <HolyContext.Provider value={{ state, goBack, singlePress, header:"Santo Rosario", prev, next }}>
 //return <>
   return ( <PrayerContext.Provider value={{header:"* * * * *"}}>
   <Slide> 
-    <Frame src={outroImg} alt="Que renueve la faz de la tierra!" />
+    <Frame 
+      src={outroImg} 
+      alt="Que renueve la faz de la tierra!" 
+      advance={()=>{ dispatch({type: "advance outro"}) }}
+      retrocede={()=>{ dispatch({type: "previous outro"}) }}
+
+    />
 
       <Steps>
 

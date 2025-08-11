@@ -115,13 +115,21 @@ export function Add ({ onClick, name }){
 
 
 export function Slide ({ children }){
-  return <div className={ `bg-gray-300 relative overflow-hidden w-full flex-shrink-0` } >
+  return <div className={ `bg-gray-300 relative overflow-hidden w-full flex-shrink-0 h-full snap-start` } >
     {children}
   </div>
 }
 
-export function Frame ({src, alt}){
+export function Frame ({src, alt, advance, retrocede}){
   return <section className="relative w-full aspect-[812/899]">
+
+    <div className="absolute w-full z-20">
+      <div className="relative w-full aspect-[812/899] flex ">
+        <div className="w-1/2 bg-teal-50/33 " onDoubleClick={retrocede}></div>
+        <div className="w-1/2 bg-red-50/33 " onDoubleClick={advance} ></div>
+      </div>
+    </div>
+
     <Image
       className="object-cover object-top"
       src={src}

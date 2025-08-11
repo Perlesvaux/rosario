@@ -10,6 +10,7 @@ import introImg from '../public/intro.webp'
 export default function Intro ({header, prev, next}) {
   //const { state, singlePress, goBack } = useIntro()
   //const { state, advance, goback } = useHolyContext()
+  const {dispatch} = useHolyContext()
 
   //return <>
   return ( <PrayerContext.Provider value={{header}}>
@@ -18,6 +19,9 @@ export default function Intro ({header, prev, next}) {
       <Frame
         src={introImg}
         alt="Oh señor. Envia tu Espiritu."
+        advance={()=>{ dispatch({type: "advance intro" }) }}
+        retrocede={()=>{ dispatch({type: "previous intro" }) }}
+
       />
 
       <Steps>

@@ -13,20 +13,20 @@ export default function Carousel({ items, name }) {
   const [index, setIndex] = useState(0)
   //const { state, singlePress, goBack } = useIntro()
   //const { state, singlePress, goBack } = useAll()
-  const { state, advance, retrocede } = useAll()
+  const { state, advance, retrocede, dispatch } = useAll()
 
   //const len = items.length+6
   const len = items.length+3
   const prev = () => setIndex(i => (i - 1 + len) % len)
   const next = () => setIndex(i => (i + 1) % len)
 
-  return (<HolyContext.Provider value={{ state, advance, index,  prev, next }}>
+  return (<HolyContext.Provider value={{ state, advance, index,  prev, next, dispatch }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
         <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-[100svh] w-[100svw] bg-gray-300">
-          <div className="flex transition-transform ease-out duration-500" style={{transform:`translateX(-${index*100}%)`}}>
-
+          <div               className="w-full h-full flex overflow-x-auto scroll-snap-type-x-mandatory scroll-padding-0-24 snap-mandatory snap-x"
+>
             <Intro header={name} prev={prev} next={next} />
             {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} prev={prev} next={next} />)}
             <Outro prev={prev} next={next} />
@@ -34,21 +34,27 @@ export default function Carousel({ items, name }) {
 
 
           </div>
-            <div className="absolute w-full z-20">
-              <div className="relative w-full aspect-[812/899] flex ">
-              <div className="w-1/2 " onDoubleClick={()=>retrocede(index)}></div>
-              <div className="w-1/2 " onDoubleClick={()=>advance(index)}></div>
-            </div>
-              <div className="flex justify-between items-center h-[2.5em]"> 
-                <Left onClick={ prev } />
-                <Right onClick={ next } /> 
-              </div>
-            </div>
+            
         </div>
       </div>
     </div></HolyContext.Provider>
   )
 }
+
+
+
+
+//<div className="absolute w-full z-20">
+//              <div className="relative w-full aspect-[812/899] flex ">
+//              <div className="w-1/2 " onDoubleClick={()=>retrocede(index)}></div>
+//              <div className="w-1/2 " onDoubleClick={()=>advance(index)}></div>
+//            </div>
+//              <div className="flex justify-between items-center h-[2.5em]"> 
+//                <Left onClick={ prev } />
+//                <Right onClick={ next } /> 
+//              </div>
+//            </div>
+
 
 
           //{['/gloriosos1.jpg', '/gozosos2.jpg', '/dolorosos5.jpg', '/luminosos3.jpg', '/gozosos4.jpg'].map((elem, indx)=>

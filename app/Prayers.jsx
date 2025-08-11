@@ -6,12 +6,13 @@ import { useReducer, useRef } from 'react'
 import Beads from './Beads.jsx'
 import Image from "next/image";
 import { MysteryPrayer, Steps } from './ui-client.jsx'
-import { PrayerContext, useMystery } from './hooks.js'
+import { PrayerContext, useMystery, useHolyContext } from './hooks.js'
 
 
 export default function Prayers({misterio, index, prev, next}) {
   //const {state, goBack, singlePress} = useMystery()
 
+  const {dispatch} = useHolyContext()
   //return ( <HolyContext.Provider value={{state, singlePress, goBack, header:misterio.encabezado, prev, next}}>
   //return ( <>
   return ( <PrayerContext.Provider value={{header:misterio.encabezado, index}}>
@@ -20,6 +21,8 @@ export default function Prayers({misterio, index, prev, next}) {
       <Frame
         src={misterio.imagen}
         alt={misterio.titulo}
+        advance={()=>{ dispatch({type: "advance mystery", index: index }) }}
+        retrocede={()=>{ dispatch({type: "previous mystery", index: index }) }}
       />
 
       <Steps>
