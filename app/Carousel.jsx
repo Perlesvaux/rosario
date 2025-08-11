@@ -7,32 +7,22 @@ import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
 import Litany from './Litany.jsx'
 
-import { HolyContext, useIntro, useAll } from './hooks.js'
+import { HolyContext, useAll } from './hooks.js'
 
 export default function Carousel({ items, name }) {
-  const [index, setIndex] = useState(0)
-  //const { state, singlePress, goBack } = useIntro()
-  //const { state, singlePress, goBack } = useAll()
-  const { state, advance, retrocede, dispatch } = useAll()
+  const { state, dispatch } = useAll()
 
-  //const len = items.length+6
-  const len = items.length+3
-  const prev = () => setIndex(i => (i - 1 + len) % len)
-  const next = () => setIndex(i => (i + 1) % len)
-
-  return (<HolyContext.Provider value={{ state, advance, index,  prev, next, dispatch }}>
+  return (<HolyContext.Provider value={{ state, dispatch }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
         <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-[100svh] w-[100svw] bg-gray-300">
-          <div               className="w-full h-full flex overflow-x-auto scroll-snap-type-x-mandatory scroll-padding-0-24 snap-mandatory snap-x"
->
-            <Intro header={name} prev={prev} next={next} />
-            {items.map((item, indx)=><Prayers key={indx} misterio={item} index={indx} prev={prev} next={next} />)}
-            <Outro prev={prev} next={next} />
-            <Litany prev={prev} next={next} />
 
-
+          <div className="w-full h-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth">
+            <Intro header={name} />
+            {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
+            <Outro />
+            <Litany />
           </div>
             
         </div>

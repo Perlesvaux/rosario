@@ -115,7 +115,7 @@ export function Add ({ onClick, name }){
 
 
 export function Slide ({ children }){
-  return <div className={ `bg-gray-300 relative overflow-hidden w-full flex-shrink-0 h-full snap-start` } >
+  return <div className={ `bg-gray-300 relative overflow-hidden w-full flex-shrink-0 h-full snap-start snap-always` } >
     {children}
   </div>
 }
