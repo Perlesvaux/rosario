@@ -7,7 +7,7 @@ import outroImg from '../public/outro.webp'
 export default function Outro (){
 
   const {state, dispatch} = useHolyContext()
-  const next = "advance outro"
+  const next = ()=>{ dispatch({type: "advance outro"}) }
   const currentState = state.outro
 
   const show = (to) => {

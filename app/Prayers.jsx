@@ -7,7 +7,7 @@ import { PrayerContext, useHolyContext } from './hooks.js'
 export default function Prayers({misterio, index}) {
 
   const {state, dispatch} = useHolyContext()
-  const next = "advance mystery"
+  const next = ()=>{ dispatch({type: "advance mystery", index: index }) }
   const currentState = state.mysteries[index]
 
   const show = (to) => {

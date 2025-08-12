@@ -7,7 +7,7 @@ import introImg from '../public/intro.webp'
 export default function Intro ({header}) {
 
   const {state, dispatch} = useHolyContext();
-  const next = "advance intro"
+  const next = ()=>{ dispatch({type: "advance intro" }) }
   const currentState = state.intro;
 
   const show = (to) =>  {

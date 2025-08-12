@@ -7,7 +7,7 @@ import litanyImg from '../public/litany.webp'
 export default function Litany (){
 
   const {state, dispatch} = useHolyContext();
-  const next = "advance litany";
+  const next = ()=>{ dispatch({type: "advance litany"}) };
   const currentState = state.litany;
 
   const show = (to) => {
