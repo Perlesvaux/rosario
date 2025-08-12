@@ -1,12 +1,8 @@
 'use client'
-import { useState } from 'react'
-import { Mysterium, Left, Up, Down, Right } from './ui.jsx'
-import Image from "next/image";
 import Prayers from './Prayers.jsx'
 import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
 import Litany from './Litany.jsx'
-
 import { HolyContext, useAll } from './hooks.js'
 
 export default function Carousel({ items, name }) {

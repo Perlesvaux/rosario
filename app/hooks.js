@@ -238,66 +238,7 @@ const allReducer = (state, action) => {
 
 export function useAll(){
   const [state, dispatch] = useReducer( allReducer, all )
-  //const singlePress = (index) => dispatch({type: "advance mystery", index:index })
-  //const goBack = () => dispatch({type:"previous"})
-
-  //const mysteryAdvance = (index) => dispatch({type: "advance mystery", index:index })
-  //const introAdvance  = () => dispatch({type: "advance intro" })
-  //const outroAdvance  = () => dispatch({type: "advance outro" })
-  //const litanyAdvance = () => dispatch({type: "advance litany" })
-  //
-  //const mysteryPrevious = (index) => dispatch({type: "previous mystery", index:index })
-  //const introPrevious  = () => dispatch({type: "previous intro" })
-  //const outroPrevious  = () => dispatch({type: "previous outro" })
-  //const litanyPrevious = () => dispatch({type: "previous litany" })
-
-  const advance = (index) => {
-    if (index===0) {
-      dispatch({type: "advance intro" })
-      console.log(`intro [${index}]`)
-    }
-
-    if (index>0 && index<6){
-      console.log(`${index} indx -> i ${index-1}`)
-      dispatch({type: "advance mystery", index:index-1 })
-      console.log(`mystery ${index-1} [${index}]`)
-    }
-
-    if (index===6) {
-      dispatch({type: "advance outro" })
-      console.log(`outro [${index}]`)
-    }
-
-    if (index===7) {
-      dispatch({type: "advance litany"})
-      console.log(`litany [${index}]`)
-    }
-  }
-
-  const retrocede = (index) => {
-    if (index===0) {
-      dispatch({type: "previous intro" })
-      console.log(`intro [${index}]`)
-    }
-
-    if (index>0 && index<6){
-      console.log(`${index} indx -> i ${index-1}`)
-      dispatch({type: "previous mystery", index:index-1 })
-      console.log(`mystery ${index-1} [${index}]`)
-    }
-
-    if (index===6) {
-      dispatch({type: "previous outro" })
-      console.log(`outro [${index}]`)
-    }
-
-    if (index===7) {
-      dispatch({type: "previous litany"})
-      console.log(`litany [${index}]`)
-    }
-  }
-
-  return { state, advance, retrocede, dispatch }
+  return { state, dispatch }
 }
 
 
