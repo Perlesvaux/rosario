@@ -8,6 +8,7 @@ export default function Litany (){
 
   const {state, dispatch} = useHolyContext();
   const next = ()=>{ dispatch({type: "advance litany"}) };
+  const prev = ()=>{ dispatch({type: "previous litany"}) }
   const currentState = state.litany;
 
   const show = (to) => {
@@ -24,8 +25,8 @@ export default function Litany (){
       <Frame
         src={litanyImg}
         alt="Que renueve la faz de la tierra!" 
-        advance={()=>{ dispatch({type: "advance litany"}) }}
-        retrocede={()=>{ dispatch({type: "previous litany"}) }}
+        advance={next}
+        retrocede={prev}
       />
 
       <Steps>

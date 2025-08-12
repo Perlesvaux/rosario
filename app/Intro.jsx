@@ -8,6 +8,7 @@ export default function Intro ({header}) {
 
   const {state, dispatch} = useHolyContext();
   const next = ()=>{ dispatch({type: "advance intro" }) }
+  const prev = ()=>{ dispatch({type: "previous intro" }) }
   const currentState = state.intro;
 
   const show = (to) =>  {
@@ -24,8 +25,8 @@ export default function Intro ({header}) {
       <Frame
         src={introImg}
         alt="Oh señor. Envia tu Espiritu."
-        advance={()=>{ dispatch({type: "advance intro" }) }}
-        retrocede={()=>{ dispatch({type: "previous intro" }) }}
+        advance={next}
+        retrocede={prev}
       />
 
       <Steps>

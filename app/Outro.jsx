@@ -8,6 +8,7 @@ export default function Outro (){
 
   const {state, dispatch} = useHolyContext()
   const next = ()=>{ dispatch({type: "advance outro"}) }
+  const prev = ()=>{ dispatch({type: "previous outro"}) }
   const currentState = state.outro
 
   const show = (to) => {
@@ -26,8 +27,8 @@ export default function Outro (){
       <Frame 
         src={outroImg} 
         alt="Que renueve la faz de la tierra!" 
-        advance={()=>{ dispatch({type: "advance outro"}) }}
-        retrocede={()=>{ dispatch({type: "previous outro"}) }}
+        advance={next}
+        retrocede={prev}
       />
 
       <Steps>

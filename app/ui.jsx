@@ -235,23 +235,5 @@ export function Steps({children, header, up, down, left, right}) {
   </section>
 
 }
-//overflow-y-auto h-50
-
-export function List({children, header, left, right}) {
-  return <section className="col-span-3 grid grid-cols-3 gap-4">
-
-    <div className="col-span-3 grid grid-cols-7 text-xs text-white/70 text-center bg-gray-800">
-      <Left onClick={left}/>
-      <div className="col-span-5 h-10 flex items-center justify-center">{header} </div>
-      <Right onClick={right}/>
-    </div>
-
-    <div className="col-span-2 grid gap-2">
-      {children}
-    </div>
-
-  </section>
-
-}
 
 

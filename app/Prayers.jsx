@@ -8,6 +8,7 @@ export default function Prayers({misterio, index}) {
 
   const {state, dispatch} = useHolyContext()
   const next = ()=>{ dispatch({type: "advance mystery", index: index }) }
+  const prev = ()=>{ dispatch({type: "previous mystery", index: index }) }
   const currentState = state.mysteries[index]
 
   const show = (to) => {
@@ -23,8 +24,8 @@ export default function Prayers({misterio, index}) {
       <Frame
         src={misterio.imagen}
         alt={misterio.titulo}
-        advance={()=>{ dispatch({type: "advance mystery", index: index }) }}
-        retrocede={()=>{ dispatch({type: "previous mystery", index: index }) }}
+        advance={next}
+        retrocede={prev}
       />
 
       <Steps>
