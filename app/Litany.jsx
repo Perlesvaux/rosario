@@ -19,7 +19,7 @@ export default function Litany (){
     if (to === "final" && currentState.actual == 4) return true
   }
 
-  return ( <PrayerContext.Provider value={{header:"Letanías Lauretanas", index:6, next, currentState, show}}>
+  return ( <PrayerContext.Provider value={{header:"Letanías Lauretanas", next, currentState, show}}>
     <Slide> 
 
       <Frame

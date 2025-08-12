@@ -19,7 +19,7 @@ export default function Intro ({header}) {
     if (to === "peticiones" && currentState.actual == 4) return true
   }
 
-  return ( <PrayerContext.Provider value={{header, next, currentState, show, index:-1}}>
+  return ( <PrayerContext.Provider value={{header, next, currentState, show}}>
     <Slide>
 
       <Frame

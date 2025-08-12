@@ -14,11 +14,12 @@ export default function Prayers({misterio, index}) {
   const show = (to) => {
     if (to === "misterio" && currentState.actual == 0) return true
     if (to === "padrenuestro" && currentState.actual == 1) return true
+    if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
     if (to === "gloria" && currentState.actual == 12) return true
     if (to === "jaculatorias" && currentState.actual == 13) return true
   }
 
-  return ( <PrayerContext.Provider value={{header:misterio.encabezado, index, next, currentState, show}}>
+  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show}}>
     <Slide>
 
       <Frame

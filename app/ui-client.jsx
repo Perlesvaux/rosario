@@ -3,9 +3,9 @@ import { useHolyContext, usePrayerContext } from "./hooks.js"
 import {useRef} from 'react'
 
 export function Prayer ({children, to, title}) {
-  const {next, currentState, show, header, index} = usePrayerContext()
+  const {next, currentState, show, header} = usePrayerContext()
   const ref = useRef(null)
-  const identifier = `${to}-${header}-${index}`
+  const identifier = `${to}-${header}`
 
   const pending = "bg-gray-600"
   const clear = "bg-teal-600"

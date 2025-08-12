@@ -21,7 +21,7 @@ export default function Outro (){
     if (to === "salve" && currentState.actual == 6) return true
   }
 
-  return ( <PrayerContext.Provider value={{header:"", index:5, next, currentState, show}}>
+  return ( <PrayerContext.Provider value={{header:"", next, currentState, show}}>
     <Slide> 
 
       <Frame 
