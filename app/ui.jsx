@@ -64,9 +64,9 @@ export function Susurri ({lider, respuesta}){
 }
 
 export function Dictum ({lider, respuesta}){
-  return <article className="flex flex-row" >
-    <div className="bg-teal-50  px-4 py-2 text-teal-800 rounded-tl-xl rounded-bl-xl">{lider}</div> 
-    <div className="bg-amber-50  px-4 py-2 text-amber-800 rounded-tr-xl rounded-br-xl">{respuesta}</div>
+  return <article className="grid grid-cols-2" >
+    <div className={`col-span-1 ${lightGrayBox}`}>{lider}</div> 
+    <div className={`col-span-1 ${darkGrayBox}`}>{respuesta}</div>
   </article>
 }
 
