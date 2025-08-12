@@ -38,7 +38,7 @@ export default function Intro ({header}) {
           /> 
         </Prayer>
 
-        <Prayer title="Invocación del Espiritu Santo" to="invocacion">
+        <Prayer title="Invocación" to="invocacion">
           <Introductio
             titulo="Invocación del Espiritu Santo"
             leyenda={invocacion}

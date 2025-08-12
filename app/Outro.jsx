@@ -14,11 +14,9 @@ export default function Outro (){
   const show = (to) => {
     if (to === "peticiones" && currentState.actual == 0 ) return true 
     if (to === "padrenuestro" && currentState.actual == 1) return true
-    if (to === "fe" && currentState.actual == 2) return true
-    if (to === "esperanza" && currentState.actual ==3) return true
-    if (to === "caridad" && currentState.actual ==4) return true
-    if (to === "gloria" && currentState.actual == 5) return true
-    if (to === "salve" && currentState.actual == 6) return true
+    if (to === "avemarias" && currentState.actual == 2) return true
+    if (to === "gloria" && currentState.actual == 3) return true
+    if (to === "salve" && currentState.actual == 4) return true
   }
 
   return ( <PrayerContext.Provider value={{header:"", next, currentState, show}}>
@@ -44,25 +42,21 @@ export default function Outro (){
           </Dialogus>
         </Prayer>
 
-        <Prayer title="Ave María por la Fe" to="fe">
-          <Dialogus>
-            <Facio>  Ave María por la Fe</Facio>
-            <Susurri lider={fe} respuesta={aveMaria.r} />
-          </Dialogus>
-        </Prayer>
-
-        <Prayer title="Ave María por la Esperanza" to="esperanza">
-          <Dialogus>
-            <Facio>  Ave María por la Esperanza</Facio>
-            <Susurri lider={esperanza} respuesta={aveMaria.r} />
-          </Dialogus>
-        </Prayer>
-
-        <Prayer title="Ave María por la Caridad" to="caridad">
-          <Dialogus>
-            <Facio>  Ave María por la Caridad</Facio>
-            <Susurri lider={caridad} respuesta={aveMaria.r} />
-          </Dialogus>
+        <Prayer title="Fe, Esperanza y Caridad" to="avemarias">
+          <section className="px-4 text-amber-800 space-y-1  overflow-y-auto h-[50svh]"   >
+            <Dialogus>
+              <Facio>  Ave María por la Fe</Facio>
+              <Susurri lider={fe} respuesta={aveMaria.r} />
+            </Dialogus>
+            <Dialogus>
+              <Facio>  Ave María por la Esperanza</Facio>
+              <Susurri lider={esperanza} respuesta={aveMaria.r} />
+            </Dialogus>
+            <Dialogus>
+              <Facio>  Ave María por la Caridad</Facio>
+              <Susurri lider={caridad} respuesta={aveMaria.r} />
+            </Dialogus>
+          </section>
         </Prayer>
 
         <Prayer title="Gloria" to="gloria">

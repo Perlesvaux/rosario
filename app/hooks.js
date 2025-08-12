@@ -74,9 +74,7 @@ const all = {
   outro:{
     peticiones: false,
     padrenuestro: false,
-    fe: false,
-    esperanza: false,
-    caridad: false,
+    avemarias: false,
     gloria: false,
     salve: false,
     actual: 0,
@@ -163,15 +161,13 @@ const allReducer = (state, action) => {
     }
 
     case "advance outro": {
-      const actual = state.outro.actual < 7 ? state.outro.actual + 1 : 7;
+      const actual = state.outro.actual < 5 ? state.outro.actual + 1 : 5;
       const updates = {
         1: { peticiones: true },
         2: { padrenuestro: true },
-        3: { fe: true },
-        4: { esperanza: true },
-        5: { caridad: true },
-        6: { gloria: true },
-        7: { salve: true },
+        3: { avemarias: true },
+        4: { gloria: true },
+        5: { salve: true },
       };
       return {
         ...state,
@@ -184,11 +180,9 @@ const allReducer = (state, action) => {
       const updates = {
         0: { peticiones: false },
         1: { padrenuestro: false },
-        2: { fe: false },
-        3: { esperanza: false },
-        4: { caridad: false },
-        5: { gloria: false },
-        6: { salve: false },
+        2: { avemarias: false },
+        3: { gloria: false },
+        4: { salve: false },
       };
       return {
         ...state,
