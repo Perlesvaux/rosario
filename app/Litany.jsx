@@ -1,31 +1,42 @@
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { Dialogus, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
-import { OutroPrayer, LitanyPrayer, Steps } from './ui-client.jsx'
+import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext } from './hooks.js'
+import litanyImg from '../public/litany.webp'
 
-export default function Outro ({prev, next}){
+export default function Litany (){
 
-  const {dispatch} = useHolyContext()
+  const {state, dispatch} = useHolyContext();
+  const next = "advance litany";
+  const currentState = state.litany;
 
-  return ( <PrayerContext.Provider value={{header:"Letanías Lauretanas"}}>
+  const show = (to) => {
+    if (to === "inicio" && currentState.actual == 0 ) return true 
+    if (to === "letanias" && currentState.actual == 1) return true
+    if (to === "oremos" && currentState.actual == 2) return true
+    if (to === "avemariapurisima" && currentState.actual == 3) return true
+    if (to === "final" && currentState.actual == 4) return true
+  }
+
+  return ( <PrayerContext.Provider value={{header:"Letanías Lauretanas", index:6, next, currentState, show}}>
     <Slide> 
 
       <Frame
-        src="/litany.webp"
+        src={litanyImg}
         alt="Que renueve la faz de la tierra!" 
         advance={()=>{ dispatch({type: "advance litany"}) }}
         retrocede={()=>{ dispatch({type: "previous litany"}) }}
       />
 
       <Steps>
-        <LitanyPrayer title="Inicio" to="inicio">
+        <Prayer title="Inicio" to="inicio">
           <Extra 
             titulo="Oración previa a Letanías" 
             leyenda="¡Oh Señor! Ten misericordia de nosotros. Escucha nuestras súplicas." 
           />
-        </LitanyPrayer>
+        </Prayer>
 
-        <LitanyPrayer title="Letanías" to="letanias">
+        <Prayer title="Letanías" to="letanias">
           <section className="px-4 text-amber-800 space-y-1  overflow-y-auto h-[50svh]"   >
 
             {letanias_1.map((letania, indx)=><Dialogus key={indx}><Dictum  lider={letania.l} respuesta={letania.r} /></Dialogus>)}
@@ -41,22 +52,22 @@ export default function Outro ({prev, next}){
             </Dialogus>
 
           </section>
-        </LitanyPrayer>
+        </Prayer>
 
-        <LitanyPrayer title="Oremos" to="oremos">
+        <Prayer title="Oremos" to="oremos">
           <Dialogus>
             <Facio> Oremos </Facio>
             <Susurri lider={oremos.l} respuesta={oremos.r} />
           </Dialogus>
-        </LitanyPrayer>
+        </Prayer>
 
-        <LitanyPrayer title="Ave Maria Purisima" to="avemariapurisima">
+        <Prayer title="Ave Maria Purisima" to="avemariapurisima">
           {aveMariaPurisima.map((letania, indx)=> <Dialogus key={indx}><Dictum lider={letania.l} respuesta={letania.r} /> </Dialogus> )}
-        </LitanyPrayer>
+        </Prayer>
 
-        <LitanyPrayer title="Final" to="final">
+        <Prayer title="Final" to="final">
           {jaculatorias_finales.map((letania, indx)=><Dialogus  key={indx}><Susurri lider={letania.l} respuesta={letania.r} /></Dialogus>)}
-        </LitanyPrayer>
+        </Prayer>
 
       </Steps>
 

@@ -46,25 +46,20 @@ export function MysteryPrayer ({children, to, title}) {
 
 
 
-export function IntroPrayer ({children, to, title}) {
+export function Prayer ({children, to, title}) {
   const {state, dispatch} = useHolyContext()
+  const {next, currentState, show, header, index} = usePrayerContext()
   const ref = useRef(null)
-  const identifier = `intro-${to}`
-
-  const intro = state.intro
+  const identifier = `${to}-${header}-${index}`
 
   const pending = "bg-gray-600"
   const clear = "bg-teal-600"
 
-  let isShown = false
-  if (to === "senal" && intro.actual == 0) isShown = true
-  if (to === "invocacion" && intro.actual == 1) isShown = true
-  if (to === "contricion" && intro.actual == 2) isShown = true
-  if (to === "credo" && intro.actual == 3) isShown = true
-  if (to === "peticiones" && intro.actual == 4) isShown = true
+  let isShown = show(to)
 
   const setAndClose =() => {
-    dispatch({type:"advance intro"}); 
+    //next()
+    dispatch({type:next, index})
     ref.current.hidePopover();
   }
 
@@ -76,8 +71,8 @@ export function IntroPrayer ({children, to, title}) {
         </article>
       </div>
 
-      <button popoverTarget={identifier} className={`${intro[to]? 'text-black/90' : 'text-gray-500/60'} px-4   text-black rounded text-xs text-left  underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
-        {intro[to]
+      <button popoverTarget={identifier} className={`${currentState[to]? 'text-black/90' : 'text-gray-500/60'} px-4   text-black rounded text-xs text-left  underline underline-offset-2 rounded hover:opacity-75 focus:outline-none`}>
+        {currentState[to]
         ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
         : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".33" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
         {title}

@@ -6,7 +6,7 @@ export default function Beads ({children}) {
   const {state, dispatch} = useHolyContext()
   const {header, index} = usePrayerContext()
   const ref = useRef(null)
-  const identifier = `avemaria-${header}`
+  const identifier = `avemaria-${header}-${index}`
 
   const mystery = state.mysteries[index]
 

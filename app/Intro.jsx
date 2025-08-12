@@ -1,14 +1,24 @@
 import { senal, invocacion, contricion, credo } from './prayers.js'
 import { Introductio, Slide, Frame, List } from './ui.jsx'
-import { IntroPrayer, Steps } from './ui-client.jsx'
+import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext } from './hooks.js'
 import introImg from '../public/intro.webp'
 
-export default function Intro ({header, prev, next}) {
+export default function Intro ({header}) {
 
-  const {dispatch} = useHolyContext()
+  const {state, dispatch} = useHolyContext();
+  const next = "advance intro"
+  const currentState = state.intro;
 
-  return ( <PrayerContext.Provider value={{header}}>
+  const show = (to) =>  {
+    if (to === "senal" && currentState.actual == 0) return true
+    if (to === "invocacion" && currentState.actual == 1) return true
+    if (to === "contricion" && currentState.actual == 2) return true
+    if (to === "credo" && currentState.actual == 3) return true
+    if (to === "peticiones" && currentState.actual == 4) return true
+  }
+
+  return ( <PrayerContext.Provider value={{header, next, currentState, show, index:-1}}>
     <Slide>
 
       <Frame
@@ -20,40 +30,40 @@ export default function Intro ({header, prev, next}) {
 
       <Steps>
 
-        <IntroPrayer title="Señal de la Cruz" to="senal">
+        <Prayer title="Señal de la Cruz" to="senal">
           <Introductio 
             titulo="Señal de la Cruz"
             leyenda={senal}
           /> 
-        </IntroPrayer>
+        </Prayer>
 
-        <IntroPrayer title="Invocación del Espiritu Santo" to="invocacion">
+        <Prayer title="Invocación del Espiritu Santo" to="invocacion">
           <Introductio
             titulo="Invocación del Espiritu Santo"
             leyenda={invocacion}
           />
-        </IntroPrayer>
+        </Prayer>
 
-        <IntroPrayer title="Acto de Contrición" to="contricion" >
+        <Prayer title="Acto de Contrición" to="contricion" >
           <Introductio
             titulo="Acto de Contrición"
             leyenda={contricion}
           />
-        </IntroPrayer>
+        </Prayer>
 
-        <IntroPrayer title="Credo de los Apóstoles" to="credo" >
+        <Prayer title="Credo de los Apóstoles" to="credo" >
         <Introductio
           titulo="Credo de los Apóstoles"
           leyenda={credo}
         />
-        </IntroPrayer>
+        </Prayer>
 
-        <IntroPrayer title="Peticiones" to="peticiones" >
+        <Prayer title="Peticiones" to="peticiones" >
           <Introductio 
             titulo="Peticiones"
             leyenda="Agradecimiento y peticiones, incluyendo por las almas del purgatorio."
           />
-        </IntroPrayer>
+        </Prayer>
       </Steps>
 
     </Slide>
