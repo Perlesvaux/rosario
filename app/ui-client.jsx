@@ -5,15 +5,12 @@ import { useHolyContext, usePrayerContext } from "./hooks.js"
 import {useRef} from 'react'
 
 export function MysteryPrayer ({children, to, title}) {
-  const {state, advance, dispatch} = useHolyContext()
+  const {state, dispatch} = useHolyContext()
   const {header, index} = usePrayerContext()
   const ref = useRef(null)
   const identifier = `${header}-${to}`
 
-  //const current = (index>0 && index<6)? index-1 : 0
-
   const mystery = state.mysteries[index]
-  //console.log(mystery)
 
   const pending = "bg-gray-600"
   const clear = "bg-teal-600"
@@ -25,13 +22,9 @@ export function MysteryPrayer ({children, to, title}) {
   if (to === "jaculatorias" && mystery.actual == 13) isShown = true
 
   const setAndClose =() => {
-    dispatch({type:"advance mystery", index:index}); 
+    dispatch({type:"advance mystery", index}); 
     ref.current.hidePopover();
   }
-  //const setAndClose =() => {
-  //  advance(index+1); 
-  //  ref.current.hidePopover();
-  //}
 
   return <>
     <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
@@ -54,7 +47,7 @@ export function MysteryPrayer ({children, to, title}) {
 
 
 export function IntroPrayer ({children, to, title}) {
-  const {state, advance, index, dispatch} = useHolyContext()
+  const {state, dispatch} = useHolyContext()
   const ref = useRef(null)
   const identifier = `intro-${to}`
 
@@ -96,7 +89,7 @@ export function IntroPrayer ({children, to, title}) {
 
 
 export function OutroPrayer ({children, to, title}) {
-  const {state, advance, index, dispatch} = useHolyContext()
+  const {state, dispatch} = useHolyContext()
   const ref = useRef(null)
   const identifier = `outro-${to}`
 
@@ -171,7 +164,7 @@ export function Steps({children}) {
 
 
 export function LitanyPrayer ({children, to, title}) {
-  const {state, advance, index, dispatch} = useHolyContext()
+  const {state, dispatch} = useHolyContext()
   const ref = useRef(null)
   const identifier = `outro-${to}`
 

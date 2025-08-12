@@ -1,9 +1,8 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { useHolyContext, usePrayerContext } from "./hooks.js"
 
 export default function Beads ({children}) {
-  //const {state, singlePress, header} = useHolyContext()
   const {state, dispatch} = useHolyContext()
   const {header, index} = usePrayerContext()
   const ref = useRef(null)
@@ -50,25 +49,6 @@ export default function Beads ({children}) {
 
 }
 
-      //{ getter.actual === 12 && <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg> }
-
-      //{ getter.cuenta >= 10 && <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity="95" fill="#434343"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg> }
-
-// Buttons used to go <button1><button2>
-// But ended up ditching <button2> altogether: aka second <Bead/>
-    //<Bead getter={getter} setter={setter} />
-
-
-          //<img className="inline pr-1" src='/title.svg'/>Ave Maria
-
-//<Beads getter={state} setter={singlePress} index={index}>
-//  <Titulus>Ave María (x10)</Titulus>
-//  <Vox lider={ aveMaria.l } respuesta={ aveMaria.r } />
-//</Beads>
-
-
-
-
 
 function Bead ({onClick}){
   const { state } = useHolyContext()
@@ -92,19 +72,4 @@ function Bead ({onClick}){
     
 
 }
-
-      //<img className="px-4 py-2 rounded transition mx-auto" src={icon()}/> 
-
-
-  //inline-flex items-center justify-center  // Ensures proper centering
-  //px-4 py-2                                // Padding
-  //rounded-md                               // Rounded corners
-  //bg-blue-600 hover:bg-blue-700            // Background with hover state
-  //text-white                               // Text color (affects SVG if using currentColor)
-  //transition-colors duration-200           // Smooth color transitions
-  //focus:outline-none focus:ring-2          // Focus styles for accessibility
-  //focus:ring-blue-500 focus:ring-opacity-50
-
-
-
 

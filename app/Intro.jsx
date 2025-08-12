@@ -1,18 +1,13 @@
-"use client"
 import { senal, invocacion, contricion, credo } from './prayers.js'
 import { Introductio, Slide, Frame, List } from './ui.jsx'
 import { IntroPrayer, Steps } from './ui-client.jsx'
-import { HolyContext, useIntro, useHolyContext, PrayerContext } from './hooks.js'
+import { useHolyContext, PrayerContext } from './hooks.js'
 import introImg from '../public/intro.webp'
 
-
-
 export default function Intro ({header, prev, next}) {
-  //const { state, singlePress, goBack } = useIntro()
-  //const { state, advance, goback } = useHolyContext()
+
   const {dispatch} = useHolyContext()
 
-  //return <>
   return ( <PrayerContext.Provider value={{header}}>
     <Slide>
 
@@ -21,7 +16,6 @@ export default function Intro ({header, prev, next}) {
         alt="Oh señor. Envia tu Espiritu."
         advance={()=>{ dispatch({type: "advance intro" }) }}
         retrocede={()=>{ dispatch({type: "previous intro" }) }}
-
       />
 
       <Steps>
@@ -64,6 +58,4 @@ export default function Intro ({header, prev, next}) {
 
     </Slide>
   </PrayerContext.Provider>)
-  //</>
-
 }
