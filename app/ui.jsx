@@ -9,31 +9,22 @@ const css_article =  "pt-4"
 //const css_article =  "pb-4"
 const css_important= "text-indigo-600 font-medium text-sm md:text-lg leading-snug"
 const css_misterio = "text-sm md:text-lg font-bold text-rose-700 text-center"
-
-
 const css_reply = "bg-amber-50 border-l-4 border-amber-400 px-4 py-2 text-amber-900 text-sm"
 
-
+const titleGray = "text-lg md:text-xl font-bold text-gray-700"
+const lightGrayBox = "bg-gray-50 border-l-4 border-gray-400 px-4 py-2 text-gray-800 text-base md:text-base"
+const darkGrayBox = "bg-gray-700 border-l-4 border-gray-900 px-4 py-2 text-gray-50 text-base md:text-base"
 
 export function Introductio ({titulo, leyenda}) {
   return <article className="pt-4"> 
-    {titulo && <h2 className="text-base md:text-xl font-bold text-gray-700"> {titulo} </h2>}
-    {leyenda && <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-2 text-gray-800 text-sm md:text-base">{leyenda}</div>}
+    {titulo && <h2 className={titleGray}> {titulo} </h2>}
+    {leyenda && <div className={lightGrayBox}>{leyenda}</div>}
   </article>
 }
 
-export function Extra ({titulo, leyenda}) {
-  return <article className="pb-4 bg-amber-50  px-4 py-2 text-amber-800 rounded-xl"> 
-    {titulo && <h2 className={css_title}> {titulo} </h2>}
-    {leyenda && <div className="text-black">{leyenda}</div>}
-  </article>
-}
-
-const lightGrayBox = "bg-gray-50 border-l-4 border-gray-400 px-4 py-2 text-gray-800 text-sm md:text-base"
-const darkGrayBox = "bg-gray-700 border-l-4 border-gray-900 px-4 py-2 text-gray-50 text-sm md:text-base"
 export function Dialogus ({titulo, lider, respuesta, children}) {
   return <article className="pt-4"> 
-    {titulo && <h2 className="text-base md:text-xl font-bold text-gray-700"> {titulo} </h2>}
+    {titulo && <h2 className={titleGray}> {titulo} </h2>}
     {lider && respuesta && <>
       <div className={lightGrayBox}>
         {lider}
@@ -55,6 +46,14 @@ export function Vox ({lider, respuesta}){
 
     //<div className={css_lead}>{lider}</div> 
     //<div className={css_response}>{respuesta}</div>
+
+
+export function Extra ({titulo, leyenda}) {
+  return <article className="pb-4 bg-amber-50  px-4 py-2 text-amber-800 rounded-xl"> 
+    {titulo && <h2 className={css_title}> {titulo} </h2>}
+    {leyenda && <div className="text-black">{leyenda}</div>}
+  </article>
+}
 
 export function Susurri ({lider, respuesta}){
   return <>
@@ -140,7 +139,7 @@ export function Frame ({src, alt, advance, retrocede}){
     <div className="absolute w-full z-20">
       <div className="relative w-full aspect-[812/899] flex ">
         <div className="w-1/2 bg-teal-50/33 " onDoubleClick={retrocede}></div>
-        <div className="w-1/2 bg-red-50/33 " onDoubleClick={advance} ></div>
+        <div className="w-1/2 bg-red-50/33 " onClick={advance} ></div>
       </div>
     </div>
 
