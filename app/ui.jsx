@@ -4,20 +4,21 @@ import Prayers from './Prayers.jsx'
 const css_lead =     "bg-teal-50 border-l-4 border-teal-400 px-4 py-2 text-teal-800 text-sm md:text-base"
 const css_response = "bg-red-50 border-l-4 border-red-400 px-4 py-2 text-red-900 text-sm md:text-base"
 const css_title =    "text-base md:text-xl font-bold text-gray-900"
-const css_header =   "text-xs md:text-lg font-bold text-gray-900"
-const css_article =  "pb-4"
-const css_important= "text-indigo-600 font-medium text-xs md:text-lg leading-snug"
-const css_misterio = "text-xs md:text-lg font-bold text-rose-700 text-center"
+const css_header =   "text-sm md:text-lg font-bold text-gray-900"
+const css_article =  "pt-4"
+//const css_article =  "pb-4"
+const css_important= "text-indigo-600 font-medium text-sm md:text-lg leading-snug"
+const css_misterio = "text-sm md:text-lg font-bold text-rose-700 text-center"
 
 
-const css_reply = "bg-amber-50 border-l-4 border-amber-400 px-4 py-2 text-amber-900"
+const css_reply = "bg-amber-50 border-l-4 border-amber-400 px-4 py-2 text-amber-900 text-sm"
 
 
 
 export function Introductio ({titulo, leyenda}) {
-  return <article className="pb-4 bg-blue-50  px-4 py-2 text-rose-800 rounded-xl"> 
-    {titulo && <h2 className={css_title}> {titulo} </h2>}
-    {leyenda && <div className="text-black text-xs md:text-base">{leyenda}</div>}
+  return <article className="pt-4"> 
+    {titulo && <h2 className="text-base md:text-xl font-bold text-gray-700"> {titulo} </h2>}
+    {leyenda && <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-2 text-gray-800 text-sm md:text-base">{leyenda}</div>}
   </article>
 }
 
@@ -28,20 +29,32 @@ export function Extra ({titulo, leyenda}) {
   </article>
 }
 
+const lightGrayBox = "bg-gray-50 border-l-4 border-gray-400 px-4 py-2 text-gray-800 text-sm md:text-base"
+const darkGrayBox = "bg-gray-700 border-l-4 border-gray-900 px-4 py-2 text-gray-50 text-sm md:text-base"
 export function Dialogus ({titulo, lider, respuesta, children}) {
-  return <article className={css_article}> 
-    {titulo && <h2 className={css_title}> {titulo} </h2>}
-    {lider && respuesta && <Vox lider={lider} respuesta={respuesta}/>}
+  return <article className="pt-4"> 
+    {titulo && <h2 className="text-base md:text-xl font-bold text-gray-700"> {titulo} </h2>}
+    {lider && respuesta && <>
+      <div className={lightGrayBox}>
+        {lider}
+      </div> 
+      <div className={darkGrayBox}>
+        {respuesta}
+      </div>
+    </>}
     {children && children}
   </article>
 }
 
 export function Vox ({lider, respuesta}){
   return <>
-    <div className={css_lead}>{lider}</div> 
-    <div className={css_response}>{respuesta}</div>
+    <div className={lightGrayBox}>{lider}</div> 
+    <div className={darkGrayBox}>{respuesta}</div>
   </>
 }
+
+    //<div className={css_lead}>{lider}</div> 
+    //<div className={css_response}>{respuesta}</div>
 
 export function Susurri ({lider, respuesta}){
   return <>
@@ -107,12 +120,13 @@ export function Down ({ onClick }){
 
 
 export function Add ({ onClick, name }){
-  return <button onClick={onClick} name={name} className="py-2 col-span-1 bg-gray-600 text-white rounded text-sm">
-    <svg className="mx-auto" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+  return <button onClick={onClick} name={name} className="py-2 col-span-1 bg-gray-800 text-white rounded text-sm">
+    <svg className="mx-auto animate-pulse" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#F3F3F3"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
   </button> 
 
 }
 
+    //<svg className="mx-auto animate-pulse" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
 
 export function Slide ({ children }){
   return <div className={ `bg-gray-300 relative overflow-hidden w-full flex-shrink-0 h-full snap-start snap-always` } >

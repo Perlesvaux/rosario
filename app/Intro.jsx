@@ -1,5 +1,5 @@
 import { senal, invocacion, contricion, credo } from './prayers.js'
-import { Introductio, Slide, Frame, List } from './ui.jsx'
+import { Introductio, Slide, Frame, Titulus } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext } from './hooks.js'
 import introImg from '../public/intro.webp'

@@ -19,7 +19,7 @@ export function Prayer ({children, to, title}) {
 
   return <>
       <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
-        <article className="flex flex-col">
+        <article className="flex flex-col gap-4">
           {children}
           { isShown && <Add onClick={setAndClose} name={identifier} /> }
         </article>

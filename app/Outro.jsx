@@ -1,5 +1,5 @@
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
-import { Dialogus, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
+import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext } from './hooks.js'
 import outroImg from '../public/outro.webp'
@@ -32,45 +32,54 @@ export default function Outro (){
       <Steps>
 
         <Prayer title="Peticiones" to="peticiones">
-          <Extra titulo="Peticiones. por los pedidos anteriores, por la iglesia, etc." />
+          <Introductio 
+            titulo="Peticiones"
+            leyenda="Peticiones. por los pedidos anteriores, por la iglesia, etc."
+          />
         </Prayer>
 
         <Prayer title="Padre Nuestro" to="padrenuestro">
-          <Dialogus>
-            <Facio>  Padre Nuestro</Facio>
-            <Susurri lider={padreNuestro.l} respuesta={padreNuestro.r} />
-          </Dialogus>
+          <Dialogus 
+            titulo="Padre Nuestro"
+            lider={padreNuestro.l} 
+            respuesta={padreNuestro.r}
+          />
         </Prayer>
 
         <Prayer title="Fe, Esperanza y Caridad" to="avemarias">
           <section className="px-4 text-amber-800 space-y-1  overflow-y-auto h-[50svh]"   >
-            <Dialogus>
-              <Facio>  Ave María por la Fe</Facio>
-              <Susurri lider={fe} respuesta={aveMaria.r} />
-            </Dialogus>
-            <Dialogus>
-              <Facio>  Ave María por la Esperanza</Facio>
-              <Susurri lider={esperanza} respuesta={aveMaria.r} />
-            </Dialogus>
-            <Dialogus>
-              <Facio>  Ave María por la Caridad</Facio>
-              <Susurri lider={caridad} respuesta={aveMaria.r} />
-            </Dialogus>
+            <Dialogus
+              titulo="Ave María por la Fe"
+              lider={fe} 
+              respuesta={aveMaria.r}
+            />
+            <Dialogus
+              titulo="Ave María por la Esperanza"
+              lider={esperanza} 
+              respuesta={aveMaria.r}
+            />
+            <Dialogus
+              titulo="Ave María por la Caridad"
+              lider={caridad} 
+              respuesta={aveMaria.r}
+            />
           </section>
         </Prayer>
 
         <Prayer title="Gloria" to="gloria">
-          <Dialogus>
-            <Facio>  Gloria </Facio>
-            <Susurri lider={gloria.l} respuesta={gloria.r} />
-          </Dialogus>
+          <Dialogus
+            titulo="Gloria"
+            lider={gloria.l} 
+            respuesta={gloria.r}
+          />
         </Prayer>
 
         <Prayer title="Salve" to="salve">
-          <Dialogus>
-            <Facio>  Salve </Facio>
-            <Susurri lider={salve.l} respuesta={salve.r} />
-          </Dialogus>
+          <Dialogus
+            titulo="Salve" 
+            lider={salve.l} 
+            respuesta={salve.r}
+          />
         </Prayer>
 
       </Steps>
