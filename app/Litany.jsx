@@ -38,7 +38,6 @@ export default function Litany (){
         </Prayer>
 
         <Prayer title="Letanías" to="letanias">
-          <section className="text-amber-800 space-y-1  overflow-y-auto h-[50svh]"   >
 
             <Dialogus titulo="Letanías">
             <div className="flex flex-col gap-1">
@@ -49,14 +48,12 @@ export default function Litany (){
               {letanias_3.map((letania, indx)=><div key={indx}><Dictum  lider={letania} respuesta="Ruega por nosotros." /></div>)}
 
               {letanias_4.map((letania, indx)=><div key={indx}><Dictum lider={letania.l} respuesta={letania.r} /></div> )}
+
+              <Vox lider={letanias_final.l} respuesta={letanias_final.r} />
+
             </div>
             </Dialogus>
 
-            <Dialogus>
-              <Vox lider={letanias_final.l} respuesta={letanias_final.r} />
-            </Dialogus>
-
-          </section>
         </Prayer>
 
         <Prayer title="Oremos" to="oremos">

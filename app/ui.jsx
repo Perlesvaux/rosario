@@ -15,26 +15,32 @@ const titleGray = "text-lg md:text-xl font-bold text-gray-700"
 const lightGrayBox = "bg-gray-50 border-l-4 border-gray-400 px-4 py-2 text-gray-800 text-base md:text-base"
 const darkGrayBox = "bg-gray-700 border-l-4 border-gray-900 px-4 py-2 text-gray-50 text-base md:text-base"
 
-export function Introductio ({titulo, leyenda}) {
-  return <article className="pt-4"> 
+export function Introductio ({titulo, leyenda, children}) {
+  return  <div className="pt-4" >
     {titulo && <h2 className={titleGray}> {titulo} </h2>}
+  <article className=" overflow-y-auto max-h-[50svh]">
     {leyenda && <div className={lightGrayBox}>{leyenda}</div>}
+    {children}
   </article>
+
+  </div>
 }
 
 export function Dialogus ({titulo, lider, respuesta, children}) {
-  return <article className="pt-4"> 
+  return <div className="pt-4"> 
     {titulo && <h2 className={titleGray}> {titulo} </h2>}
-    {lider && respuesta && <>
-      <div className={lightGrayBox}>
-        {lider}
-      </div> 
-      <div className={darkGrayBox}>
-        {respuesta}
-      </div>
-    </>}
-    {children && children}
-  </article>
+    <article className=" overflow-y-auto max-h-[50svh]">
+      {lider && respuesta && <>
+        <div className={lightGrayBox}>
+          {lider}
+        </div> 
+        <div className={darkGrayBox}>
+          {respuesta}
+        </div>
+      </>}
+      {children && children}
+    </article>
+  </div>
 }
 
 export function Vox ({lider, respuesta}){

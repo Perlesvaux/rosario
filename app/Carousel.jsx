@@ -3,6 +3,7 @@ import Prayers from './Prayers.jsx'
 import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
 import Litany from './Litany.jsx'
+import { Help } from './ui-client.jsx'
 import { HolyContext, useAll } from './hooks.js'
 
 export default function Carousel({ items, name }) {
@@ -21,9 +22,11 @@ export default function Carousel({ items, name }) {
             <Litany />
           </div>
             
+          <Help />
         </div>
       </div>
-    </div></HolyContext.Provider>
+    </div>
+  </HolyContext.Provider>
   )
 }
 

@@ -47,7 +47,8 @@ export default function Outro (){
         </Prayer>
 
         <Prayer title="Fe, Esperanza y Caridad" to="avemarias">
-          <section className="px-4 text-amber-800 space-y-1  overflow-y-auto h-[50svh]"   >
+          <Dialogus titulo="Fe, Esperanza y Caridad"  >
+            <div className="px-4" >
             <Dialogus
               titulo="Ave María por la Fe"
               lider={fe} 
@@ -63,7 +64,8 @@ export default function Outro (){
               lider={caridad} 
               respuesta={aveMaria.r}
             />
-          </section>
+            </div>
+          </Dialogus>
         </Prayer>
 
         <Prayer title="Gloria" to="gloria">
