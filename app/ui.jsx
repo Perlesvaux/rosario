@@ -126,13 +126,13 @@ export function Down ({ onClick }){
 
 export function Add ({ onClick, name }){
   return <button onClick={onClick} name={name} className="py-2 col-span-1 bg-gray-800 text-white rounded text-sm">
-    <svg className="mx-auto animate-pulse" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#F3F3F3"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
+    <svg className="mx-auto animate-pulse" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".99" fill="#ffffff"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
   </button> 
 
 }
 
 export function Exit ({onClick}){
-  return <button onClick={onClick} className="h-6 w-6 py-2 absolute top-0 right-5">
+  return <button onClick={onClick} className="h-6 w-6 py-2 absolute top-0 right-5 hover:opacity-75">
     <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
   </button>
 }
