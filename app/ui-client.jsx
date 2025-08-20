@@ -22,6 +22,7 @@ export function Prayer ({children, to, title}) {
         <article className="flex flex-col gap-4">
           {children}
           { isShown && <Add onClick={setAndClose} name={identifier} /> }
+          <Exit onClick={()=>ref.current.hidePopover()} />
         </article>
       </div>
 
@@ -56,7 +57,7 @@ export function Steps({children}) {
 
 }
 
-import { Introductio } from './ui.jsx'
+import { Introductio, Exit } from './ui.jsx'
 
 export function Help(){
   const ref = useRef(null)
@@ -69,17 +70,22 @@ export function Help(){
       <div ref={ref} popover="auto" id="help-section" className="bg-gray-300  px-4 py-2 text-gray-800  overflow-hidden w-full border rounded shadow">
         <article className="flex flex-col gap-4">
           
-        <Introductio titulo="Ayuda">
-          <div className="space-y-5  bg-gray-50 border-l-4 border-gray-400 px-4 py-2 text-gray-800 text-base md:text-base">
-          <p>Por defecto, la aplicación se abre en el misterio del día.</p>
-          <p>Desliza lateralmente para avanzar o retroceder.</p>
-          <p><span className="text-gray-500/60 px-4 text-black text-base text-left underline underline-offset-2 rounded-r-lg hover:opacity-75 focus:outline-none bg-gray-800/90 text-white/90">Observa la sección</span> resaltada en negro. Haz click en ella para ver más <strong>detalles</strong> (verás una <strong>cruz que parpadea</strong>. Haz click en ella cuando termines)</p>
-          <p>Atajos: Haz <strong>click en la mitad derecha de la imagen</strong> para continuar con el siguiente elemento en la lista; retrocede haciendo <strong>doble-click en la mitad izquierda de la imagen</strong></p>
-          <p>Cuando sea el turno del <strong>Ave María</strong>, verás un <i>contador iniciado en cero</i>. Haz click en él cada vez que pronuncies <strong>Amén</strong>.</p>
-          </div>
-        </Introductio>
+          <Introductio titulo="Ayuda">
+            <div className="space-y-5  bg-gray-50 border-l-4 border-gray-400 px-4 py-2 text-gray-800 text-base md:text-base">
+            <p>Por defecto, la aplicación se abre en el misterio del día.</p>
+            <p>Desliza lateralmente para avanzar o retroceder.</p>
+            <p><span className="text-gray-500/60 px-4 text-black text-base text-left underline underline-offset-2 rounded-r-lg hover:opacity-75 focus:outline-none bg-gray-800/90 text-white/90">Observa la sección</span> resaltada en negro. Haz click en ella para ver más <strong>detalles</strong> (verás una <strong>cruz que parpadea</strong>. Haz click en ella cuando termines)</p>
+            <p>Atajos: Haz <strong>click en la mitad derecha de la imagen</strong> para continuar con el siguiente elemento en la lista; retrocede haciendo <strong>doble-click en la mitad izquierda de la imagen</strong></p>
+            <p>Cuando sea el turno del <strong>Ave María</strong>, verás un <i>contador iniciado en cero</i>. Haz click en él cada vez que pronuncies <strong>Amén</strong>.</p>
+            </div>
+          </Introductio>
 
-          <Add onClick={close} name="help-section" />
+          <button onClick={close} name="help-section" className="py-2 col-span-1 bg-gray-800 text-white rounded text-sm">
+            <svg className="mx-auto animate-pulse" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#F3F3F3"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+          </button>
+
+          <Exit onClick={close} />
+
         </article>
       </div>
 

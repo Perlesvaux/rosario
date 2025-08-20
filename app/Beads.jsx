@@ -1,6 +1,7 @@
 'use client'
 import { useRef } from 'react'
 import { useHolyContext, usePrayerContext } from "./hooks.js"
+import { Exit } from './ui.jsx'
 
 export default function Beads ({children}) {
   const {next, currentState, show, header} = usePrayerContext()
@@ -23,6 +24,7 @@ export default function Beads ({children}) {
       <article className="flex flex-col  gap-4">
         {children}
         { isShown && <Bead onClick={setAndCloseRosary} /> }
+        <Exit onClick={()=> ref.current.hidePopover()}/>
       </article>
     </div>
 
