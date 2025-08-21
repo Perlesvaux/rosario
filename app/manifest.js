@@ -18,6 +18,22 @@ export default function manifest() {
         sizes: '512x512',
         type: 'image/png',
       },
-    ],
+    ],  
+    screenshots: [
+    {
+      src: "screenshot-narrow.png",
+      sizes: "320x320",
+      type: "image/png",
+      form_factor: "narrow",
+      label: "Narrow"
+    },
+    {
+      src: "screenshot-wide.png",
+      sizes: "320x320",
+      type: "image/png",
+      form_factor: "wide",
+      label: "Wide"
+    }
+  ]
   }
 }
