@@ -1,10 +1,16 @@
+import gozosos1 from '../public/gozosos1.jpg'
+import gozosos2 from '../public/gozosos2.jpg'
+import gozosos3 from '../public/gozosos3.jpg'
+import gozosos4 from '../public/gozosos4.jpg'
+import gozosos5 from '../public/gozosos5.jpg'
+
 export const gozosos = {
   nombre:"GOZOSOS",
   lista: [
   {
     encabezado: "GOZOSO I - La anunciación",   
     titulo: "EN EL PRIMER MISTERIO GOZOSO: CONTEMPLAMOS “LA ANUNCIACIÓN”",
-    imagen: "/gozosos1.jpg",
+    imagen: gozosos1,
     fruto: "¡Por el amor y la humildad!",
     leyenda: "El ángel Gabriel entró donde ella estaba y le dijo: No temas María, porque has hallado gracia ante Dios. Vas a concebir y a dar a luz un hijo y le pondrás por nombre Jesús. Él será grande y será llamado Hijo del Altísimo. (Lucas 1: 26-38)",
     l: "¡Palabra del Señor,",
@@ -13,7 +19,7 @@ export const gozosos = {
   {
     encabezado: "GOZOSO II - La visitación",   
     titulo: "EN EL SEGUNDO MISTERIO GOZOSO:  CONTEMPLAMOS “LA VISITACIÓN”",
-    imagen: "/gozosos2.jpg",
+    imagen: gozosos2,
     fruto: "¡Por amor al prójimo!",
     leyenda: "En cuanto Isabel oyó el saludo de María, saltó de gozo el niño en su seno, e Isabel quedó llena del Espíritu Santo y exclamó : “Bendita tú entre las mujeres, y bendito el fruto de tu vientre”. (Lucas 1: 39-56)",
     l: "¡Palabra del Señor,",
@@ -22,7 +28,7 @@ export const gozosos = {
   {
     encabezado: "GOZOSO III - El nacimiento de Jesús",   
     titulo: "EN EL TERCER MISTERIO GOZOSO:  CONTEMPLAMOS EL NACIMIENTO DE JESÚS",
-    imagen: "/gozosos3.jpg",
+    imagen: gozosos3,
     fruto: "¡El espíritu de pobreza!",
     leyenda: "Y dio a luz a su hijo primogénito, lo envolvió en pañales y lo reclinó en un pesebre, porque no había sitio para ellos en la posada. (Lucas 2: 6-11)",
     l: "¡Palabra del Señor,",
