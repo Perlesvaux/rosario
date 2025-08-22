@@ -221,6 +221,10 @@ const allReducer = (state, action) => {
       };
     }
 
+    case "reset": {
+      return all
+    }
+
 
 
 
@@ -506,6 +510,62 @@ export function useWakeLock() {
 
   }
     , [])
+}
+
+
+
+import { misterio_del_dia } from './prayers.js'
+
+import { luminosos, gozosos, gloriosos, dolorosos } from './misterios.js'
+
+const routes = misterio_del_dia()
+
+
+const routesReducer = (state, action) => {
+
+  const { type } = action;
+
+  switch (type) {
+
+    case "hoy":
+      return misterio_del_dia()
+
+    case "gozosos":
+      return gozosos
+      
+    case "gloriosos":
+      return gloriosos
+
+    case "dolorosos":
+      return dolorosos
+
+    case "luminosos":
+      return luminosos
+
+    default:
+      return `undefined case: ${type}`
+  }
+
+}
+
+export function useRoute() {
+  const [route, routeDispatch] = useReducer( routesReducer, routes )
+  const ref = useRef()
+
+  const backToSquareOne = () => {
+    ref.current.scrollTo(0, 0)
+  }
+
+  const select = (e) => {
+    console.log(e.currentTarget.name)
+    routeDispatch({type:e.currentTarget.name})
+  }
+
+  const { lista:items, nombre:name } = route
+
+  return {name, items, select, ref, backToSquareOne}
+  
+  
 }
 
 

@@ -150,8 +150,8 @@ export function Frame ({src, alt, advance, retrocede}){
 
     <div className="absolute w-full z-20">
       <div className="relative w-full aspect-[812/899] flex ">
-        <div className="w-1/2 bg-teal-50/33 " onDoubleClick={retrocede}></div>
-        <div className="w-1/2 bg-red-50/33 " onClick={advance} ></div>
+        <div className="w-1/2  " onDoubleClick={retrocede}></div>
+        <div className="w-1/2  " onClick={advance} ></div>
       </div>
     </div>
 
