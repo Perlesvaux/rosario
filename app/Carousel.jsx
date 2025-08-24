@@ -4,19 +4,13 @@ import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
 import Litany from './Litany.jsx'
 import { Help, Menu } from './ui-client.jsx'
-import { HolyContext, useAll, useRoute, 
-useWakeLock, useRegisterSW, useTitle
+import { HolyContext, useAll, useRoute, useTitle
 } from './hooks.js'
-import { useEffect } from 'react';
 
 export default function Carousel() {
   const { state, dispatch } = useAll()
 
   const {name, items, select, backToSquareOne, ref} = useRoute()
-
-  useRegisterSW()
-
-  useWakeLock()
 
   useTitle(name)
 

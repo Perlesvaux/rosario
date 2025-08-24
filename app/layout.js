@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { misterio_del_dia } from './prayers.js'
+//import { misterio_del_dia } from './prayers.js'
+import RegisterWorker from './RegisterWorker.jsx'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <RegisterWorker />
       </body>
     </html>
   );
