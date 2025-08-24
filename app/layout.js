@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 
 export const metadata = {
-  title: `Santo Rosario | ${misterio_del_dia().nombre}`,
+  title: `Santo Rosario`,
   description: "¿Nunca has rezado el rosario? ¿No sabes cuáles misterios tocan hoy? ¡Esta aplicación es para ti!",
 };
 

@@ -4,13 +4,21 @@ import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
 import Litany from './Litany.jsx'
 import { Help, Menu } from './ui-client.jsx'
-import { HolyContext, useAll, useRoute } from './hooks.js'
-
+import { HolyContext, useAll, useRoute, 
+useWakeLock, useRegisterSW, useTitle
+} from './hooks.js'
+import { useEffect } from 'react';
 
 export default function Carousel() {
   const { state, dispatch } = useAll()
 
   const {name, items, select, backToSquareOne, ref} = useRoute()
+
+  useRegisterSW()
+
+  useWakeLock()
+
+  useTitle(name)
 
   return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne }}>
     <div className="flex justify-center items-center">
