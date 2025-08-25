@@ -4,7 +4,7 @@ import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext } from './hooks.js'
 import outroImg from '../public/outro.webp'
 
-export default function Outro (){
+export default function Outro ({header}){
 
   const {state, dispatch} = useHolyContext()
   const next = ()=>{ dispatch({type: "advance outro"}) }
@@ -19,7 +19,7 @@ export default function Outro (){
     if (to === "salve" && currentState.actual == 4) return true
   }
 
-  return ( <PrayerContext.Provider value={{header:"", next, currentState, show}}>
+  return ( <PrayerContext.Provider value={{header:`${header} - Oraciones Finales`, next, currentState, show}}>
     <Slide> 
 
       <Frame 

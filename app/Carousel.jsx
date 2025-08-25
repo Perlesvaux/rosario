@@ -23,8 +23,8 @@ export default function Carousel() {
           <div ref={ref} className="w-full h-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth">
             <Intro header={name} />
             {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
-            <Outro />
-            <Litany />
+            <Outro header={name} />
+            <Litany header={name}/>
           </div>
             
           <Menu />

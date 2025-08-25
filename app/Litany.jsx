@@ -4,7 +4,7 @@ import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext } from './hooks.js'
 import litanyImg from '../public/litany.webp'
 
-export default function Litany (){
+export default function Litany ({header}){
 
   const {state, dispatch} = useHolyContext();
   const next = ()=>{ dispatch({type: "advance litany"}) };
@@ -19,7 +19,7 @@ export default function Litany (){
     if (to === "final" && currentState.actual == 4) return true
   }
 
-  return ( <PrayerContext.Provider value={{header:"Letanías Lauretanas", next, currentState, show}}>
+  return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show}}>
     <Slide> 
 
       <Frame
