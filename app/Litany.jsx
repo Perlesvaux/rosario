@@ -1,23 +1,12 @@
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { Dialogus, Vox, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
-import { useHolyContext, PrayerContext } from './hooks.js'
+import { useHolyContext, PrayerContext, useShowLitany } from './hooks.js'
 import litanyImg from '../public/litany.webp'
 
 export default function Litany ({header}){
 
-  const {state, dispatch} = useHolyContext();
-  const next = ()=>{ dispatch({type: "advance litany"}) };
-  const prev = ()=>{ dispatch({type: "previous litany"}) }
-  const currentState = state.litany;
-
-  const show = (to) => {
-    if (to === "inicio" && currentState.actual == 0 ) return true 
-    if (to === "letanias" && currentState.actual == 1) return true
-    if (to === "oremos" && currentState.actual == 2) return true
-    if (to === "avemariapurisima" && currentState.actual == 3) return true
-    if (to === "final" && currentState.actual == 4) return true
-  }
+  const {show, currentState, next, prev} = useShowLitany()
 
   return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show}}>
     <Slide> 

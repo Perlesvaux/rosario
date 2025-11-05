@@ -2,33 +2,11 @@ import Beads from './Beads.jsx'
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 import { Dialogus, Vox, Mysterium, Titulus, Slide, Frame } from './ui.jsx' 
 import { Prayer, Steps } from './ui-client.jsx'
-import { PrayerContext, useHolyContext } from './hooks.js'
+import { PrayerContext, useHolyContext, useShowPrayers } from './hooks.js'
 
 export default function Prayers({misterio, index}) {
 
-  const {state, dispatch} = useHolyContext()
-  const next = ()=>{ dispatch({type: "advance mystery", index: index }) }
-  const prev = ()=>{ dispatch({type: "previous mystery", index: index }) }
-  const currentState = state.mysteries[index]
-
-  const show = (to) => {
-
-    // Solo vibra en las decenas
-    if (to === "avemaria" && currentState.actual > 2 && currentState.actual <= 11){
-      if (navigator.vibrate) navigator.vibrate(33)
-    }
-
-    // Vibra diferente al concluir la decena
-    if (currentState.actual == 12){
-      if (navigator.vibrate) navigator.vibrate([50,10,50])
-    }
-
-    if (to === "misterio" && currentState.actual == 0) return true
-    if (to === "padrenuestro" && currentState.actual == 1) return true
-    if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
-    if (to === "gloria" && currentState.actual == 12) return true
-    if (to === "jaculatorias" && currentState.actual == 13) return true
-  }
+  const {show, currentState, next, prev} = useShowPrayers(index)
 
   return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show}}>
     <Slide>

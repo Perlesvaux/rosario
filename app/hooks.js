@@ -1,7 +1,8 @@
 import { createContext, useContext, 
 useReducer,
 useRef,
-useEffect
+useEffect,
+useCallback,
 } from 'react'
 
 import {requestWakeLock, releaseWakeLock} from './wakelock.js'
@@ -590,3 +591,96 @@ export function useTitle(name){
 }
 
 
+
+
+
+
+export function useShowPrayers (index) {
+
+  const {state, dispatch} = useHolyContext()
+  const currentState = state.mysteries[index]
+  const next = useCallback(()=>{ dispatch({type: "advance mystery", index: index }) },  [dispatch, index])
+  const prev = useCallback(()=>{ dispatch({type: "previous mystery", index: index }) }, [dispatch, index])
+
+  const show = useCallback((to) => {
+
+    // Solo vibra en las decenas
+    if (to === "avemaria" && currentState.actual > 2 && currentState.actual <= 11){
+      if (navigator.vibrate) navigator.vibrate(33)
+    console.log(`${to} - trgrd`)
+    }
+
+    // Vibra diferente al concluir la decena
+    if (currentState.actual == 12){
+      if (navigator.vibrate) navigator.vibrate([50,10,50])
+    }
+
+    if (to === "misterio" && currentState.actual == 0) return true
+    if (to === "padrenuestro" && currentState.actual == 1) return true
+    if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
+    if (to === "gloria" && currentState.actual == 12) return true
+    if (to === "jaculatorias" && currentState.actual == 13) return true
+
+    }, [currentState])
+
+  return { show, currentState, next, prev }
+
+}
+
+
+export function useShowOutro(){
+
+  const {state, dispatch} = useHolyContext()
+  const next = useCallback(()=>{ dispatch({type: "advance outro"}) }, [dispatch])
+  const prev = useCallback(()=>{ dispatch({type: "previous outro"}) }, [dispatch])
+  const currentState = state.outro
+
+  const show = useCallback((to) => {
+    if (to === "peticiones" && currentState.actual == 0 ) return true 
+    if (to === "padrenuestro" && currentState.actual == 1) return true
+    if (to === "avemarias" && currentState.actual == 2) return true
+    if (to === "gloria" && currentState.actual == 3) return true
+    if (to === "salve" && currentState.actual == 4) return true
+  }
+    , [currentState])
+
+  return { show, currentState, next, prev }
+}
+
+
+export function useShowIntro(){
+  const {state, dispatch} = useHolyContext();
+  const next = useCallback(()=>{ dispatch({type: "advance intro" }) }, [dispatch])
+  const prev = useCallback(()=>{ dispatch({type: "previous intro" }) }, [dispatch])
+  const currentState = state.intro;
+
+  const show = useCallback((to) =>  {
+    if (to === "senal" && currentState.actual == 0) return true
+    if (to === "invocacion" && currentState.actual == 1) return true
+    if (to === "contricion" && currentState.actual == 2) return true
+    if (to === "credo" && currentState.actual == 3) return true
+    if (to === "peticiones" && currentState.actual == 4) return true
+  }, [currentState])
+
+  return { show, currentState, next, prev }
+}
+
+
+export function useShowLitany(){
+
+  const {state, dispatch} = useHolyContext();
+  const next = useCallback(()=>{ dispatch({type: "advance litany"}) }, [dispatch]);
+  const prev = useCallback(()=>{ dispatch({type: "previous litany"}) }, [dispatch])
+  const currentState = state.litany;
+
+  const show = useCallback((to) => {
+    if (to === "inicio" && currentState.actual == 0 ) return true 
+    if (to === "letanias" && currentState.actual == 1) return true
+    if (to === "oremos" && currentState.actual == 2) return true
+    if (to === "avemariapurisima" && currentState.actual == 3) return true
+    if (to === "final" && currentState.actual == 4) return true
+  }
+, [currentState])
+  return { show, currentState, next, prev }
+
+}

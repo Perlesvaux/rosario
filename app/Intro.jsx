@@ -1,23 +1,12 @@
 import { senal, invocacion, contricion, credo } from './prayers.js'
 import { Introductio, Slide, Frame, Titulus } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
-import { useHolyContext, PrayerContext } from './hooks.js'
+import { useHolyContext, PrayerContext, useShowIntro } from './hooks.js'
 import introImg from '../public/intro.webp'
 
 export default function Intro ({header}) {
 
-  const {state, dispatch} = useHolyContext();
-  const next = ()=>{ dispatch({type: "advance intro" }) }
-  const prev = ()=>{ dispatch({type: "previous intro" }) }
-  const currentState = state.intro;
-
-  const show = (to) =>  {
-    if (to === "senal" && currentState.actual == 0) return true
-    if (to === "invocacion" && currentState.actual == 1) return true
-    if (to === "contricion" && currentState.actual == 2) return true
-    if (to === "credo" && currentState.actual == 3) return true
-    if (to === "peticiones" && currentState.actual == 4) return true
-  }
+  const {show, currentState, next, prev} = useShowIntro()
 
   return ( <PrayerContext.Provider value={{header, next, currentState, show}}>
     <Slide>
