@@ -12,6 +12,17 @@ export default function Prayers({misterio, index}) {
   const currentState = state.mysteries[index]
 
   const show = (to) => {
+
+    // Solo vibra en las decenas
+    if (to === "avemaria" && currentState.actual > 2 && currentState.actual <= 11){
+      if (navigator.vibrate) navigator.vibrate(33)
+    }
+
+    // Vibra diferente al concluir la decena
+    if (currentState.actual == 12){
+      if (navigator.vibrate) navigator.vibrate([50,10,50])
+    }
+
     if (to === "misterio" && currentState.actual == 0) return true
     if (to === "padrenuestro" && currentState.actual == 1) return true
     if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
