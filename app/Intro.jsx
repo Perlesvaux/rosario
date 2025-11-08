@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { senal, invocacion, contricion, credo } from './prayers.js'
 import { Introductio, Slide, Frame, Titulus } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext, useShowIntro } from './hooks.js'
 import introImg from '../public/intro.webp'
 
-export default function Intro ({header}) {
+function Intro ({header}) {
 
   const {show, currentState, next, prev} = useShowIntro()
 
@@ -59,3 +60,4 @@ export default function Intro ({header}) {
     </Slide>
   </PrayerContext.Provider>)
 }
+export default memo(Intro)

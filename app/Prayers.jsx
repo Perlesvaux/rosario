@@ -1,10 +1,11 @@
 import Beads from './Beads.jsx'
+import { memo } from 'react';
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 import { Dialogus, Vox, Mysterium, Titulus, Slide, Frame } from './ui.jsx' 
 import { Prayer, Steps } from './ui-client.jsx'
 import { PrayerContext, useHolyContext, useShowPrayers } from './hooks.js'
 
-export default function Prayers({misterio, index}) {
+function Prayers({misterio, index}) {
 
   const {show, currentState, next, prev} = useShowPrayers(index)
 
@@ -68,3 +69,4 @@ export default function Prayers({misterio, index}) {
   </PrayerContext.Provider>)
 }
 
+export default memo(Prayers)

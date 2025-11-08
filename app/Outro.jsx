@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext, useShowOutro } from './hooks.js'
 import outroImg from '../public/outro.webp'
 
-export default function Outro ({header}){
+function Outro ({header}){
 
   const {show, currentState, next, prev} = useShowOutro()
 
@@ -78,3 +79,4 @@ export default function Outro ({header}){
     </Slide>
   </PrayerContext.Provider>)
 }
+export default memo(Outro)

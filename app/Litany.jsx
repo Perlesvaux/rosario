@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { Dialogus, Vox, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
 import { useHolyContext, PrayerContext, useShowLitany } from './hooks.js'
 import litanyImg from '../public/litany.webp'
 
-export default function Litany ({header}){
+function Litany ({header}){
 
   const {show, currentState, next, prev} = useShowLitany()
 
@@ -75,3 +76,4 @@ export default function Litany ({header}){
   </PrayerContext.Provider>)
 }
 
+export default memo(Litany)

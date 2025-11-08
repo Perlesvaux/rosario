@@ -606,13 +606,13 @@ export function useShowPrayers (index) {
 
     // Solo vibra en las decenas
     if (to === "avemaria" && currentState.actual > 2 && currentState.actual <= 11){
-      if (navigator.vibrate) navigator.vibrate(33)
+      if (navigator.vibrate) navigator.vibrate(50)
     console.log(`${to} - trgrd`)
     }
 
     // Vibra diferente al concluir la decena
     if (currentState.actual == 12){
-      if (navigator.vibrate) navigator.vibrate([50,10,50])
+      if (navigator.vibrate) navigator.vibrate([60,10,60,10,60])
     }
 
     if (to === "misterio" && currentState.actual == 0) return true
