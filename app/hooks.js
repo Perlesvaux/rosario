@@ -3,6 +3,7 @@ useReducer,
 useRef,
 useEffect,
 useCallback,
+useMemo,
 } from 'react'
 
 import {requestWakeLock, releaseWakeLock} from './wakelock.js'
@@ -93,6 +94,10 @@ const all = {
 
 const allReducer = (state, action) => {
 
+  const vibrate = (intensity) => {
+    if (navigator.vibrate) navigator.vibrate(intensity)
+  }
+
   const { type, index } = action;
 
   switch (type) {
@@ -106,6 +111,14 @@ const allReducer = (state, action) => {
         13: { gloria: true },
         14: { jaculatorias: true },
       };
+
+    // Indicates GLORIA reached
+    if (actual === 12) vibrate([60,10,60,10,60])
+    // Indicates ongoing AVEMARIA
+    else if (actual > 2 && actual <= 11) vibrate(50)
+    // Normal button press feedback
+    else vibrate(40)
+
       return {
         ...state,
         mysteries: state.mysteries.map((mystery, i) => 
@@ -123,6 +136,7 @@ const allReducer = (state, action) => {
         12: { gloria: false },
         13: { jaculatorias: false },
       };
+      vibrate(30)
       return {
         ...state,
         mysteries: state.mysteries.map((mystery, i) => 
@@ -140,6 +154,7 @@ const allReducer = (state, action) => {
         4: { credo: true },
         5: { peticiones: true },
       };
+      vibrate(40)
       return {
         ...state,
         intro: { ...state.intro, ...updates[actual], actual } 
@@ -155,6 +170,7 @@ const allReducer = (state, action) => {
         3: { credo: false },
         4: { peticiones: false },
       };
+      vibrate(30)
       return {
         ...state,
         intro: { ...state.intro, ...updates[actual], actual } 
@@ -170,6 +186,7 @@ const allReducer = (state, action) => {
         4: { gloria: true },
         5: { salve: true },
       };
+      vibrate(40)
       return {
         ...state,
         outro: { ...state.outro, ...updates[actual], actual } 
@@ -185,6 +202,7 @@ const allReducer = (state, action) => {
         3: { gloria: false },
         4: { salve: false },
       };
+      vibrate(30)
       return {
         ...state,
         outro: { ...state.outro, ...updates[actual], actual } 
@@ -201,6 +219,7 @@ const allReducer = (state, action) => {
         4: { avemariapurisima: true },
         5: { final: true },
       };
+      vibrate(40)
       return {
         ...state,
         litany: { ...state.litany, ...updates[actual], actual } 
@@ -216,6 +235,7 @@ const allReducer = (state, action) => {
         3: { avemariapurisima: false },
         4: { final: false },
       };
+      vibrate(30)
       return {
         ...state,
         litany: { ...state.litany, ...updates[actual], actual } 
@@ -549,6 +569,8 @@ const routesReducer = (state, action) => {
 
 }
 
+
+
 export function useRoute() {
   const [route, routeDispatch] = useReducer( routesReducer, routes )
   const ref = useRef()
@@ -562,7 +584,13 @@ export function useRoute() {
     routeDispatch({type:e.currentTarget.name})
   }
 
-  const { lista:items, nombre:name } = route
+  const { lista, nombre:name } = route
+  const items = useMemo(()=> lista, [lista])
+
+
+
+
+  
 
   return {name, items, select, ref, backToSquareOne}
   
@@ -593,6 +621,10 @@ export function useTitle(name){
 
 
 
+const ok = (intensity) => {
+  if (navigator.vibrate) navigator.vibrate(intensity)
+  return true
+}
 
 
 export function useShowPrayers (index) {
@@ -603,24 +635,11 @@ export function useShowPrayers (index) {
   const prev = useCallback(()=>{ dispatch({type: "previous mystery", index: index }) }, [dispatch, index])
 
   const show = useCallback((to) => {
-
-    // Solo vibra en las decenas
-    if (to === "avemaria" && currentState.actual > 2 && currentState.actual <= 11){
-      if (navigator.vibrate) navigator.vibrate(50)
-    console.log(`${to} - trgrd`)
-    }
-
-    // Vibra diferente al concluir la decena
-    if (currentState.actual == 12){
-      if (navigator.vibrate) navigator.vibrate([60,10,60,10,60])
-    }
-
     if (to === "misterio" && currentState.actual == 0) return true
     if (to === "padrenuestro" && currentState.actual == 1) return true
     if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
     if (to === "gloria" && currentState.actual == 12) return true
     if (to === "jaculatorias" && currentState.actual == 13) return true
-
     }, [currentState])
 
   return { show, currentState, next, prev }
