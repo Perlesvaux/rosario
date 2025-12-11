@@ -564,7 +564,7 @@ const routesReducer = (state, action) => {
       return luminosos
 
     default:
-      return `undefined case: ${type}`
+      return dolorosos
   }
 
 }
