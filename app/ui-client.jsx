@@ -1,3 +1,4 @@
+"use client"
 import { Add } from "./ui.jsx"
 import { useHolyContext, usePrayerContext } from "./hooks.js"
 import {useRef} from 'react'
