@@ -4,6 +4,7 @@ useRef,
 useEffect,
 useCallback,
 useMemo,
+useState,
 } from 'react'
 
 import {requestWakeLock, releaseWakeLock} from './wakelock.js'
@@ -583,8 +584,14 @@ const routesReducer = (state, action) => {
 
 export function useRoute() {
   const routes = misterio_del_dia()
-  const [route, routeDispatch] = useReducer( routesReducer, routes, ()=> misterio_del_dia() )
+  const [route, routeDispatch] = useReducer( routesReducer, null, misterio_del_dia )
   const ref = useRef()
+  const [isReady, setIsReady] = useState(false)
+
+  useEffect(() => {
+    routeDispatch({ type: "hoy" })
+    setIsReady(true)
+  }, [])
 
   const backToSquareOne = () => {
     ref.current.scrollTo(0, 0)
@@ -598,13 +605,7 @@ export function useRoute() {
   const { lista, nombre:name } = route
   const items = useMemo(()=> lista, [lista])
 
-
-
-
-  
-
-  return {name, items, select, ref, backToSquareOne}
-  
+  return {name, items, select, ref, backToSquareOne, isReady}
   
 }
 

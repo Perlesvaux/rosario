@@ -10,7 +10,8 @@ import { HolyContext, useAll, useRoute, useTitle
 export default function Carousel() {
   const { state, dispatch } = useAll()
 
-  const {name, items, select, backToSquareOne, ref} = useRoute()
+  const {name, items, select, backToSquareOne, ref, isReady} = useRoute()
+
 
   useTitle(name)
 
@@ -21,10 +22,27 @@ export default function Carousel() {
         <div className="flex flex-col items-center gap-2 w-full relative overflow-hidden h-[100svh] w-[100svw] bg-gray-300">
 
           <div ref={ref} className="w-full h-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth">
-            <Intro header={name} />
-            {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
-            <Outro header={name} />
-            <Litany header={name}/>
+
+            {
+              isReady
+              ?
+                <>
+                  <Intro header={name} />
+                  {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
+                  <Outro header={name} />
+                  <Litany header={name}/>
+                </>
+              :
+                <>
+                  <div className={ `w-screen text-center` }> Espere ... </div>
+                </>
+
+
+            
+            }
+
+
+
           </div>
             
           <Menu />
