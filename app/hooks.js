@@ -551,8 +551,6 @@ export const misterio_del_dia = () => {
 }
 
 
-const routes = misterio_del_dia()
-
 
 const routesReducer = (state, action) => {
 
@@ -584,7 +582,8 @@ const routesReducer = (state, action) => {
 
 
 export function useRoute() {
-  const [route, routeDispatch] = useReducer( routesReducer, routes )
+  const routes = misterio_del_dia()
+  const [route, routeDispatch] = useReducer( routesReducer, routes, ()=> misterio_del_dia() )
   const ref = useRef()
 
   const backToSquareOne = () => {
