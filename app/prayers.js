@@ -128,7 +128,7 @@ export const letanias_final = {
 }
 
 export const oremos = {
-  "l": "Te rogamos señor, que nos concedas a nosotros tus siervos, gozar de perpetua  salud de alma y cuerpo, y por la gloriosa intercesión de la bienaventurada Virgen María, seamos librados de la tristeza presente y disfrutemos de la eterna alegría. Por Jesucristo, nuestro Señor.", "r":"Amén."
+  "l": "Oremos. Te rogamos señor, que nos concedas a nosotros tus siervos, gozar de perpetua  salud de alma y cuerpo, y por la gloriosa intercesión de la bienaventurada Virgen María, seamos librados de la tristeza presente y disfrutemos de la eterna alegría. Por Jesucristo, nuestro Señor.", "r":"Amén."
 }
 
 export const aveMariaPurisima =  [

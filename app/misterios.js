@@ -28,7 +28,7 @@ export const gozosos = {
   nombre:"GOZOSOS",
   lista: [
   {
-    encabezado: "GOZOSO I - La anunciación",   
+    encabezado: "GOZOSO I - La Anunciación",   
     titulo: "EN EL PRIMER MISTERIO GOZOSO: CONTEMPLAMOS “LA ANUNCIACIÓN”",
     imagen: gozosos1,
     fruto: "¡Por el amor y la humildad!",
@@ -37,7 +37,7 @@ export const gozosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "GOZOSO II - La visitación",   
+    encabezado: "GOZOSO II - La Visitación",   
     titulo: "EN EL SEGUNDO MISTERIO GOZOSO:  CONTEMPLAMOS “LA VISITACIÓN”",
     imagen: gozosos2,
     fruto: "¡Por amor al prójimo!",
@@ -46,7 +46,7 @@ export const gozosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "GOZOSO III - El nacimiento de Jesús",   
+    encabezado: "GOZOSO III - El Nacimiento de Jesús",   
     titulo: "EN EL TERCER MISTERIO GOZOSO:  CONTEMPLAMOS EL NACIMIENTO DE JESÚS",
     imagen: gozosos3,
     fruto: "¡El espíritu de pobreza!",
@@ -55,7 +55,7 @@ export const gozosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "GOZOSO IV - La presentación",   
+    encabezado: "GOZOSO IV - La Presentación",   
     titulo: "EN EL CUARTO MISTERIO GOZOSO:  CONTEMPLAMOS LA PRESENTACIÓN",
     imagen: "/gozosos4.jpg",
     fruto: "¡Por la virtud de la obediencia!",
@@ -64,7 +64,7 @@ export const gozosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "GOZOSO V - El niño perdido y hallado en el templo",   
+    encabezado: "GOZOSO V - El Niño Perdido y Hallado en el Templo",   
     titulo: "EN EL QUINTO MISTERIO GOZOSO:  CONTEMPLAMOS EL NIÑO PERDIDO Y HALLADO EN EL TEMPLO",
     imagen: "/gozosos5.jpg",
     fruto: "¡Por la virtud de la piedad!",
@@ -79,7 +79,7 @@ export const dolorosos = {
   nombre: "DOLOROSOS",
   lista: [
   {
-    encabezado: "DOLOROSO I - la oración en el huerto",   
+    encabezado: "DOLOROSO I - La Oración en el Huerto",   
     titulo: "EN EL PRIMER MISTERIO DOLOROSO: CONTEMPLAMOS LA ORACIÓN EN EL HUERTO",
     imagen: dolorosos1,
     fruto: "¡Por el verdadero arrepentimiento de los pecados!",
@@ -88,7 +88,7 @@ export const dolorosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "DOLOROSO II - La flagelación",   
+    encabezado: "DOLOROSO II - La Flagelación",   
     titulo: "EN EL SEGUNDO MISTERIO DOLOROSO:  CONTEMPLAMOS LA FLAGELACIÓN",
     imagen: dolorosos2,
     fruto: "¡Por la virtud de la pureza!",
@@ -97,7 +97,7 @@ export const dolorosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "DOLOROSO III - La coronación de espinas",   
+    encabezado: "DOLOROSO III - La Coronación de Espinas",   
     titulo: "EN EL TERCER MISTERIO DOLOROSO:  CONTEMPLAMOS LA CORONACIÓN DE ESPINAS",
     imagen: dolorosos3,
     fruto: "¡Por el valor moral!",
@@ -106,7 +106,7 @@ export const dolorosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "DOLOROSO IV - Jesús con la cruz a cuestas",   
+    encabezado: "DOLOROSO IV - Jesús con la Cruz a Cuestas",   
     titulo: "EN EL CUARTO MISTERIO DOLOROSO:  CONTEMPLAMOS A JESÚS CON LA CRUZ A CUESTAS",
     imagen: dolorosos4,
     fruto: "¡Por la virtud de la paciencia!",
@@ -115,7 +115,7 @@ export const dolorosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "DOLOROSO V - La crucifixión",   
+    encabezado: "DOLOROSO V - La Crucifixión",   
     titulo: "EN EL QUINTO MISTERIO DOLOROSO:   CONTEMPLAMOS LA CRUCIFIXIÓN",
     imagen: dolorosos5,
     fruto: "¡Por la perseverancia final!",
@@ -132,7 +132,7 @@ export const gloriosos = {
   nombre: "GLORIOSOS",
   lista: [
   {
-    encabezado: "GLORIOSO I - La resurrección",   
+    encabezado: "GLORIOSO I - La Resurrección",   
     titulo: "EN EL PRIMER MISTERIO GLORIOSO: CONTEMPLAMOS LA RESURRECCIÓN",
     imagen: gloriosos1,
     fruto: "¡Por la virtud de la fe!",
@@ -141,7 +141,7 @@ export const gloriosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "GLORIOSO II - La ascensión",   
+    encabezado: "GLORIOSO II - La Ascensión",   
     titulo: "EN EL SEGUNDO MISTERIO GLORIOSO:  CONTEMPLAMOS LA ASCENSIÓN",
     imagen: gloriosos2,
     fruto: "¡Por la virtud de la esperanza!",
@@ -150,7 +150,7 @@ export const gloriosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "GLORIOSO III - La venida del espíritu santo",   
+    encabezado: "GLORIOSO III - La Venida del Espíritu Santo",   
     titulo: "EN EL TERCER MISTERIO GLORIOSO: CONTEMPLAMOS LA VENIDA DEL ESPÍRITU SANTO",
     imagen: gloriosos3,
     fruto: "Por el amor hacia Dios.",
@@ -159,7 +159,7 @@ export const gloriosos = {
     r: "Te alabamos Señor!"
   },
   {
-    encabezado: "GLORIOSO IV - La asunción de maría al cielo",   
+    encabezado: "GLORIOSO IV - La Asunción de María al Cielo",   
     titulo: "EN EL CUARTO MISTERIO GLORIOSO: CONTEMPLAMOS LA ASUNCIÓN DE MARÍA AL CIELO",
     imagen: gloriosos4,
     fruto: "¡Por la devoción a María!",
@@ -168,7 +168,7 @@ export const gloriosos = {
     r: "Te alabamos Señor!"
   },
   {
-    encabezado: "GLORIOSO V - La coronación de la santa virgen maría",   
+    encabezado: "GLORIOSO V - La Coronación de la Santa Virgen María",   
     titulo: "EN EL QUINTO MISTERIO GLORIOSO: CONTEMPLAMOS LA CORONACIÓN DE LA SANTA VIRGEN MARÍA",
     imagen: gloriosos5,
     fruto: "¡Por la felicidad eterna!",
@@ -185,7 +185,7 @@ export const luminosos = {
   nombre: "LUMINOSOS",
   lista: [
   {
-    encabezado: "LUMINOSO I - El bautismo de jesús",   
+    encabezado: "LUMINOSO I - El Bautismo de Jesús",   
     titulo: "EN EL PRIMER MISTERIO LUMINOSO:  CONTEMPLAMOS EL BAUTISMO DE JESÚS",
     imagen: luminosos1,
     fruto: "Por la docilidad a la voluntad divina.",
@@ -194,7 +194,7 @@ export const luminosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "LUMINOSO II - La revelación de jesús en las bodas de caná",   
+    encabezado: "LUMINOSO II - La Revelación de Jesús en las bodas de Caná",   
     titulo: "EN EL SEGUNDO MISTERIO LUMINOSO:  CONTEMPLAMOS LA REVELACIÓN DE JESÚS EN LAS BODAS DE CANÁ",
     imagen: luminosos2,
     fruto: "¡Por la devoción a María!",
@@ -203,7 +203,7 @@ export const luminosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "LUMINOSO III - El anuncio del reino de dios",   
+    encabezado: "LUMINOSO III - El Anuncio del Reino de Dios",   
     titulo: "EN EL TERCER MISTERIO LUMINOSO:  CONTEMPLAMOS EL ANUNCIO DEL REINO DE DIOS",
     imagen: luminosos3,
     fruto: "¡Por la gracia de la conversión!",
@@ -212,7 +212,7 @@ export const luminosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "LUMINOSO IV - Transfiguración de jesús",   
+    encabezado: "LUMINOSO IV - Transfiguración de Jesús",   
     titulo: "EN EL CUARTO MISTERIO LUMINOSO:  CONTEMPLAMOS LA TRANSFIGURACIÓN DE JESÚS",
     imagen: luminosos4,
     fruto: "¡Por el Santo temor de Dios!",
@@ -221,7 +221,7 @@ export const luminosos = {
     r: "Gloria y honor a Ti, Señor Jesús!"
   },
   {
-    encabezado: "LUMINOSO V - La institución de la eucaristía",   
+    encabezado: "LUMINOSO V - La Institución de la Eucaristía",   
     titulo: "EN EL QUINTO MISTERIO LUMINOSO:  CONTEMPLAMOS LA INSTITUCIÓN DE LA EUCARISTÍA",
     imagen: luminosos5,
     fruto: "¡Por el agradecimiento a Dios!",

@@ -84,9 +84,9 @@ export default function StreakTracker() {
   return <div className={
     `${ doneForToday
         ? "bg-gray-800/90 text-white"
-        : "bg-red-600/25 text-white animate-pulse"
+        : "bg-red-600/90 text-white animate-pulse"
       } font-black rounded-full h-8 w-8 flex items-center justify-center`
   }>
-    {streak.count}
+    <span className="animate-pulse">{streak.count}</span>
   </div>;
 }
