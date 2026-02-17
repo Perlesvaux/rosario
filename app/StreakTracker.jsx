@@ -82,9 +82,10 @@ export default function StreakTracker() {
 
   
   return <div className={
-    doneForToday
-    ? "font-black rounded-full h-8 w-8 bg-gray-800/90 text-white  flex items-center justify-center"
-    : "font-black rounded-full h-8 w-8 bg-red-600/60 text-white   animate-pulse flex items-center justify-center"
+    `${ doneForToday
+        ? "bg-gray-800/90 text-white"
+        : "bg-red-600/25 text-white animate-pulse"
+      } font-black rounded-full h-8 w-8 flex items-center justify-center`
   }>
     {streak.count}
   </div>;

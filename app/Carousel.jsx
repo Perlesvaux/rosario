@@ -34,7 +34,7 @@ export default function Carousel() {
                 </>
               :
                 <>
-                  <div className={ `w-screen text-center` }> Espere ... </div>
+                  <div className="w-screen text-center"> Espere ... </div>
                 </>
 
 
