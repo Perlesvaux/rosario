@@ -62,6 +62,10 @@ export default function StreakTracker() {
   const wasRosaryPrayedToday = state.mysteries.every(
     mystery => mystery.avemaria
   );
+
+  const doneForToday = today()==streak.last
+
+  console.log(doneForToday)
   
   // Initial load
   useEffect(() => {
@@ -74,8 +78,14 @@ export default function StreakTracker() {
       setStreak(markDone());
     }
   }, [wasRosaryPrayedToday, markDone, setStreak]);
+
+
   
-  return <div className="rounded-lg h-8 w-8 bg-gray-900/60 text-white  hover:bg-gray-900/50 text-center">
+  return <div className={
+    doneForToday
+    ? "font-black rounded-full h-8 w-8 bg-gray-800/90 text-white  flex items-center justify-center"
+    : "font-black rounded-full h-8 w-8 bg-red-600/60 text-white   animate-pulse flex items-center justify-center"
+  }>
     {streak.count}
   </div>;
 }
