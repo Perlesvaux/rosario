@@ -2,12 +2,23 @@ import { useHolyContext } from "./hooks.js"
 import { useEffect, useState, useCallback } from 'react'
 
 // Move helper functions outside component
-const today = () => new Date().toISOString().slice(0, 10);
-const yesterday = () => {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return d.toISOString().slice(0, 10);
-};
+//const today = () => new Date().toISOString().slice(0, 10);
+//const yesterday = () => {
+//  const d = new Date();
+//  d.setDate(d.getDate() - 1);
+//  return d.toISOString().slice(0, 10);
+//};
+
+// Alternative using Intl.DateTimeFormat if you prefer:
+ const today = () => {
+   return new Intl.DateTimeFormat('en-CA').format(new Date()); // 'en-CA' gives YYYY-MM-DD format
+ };
+
+ const yesterday = () => {
+   const d = new Date();
+   d.setDate(d.getDate() - 1);
+   return new Intl.DateTimeFormat('en-CA').format(d);
+ };
 
 // Extract streak logic to custom hook
 const useStreak = () => {
@@ -38,8 +49,10 @@ const useStreak = () => {
     const data = loadStreak(); // Use loadStreak to ensure consistency
     const todayStr = today();
     
+    // Do nothing if you already prayed today
     if (data.last === todayStr) return data;
     
+    // If last day prayed was yesterday, increase counter.
     const newData = { ...data };
     if (data.last === yesterday()) {
       newData.count++;
@@ -51,13 +64,23 @@ const useStreak = () => {
     localStorage.setItem("streak", JSON.stringify(newData));
     return newData;
   }, [loadStreak]);
+
+
+  const load = useCallback(()=>{
+    setStreak(()=>loadStreak())
+  },[]);
+
+  const complete = useCallback(()=>{
+    setStreak(()=>markDone())
+  }, []);
   
-  return { streak, setStreak, loadStreak, markDone };
+  
+  return { streak, load, complete };
 };
 
 export default function StreakTracker() {
   const { state } = useHolyContext();
-  const { streak, setStreak, loadStreak, markDone } = useStreak();
+  const { streak, load, complete } = useStreak();
   
   const wasRosaryPrayedToday = state.mysteries.every(
     mystery => mystery.avemaria
@@ -69,15 +92,15 @@ export default function StreakTracker() {
   
   // Initial load
   useEffect(() => {
-    setStreak(loadStreak());
-  }, [loadStreak, setStreak]);
+    load()
+  }, [load]);
   
   // Update when prayed
   useEffect(() => {
     if (wasRosaryPrayedToday) {
-      setStreak(markDone());
+      complete()
     }
-  }, [wasRosaryPrayedToday, markDone, setStreak]);
+  }, [wasRosaryPrayedToday, complete]);
 
 
   
@@ -87,6 +110,6 @@ export default function StreakTracker() {
         : "bg-red-600/90 text-white animate-pulse"
       } font-black rounded-full h-8 w-8 flex items-center justify-center`
   }>
-    <span className="animate-pulse">{streak.count}</span>
+    {streak.count}
   </div>;
 }
