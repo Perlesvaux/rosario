@@ -117,6 +117,13 @@ export function SimpleIntro ({header}) {
           </Dialogus>
         </Prayer>
 
+        <Prayer title="Gloria" to="gloria"  >
+          <Dialogus
+            titulo="Gloria"
+            lider={gloria.l}
+            respuesta={gloria.r}
+          />
+        </Prayer>
 
 
       </Steps>
