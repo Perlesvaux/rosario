@@ -1,10 +1,10 @@
 import { createContext, useContext, 
-useReducer,
-useRef,
-useEffect,
-useCallback,
-useMemo,
-useState,
+  useReducer,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+  useState,
 } from 'react'
 
 import {requestWakeLock, releaseWakeLock} from './wakelock.js'
@@ -19,6 +19,13 @@ export const PrayerContext = createContext()
 
 export function usePrayerContext () {
   return useContext(PrayerContext)
+}
+
+const PRESET = {
+  hard:[71,9,71,9,71],
+  mid: 60,
+  soft: 50,
+  faint: 40,
 }
 
 const all = {
@@ -113,12 +120,12 @@ const allReducer = (state, action) => {
         14: { jaculatorias: true },
       };
 
-    // Indicates GLORIA reached
-    if (actual === 12) vibrate([60,10,60,10,60])
-    // Indicates ongoing AVEMARIA
-    else if (actual > 2 && actual <= 11) vibrate(50)
-    // Normal button press feedback
-    else vibrate(40)
+      // Indicates GLORIA reached
+      if (actual === 12) vibrate(PRESET.hard)
+        // Indicates ongoing AVEMARIA
+        else if (actual > 2 && actual <= 11) vibrate(PRESET.mid)
+          // Normal button press feedback
+          else vibrate(PRESET.soft)
 
       return {
         ...state,
@@ -137,7 +144,7 @@ const allReducer = (state, action) => {
         12: { gloria: false },
         13: { jaculatorias: false },
       };
-      vibrate(30)
+      vibrate(PRESET.faint)
       return {
         ...state,
         mysteries: state.mysteries.map((mystery, i) => 
@@ -155,7 +162,7 @@ const allReducer = (state, action) => {
         4: { credo: true },
         5: { peticiones: true },
       };
-      vibrate(40)
+      vibrate(PRESET.soft)
       return {
         ...state,
         intro: { ...state.intro, ...updates[actual], actual } 
@@ -171,7 +178,7 @@ const allReducer = (state, action) => {
         3: { credo: false },
         4: { peticiones: false },
       };
-      vibrate(30)
+      vibrate(PRESET.faint)
       return {
         ...state,
         intro: { ...state.intro, ...updates[actual], actual } 
@@ -187,7 +194,7 @@ const allReducer = (state, action) => {
         4: { gloria: true },
         5: { salve: true },
       };
-      vibrate(40)
+      vibrate(PRESET.soft)
       return {
         ...state,
         outro: { ...state.outro, ...updates[actual], actual } 
@@ -203,7 +210,7 @@ const allReducer = (state, action) => {
         3: { gloria: false },
         4: { salve: false },
       };
-      vibrate(30)
+      vibrate(PRESET.faint)
       return {
         ...state,
         outro: { ...state.outro, ...updates[actual], actual } 
@@ -220,7 +227,7 @@ const allReducer = (state, action) => {
         4: { avemariapurisima: true },
         5: { final: true },
       };
-      vibrate(40)
+      vibrate(PRESET.soft)
       return {
         ...state,
         litany: { ...state.litany, ...updates[actual], actual } 
@@ -236,7 +243,7 @@ const allReducer = (state, action) => {
         3: { avemariapurisima: false },
         4: { final: false },
       };
-      vibrate(30)
+      vibrate(PRESET.faint)
       return {
         ...state,
         litany: { ...state.litany, ...updates[actual], actual } 
@@ -248,10 +255,8 @@ const allReducer = (state, action) => {
     }
 
 
-
-
     default:
-    return `undefined case: ${type}`
+      return `undefined case: ${type}`
   }
 }
 
@@ -264,250 +269,197 @@ export function useAll(){
 
 
 
-const mysteries = {
-  misterio: false,
-  padrenuestro: false,
-  avemaria: false,
-  gloria: false,
-  jaculatorias: false,
-  actual: 0,
+const simple = {
+  intro : {
+    senal: false,
+    credo: false,
+    avemarias: false,
+    gloria: false,
+    actual: 0,
+  },
+  mysteries: [
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+
+
+  ],
+  outro:{
+    salve: false,
+    final: false,
+    actual: 0,
+  },
+
 }
 
-const mysteryReducer = (state, action) => {
 
-  const { prayer, type, fun } = action;
+const simpleReducer = (state, action) => {
+
+  const vibrate = (intensity) => {
+    if (navigator.vibrate) navigator.vibrate(intensity)
+  }
+
+  const { type, index } = action;
 
   switch (type) {
 
-    case "next": {
-      const actual = state.actual < 14 ? state.actual + 1 : 14;
+    case "advance mystery": {
+      const actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
       const updates = {
         1: { misterio: true },
         2: { padrenuestro: true },
         12: { avemaria: true },
         13: { gloria: true },
-        14: { jaculatorias: true },
       };
+
+      // Indicates GLORIA reached
+      if (actual === 12) vibrate(PRESET.hard)
+        // Indicates ongoing AVEMARIA
+        else if (actual > 2 && actual <= 11) vibrate(PRESET.mid)
+          // Normal button press feedback
+          else vibrate(PRESET.soft)
+
       return {
         ...state,
-        actual,
-        ...updates[actual] // only applies if match
+        mysteries: state.mysteries.map((mystery, i) => 
+          index === i ? { ...mystery, ...updates[actual], actual  } : mystery
+        )
       };
     }
 
-    case "previous": {
-      const actual = state.actual > 0 ? state.actual - 1 : 0;
+    case "previous mystery": {
+      const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
       const updates = {
         0: { misterio: false },
         1: { padrenuestro: false },
         11: { avemaria: false },
         12: { gloria: false },
-        13: { jaculatorias: false },
       };
+      vibrate(PRESET.faint)
       return {
         ...state,
-        actual,
-        ...updates[actual] // only applies if match
+        mysteries: state.mysteries.map((mystery, i) => 
+          index === i ? { ...mystery, ...updates[actual], actual  } : mystery
+        )
       };
     }
 
-    default:
-    return `undefined case: ${type}`
-  }
-}
-
-export function useMystery() {
-  const [state, dispatch] = useReducer( mysteryReducer, mysteries )
-  const singlePress = () => dispatch({type: "next"})
-  const goBack = () => dispatch({type:"previous"})
-  return {state, singlePress, goBack }
-}
-
-
-
-
-const outro = {
-  peticiones: false,
-  padrenuestro: false,
-  fe: false,
-  esperanza: false,
-  caridad: false,
-  gloria: false,
-  salve: false,
-  actual: 0,
-}
-
-const outroReducer = (state, action)=> {
-  const {type} = action
-
-  switch (type){
-
-    case "next": {
-      const actual = state.actual < 7 ? state.actual + 1 : 7;
-      const updates = {
-        1: { peticiones: true },
-        2: { padrenuestro: true },
-        3: { fe: true },
-        4: { esperanza: true },
-        5: { caridad: true },
-        6: { gloria: true },
-        7: { salve: true },
-      };
-      return {
-        ...state,
-        actual,
-        ...updates[actual] // only applies if match
-      };
-    }
-
-    case "previous": {
-      const actual = state.actual > 0 ? state.actual - 1 : 0;
-      const updates = {
-        0: { peticiones: false },
-        1: { padrenuestro: false },
-        2: { fe: false },
-        3: { esperanza: false },
-        4: { caridad: false },
-        5: { gloria: false },
-        6: { salve: false },
-      };
-      return {
-        ...state,
-        actual,
-        ...updates[actual] // only applies if match
-      };
-    }
-  }
-}
-
-
-export function useOutro() {
-  const [state, dispatch] = useReducer( outroReducer, outro )
-  const singlePress = () => dispatch({type: "next"})
-  const goBack = () => dispatch({type:"previous"})
-  return {state, singlePress, goBack }
-}
-
-
-
-const intro = {
-  senal: false,
-  invocacion: false,
-  contricion: false,
-  credo: false,
-  peticiones: false,
-  actual: 0,
-}
-
-const introReducer = (state, action) => {
-
-  const { type } = action;
-
-  switch (type) {
-
-    case "next": {
-      const actual = state.actual < 5 ? state.actual + 1 : 5;
+    case "advance intro":{
+      const actual = state.intro.actual < 5 ? state.intro.actual + 1 : 5;
       const updates = {
         1: { senal: true },
-        2: { invocacion: true },
-        3: { contricion: true },
-        4: { credo: true },
-        5: { peticiones: true },
+        2: { credo: true },
+        3: { avemarias: true },
+        4: { gloria: true },
       };
+      vibrate(PRESET.soft)
       return {
         ...state,
-        actual,
-        ...updates[actual] // only applies if match
+        intro: { ...state.intro, ...updates[actual], actual } 
       };
     }
 
-    case "previous": {
-      const actual = state.actual > 0 ? state.actual - 1 : 0;
+    case "previous intro": {
+      const actual = state.intro.actual > 0 ? state.intro.actual - 1 : 0;
       const updates = {
         0: { senal: false },
-        1: { invocacion: false },
-        2: { contricion: false },
-        3: { credo: false },
-        4: { peticiones: false },
+        1: { credo: false },
+        2: { avemarias: false },
+        3: { gloria: false },
       };
+      vibrate(PRESET.faint)
       return {
         ...state,
-        actual,
-        ...updates[actual] // only applies if match
+        intro: { ...state.intro, ...updates[actual], actual } 
       };
     }
 
-}
-}
-
-
-
-export function useIntro () {
-  const [state, dispatch] = useReducer( introReducer, intro)
-  const singlePress = () => dispatch({type: "next"})
-  const goBack = () => dispatch({type:"previous"})
-  return {state, singlePress, goBack }
-}
-
-
-
-const litany = {
-  inicio: false,
-  letanias: false,
-  oremos: false,
-  final: false,
-  actual: 0,
-}
-
-
-const litanyReducer = (state, action) => {
-
-  const { type } = action;
-
-  switch (type) {
-
-    case "next": {
-      const actual = state.actual < 5 ? state.actual + 1 : 5;
+    case "advance outro": {
+      const actual = state.outro.actual < 5 ? state.outro.actual + 1 : 5;
       const updates = {
-        1: { inicio: true },
-        2: { letanias: true },
-        3: { oremos: true },
-        4: { avemariapurisima: true },
-        5: { final: true },
+        1: { salve: true },
+        2: { final: true },
       };
+      vibrate(PRESET.soft)
       return {
         ...state,
-        actual,
-        ...updates[actual] // only applies if match
+        outro: { ...state.outro, ...updates[actual], actual } 
       };
     }
 
-    case "previous": {
-      const actual = state.actual > 0 ? state.actual - 1 : 0;
+    case "previous outro": {
+      const actual = state.outro.actual > 0 ? state.outro.actual - 1 : 0;
       const updates = {
-        0: { inicio: false },
-        1: { letanias: false },
-        2: { oremos: false },
-        3: { avemariapurisima: false },
-        4: { final: false },
+        0: { salve: false },
+        1: { final: false },
       };
+      vibrate(PRESET.faint)
       return {
         ...state,
-        actual,
-        ...updates[actual] // only applies if match
+        outro: { ...state.outro, ...updates[actual], actual } 
       };
     }
 
-}
+
+    case "reset": {
+      return all
+    }
+
+
+    default:
+      return `undefined case: ${type}`
+  }
 }
 
 
-export function useLitany () {
-  const [state, dispatch] = useReducer( litanyReducer, litany)
-  const singlePress = () => dispatch({type: "next"})
-  const goBack = () => dispatch({type:"previous"})
-  return {state, singlePress, goBack }
+export function useSimple(){
+  const [simpleState, simpleDispatch] = useReducer( simpleReducer, simple )
+  return {simpleState, simpleDispatch}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export function useWakeLock() {
@@ -564,7 +516,7 @@ const routesReducer = (state, action) => {
 
     case "gozosos":
       return gozosos
-      
+
     case "gloriosos":
       return gloriosos
 
@@ -606,7 +558,7 @@ export function useRoute() {
   const items = useMemo(()=> lista, [lista])
 
   return {name, items, select, ref, backToSquareOne, isReady}
-  
+
 }
 
 
@@ -614,12 +566,12 @@ export function useRoute() {
 export function useRegisterSW(){
 
   useEffect(() => {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('/sw.js', { scope: '/' })
-          .then((registration) => console.log('scope is: ', registration.scope));
-      }
-    }, []);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js', { scope: '/' })
+        .then((registration) => console.log('scope is: ', registration.scope));
+    }
+  }, []);
 
 }
 
@@ -652,7 +604,26 @@ export function useShowPrayers (index) {
     if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
     if (to === "gloria" && currentState.actual == 12) return true
     if (to === "jaculatorias" && currentState.actual == 13) return true
-    }, [currentState])
+  }, [currentState])
+
+  return { show, currentState, next, prev }
+
+}
+
+
+export function useShowSimplePrayers (index) {
+
+  const {simpleState, simpleDispatch} = useHolyContext()
+  const currentState = simpleState.mysteries[index]
+  const next = useCallback(()=>{ simpleDispatch({type: "advance mystery", index: index }) },  [simpleDispatch, index])
+  const prev = useCallback(()=>{ simpleDispatch({type: "previous mystery", index: index }) }, [simpleDispatch, index])
+
+  const show = useCallback((to) => {
+    if (to === "misterio" && currentState.actual == 0) return true
+    if (to === "padrenuestro" && currentState.actual == 1) return true
+    if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
+    if (to === "gloria" && currentState.actual == 12) return true
+  }, [currentState])
 
   return { show, currentState, next, prev }
 
@@ -679,12 +650,32 @@ export function useShowOutro(){
 }
 
 
+
+
+export function useShowSimpleOutro(){
+
+  const {simpleState, simpleDispatch} = useHolyContext()
+  const next = useCallback(()=>{ simpleDispatch({type: "advance outro"}) }, [simpleDispatch])
+  const prev = useCallback(()=>{ simpleDispatch({type: "previous outro"}) }, [simpleDispatch])
+  const currentState = simpleState.outro
+
+  const show = useCallback((to) => {
+    if (to === "salve" && currentState.actual == 0 ) return true 
+    if (to === "final" && currentState.actual == 1) return true
+  }
+    , [currentState])
+
+  return { show, currentState, next, prev }
+}
+
+
+
+
 export function useShowIntro(){
   const {state, dispatch} = useHolyContext();
   const next = useCallback(()=>{ dispatch({type: "advance intro" }) }, [dispatch])
   const prev = useCallback(()=>{ dispatch({type: "previous intro" }) }, [dispatch])
   const currentState = state.intro;
-
   const show = useCallback((to) =>  {
     if (to === "senal" && currentState.actual == 0) return true
     if (to === "invocacion" && currentState.actual == 1) return true
@@ -693,6 +684,20 @@ export function useShowIntro(){
     if (to === "peticiones" && currentState.actual == 4) return true
   }, [currentState])
 
+  return { show, currentState, next, prev }
+}
+
+export function useShowSimpleIntro (){
+  const {simpleState, simpleDispatch} = useHolyContext();
+  const next = useCallback(()=>{ simpleDispatch({type: "advance intro" }) }, [simpleDispatch])
+  const prev = useCallback(()=>{ simpleDispatch({type: "previous intro" }) }, [simpleDispatch])
+  const currentState = simpleState.intro;
+  const show = useCallback((to) =>  {
+    if (to === "senal" && currentState.actual == 0) return true
+    if (to === "credo" && currentState.actual == 1) return true
+    if (to === "avemarias" && currentState.actual == 2) return true
+    if (to === "gloria" && currentState.actual == 3) return true
+  }, [currentState])
   return { show, currentState, next, prev }
 }
 
@@ -711,7 +716,15 @@ export function useShowLitany(){
     if (to === "avemariapurisima" && currentState.actual == 3) return true
     if (to === "final" && currentState.actual == 4) return true
   }
-, [currentState])
+    , [currentState])
   return { show, currentState, next, prev }
 
 }
+
+
+export function useToggleSimple(){
+  const[isSimple, setSimple] = useState(false)
+  const toggle = useCallback(() => { setSimple(!isSimple) }, [isSimple])
+  return {isSimple, toggle}
+}
+

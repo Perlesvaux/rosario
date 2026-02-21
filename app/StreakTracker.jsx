@@ -71,12 +71,11 @@ const useStreak = () => {
 };
 
 export default function StreakTracker() {
-  const { state } = useHolyContext();
+  const { state, simpleState } = useHolyContext();
   const { streak, load, complete } = useStreak();
 
-  const wasRosaryPrayedToday = state.mysteries.every(
-    mystery => mystery.avemaria
-  );
+  const wasRosaryPrayedToday = state.mysteries.every(mystery => mystery.avemaria) 
+    || simpleState.mysteries.every(mystery => mystery.avemaria);
 
   const doneForToday = today()==streak.last
 

@@ -1,21 +1,26 @@
 'use client'
-import Prayers from './Prayers.jsx'
-import Intro from './Intro.jsx'
-import Outro from './Outro.jsx'
+import Prayers, {SimplePrayers} from './Prayers.jsx'
+import Intro, {SimpleIntro} from './Intro.jsx'
+import Outro, {SimpleOutro} from './Outro.jsx'
 import Litany from './Litany.jsx'
 import { Help, Menu } from './ui-client.jsx'
-import { HolyContext, useAll, useRoute, useTitle
+import { HolyContext, useAll, useSimple, useRoute, useTitle, useToggleSimple
 } from './hooks.js'
+import { Slide, Frame } from './ui.jsx'
+import introImg from '../public/intro.webp'
 
 export default function Carousel() {
   const { state, dispatch } = useAll()
+  const { simpleState, simpleDispatch } = useSimple()
 
   const {name, items, select, backToSquareOne, ref, isReady} = useRoute()
+
+  const {isSimple, toggle} = useToggleSimple()
 
 
   useTitle(name)
 
-  return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne }}>
+  return (<HolyContext.Provider value={{ state, dispatch, simpleState, simpleDispatch, select, backToSquareOne, isSimple, toggle }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
@@ -25,26 +30,44 @@ export default function Carousel() {
 
             {
               isReady
-              ?
+                ?
                 <>
-                  <Intro header={name} />
-                  {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
-                  <Outro header={name} />
-                  <Litany header={name}/>
+                  {
+                    isSimple
+                      ?  
+                      <>
+                        <SimpleIntro header={name} />
+                        {items.map((item, indx) => <SimplePrayers key={indx} misterio={item} index={indx} />)}
+                        <SimpleOutro header={name} />
+                      </>
+                      :
+                      <>
+                        <Intro header={name} />
+                        {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
+                        <Outro header={name} />
+                        <Litany header={name}/>
+                      </>
+                  }
                 </>
-              :
+                :
                 <>
+                  <Slide>
+                    <Frame
+                      src={introImg}
+                      alt="Bienvenido!"
+                    />
+                  </Slide>
                   <div className="w-screen text-center"> Espere ... </div>
                 </>
 
 
-            
+
             }
 
 
 
           </div>
-            
+
           <Menu />
         </div>
       </div>

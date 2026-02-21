@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
-import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
+import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame, Vox   } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
-import { useHolyContext, PrayerContext, useShowOutro } from './hooks.js'
+import { useHolyContext, PrayerContext, useShowOutro, useShowSimpleOutro } from './hooks.js'
 import outroImg from '../public/outro.webp'
 
 function Outro ({header}){
@@ -80,3 +80,44 @@ function Outro ({header}){
   </PrayerContext.Provider>)
 }
 export default memo(Outro)
+
+
+
+
+export function SimpleOutro ({header}){
+
+  const {show, currentState, next, prev} = useShowSimpleOutro()
+
+  return ( <PrayerContext.Provider value={{header:`${header} - Oraciones Finales`, next, currentState, show}}>
+    <Slide> 
+
+      <Frame 
+        src={outroImg} 
+        alt="Que renueve la faz de la tierra!" 
+        advance={next}
+        retrocede={prev}
+      />
+
+      <Steps>
+
+        <Prayer title="Salve" to="salve">
+          <Dialogus
+            titulo="Salve" 
+            lider={salve.l} 
+            respuesta={salve.r}
+          />
+        </Prayer>
+
+        <Prayer title="Final" to="final">
+          <Dialogus titulo="Final">
+            <div className="flex flex-col gap-1">
+              {jaculatorias_finales.map((letania, indx)=><div  key={indx}><Vox lider={letania.l} respuesta={letania.r} /></div>)}
+            </div>
+          </Dialogus>
+        </Prayer>
+
+      </Steps>
+
+    </Slide>
+  </PrayerContext.Provider>)
+}

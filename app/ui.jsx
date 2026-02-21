@@ -145,7 +145,7 @@ export function Slide ({ children }){
   </div>
 }
 
-export function Frame ({src, alt, advance, retrocede}){
+export function Frame ({src, alt, advance=null, retrocede=null}){
   return <section className="relative w-full aspect-[812/899]">
 
     <div className="absolute w-full z-20">
