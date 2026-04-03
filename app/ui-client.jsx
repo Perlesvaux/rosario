@@ -186,6 +186,23 @@ export function Menu(){
 
               En negro</span> se indica la <strong>oración</strong> actual. Haz click en ella para ver más <strong>detalles</strong> (verás una <strong>cruz que parpadea</strong>. Haz click en ella para continuar con la siguiente <strong>oración</strong>)</p>
             <p>Atajos: <strong>toca dos veces la mitad derecha de la imagen</strong> para continuar con la siguiente <strong>oración</strong>; retrocede <strong>tocando dos veces la mitad izquierda de la imagen</strong></p>
+
+            <p>Contador de rachas: parpadea en rojo cuando aun no has rezado. </p>
+
+
+            <p><span className="font-black rounded-full h-8 w-8 inline-block  bg-gray-800/90 text-white hover:bg-gray-800/50"> 
+<svg className="m-auto" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+            </span> Version completa del Rosario. Incluye jaculatorias y letanias lauretanas.</p>
+
+
+            <p>
+            <span className="font-black rounded-full h-8 w-8 inline-block  bg-gray-500/90 text-white hover:bg-gray-500/50"> 
+<svg className="m-auto" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-480ZM282-282q-82-82-82-198t82-198q82-82 198-82t198 82q82 82 82 198t-82 198q-82 82-198 82t-198-82Zm339.5-56.5Q680-397 680-480t-58.5-141.5Q563-680 480-680t-141.5 58.5Q280-563 280-480t58.5 141.5Q397-280 480-280t141.5-58.5Z"/></svg>
+            </span> Version simple.
+            </p>
+
+
+
           </div>
         </Introductio>
 
@@ -266,7 +283,11 @@ export function ToggleSimple(){
 : "bg-gray-800/90 text-white hover:bg-gray-800/50"
 } font-black rounded-full h-8 w-8 flex items-center justify-center`
   }>
-    {isSimple? "S" : "C"}
+    {
+      isSimple
+        ? <svg className="mx-auto" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-480ZM282-282q-82-82-82-198t82-198q82-82 198-82t198 82q82 82 82 198t-82 198q-82 82-198 82t-198-82Zm339.5-56.5Q680-397 680-480t-58.5-141.5Q563-680 480-680t-141.5 58.5Q280-563 280-480t58.5 141.5Q397-280 480-280t141.5-58.5Z"/></svg> 
+        : <svg className="mx-auto" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#F3F3F3"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+    }
   </button>;
 
 }

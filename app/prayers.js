@@ -22,7 +22,7 @@ export const jaculatoria_2 = {
 
 export const padreNuestro = {
 "l": "Padre nuestro que estás en el cielo, santificado sea Tu Nombre; venga a nosotros Tu Reino; hágase tu voluntad, en la tierra como en el cielo.",
-"r": "Danos hoy nuestro pan de cada día; perdona nuestras deudas, como también nosotros perdonamos a nuestros deudores; no nos dejes caer en tentación, y líbranos del mal. Amén."
+"r": "Danos hoy nuestro pan de cada día; perdona nuestras deudas, como también nosotros perdonamos a nuestros deudores; no nos dejes caer en tentación, y líbranos del maligno. Amén."
 }
 
 export const senal = "Por la señal de la Santa Cruz, de nuestros enemigos líbranos Señor, Dios Nuestro. En el nombre del Padre, del hijo y del Espíritu Santo. AMÉN."
