@@ -29,6 +29,9 @@ const PRESET = {
 }
 
 const all = {
+
+  complete: {
+
   intro : {
     senal: false,
     invocacion: false,
@@ -97,6 +100,67 @@ const all = {
     actual: 0,
   }
 
+  },
+
+
+  simple: {
+
+  intro : {
+    senal: false,
+    credo: false,
+    avemarias: false,
+    gloria: false,
+    actual: 0,
+  },
+  mysteries: [
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+    {
+      misterio: false,
+      padrenuestro: false,
+      avemaria: false,
+      gloria: false,
+      actual: 0,
+    },
+
+
+  ],
+  outro:{
+    salve: false,
+    final: false,
+    actual: 0,
+  },
+
+
+}
+
+
 }
 
 
@@ -154,34 +218,79 @@ const allReducer = (state, action) => {
     }
 
     case "advance intro":{
-      const actual = state.intro.actual < 5 ? state.intro.actual + 1 : 5;
-      const updates = {
-        1: { senal: true },
-        2: { invocacion: true },
-        3: { contricion: true },
-        4: { credo: true },
-        5: { peticiones: true },
+      const actual = {
+        complete:state.complete.intro.actual < 5 ? state.complete.intro.actual + 1 : 5,
+        simple:state.simple.intro.actual < 5 ? state.simple.intro.actual + 1 : 5
       };
+      const updates = {
+        complete:{
+          1: { senal: true },
+          2: { invocacion: true },
+          3: { contricion: true },
+          4: { credo: true },
+          5: { peticiones: true },
+        },
+        simple: {
+          1: { senal: true },
+          2: { credo: true },
+          3: { avemarias: true },
+          4: { gloria: true },
+      }
+      };
+      console.log(state)
+
       vibrate(PRESET.soft)
+
       return {
         ...state,
-        intro: { ...state.intro, ...updates[actual], actual } 
+        complete: {
+          ...state.complete,
+          intro: { ...state.complete.intro, ...updates.complete[actual.complete], actual:actual.complete }
+        },
+        simple: {
+          ...state.simple,
+          intro: { ...state.simple.intro, ...updates.simple[actual.simple], actual:actual.simple }
+        }
       };
     }
 
     case "previous intro": {
-      const actual = state.intro.actual > 0 ? state.intro.actual - 1 : 0;
+      const actual = {
+        complete:state.complete.intro.actual > 0 ? state.complete.intro.actual - 1 : 0,
+        simple:state.simple.intro.actual > 0 ? state.simple.intro.actual - 1 : 0
+      }
+
       const updates = {
-        0: { senal: false },
-        1: { invocacion: false },
-        2: { contricion: false },
-        3: { credo: false },
-        4: { peticiones: false },
+        complete:{
+          0: { senal: false },
+          1: { invocacion: false },
+          2: { contricion: false },
+          3: { credo: false },
+          4: { peticiones: false },
+        },
+
+        simple:{
+          0: { senal: false },
+          1: { credo: false },
+          2: { avemarias: false },
+          3: { gloria: false },
+        }
+
       };
+
+      console.log(state.complete)
+
       vibrate(PRESET.faint)
       return {
         ...state,
-        intro: { ...state.intro, ...updates[actual], actual } 
+        complete: {
+          ...state.complete,
+          intro: { ...state.complete.intro, ...updates.complete[actual.complete], actual:actual.complete }
+        },
+        simple: {
+          ...state.simple,
+          intro: { ...state.simple.intro, ...updates.simple[actual.simple], actual:actual.simple }
+        }
       };
     }
 
@@ -593,60 +702,60 @@ const ok = (intensity) => {
 
 export function useShowPrayers (index) {
 
-  const {state, dispatch} = useHolyContext()
-  const currentState = state.mysteries[index]
-  const next = useCallback(()=>{ dispatch({type: "advance mystery", index: index }) },  [dispatch, index])
-  const prev = useCallback(()=>{ dispatch({type: "previous mystery", index: index }) }, [dispatch, index])
+  //const {state, dispatch} = useHolyContext()
+  //const currentState = state.mysteries[index]
+  //const next = useCallback(()=>{ dispatch({type: "advance mystery", index: index }) },  [dispatch, index])
+  //const prev = useCallback(()=>{ dispatch({type: "previous mystery", index: index }) }, [dispatch, index])
+  //
+  //const show = useCallback((to) => {
+  //  //if (to === "misterio" && currentState.actual == 0) return true
+  //  //if (to === "padrenuestro" && currentState.actual == 1) return true
+  //  //if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
+  //  //if (to === "gloria" && currentState.actual == 12) return true
+  //  //if (to === "jaculatorias" && currentState.actual == 13) return true
+  //}, [currentState])
 
-  const show = useCallback((to) => {
-    if (to === "misterio" && currentState.actual == 0) return true
-    if (to === "padrenuestro" && currentState.actual == 1) return true
-    if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
-    if (to === "gloria" && currentState.actual == 12) return true
-    if (to === "jaculatorias" && currentState.actual == 13) return true
-  }, [currentState])
-
-  return { show, currentState, next, prev }
+  //return { show, currentState, next, prev }
 
 }
 
 
 export function useShowSimplePrayers (index) {
 
-  const {simpleState, simpleDispatch} = useHolyContext()
-  const currentState = simpleState.mysteries[index]
-  const next = useCallback(()=>{ simpleDispatch({type: "advance mystery", index: index }) },  [simpleDispatch, index])
-  const prev = useCallback(()=>{ simpleDispatch({type: "previous mystery", index: index }) }, [simpleDispatch, index])
-
-  const show = useCallback((to) => {
-    if (to === "misterio" && currentState.actual == 0) return true
-    if (to === "padrenuestro" && currentState.actual == 1) return true
-    if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
-    if (to === "gloria" && currentState.actual == 12) return true
-  }, [currentState])
-
-  return { show, currentState, next, prev }
+  //const {simpleState, simpleDispatch} = useHolyContext()
+  //const currentState = simpleState.mysteries[index]
+  //const next = useCallback(()=>{ simpleDispatch({type: "advance mystery", index: index }) },  [simpleDispatch, index])
+  //const prev = useCallback(()=>{ simpleDispatch({type: "previous mystery", index: index }) }, [simpleDispatch, index])
+  //
+  //const show = useCallback((to) => {
+  //  //if (to === "misterio" && currentState.actual == 0) return true
+  //  //if (to === "padrenuestro" && currentState.actual == 1) return true
+  //  //if (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11) return true
+  //  //if (to === "gloria" && currentState.actual == 12) return true
+  //}, [currentState])
+  //
+  //return { show, currentState, next, prev }
 
 }
 
 
 export function useShowOutro(){
 
-  const {state, dispatch} = useHolyContext()
-  const next = useCallback(()=>{ dispatch({type: "advance outro"}) }, [dispatch])
-  const prev = useCallback(()=>{ dispatch({type: "previous outro"}) }, [dispatch])
-  const currentState = state.outro
-
-  const show = useCallback((to) => {
-    if (to === "peticiones" && currentState.actual == 0 ) return true 
-    if (to === "padrenuestro" && currentState.actual == 1) return true
-    if (to === "avemarias" && currentState.actual == 2) return true
-    if (to === "gloria" && currentState.actual == 3) return true
-    if (to === "salve" && currentState.actual == 4) return true
-  }
-    , [currentState])
-
-  return { show, currentState, next, prev }
+  //const {state, dispatch} = useHolyContext()
+  //const next = useCallback(()=>{ dispatch({type: "advance outro"}) }, [dispatch])
+  //const prev = useCallback(()=>{ dispatch({type: "previous outro"}) }, [dispatch])
+  //const currentState = state.outro
+  //
+  //const show = useCallback((to) => {
+  //  //if (to === "peticiones" && currentState.actual == 0 ) return true 
+  //  //if (to === "padrenuestro" && currentState.actual == 1) return true
+  //  //if (to === "avemarias" && currentState.actual == 2) return true
+  //  //if (to === "gloria" && currentState.actual == 3) return true
+  //  //if (to === "salve" && currentState.actual == 4) return true
+  //}
+  //  , [currentState])
+  //
+  //return { show, currentState, next, prev }
 }
 
 
@@ -654,70 +763,91 @@ export function useShowOutro(){
 
 export function useShowSimpleOutro(){
 
-  const {simpleState, simpleDispatch} = useHolyContext()
-  const next = useCallback(()=>{ simpleDispatch({type: "advance outro"}) }, [simpleDispatch])
-  const prev = useCallback(()=>{ simpleDispatch({type: "previous outro"}) }, [simpleDispatch])
-  const currentState = simpleState.outro
-
-  const show = useCallback((to) => {
-    if (to === "salve" && currentState.actual == 0 ) return true 
-    if (to === "final" && currentState.actual == 1) return true
-  }
-    , [currentState])
-
-  return { show, currentState, next, prev }
+  //const {simpleState, simpleDispatch} = useHolyContext()
+  //const next = useCallback(()=>{ simpleDispatch({type: "advance outro"}) }, [simpleDispatch])
+  //const prev = useCallback(()=>{ simpleDispatch({type: "previous outro"}) }, [simpleDispatch])
+  //const currentState = simpleState.outro
+  //
+  //const show = useCallback((to) => {
+  //  //if (to === "salve" && currentState.actual == 0 ) return true 
+  //  //if (to === "final" && currentState.actual == 1) return true
+  //}
+  //  , [currentState])
+  //
+  //return { show, currentState, next, prev }
 }
 
 
 
 
 export function useShowIntro(){
-  const {state, dispatch} = useHolyContext();
+  const {state, dispatch, isSimple} = useHolyContext();
   const next = useCallback(()=>{ dispatch({type: "advance intro" }) }, [dispatch])
   const prev = useCallback(()=>{ dispatch({type: "previous intro" }) }, [dispatch])
-  const currentState = state.intro;
+  //const currentState = state.intro;
+  const currentState = isSimple? state.simple.intro : state.complete.intro;
   const show = useCallback((to) =>  {
-    if (to === "senal" && currentState.actual == 0) return true
-    if (to === "invocacion" && currentState.actual == 1) return true
-    if (to === "contricion" && currentState.actual == 2) return true
-    if (to === "credo" && currentState.actual == 3) return true
-    if (to === "peticiones" && currentState.actual == 4) return true
+    //if (to === "senal" && currentState.actual == 0) return true
+    //if (to === "invocacion" && currentState.actual == 1) return true
+    //if (to === "contricion" && currentState.actual == 2) return true
+    //if (to === "credo" && currentState.actual == 3) return true
+    //if (to === "peticiones" && currentState.actual == 4) return true
   }, [currentState])
 
   return { show, currentState, next, prev }
 }
 
 export function useShowSimpleIntro (){
-  const {simpleState, simpleDispatch} = useHolyContext();
-  const next = useCallback(()=>{ simpleDispatch({type: "advance intro" }) }, [simpleDispatch])
-  const prev = useCallback(()=>{ simpleDispatch({type: "previous intro" }) }, [simpleDispatch])
-  const currentState = simpleState.intro;
+
+
+  const {state, dispatch} = useHolyContext();
+  const next = useCallback(()=>{ dispatch({type: "advance intro" }) }, [dispatch])
+  const prev = useCallback(()=>{ dispatch({type: "previous intro" }) }, [dispatch])
+  //const currentState = state.intro;
+  const currentState = state;
   const show = useCallback((to) =>  {
-    if (to === "senal" && currentState.actual == 0) return true
-    if (to === "credo" && currentState.actual == 1) return true
-    if (to === "avemarias" && currentState.actual == 2) return true
-    if (to === "gloria" && currentState.actual == 3) return true
+    //if (to === "senal" && currentState.actual == 0) return true
+    //if (to === "invocacion" && currentState.actual == 1) return true
+    //if (to === "contricion" && currentState.actual == 2) return true
+    //if (to === "credo" && currentState.actual == 3) return true
+    //if (to === "peticiones" && currentState.actual == 4) return true
   }, [currentState])
+
   return { show, currentState, next, prev }
+
+
+
+
+  //const {simpleState, simpleDispatch} = useHolyContext();
+  //const next = useCallback(()=>{ simpleDispatch({type: "advance intro" }) }, [simpleDispatch])
+  //const prev = useCallback(()=>{ simpleDispatch({type: "previous intro" }) }, [simpleDispatch])
+  //const currentState = simpleState.intro;
+  //const show = useCallback((to) =>  {
+  //  //if (to === "senal" && currentState.actual == 0) return true
+  //  //if (to === "credo" && currentState.actual == 1) return true
+  //  //if (to === "avemarias" && currentState.actual == 2) return true
+  //  //if (to === "gloria" && currentState.actual == 3) return true
+  //}, [currentState])
+  //return { show, currentState, next, prev }
 }
 
 
 export function useShowLitany(){
 
-  const {state, dispatch} = useHolyContext();
-  const next = useCallback(()=>{ dispatch({type: "advance litany"}) }, [dispatch]);
-  const prev = useCallback(()=>{ dispatch({type: "previous litany"}) }, [dispatch])
-  const currentState = state.litany;
-
-  const show = useCallback((to) => {
-    if (to === "inicio" && currentState.actual == 0 ) return true 
-    if (to === "letanias" && currentState.actual == 1) return true
-    if (to === "oremos" && currentState.actual == 2) return true
-    if (to === "avemariapurisima" && currentState.actual == 3) return true
-    if (to === "final" && currentState.actual == 4) return true
-  }
-    , [currentState])
-  return { show, currentState, next, prev }
+  //const {state, dispatch} = useHolyContext();
+  //const next = useCallback(()=>{ dispatch({type: "advance litany"}) }, [dispatch]);
+  //const prev = useCallback(()=>{ dispatch({type: "previous litany"}) }, [dispatch])
+  //const currentState = state.litany;
+  //
+  //const show = useCallback((to) => {
+  //  //if (to === "inicio" && currentState.actual == 0 ) return true 
+  //  //if (to === "letanias" && currentState.actual == 1) return true
+  //  //if (to === "oremos" && currentState.actual == 2) return true
+  //  //if (to === "avemariapurisima" && currentState.actual == 3) return true
+  //  //if (to === "final" && currentState.actual == 4) return true
+  //}
+  //  , [currentState])
+  //return { show, currentState, next, prev }
 
 }
 

@@ -32,22 +32,15 @@ export default function Carousel() {
               isReady
                 ?
                 <>
-                  {
-                    isSimple
-                      ?  
-                      <>
-                        <SimpleIntro header={name} />
-                        {items.map((item, indx) => <SimplePrayers key={indx} misterio={item} index={indx} />)}
-                        <SimpleOutro header={name} />
-                      </>
-                      :
-                      <>
-                        <Intro header={name} />
-                        {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
-                        <Outro header={name} />
-                        <Litany header={name}/>
-                      </>
-                  }
+                  <>
+                    <Intro header={name} />
+                    {
+
+                    //{items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
+                    //<Outro header={name} />
+                    //<Litany header={name}/>
+                    }
+                  </>
                 </>
                 :
                 <>
