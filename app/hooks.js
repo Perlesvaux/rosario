@@ -170,6 +170,34 @@ const allReducer = (state, action) => {
     if (navigator.vibrate) navigator.vibrate(intensity)
   }
 
+  const commit = (state, updates, actual, section)=>{
+    console.log(state.complete.litany)
+
+    if (state.complete[section] && state.simple[section])
+    {
+      return {
+        ...state,
+        complete: {
+          ...state.complete,
+          [section]: { ...state.complete[section], ...updates.complete[actual.complete], actual:actual.complete }
+        },
+        simple: {
+          ...state.simple,
+          [section]: { ...state.simple[section], ...updates.simple[actual.simple], actual:actual.simple }
+        }
+      };
+    }
+
+    // state.simple doesn't have any 'litany' key
+    return {
+      ...state,
+      complete: {
+        ...state.complete,
+        [section]: { ...state.complete[section], ...updates.complete[actual.complete], actual:actual.complete }
+      }
+    };
+  }
+
   const { type, index } = action;
 
   switch (type) {
@@ -241,17 +269,7 @@ const allReducer = (state, action) => {
 
       vibrate(PRESET.soft)
 
-      return {
-        ...state,
-        complete: {
-          ...state.complete,
-          intro: { ...state.complete.intro, ...updates.complete[actual.complete], actual:actual.complete }
-        },
-        simple: {
-          ...state.simple,
-          intro: { ...state.simple.intro, ...updates.simple[actual.simple], actual:actual.simple }
-        }
-      };
+      return commit(state, updates, actual, "intro")
     }
 
     case "previous intro": {
@@ -278,85 +296,92 @@ const allReducer = (state, action) => {
 
       };
 
-      console.log(state.complete)
-
       vibrate(PRESET.faint)
-      return {
-        ...state,
-        complete: {
-          ...state.complete,
-          intro: { ...state.complete.intro, ...updates.complete[actual.complete], actual:actual.complete }
-        },
-        simple: {
-          ...state.simple,
-          intro: { ...state.simple.intro, ...updates.simple[actual.simple], actual:actual.simple }
-        }
-      };
+
+      return commit(state, updates, actual, "intro")
     }
 
     case "advance outro": {
-      const actual = state.outro.actual < 5 ? state.outro.actual + 1 : 5;
+      const actual = {
+        complete:state.complete.outro.actual < 5 ? state.complete.outro.actual + 1 : 5,
+        simple: state.simple.outro.actual < 5 ? state.simple.outro.actual + 1 : 5
+      };
       const updates = {
-        1: { peticiones: true },
-        2: { padrenuestro: true },
-        3: { avemarias: true },
-        4: { gloria: true },
-        5: { salve: true },
+        complete:{
+          1: { peticiones: true },
+          2: { padrenuestro: true },
+          3: { avemarias: true },
+          4: { gloria: true },
+          5: { salve: true },
+        },
+        simple:{
+          1: { salve: true },
+          2: { final: true },
+        }
       };
       vibrate(PRESET.soft)
-      return {
-        ...state,
-        outro: { ...state.outro, ...updates[actual], actual } 
-      };
+
+      return commit(state, updates, actual, "outro")
+
+
     }
 
     case "previous outro": {
-      const actual = state.outro.actual > 0 ? state.outro.actual - 1 : 0;
+      const actual = {
+        complete:state.complete.outro.actual > 0 ? state.complete.outro.actual - 1 : 0,
+        simple:state.simple.outro.actual > 0 ? state.simple.outro.actual - 1 : 0
+      }
       const updates = {
-        0: { peticiones: false },
-        1: { padrenuestro: false },
-        2: { avemarias: false },
-        3: { gloria: false },
-        4: { salve: false },
+        complete:{
+          0: { peticiones: false },
+          1: { padrenuestro: false },
+          2: { avemarias: false },
+          3: { gloria: false },
+          4: { salve: false },
+        },
+        simple:{
+          0: { salve: false },
+          1: { final: false },
+        }
       };
       vibrate(PRESET.faint)
-      return {
-        ...state,
-        outro: { ...state.outro, ...updates[actual], actual } 
-      };
+
+      return commit(state, updates, actual, "outro")
     }
 
 
     case "advance litany": {
-      const actual = state.litany.actual < 5 ? state.litany.actual + 1 : 5;
+      const actual = {
+        complete: state.complete.litany.actual < 5 ? state.complete.litany.actual + 1 : 5
+      };
       const updates = {
+        complete:{
         1: { inicio: true },
         2: { letanias: true },
         3: { oremos: true },
         4: { avemariapurisima: true },
         5: { final: true },
+        }
       };
       vibrate(PRESET.soft)
-      return {
-        ...state,
-        litany: { ...state.litany, ...updates[actual], actual } 
-      };
+      return commit(state, updates, actual, "litany")
     }
 
     case "previous litany": {
-      const actual = state.litany.actual > 0 ? state.litany.actual - 1 : 0;
+      const actual = {
+        complete: state.complete.litany.actual > 0 ? state.complete.litany.actual - 1 : 0
+      };
       const updates = {
-        0: { inicio: false },
-        1: { letanias: false },
-        2: { oremos: false },
-        3: { avemariapurisima: false },
-        4: { final: false },
+        complete:{
+          0: { inicio: false },
+          1: { letanias: false },
+          2: { oremos: false },
+          3: { avemariapurisima: false },
+          4: { final: false },
+        }
       };
       vibrate(PRESET.faint)
-      return {
-        ...state,
-        litany: { ...state.litany, ...updates[actual], actual } 
-      };
+      return commit(state, updates, actual, "litany")
     }
 
     case "reset": {
@@ -778,6 +803,15 @@ export function useShowSimpleOutro(){
 }
 
 
+export function useStateOf(section)
+{
+  const {state, dispatch, isSimple} = useHolyContext();
+  const next = useCallback(()=>{dispatch({type: `advance ${section}`})}, [dispatch, section])
+  const prev = useCallback(()=>{dispatch({type: `previous ${section}`})}, [dispatch, section])
+  const currentState = isSimple? state.simple[section] : state.complete[section];
+  const show =(to)=>{ return }
+  return { show, currentState, next, prev }
+}
 
 
 export function useShowIntro(){
@@ -797,39 +831,6 @@ export function useShowIntro(){
   return { show, currentState, next, prev }
 }
 
-export function useShowSimpleIntro (){
-
-
-  const {state, dispatch} = useHolyContext();
-  const next = useCallback(()=>{ dispatch({type: "advance intro" }) }, [dispatch])
-  const prev = useCallback(()=>{ dispatch({type: "previous intro" }) }, [dispatch])
-  //const currentState = state.intro;
-  const currentState = state;
-  const show = useCallback((to) =>  {
-    //if (to === "senal" && currentState.actual == 0) return true
-    //if (to === "invocacion" && currentState.actual == 1) return true
-    //if (to === "contricion" && currentState.actual == 2) return true
-    //if (to === "credo" && currentState.actual == 3) return true
-    //if (to === "peticiones" && currentState.actual == 4) return true
-  }, [currentState])
-
-  return { show, currentState, next, prev }
-
-
-
-
-  //const {simpleState, simpleDispatch} = useHolyContext();
-  //const next = useCallback(()=>{ simpleDispatch({type: "advance intro" }) }, [simpleDispatch])
-  //const prev = useCallback(()=>{ simpleDispatch({type: "previous intro" }) }, [simpleDispatch])
-  //const currentState = simpleState.intro;
-  //const show = useCallback((to) =>  {
-  //  //if (to === "senal" && currentState.actual == 0) return true
-  //  //if (to === "credo" && currentState.actual == 1) return true
-  //  //if (to === "avemarias" && currentState.actual == 2) return true
-  //  //if (to === "gloria" && currentState.actual == 3) return true
-  //}, [currentState])
-  //return { show, currentState, next, prev }
-}
 
 
 export function useShowLitany(){

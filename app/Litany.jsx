@@ -2,15 +2,19 @@ import { memo } from 'react';
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { Dialogus, Vox, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
-import { useHolyContext, PrayerContext, useShowLitany } from './hooks.js'
+import { useHolyContext, PrayerContext, useStateOf } from './hooks.js'
 import litanyImg from '../public/litany.webp'
 
 function Litany ({header}){
 
-  const {show, currentState, next, prev} = useShowLitany()
+  const {isSimple} = useHolyContext()
 
-  return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show}}>
-    <Slide> 
+  const {show, currentState, next, prev} = useStateOf("litany")
+
+  return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, isSimple}}>
+
+    {
+      !isSimple && <Slide> 
 
       <Frame
         src={litanyImg}
@@ -73,6 +77,8 @@ function Litany ({header}){
       </Steps>
 
     </Slide>
+
+    }
   </PrayerContext.Provider>)
 }
 

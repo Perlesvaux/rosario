@@ -20,7 +20,6 @@ export function Prayer ({children, to, title}) {
     ref.current.hidePopover();
   }
 
-  debugger 
   return <>
     <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
       <article className="flex flex-col gap-4">
@@ -43,7 +42,7 @@ export function Prayer ({children, to, title}) {
 
 export function Steps({children}) {
   const {header} = usePrayerContext()
-  return <section className="col-span-3 grid grid-cols-3 gap-4 w-screen">
+  return <section className="col-span-3 grid grid-cols-3 gap-4  ">
 
     <div className="col-span-3  text-sm text-white/70 font-extrabold text-center bg-gray-800">
       <div className=" h-10 flex items-center justify-center">{header} </div>

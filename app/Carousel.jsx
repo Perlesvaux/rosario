@@ -40,6 +40,8 @@ export default function Carousel() {
                     //<Outro header={name} />
                     //<Litany header={name}/>
                     }
+                    <Outro header={name} />
+                    <Litany header={name}/>
                   </>
                 </>
                 :
