@@ -170,29 +170,33 @@ const allReducer = (state, action) => {
     if (navigator.vibrate) navigator.vibrate(intensity)
   }
 
-  const commitEach =(state, updates, actual, section, index)=>{
+  const updateShallow = (state, updates, actual, section, part) => {
+    return {
+      [part]: {
+        ...state[part],
+        [section]: { ...state[part][section], ...updates[part][actual[part]], actual:actual[part] }
+      }}
+  }
 
+  const updateDeep = (state, updates, actual, section, index, part) => {
+    return {
+      [part]:{
+        ...state[part],
+        [section]: state[part][section].map((mystery, i) => 
+          index === i ? { ...mystery, ...updates[part][actual[part]], actual:actual[part]  } : mystery
+        )
+      }
+    }
+  }
+
+  const commitEach =(state, updates, actual, section, index)=>{
     // Only for 'mystery' section
     console.log(state.simple[section], index)
     return {
       ...state,
-      complete:{
-        ...state.complete,
-        [section]: state.complete[section].map((mystery, i) => 
-          index === i ? { ...mystery, ...updates.complete[actual.complete], actual:actual.complete  } : mystery
-        )
-      },
-
-
-      simple:{
-        ...state.simple,
-        [section]: state.simple[section].map((mystery, i) => 
-          index === i ? { ...mystery, ...updates.simple[actual.simple], actual:actual.simple  } : mystery
-        )
-      }
-
+      ...updateDeep(state, updates, actual, section, index, "complete"),
+      ...updateDeep(state, updates, actual, section, index, "simple")
     };
-
   }
 
   const commit = (state, updates, actual, section)=>{
@@ -202,24 +206,15 @@ const allReducer = (state, action) => {
     {
       return {
         ...state,
-        complete: {
-          ...state.complete,
-          [section]: { ...state.complete[section], ...updates.complete[actual.complete], actual:actual.complete }
-        },
-        simple: {
-          ...state.simple,
-          [section]: { ...state.simple[section], ...updates.simple[actual.simple], actual:actual.simple }
-        }
+        ...updateShallow(state,updates,actual,section, "complete"),
+        ...updateShallow(state, updates, actual, section, "simple")
       };
     }
 
     // state.simple doesn't have any 'litany' key
     return {
       ...state,
-      complete: {
-        ...state.complete,
-        [section]: { ...state.complete[section], ...updates.complete[actual.complete], actual:actual.complete }
-      }
+      ...updateShallow(state, updates, actual, section, "complete")
     };
   }
 
