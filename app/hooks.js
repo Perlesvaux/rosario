@@ -185,7 +185,7 @@ const allReducer = (state, action) => {
 
 
       simple:{
-        ...state.complete,
+        ...state.simple,
         [section]: state.simple[section].map((mystery, i) => 
           index === i ? { ...mystery, ...updates.simple[actual.simple], actual:actual.simple  } : mystery
         )
