@@ -40,6 +40,7 @@ export default function Carousel() {
                     //<Outro header={name} />
                     //<Litany header={name}/>
                     }
+                    {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
                     <Outro header={name} />
                     <Litany header={name}/>
                   </>

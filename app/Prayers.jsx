@@ -3,13 +3,15 @@ import { memo } from 'react';
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 import { Dialogus, Vox, Mysterium, Titulus, Slide, Frame } from './ui.jsx' 
 import { Prayer, Steps } from './ui-client.jsx'
-import { PrayerContext, useHolyContext, useShowPrayers, useShowSimplePrayers } from './hooks.js'
+import { PrayerContext, useHolyContext,useStateOfEach } from './hooks.js'
 
 function Prayers({misterio, index}) {
 
-  const {show, currentState, next, prev} = useShowPrayers(index)
+  const {isSimple} = useHolyContext()
 
-  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show}}>
+  const {show, currentState, next, prev} = useStateOfEach("mysteries",index)
+
+  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple}}>
     <Slide>
 
       <Frame
@@ -56,12 +58,14 @@ function Prayers({misterio, index}) {
           />
         </Prayer>
 
-        <Prayer title="Jaculatorias" to="jaculatorias" >
-          <Dialogus titulo="Jaculatorias" >
-            <Vox lider={jaculatoria_1.l} respuesta={jaculatoria_1.r} />
-            <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
-          </Dialogus>
-        </Prayer>
+        { !isSimple &&
+          <Prayer title="Jaculatorias" to="jaculatorias" >
+            <Dialogus titulo="Jaculatorias" >
+              <Vox lider={jaculatoria_1.l} respuesta={jaculatoria_1.r} />
+              <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
+            </Dialogus>
+          </Prayer>
+        }
 
       </Steps>
 

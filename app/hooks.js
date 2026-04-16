@@ -170,8 +170,33 @@ const allReducer = (state, action) => {
     if (navigator.vibrate) navigator.vibrate(intensity)
   }
 
+  const commitEach =(state, updates, actual, section, index)=>{
+
+    // Only for 'mystery' section
+    console.log(state.simple[section], index)
+    return {
+      ...state,
+      complete:{
+        ...state.complete,
+        [section]: state.complete[section].map((mystery, i) => 
+          index === i ? { ...mystery, ...updates.complete[actual.complete], actual:actual.complete  } : mystery
+        )
+      },
+
+
+      simple:{
+        ...state.complete,
+        [section]: state.simple[section].map((mystery, i) => 
+          index === i ? { ...mystery, ...updates.simple[actual.simple], actual:actual.simple  } : mystery
+        )
+      }
+
+    };
+
+  }
+
   const commit = (state, updates, actual, section)=>{
-    console.log(state.complete.litany)
+
 
     if (state.complete[section] && state.simple[section])
     {
@@ -202,14 +227,25 @@ const allReducer = (state, action) => {
 
   switch (type) {
 
-    case "advance mystery": {
-      const actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
+    case "advance mysteries": {
+      const actual = {
+        complete: state.complete.mysteries[index].actual < 14 ? state.complete.mysteries[index].actual + 1 : 14,
+        simple: state.simple.mysteries[index].actual < 14 ? state.simple.mysteries[index].actual + 1 : 14
+      }
       const updates = {
-        1: { misterio: true },
-        2: { padrenuestro: true },
-        12: { avemaria: true },
-        13: { gloria: true },
-        14: { jaculatorias: true },
+        complete:{
+          1: { misterio: true },
+          2: { padrenuestro: true },
+          12: { avemaria: true },
+          13: { gloria: true },
+          14: { jaculatorias: true },
+        },
+        simple:{
+          1: { misterio: true },
+          2: { padrenuestro: true },
+          12: { avemaria: true },
+          13: { gloria: true },
+        }
       };
 
       // Indicates GLORIA reached
@@ -219,30 +255,34 @@ const allReducer = (state, action) => {
           // Normal button press feedback
           else vibrate(PRESET.soft)
 
-      return {
-        ...state,
-        mysteries: state.mysteries.map((mystery, i) => 
-          index === i ? { ...mystery, ...updates[actual], actual  } : mystery
-        )
-      };
+      return commitEach(state, updates, actual, "mysteries", index);
     }
 
-    case "previous mystery": {
-      const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
+    case "previous mysteries": {
+      const actual = {
+        complete:state.complete.mysteries[index].actual > 0 ? state.complete.mysteries[index].actual - 1 : 0 ,
+        simple: state.simple.mysteries[index].actual > 0 ? state.simple.mysteries[index].actual - 1 : 0
+      }
+
       const updates = {
-        0: { misterio: false },
-        1: { padrenuestro: false },
-        11: { avemaria: false },
-        12: { gloria: false },
-        13: { jaculatorias: false },
+        complete:{
+          0: { misterio: false },
+          1: { padrenuestro: false },
+          11: { avemaria: false },
+          12: { gloria: false },
+          13: { jaculatorias: false },
+        },
+        simple:{
+          0: { misterio: false },
+          1: { padrenuestro: false },
+          11: { avemaria: false },
+          12: { gloria: false },
+        }
       };
+
       vibrate(PRESET.faint)
-      return {
-        ...state,
-        mysteries: state.mysteries.map((mystery, i) => 
-          index === i ? { ...mystery, ...updates[actual], actual  } : mystery
-        )
-      };
+
+      return commitEach(state, updates, actual, "mysteries", index);
     }
 
     case "advance intro":{
@@ -803,8 +843,17 @@ export function useShowSimpleOutro(){
 }
 
 
-export function useStateOf(section)
-{
+export function useStateOfEach(section, index){
+  const {state, dispatch, isSimple} = useHolyContext();
+  const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index])
+  const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index])
+  const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
+  debugger
+  const show =(to)=>{ return }
+  return { show, currentState, next, prev }
+}
+
+export function useStateOf(section) {
   const {state, dispatch, isSimple} = useHolyContext();
   const next = useCallback(()=>{dispatch({type: `advance ${section}`})}, [dispatch, section])
   const prev = useCallback(()=>{dispatch({type: `previous ${section}`})}, [dispatch, section])
