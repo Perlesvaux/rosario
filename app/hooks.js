@@ -244,9 +244,9 @@ const allReducer = (state, action) => {
       };
 
       // Indicates GLORIA reached
-      if (actual === 12) vibrate(PRESET.hard)
+      if (actual.complete === 12) vibrate(PRESET.hard)
         // Indicates ongoing AVEMARIA
-        else if (actual > 2 && actual <= 11) vibrate(PRESET.mid)
+        else if (actual.complete > 2 && actual.complete <= 11) vibrate(PRESET.mid)
           // Normal button press feedback
           else vibrate(PRESET.soft)
 
