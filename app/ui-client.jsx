@@ -5,13 +5,13 @@ import {useRef} from 'react'
 import StreakTracker from './StreakTracker.jsx'
 
 export function Prayer ({children, to, title}) {
-  const {next, currentState, show, header, isSimple} = usePrayerContext()
+  const {next, currentState, show, header} = usePrayerContext()
   const ref = useRef(null)
   const identifier = `${to}-${header}`
   //debugger
 
-  const pending = "bg-gray-600"
-  const clear = "bg-teal-600"
+  //const pending = "bg-gray-600"
+  //const clear = "bg-teal-600"
 
   let isShown = show(to)
 

@@ -32,143 +32,139 @@ const all = {
 
   complete: {
 
-  intro : {
-    senal: false,
-    invocacion: false,
-    contricion: false,
-    credo: false,
-    peticiones: false,
-    actual: 0,
-  },
-  mysteries: [
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      jaculatorias: false,
+    intro : {
+      senal: false,
+      invocacion: false,
+      contricion: false,
+      credo: false,
+      peticiones: false,
       actual: 0,
     },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      jaculatorias: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      jaculatorias: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      jaculatorias: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      jaculatorias: false,
-      actual: 0,
-    },
+    mysteries: [
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        jaculatorias: false,
+        actual: 0,
+      },
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        jaculatorias: false,
+        actual: 0,
+      },
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        jaculatorias: false,
+        actual: 0,
+      },
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        jaculatorias: false,
+        actual: 0,
+      },
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        jaculatorias: false,
+        actual: 0,
+      },
 
 
-  ],
-  outro:{
-    peticiones: false,
-    padrenuestro: false,
-    avemarias: false,
-    gloria: false,
-    salve: false,
-    actual: 0,
-  },
-  litany: {
-    inicio: false,
-    letanias: false,
-    oremos: false,
-    final: false,
-    actual: 0,
-  }
+    ],
+    outro:{
+      peticiones: false,
+      padrenuestro: false,
+      avemarias: false,
+      gloria: false,
+      salve: false,
+      actual: 0,
+    },
+    litany: {
+      inicio: false,
+      letanias: false,
+      oremos: false,
+      final: false,
+      actual: 0,
+    }
 
   },
 
 
   simple: {
 
-  intro : {
-    senal: false,
-    credo: false,
-    avemarias: false,
-    gloria: false,
-    actual: 0,
-  },
-  mysteries: [
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
+    intro : {
+      senal: false,
+      credo: false,
+      avemarias: false,
       gloria: false,
       actual: 0,
     },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
+    mysteries: [
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        actual: 0,
+      },
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        actual: 0,
+      },
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        actual: 0,
+      },
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        actual: 0,
+      },
+      {
+        misterio: false,
+        padrenuestro: false,
+        avemaria: false,
+        gloria: false,
+        actual: 0,
+      },
+
+
+    ],
+    outro:{
+      salve: false,
+      final: false,
       actual: 0,
     },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      actual: 0,
-    },
 
 
-  ],
-  outro:{
-    salve: false,
-    final: false,
-    actual: 0,
-  },
-
-
-}
-
-
-}
-
-
-const allReducer = (state, action) => {
-
-  const vibrate = (intensity) => {
-    if (navigator.vibrate) navigator.vibrate(intensity)
   }
+
+
+}
+
+
+
 
   const updateShallow = (state, updates, actual, section, part) => {
     return {
@@ -182,11 +178,21 @@ const allReducer = (state, action) => {
     return {
       [part]:{
         ...state[part],
-        [section]: state[part][section].map((mystery, i) => 
-          index === i ? { ...mystery, ...updates[part][actual[part]], actual:actual[part]  } : mystery
+        [section]: state[part][section].map((item, i) => 
+          index === i ? { ...item, ...updates[part][actual[part]], actual:actual[part]  } : item
         )
       }
     }
+  }
+
+
+
+
+
+const allReducer = (state, action) => {
+
+  const vibrate = (intensity) => {
+    if (navigator.vibrate) navigator.vibrate(intensity)
   }
 
   const commitEach =(state, updates, actual, section, index)=>{
@@ -438,185 +444,6 @@ export function useAll(){
 
 
 
-const simple = {
-  intro : {
-    senal: false,
-    credo: false,
-    avemarias: false,
-    gloria: false,
-    actual: 0,
-  },
-  mysteries: [
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      actual: 0,
-    },
-    {
-      misterio: false,
-      padrenuestro: false,
-      avemaria: false,
-      gloria: false,
-      actual: 0,
-    },
-
-
-  ],
-  outro:{
-    salve: false,
-    final: false,
-    actual: 0,
-  },
-
-}
-
-
-const simpleReducer = (state, action) => {
-
-  const vibrate = (intensity) => {
-    if (navigator.vibrate) navigator.vibrate(intensity)
-  }
-
-  const { type, index } = action;
-
-  switch (type) {
-
-    case "advance mystery": {
-      const actual = state.mysteries[index].actual < 14 ? state.mysteries[index].actual + 1 : 14;
-      const updates = {
-        1: { misterio: true },
-        2: { padrenuestro: true },
-        12: { avemaria: true },
-        13: { gloria: true },
-      };
-
-      // Indicates GLORIA reached
-      if (actual === 12) vibrate(PRESET.hard)
-        // Indicates ongoing AVEMARIA
-        else if (actual > 2 && actual <= 11) vibrate(PRESET.mid)
-          // Normal button press feedback
-          else vibrate(PRESET.soft)
-
-      return {
-        ...state,
-        mysteries: state.mysteries.map((mystery, i) => 
-          index === i ? { ...mystery, ...updates[actual], actual  } : mystery
-        )
-      };
-    }
-
-    case "previous mystery": {
-      const actual = state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0;
-      const updates = {
-        0: { misterio: false },
-        1: { padrenuestro: false },
-        11: { avemaria: false },
-        12: { gloria: false },
-      };
-      vibrate(PRESET.faint)
-      return {
-        ...state,
-        mysteries: state.mysteries.map((mystery, i) => 
-          index === i ? { ...mystery, ...updates[actual], actual  } : mystery
-        )
-      };
-    }
-
-    case "advance intro":{
-      const actual = state.intro.actual < 5 ? state.intro.actual + 1 : 5;
-      const updates = {
-        1: { senal: true },
-        2: { credo: true },
-        3: { avemarias: true },
-        4: { gloria: true },
-      };
-      vibrate(PRESET.soft)
-      return {
-        ...state,
-        intro: { ...state.intro, ...updates[actual], actual } 
-      };
-    }
-
-    case "previous intro": {
-      const actual = state.intro.actual > 0 ? state.intro.actual - 1 : 0;
-      const updates = {
-        0: { senal: false },
-        1: { credo: false },
-        2: { avemarias: false },
-        3: { gloria: false },
-      };
-      vibrate(PRESET.faint)
-      return {
-        ...state,
-        intro: { ...state.intro, ...updates[actual], actual } 
-      };
-    }
-
-    case "advance outro": {
-      const actual = state.outro.actual < 5 ? state.outro.actual + 1 : 5;
-      const updates = {
-        1: { salve: true },
-        2: { final: true },
-      };
-      vibrate(PRESET.soft)
-      return {
-        ...state,
-        outro: { ...state.outro, ...updates[actual], actual } 
-      };
-    }
-
-    case "previous outro": {
-      const actual = state.outro.actual > 0 ? state.outro.actual - 1 : 0;
-      const updates = {
-        0: { salve: false },
-        1: { final: false },
-      };
-      vibrate(PRESET.faint)
-      return {
-        ...state,
-        outro: { ...state.outro, ...updates[actual], actual } 
-      };
-    }
-
-
-    case "reset": {
-      return all
-    }
-
-
-    default:
-      return `undefined case: ${type}`
-  }
-}
-
-
-export function useSimple(){
-  const [simpleState, simpleDispatch] = useReducer( simpleReducer, simple )
-  return {simpleState, simpleDispatch}
-}
 
 
 
@@ -704,7 +531,6 @@ const routesReducer = (state, action) => {
 
 
 export function useRoute() {
-  const routes = misterio_del_dia()
   const [route, routeDispatch] = useReducer( routesReducer, null, misterio_del_dia )
   const ref = useRef()
   const [isReady, setIsReady] = useState(false)
@@ -840,10 +666,9 @@ export function useShowSimpleOutro(){
 
 export function useStateOfEach(section, index){
   const {state, dispatch, isSimple} = useHolyContext();
-  const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index])
-  const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index])
+  const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index, section])
+  const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index, section])
   const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
-  debugger
   const show =(to)=>{ return }
   return { show, currentState, next, prev }
 }

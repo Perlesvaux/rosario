@@ -4,14 +4,13 @@ import Intro, {SimpleIntro} from './Intro.jsx'
 import Outro, {SimpleOutro} from './Outro.jsx'
 import Litany from './Litany.jsx'
 import { Help, Menu } from './ui-client.jsx'
-import { HolyContext, useAll, useSimple, useRoute, useTitle, useToggleSimple
+import { HolyContext, useAll, useRoute, useTitle, useToggleSimple
 } from './hooks.js'
 import { Slide, Frame } from './ui.jsx'
 import introImg from '../public/intro.webp'
 
 export default function Carousel() {
   const { state, dispatch } = useAll()
-  const { simpleState, simpleDispatch } = useSimple()
 
   const {name, items, select, backToSquareOne, ref, isReady} = useRoute()
 
@@ -20,7 +19,7 @@ export default function Carousel() {
 
   useTitle(name)
 
-  return (<HolyContext.Provider value={{ state, dispatch, simpleState, simpleDispatch, select, backToSquareOne, isSimple, toggle }}>
+  return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne, isSimple, toggle }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
