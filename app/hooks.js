@@ -743,7 +743,24 @@ export function useStateOfEach(section, index){
   const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index, section])
   const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index, section])
   const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
-  const show =(to)=>{ return }
+  const show = useCallback((to)=> {
+
+
+    const isAvemaria = (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11)
+    const conditions = updates(state)
+    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
+    const mapping = {};
+
+    for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
+      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
+      mapping[innerKey] = parseInt(key); // Store the index as a number
+    }
+
+    return mapping[to] === currentState.actual || isAvemaria;
+  }
+
+
+    , [currentState, isSimple, section, state])
   return { show, currentState, next, prev }
 }
 
@@ -754,20 +771,21 @@ export function useStateOf(section) {
   const currentState = isSimple? state.simple[section] : state.complete[section];
 
 
-  const show =(to)=> {
-{
-  const conditions = updates(state)
-  // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-  const mapping = {};
-  
-  for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
-    const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-    mapping[innerKey] = parseInt(key); // Store the index as a number
-  }
-  
+  const show = useCallback((to)=> {
+    const conditions = updates(state)
+    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
+    const mapping = {};
+
+    for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
+      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
+      mapping[innerKey] = parseInt(key); // Store the index as a number
+    }
+
     return mapping[to] === currentState.actual;
-}
- }
+  }
+
+
+    , [currentState, isSimple, section, state])
 
   return { show, currentState, next, prev }
 }
