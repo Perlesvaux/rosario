@@ -3,13 +3,14 @@ import { memo } from 'react';
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from './prayers.js'
 import { Dialogus, Vox, Mysterium, Titulus, Slide, Frame } from './ui.jsx' 
 import { Prayer, Steps } from './ui-client.jsx'
-import { PrayerContext, useHolyContext,useStateOfEach } from './hooks.js'
+//import { useStateOfEach } from './hooks.js'
+import { useHolyContext, PrayerContext, useRosarioStateOfEach } from '../hooks'
 
 function Prayers({misterio, index}) {
 
   const {isSimple} = useHolyContext()
 
-  const {show, currentState, next, prev} = useStateOfEach("mysteries",index)
+  const {show, currentState, next, prev} = useRosarioStateOfEach("mysteries",index)
 
   return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple}}>
     <Slide>

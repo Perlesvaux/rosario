@@ -1,6 +1,6 @@
 'use client'
 import { useRef } from 'react'
-import { useHolyContext, usePrayerContext } from "./hooks.js"
+import { usePrayerContext } from "../hooks"
 import { Exit } from './ui.jsx'
 
 export default function Beads ({children}) {

@@ -2,14 +2,15 @@ import { memo } from 'react';
 import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
 import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame, Vox   } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
-import { useHolyContext, PrayerContext, useStateOf } from './hooks.js'
+//import {  useStateOf } from './hooks.js'
+import {useHolyContext, PrayerContext, useRosarioStateOf} from '../hooks'
 import outroImg from '../public/outro.webp'
 
 function Outro ({header}){
 
   const {isSimple} = useHolyContext()
 
-  const {show, currentState, next, prev} = useStateOf("outro")
+  const {show, currentState, next, prev} = useRosarioStateOf("outro")
 
   return ( <PrayerContext.Provider value={{header:`${header} - Oraciones Finales`, next, currentState, show, isSimple}}>
     <Slide> 

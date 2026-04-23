@@ -2,14 +2,15 @@ import { memo } from 'react';
 import { senal, invocacion, contricion, credo, fe, esperanza, caridad, gloria, aveMaria } from './prayers.js'
 import { Dialogus, Introductio, Slide, Frame, Titulus } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
-import { useHolyContext, PrayerContext, useStateOf } from './hooks.js'
+//import { useStateOf } from './hooks.js'
+import { useHolyContext, PrayerContext, useRosarioStateOf } from '../hooks'
 import introImg from '../public/intro.webp'
 
 function Intro ({header}) {
 
   const {isSimple} = useHolyContext()
 
-  const {show, currentState, next, prev} = useStateOf("intro")
+  const {show, currentState, next, prev} = useRosarioStateOf("intro")
 
   return ( <PrayerContext.Provider value={{header, next, currentState, show, isSimple}}>
     <Slide>

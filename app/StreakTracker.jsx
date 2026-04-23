@@ -1,4 +1,5 @@
-import { useHolyContext } from "./hooks.js"
+import { useHolyContext } from "../hooks"
+
 import { useEffect, useState, useCallback } from 'react'
 
 const initial = { last: null, count: 0 }

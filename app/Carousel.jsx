@@ -4,13 +4,14 @@ import Intro, {SimpleIntro} from './Intro.jsx'
 import Outro, {SimpleOutro} from './Outro.jsx'
 import Litany from './Litany.jsx'
 import { Help, Menu } from './ui-client.jsx'
-import { HolyContext, useAll, useRoute, useTitle, useToggleSimple
+import { useRoute, 
 } from './hooks.js'
+import {HolyContext, useRosario, useTitle, useToggleSimple  } from '../hooks'
 import { Slide, Frame } from './ui.jsx'
 import introImg from '../public/intro.webp'
 
 export default function Carousel() {
-  const { state, dispatch } = useAll()
+  const { state, dispatch } = useRosario()
 
   const {name, items, select, backToSquareOne, ref, isReady} = useRoute()
 
