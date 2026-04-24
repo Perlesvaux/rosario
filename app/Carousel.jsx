@@ -1,26 +1,20 @@
 'use client'
-import Prayers, {SimplePrayers} from './Prayers.jsx'
-import Intro, {SimpleIntro} from './Intro.jsx'
-import Outro, {SimpleOutro} from './Outro.jsx'
-import Litany from './Litany.jsx'
-import { Help, Menu } from './ui-client.jsx'
-//import { useRoute, 
-//} from './hooks.js'
+import Rezo from './Rezo.jsx'
+import Rosario from './Rosario.jsx'
+import { Menu } from './ui-client.jsx'
 import {HolyContext, useRosario, useTitle, useToggleSimple, useRoute  } from '../hooks'
-import { Slide, Frame } from './ui.jsx'
-import introImg from '../public/intro.webp'
 
 export default function Carousel() {
-  const { state, dispatch } = useRosario()
+  const { state, dispatch } = useRosario() //HYLE
 
-  const {name, items, select, backToSquareOne, ref, isReady} = useRoute()
+  const {name, items, select, backToSquareOne, ref, isReady} = useRoute() //MORPHE
 
   const {isSimple, toggle} = useToggleSimple()
 
 
   useTitle(name)
 
-  return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne, isSimple, toggle }}>
+  return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne, name, items, isReady, isSimple, toggle }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
@@ -28,39 +22,13 @@ export default function Carousel() {
 
           <div ref={ref} className="w-full h-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth">
 
-            {
-              isReady
-                ?
-                <>
-                  <>
-                    <Intro header={name} />
-                    {
+            <Rezo>
 
-                    //{items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
-                    //<Outro header={name} />
-                    //<Litany header={name}/>
-                    }
-                    {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
-                    <Outro header={name} />
-                    <Litany header={name}/>
-                  </>
-                </>
-                :
-                <>
-                  <Slide>
-                    <Frame
-                      src={introImg}
-                      alt="Bienvenido!"
-                    />
-                  </Slide>
-                  <div className="w-screen text-center"> Espere ... </div>
-                </>
+              <Rosario />
 
 
 
-            }
-
-
+            </Rezo>
 
           </div>
 
