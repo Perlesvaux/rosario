@@ -21,6 +21,7 @@ jaculatoria_1, jaculatoria_2, padreNuestro, salve
 } from './morphe/oracionesComunes'
 
 export { luminosos, gozosos, gloriosos, dolorosos } from './morphe/rosario.js'
+export { useRoute } from './morphe/useRoute'
 
 
 

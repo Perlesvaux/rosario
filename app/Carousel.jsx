@@ -4,9 +4,9 @@ import Intro, {SimpleIntro} from './Intro.jsx'
 import Outro, {SimpleOutro} from './Outro.jsx'
 import Litany from './Litany.jsx'
 import { Help, Menu } from './ui-client.jsx'
-import { useRoute, 
-} from './hooks.js'
-import {HolyContext, useRosario, useTitle, useToggleSimple  } from '../hooks'
+//import { useRoute, 
+//} from './hooks.js'
+import {HolyContext, useRosario, useTitle, useToggleSimple, useRoute  } from '../hooks'
 import { Slide, Frame } from './ui.jsx'
 import introImg from '../public/intro.webp'
 

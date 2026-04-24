@@ -1,21 +1,12 @@
-import { createContext, useContext, 
+import {
   useReducer,
   useRef,
   useEffect,
-  useCallback,
   useMemo,
   useState,
 } from 'react'
 
-//import {requestWakeLock, releaseWakeLock} from './wakelock.js'
-
-//import {useHolyContext, usePrayerContext} from '../hooks'
-
-//import { misterio_del_dia } from './prayers.js'
-
-//import { luminosos, gozosos, gloriosos, dolorosos } from './misterios.js'
-
-import { luminosos, gozosos, gloriosos, dolorosos } from '../hooks'
+import { luminosos, gozosos, gloriosos, dolorosos } from './rosario.js'
 
 
 export const misterio_del_dia = () => {
@@ -32,6 +23,7 @@ export const misterio_del_dia = () => {
 
 const routesReducer = (state, action) => {
 
+  // Add here new routes, such as 'Coronilla a la Divina Misericordia'
   const { type } = action;
 
   switch (type) {
