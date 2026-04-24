@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from './prayers.js'
+import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from '../hooks'
 import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame, Vox   } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
 //import {  useStateOf } from './hooks.js'

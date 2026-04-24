@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { senal, invocacion, contricion, credo, fe, esperanza, caridad, gloria, aveMaria } from './prayers.js'
+import { senal, invocacion, contricion, credo, fe, esperanza, caridad, gloria, aveMaria } from '../hooks'
 import { Dialogus, Introductio, Slide, Frame, Titulus } from './ui.jsx'
 import { Prayer, Steps } from './ui-client.jsx'
 //import { useStateOf } from './hooks.js'

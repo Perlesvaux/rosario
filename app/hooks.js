@@ -13,8 +13,9 @@ import { createContext, useContext,
 
 //import { misterio_del_dia } from './prayers.js'
 
-import { luminosos, gozosos, gloriosos, dolorosos } from './misterios.js'
+//import { luminosos, gozosos, gloriosos, dolorosos } from './misterios.js'
 
+import { luminosos, gozosos, gloriosos, dolorosos } from '../hooks'
 
 
 export const misterio_del_dia = () => {
