@@ -4,7 +4,7 @@ export {
   useRosario,
   useRosarioStateOf,
   useRosarioStateOfEach,
-} from './prayers/rosario'
+} from './hyle/rosario'
 
 export { useWakeLock } from './wakelock/useWakeLock'
 export { useRegisterSW } from './useRegisterSW'
