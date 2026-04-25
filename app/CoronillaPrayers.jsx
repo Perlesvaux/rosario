@@ -29,7 +29,7 @@ function CoronillaPrayers({misterio, index}) {
           />
         </Prayer>
 
-        <Beads>
+        <Beads to="dolorosapasion" titulo="Dolorosa Pasión">
           <Dialogus
             titulo="Por su dolorosa pasión... (x10)"
             lider={ dolorosaPasion.l } 

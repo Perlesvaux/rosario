@@ -1,5 +1,9 @@
 export { useHolyContext, HolyContext } from './context/useHolyContext'
 export { usePrayerContext, PrayerContext } from './context/usePrayerContext'
+export { useBeadContext, BeadContext } from './context/useBeadContext'
+
+export {LIMIT} from './hyle/utils'
+
 export {
   useRosario,
   useRosarioStateOf,

@@ -1,24 +1,24 @@
 'use client'
 import { useRef } from 'react'
-import { usePrayerContext } from "../hooks"
+import { usePrayerContext, useBeadContext, BeadContext, LIMIT } from "../hooks"
 import { Exit } from './ui.jsx'
 
-export default function Beads ({children}) {
+export default function Beads ({children, to, titulo}) {
   const {next, currentState, show, header} = usePrayerContext()
   const ref = useRef(null)
-  const identifier = `avemaria-${header}`
+  const identifier = `${titulo}-${header}`
 
-  const pending = "bg-gray-600"
-  const clear = "bg-teal-600"
+  let isShown = show(to) 
+  // to: "avemaria" or "dolorosapasion"
+  // titulo: "Ave Maria" or "Por su Dolorosa Pasion..."
 
-  let isShown = show("avemaria")
 
   const setAndCloseRosary =() => {
     next()
-    if (currentState.actual == 11) ref.current.hidePopover();
+    if (currentState.actual == LIMIT[to]) ref.current.hidePopover();
   }
 
-  return <>
+  return <BeadContext.Provider value={{ to }}>
 
     <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
       <article className="flex flex-col  gap-4">
@@ -28,24 +28,26 @@ export default function Beads ({children}) {
       </article>
     </div>
 
-    <button popoverTarget={identifier} className={` ${currentState.avemaria? 'text-black/90' : 'text-gray-500/60'}  px-4   text-black  text-base text-left  underline underline-offset-2  rounded-r-lg hover:opacity-75 focus:outline-none   ${isShown? " bg-gray-800/90 text-white/90 ": "" } `}>
-        {currentState["avemaria"]
+    <button popoverTarget={identifier} className={` ${currentState[to]? 'text-black/90' : 'text-gray-500/60'}  px-4   text-black  text-base text-left  underline underline-offset-2  rounded-r-lg hover:opacity-75 focus:outline-none   ${isShown? " bg-gray-800/90 text-white/90 ": "" } `}>
+        {currentState[to]
         ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
         : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity={isShown?".77":".33"} fill={isShown?"#ffffff" : "#434343"}><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
-      Ave Maria {isShown && <>→</>} <BeadCount count={currentState.actual}/>
+      { titulo } {isShown && <>→</>} <BeadCount count={currentState.actual}/>
     </button>
 
-  </>
+  </BeadContext.Provider>
 
 }
 
 
 function Bead ({onClick}){
-  //const { state } = useHolyContext()
+  const { to } = useBeadContext()
   const { currentState } = usePrayerContext()
+
+
   return <button 
     onClick={onClick}
-    className={`${currentState.actual>=11? 'bg-rose-700 ':'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}
+    className={`${currentState.actual>=LIMIT[to]? 'bg-rose-700 ':'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}
     > 
      <BeadCount count={currentState.actual} />
   </button>
@@ -55,9 +57,20 @@ function Bead ({onClick}){
 
 
   const BeadCount = ({count}) => {
-    if (count-2 < 0) return  
-    if (count >= 12) return
-    return <>  <strong className="font-bold">{ count-1 }</strong>/<span className="text-xs">10</span></>
+    const { to } = useBeadContext()
+
+    const decrease = {
+      dolorosapasion:0,
+      avemaria:1,
+    }
+
+
+    if (to==="dolorosapasion" && count-(LIMIT.dolorosapasion-9) < 0) return  
+    if (to==="dolorosapasion" && count >= (LIMIT.dolorosapasion+1)) return
+
+    if (to==="avemaria" && count-(LIMIT.avemaria-9) < 0) return  
+    if (to==="avemaria" && count >= (LIMIT.avemaria+1) ) return
+    return <>  <strong className="font-bold">{ count-decrease[to] }</strong>/<span className="text-xs">10</span></>
   }
 
 

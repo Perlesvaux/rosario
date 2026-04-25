@@ -255,13 +255,14 @@ export function useCoronillaMisericordia(){
 
 export function useCoronillaMisericordiaStateOfEach(section, index){
   const {coronillaMisericordiaState, coronillaMisericordiaDispatch} = useHolyContext();
-  const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance ${section}`, index: index }) },  [coronillaMisericordiaState, index, section])
-  const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous ${section}`, index: index }) }, [coronillaMisericordiaState, index, section])
+  const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance ${section}`, index: index }) },  [coronillaMisericordiaDispatch, index, section])
+  const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous ${section}`, index: index }) }, [coronillaMisericordiaDispatch, index, section])
   const currentState = coronillaMisericordiaState[section][index] 
   const show = useCallback((to)=> {
 
-    const isDolorosaPasion = (to === "dolorosapasion" && currentState.actual > 1 && currentState.actual <= 11)
+    const isDolorosaPasion = (to === "dolorosapasion" && currentState.actual > 0 && currentState.actual <= 10)
     const conditions = updates(coronillaMisericordiaState)
+    
     // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
     const mapping = {};
 

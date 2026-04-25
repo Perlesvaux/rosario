@@ -43,7 +43,7 @@ function Prayers({misterio, index}) {
           />
         </Prayer>
 
-        <Beads>
+        <Beads to="avemaria" titulo="Ave María">
           <Dialogus
             titulo="Ave María (x10)"
             lider={ aveMaria.l } 
