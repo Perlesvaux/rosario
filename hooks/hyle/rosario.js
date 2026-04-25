@@ -464,7 +464,7 @@ const rosarioReducer = (state, action) => {
     }
 
     case "reset": {
-      return all
+      return rosario
     }
 
     default:

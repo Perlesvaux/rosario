@@ -7,6 +7,7 @@ import {
 } from 'react'
 
 import { luminosos, gozosos, gloriosos, dolorosos } from './rosario.js'
+import { coronillaMisericordia } from './coronillaMisericordia.js'
 
 
 export const misterio_del_dia = () => {
@@ -42,6 +43,9 @@ const routesReducer = (state, action) => {
 
     case "luminosos":
       return luminosos
+
+    case "misericordia":
+      return coronillaMisericordia
 
     default:
       return dolorosos

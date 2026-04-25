@@ -3,9 +3,8 @@ import Intro from './Intro.jsx'
 import Outro from './Outro.jsx'
 import Litany from './Litany.jsx'
 
-//name==="hoy" || name==="gozosos" || name==="gloriosos" || name==="dolorosos" || name==="luminosos"
 
-import {HolyContext, useRosario, useTitle, useToggleSimple, useRoute, useHolyContext  } from '../hooks'
+import { useHolyContext } from '../hooks'
 
 export default function Rosario (){
   const {name, items} = useHolyContext()

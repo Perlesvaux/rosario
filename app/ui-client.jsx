@@ -165,12 +165,11 @@ export function Menu(){
     refMenu.current.hidePopover();
   }
 
-  const {select, dispatch, simpleDispatch, backToSquareOne} = useHolyContext()
+  const {select, dispatch, backToSquareOne} = useHolyContext()
 
   const selectRoute = (e) => {
     select(e)
     dispatch({type:"reset"})
-    simpleDispatch({type:"reset"})
     closeMenu()
     backToSquareOne()
 
@@ -232,7 +231,8 @@ export function Menu(){
                 { route:"gozosos", title: "Gozosos" },
                 { route:"gloriosos", title: "Gloriosos" },
                 { route:"dolorosos", title: "Dolorosos" },
-                { route:"luminosos", title: "Luminosos" }
+                { route:"luminosos", title: "Luminosos" },
+                { route:"misericordia", title: "Coronilla de la Misericordia" }
               ].map(({route, title}, indx)=>
                 <button key={indx} 
                   name={route}

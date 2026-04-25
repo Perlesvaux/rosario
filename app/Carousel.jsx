@@ -2,10 +2,12 @@
 import Rezo from './Rezo.jsx'
 import Rosario from './Rosario.jsx'
 import { Menu } from './ui-client.jsx'
-import {HolyContext, useRosario, useTitle, useToggleSimple, useRoute  } from '../hooks'
+import {HolyContext, useRosario, useTitle, useToggleSimple, useRoute, useCoronillaMisericordia  } from '../hooks'
+import CoronillaMisericordia from './CoronillaMisericordia.jsx'
 
 export default function Carousel() {
   const { state, dispatch } = useRosario() //HYLE
+  const { coronillaMisericordiaState, coronillaMisericordiaDispatch } = useCoronillaMisericordia() //HYLE
 
   const {name, items, select, backToSquareOne, ref, isReady} = useRoute() //MORPHE
 
@@ -14,7 +16,7 @@ export default function Carousel() {
 
   useTitle(name)
 
-  return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne, name, items, isReady, isSimple, toggle }}>
+  return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne, name, items, isReady, isSimple, toggle, coronillaMisericordiaState, coronillaMisericordiaDispatch }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
@@ -25,6 +27,7 @@ export default function Carousel() {
             <Rezo>
 
               <Rosario />
+              <CoronillaMisericordia />
 
 
 

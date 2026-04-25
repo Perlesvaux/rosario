@@ -145,8 +145,14 @@ export const jaculatorias_finales = [
 
 ]
 
-
-
+export const faustina =   "Expiraste, Jesús, pero la fuente de vida brotó para las almas y el mar de misericordia se abrió para el mundo entero. Oh fuente de vida, insondable Misericordia Divina, abarca al mundo entero y derrámate sobre nosotros (Diario, 1319). Oh Sangre y Agua que brotaste del Corazón de Jesús, como una Fuente de Misericordia para nosotros, en Ti confío (Diario, 84). Primero se reza una vez el Padre Nuestro, el Ave María y el Credo de los Apóstoles."
+export const padreEterno = "Padre Eterno, Te ofrezco el Cuerpo y la Sangre, el Alma y la Divinidad de Tu Amadísimo Hijo, nuestro Señor Jesucristo, como propiciación de nuestros pecados y los del mundo entero (476)."
+export const dolorosaPasion = {
+  "l":"Por Su dolorosa Pasión",
+  "r":"ten misericordia de nosotros y del mundo entero."
+}
+export const doxologiaFinal = "Santo Dios, Santo Fuerte, Santo Inmortal, ten piedad de nosotros y del mundo entero."
+export const oracionFinal = "Oh Dios Eterno, en quien la misericordia es infinita y el tesoro de compasión inagotable, vuelve a nosotros Tu mirada bondadosa y aumenta Tu misericordia en nosotros, para que en momentos difíciles no nos desesperemos ni nos desalentamos, sino que, con gran confianza, nos sometamos a Tu santa voluntad, que es el Amor y la Misericordia Mismos (950)."
 
 
 
