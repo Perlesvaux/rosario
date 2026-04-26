@@ -57,7 +57,7 @@ export const gozosos = {
   {
     encabezado: "GOZOSO IV - La Presentación",   
     titulo: "EN EL CUARTO MISTERIO GOZOSO:  CONTEMPLAMOS LA PRESENTACIÓN",
-    imagen: "/gozosos4.jpg",
+    imagen:gozosos4,
     fruto: "¡Por la virtud de la obediencia!",
     leyenda: "Cuando se cumplieron los días de la purificación, según la Ley de Moisés, llevaron a Jesús a Jerusalén. Está escrito: “Todo varón primogénito será consagrado al Señor”. (Lucas 2: 22-35)",
     l: "¡Palabra del Señor,",
@@ -66,7 +66,7 @@ export const gozosos = {
   {
     encabezado: "GOZOSO V - El Niño Perdido y Hallado en el Templo",   
     titulo: "EN EL QUINTO MISTERIO GOZOSO:  CONTEMPLAMOS EL NIÑO PERDIDO Y HALLADO EN EL TEMPLO",
-    imagen: "/gozosos5.jpg",
+    imagen:gozosos5,
     fruto: "¡Por la virtud de la piedad!",
     leyenda: "A los tres días lo encontraron en el templo, sentado en medio de los Maestros, oyéndolos y haciéndoles preguntas. Todos los que escuchaban a Jesús se  asombraban de su inteligencia y de sus respuestas. (Lucas 2: 41-52)",
     l: "¡Palabra del Señor,",
