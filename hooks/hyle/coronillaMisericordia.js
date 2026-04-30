@@ -4,7 +4,7 @@ import {
   useMemo,
 } from 'react'
 import { useHolyContext } from '../context/useHolyContext'
-import { PRESET, vibrate } from './utils'
+import { PRESET, LIMIT, vibrate } from './utils'
 import { dolorosaPasion } from '../morphe/oracionesComunes'
 
   const updateShallow = (state, updates, actual, section) => {
@@ -214,9 +214,9 @@ const coronillaMisericordiaReducer = (state, action) => {
     case "advance mysteries": {
       const actual = mysteries.advance.actual(index)
       // Indicates GLORIA reached
-      if (actual === 12) vibrate(PRESET.hard)
+      if (actual === LIMIT.dolorosapasion+1) vibrate(PRESET.hard)
         // Indicates ongoing AVEMARIA
-        else if (actual > 2 && actual <= 11) vibrate(PRESET.mid)
+        else if (actual > 2 && actual <= 10) vibrate(PRESET.mid)
           // Normal button press feedback
           else vibrate(PRESET.soft)
       return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
