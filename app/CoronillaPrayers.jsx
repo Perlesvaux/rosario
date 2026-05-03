@@ -23,7 +23,7 @@ function CoronillaPrayers({misterio, index}) {
 
         <Prayer title="Padre Eterno ..." to="padreeterno" > 
           <Dialogus
-            titulo="*"
+            titulo="Padre Eterno"
             lider={ padreEterno.l } 
             respuesta={ padreEterno.r } 
           />

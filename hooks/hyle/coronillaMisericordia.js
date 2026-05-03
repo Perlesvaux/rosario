@@ -1,11 +1,9 @@
 import {  
   useReducer,
   useCallback,
-  useMemo,
 } from 'react'
 import { useHolyContext } from '../context/useHolyContext'
 import { PRESET, LIMIT, vibrate } from './utils'
-import { dolorosaPasion } from '../morphe/oracionesComunes'
 
   const updateShallow = (state, updates, actual, section) => {
     return {
@@ -183,7 +181,7 @@ const coronillaMisericordiaReducer = (state, action) => {
 
   const { type, index } = action;
 
-  const { intro, outro, litany, mysteries } = updates(state)
+  const { intro, outro, mysteries } = updates(state)
 
   switch (type) {
 
