@@ -1,11 +1,12 @@
 import { memo } from 'react';
-import { senal, credo, aveMaria, padreNuestro, faustina } from '../hooks'
-import { Dialogus, Introductio, Slide, Frame } from './ui.jsx'
-import { Prayer, Steps } from './ui-client.jsx'
+import { senal, credo, aveMaria, padreNuestro, faustina } from '../../oracionesComunes'
+import { Dialogus, Introductio, Slide, Frame,  Prayer, Steps  } from '../../../components'
 import { useHolyContext, PrayerContext, 
-  useCoronillaMisericordiaStateOf 
-} from '../hooks'
-import introImg from '../public/intro.webp'
+} from '../../../hooks'
+
+import { useCoronillaMisericordiaStateOf } from '../morphe/state'
+
+import introImg from '../../../public/intro.webp'
 
 function CoronillaIntro ({header}) {
 

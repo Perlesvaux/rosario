@@ -1,6 +1,7 @@
 'use client'
 import { useRef } from 'react'
-import { usePrayerContext, useBeadContext, BeadContext, LIMIT } from "../hooks"
+import { usePrayerContext, useBeadContext, BeadContext } from "../hooks"
+import { LIMIT } from '../prayers/utils'
 import { Exit } from './ui.jsx'
 
 export default function Beads ({children, to, titulo}) {

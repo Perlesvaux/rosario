@@ -1,10 +1,10 @@
 import { memo } from 'react';
-import { senal, invocacion, contricion, credo, fe, esperanza, caridad, gloria, aveMaria } from '../hooks'
-import { Dialogus, Introductio, Slide, Frame, Titulus } from './ui.jsx'
-import { Prayer, Steps } from './ui-client.jsx'
-//import { useStateOf } from './hooks.js'
-import { useHolyContext, PrayerContext, useRosarioStateOf } from '../hooks'
-import introImg from '../public/intro.webp'
+import { senal, invocacion, contricion, credo, fe, esperanza, caridad, gloria, aveMaria } from '../../oracionesComunes'
+import { Dialogus, Introductio, Slide, Frame,  Prayer, Steps  } from '../../../components'
+import { useHolyContext, PrayerContext } from '../../../hooks'
+import { useRosarioStateOf } from '../morphe/state'
+
+import introImg from '../../../public/intro.webp'
 
 function Intro ({header}) {
 

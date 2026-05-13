@@ -1,10 +1,10 @@
-import Prayers from './Prayers.jsx'
-import Intro from './Intro.jsx'
-import Outro from './Outro.jsx'
-import Litany from './Litany.jsx'
+import Prayers from './hyle/Prayers.jsx'
+import Intro from './hyle/Intro.jsx'
+import Outro from './hyle/Outro.jsx'
+import Litany from './hyle/Litany.jsx'
 
 
-import { useHolyContext } from '../hooks'
+import { useHolyContext } from '../../hooks'
 
 export default function Rosario (){
   const {name, items} = useHolyContext()

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Prayers from './Prayers.jsx'
+//import Prayers from './Prayers.jsx'
 
 const css_lead =     "bg-teal-50 border-l-4 border-teal-400 px-4 py-2 text-teal-800 text-sm md:text-base"
 const css_response = "bg-red-50 border-l-4 border-red-400 px-4 py-2 text-red-900 text-sm md:text-base"
@@ -75,18 +75,18 @@ export function Dictum ({lider, respuesta}){
   </article>
 }
 
-export function Mysterium ({ misterio, index }){
-  //const bgColors = ['bg-pink-50', 'bg-pink-100', 'bg-rose-50', 'bg-rose-100', 'bg-rose-200']
-  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
-  // key prop trick to avoid useEffect used here! =D
-//h-[95vh]
-  return <section className={ `${bgColors[index]}  px-4 py-2 text-rose-800` }>
-
-
-
-    <Prayers misterio={misterio} index={index} key={index}  />
-  </section>
-}
+//export function Mysterium ({ misterio, index }){
+//  //const bgColors = ['bg-pink-50', 'bg-pink-100', 'bg-rose-50', 'bg-rose-100', 'bg-rose-200']
+//  const bgColors = ['bg-violet-100', 'bg-purple-100', 'bg-fuchsia-100', 'bg-pink-100', 'bg-rose-100']
+//  // key prop trick to avoid useEffect used here! =D
+////h-[95vh]
+//  return <section className={ `${bgColors[index]}  px-4 py-2 text-rose-800` }>
+//
+//
+//
+//    <Prayers misterio={misterio} index={index} key={index}  />
+//  </section>
+//}
       //<div className="font-bold text-rose-700 text-center text-sm md:text-lg">{titulo}</div>
 
 export function Titulus ({children}){
@@ -239,26 +239,26 @@ NH1O/VCE/wfNGh8DwcuyWAAAAABJRU5ErkJggg=="
   </section>
 }
 
-export function Steps({children, header, up, down, left, right}) {
-  return <section className="col-span-3 grid grid-cols-3 gap-4">
-
-    <div className="col-span-3 grid grid-cols-7 text-xs text-white/70 text-center bg-gray-800">
-      <Left onClick={left}/>
-      <div className="col-span-5 h-10 flex items-center justify-center">{header} </div>
-      <Right onClick={right}/>
-    </div>
-
-    <div className="col-span-2 grid gap-2 ">
-      {children}
-    </div>
-
-    <div className="col-span-1 grid ">
-      <Up onClick={up} />
-      <Down onClick={down} />
-    </div>
-
-  </section>
-
-}
+//export function Steps({children, header, up, down, left, right}) {
+//  return <section className="col-span-3 grid grid-cols-3 gap-4">
+//
+//    <div className="col-span-3 grid grid-cols-7 text-xs text-white/70 text-center bg-gray-800">
+//      <Left onClick={left}/>
+//      <div className="col-span-5 h-10 flex items-center justify-center">{header} </div>
+//      <Right onClick={right}/>
+//    </div>
+//
+//    <div className="col-span-2 grid gap-2 ">
+//      {children}
+//    </div>
+//
+//    <div className="col-span-1 grid ">
+//      <Up onClick={up} />
+//      <Down onClick={down} />
+//    </div>
+//
+//  </section>
+//
+//}
 
 

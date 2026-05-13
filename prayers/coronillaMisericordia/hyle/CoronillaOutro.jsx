@@ -1,12 +1,11 @@
 import { memo } from 'react';
-import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales, doxologiaFinal, oracionFinal } from '../hooks'
-import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame, Vox   } from './ui.jsx'
-import { Prayer, Steps } from './ui-client.jsx'
-import {useHolyContext, PrayerContext, useCoronillaMisericordiaStateOf} from '../hooks'
-import outroImg from '../public/outro.webp'
+import { doxologiaFinal, oracionFinal } from '../../oracionesComunes'
+import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame, Vox , Prayer, Steps   } from '../../../components'
+import {useHolyContext, PrayerContext } from '../../../hooks'
+import outroImg from '../../../public/outro.webp'
+import { useCoronillaMisericordiaStateOf } from '../morphe/state'
 
 function CoronillaOutro ({header}){
-
 
   const {show, currentState, next, prev} = useCoronillaMisericordiaStateOf("outro")
 

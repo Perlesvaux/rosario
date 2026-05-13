@@ -3,8 +3,8 @@ import {
   useCallback,
   useMemo,
 } from 'react'
-import { useHolyContext } from '../context/useHolyContext'
-import { PRESET, vibrate } from './utils'
+import { useHolyContext } from '../../../hooks'
+import { PRESET, vibrate } from '../../utils'
 
   const updateShallow = (state, updates, actual, section, part) => {
     return {

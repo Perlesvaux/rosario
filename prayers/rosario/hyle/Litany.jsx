@@ -1,10 +1,12 @@
 import { memo } from 'react';
-import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from '../hooks'
-import { Dialogus, Vox, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame   } from './ui.jsx'
-import { Prayer, Steps } from './ui-client.jsx'
-//import { useStateOf } from './hooks.js'
-import { useHolyContext, PrayerContext, useRosarioStateOf } from '../hooks'
-import litanyImg from '../public/litany.webp'
+import { letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales} from '../../oracionesComunes'
+import { Dialogus, Vox, Introductio, Dictum, Slide, Frame, 
+Prayer, Steps 
+} from '../../../components'
+
+import { useHolyContext, PrayerContext } from '../../../hooks'
+import { useRosarioStateOf } from '../morphe/state'
+import litanyImg from '../../../public/litany.webp'
 
 function Litany ({header}){
 

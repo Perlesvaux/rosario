@@ -1,9 +1,8 @@
-import Beads from './Beads.jsx'
 import { memo } from 'react';
-import { padreEterno, dolorosaPasion } from '../hooks'
-import { Dialogus, Vox, Mysterium, Titulus, Slide, Frame } from './ui.jsx' 
-import { Prayer, Steps } from './ui-client.jsx'
-import { useHolyContext, PrayerContext, useCoronillaMisericordiaStateOfEach } from '../hooks'
+import { padreEterno, dolorosaPasion } from '../../oracionesComunes'
+import { Dialogus, Slide, Frame,  Prayer, Steps, Beads  } from '../../../components' 
+import { useHolyContext, PrayerContext } from '../../../hooks'
+import { useCoronillaMisericordiaStateOfEach } from '../morphe/state'
 
 function CoronillaPrayers({misterio, index}) {
 

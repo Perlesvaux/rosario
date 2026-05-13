@@ -1,10 +1,8 @@
-import Beads from './Beads.jsx'
 import { memo } from 'react';
-import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from '../hooks'
-import { Dialogus, Vox, Mysterium, Titulus, Slide, Frame } from './ui.jsx' 
-import { Prayer, Steps } from './ui-client.jsx'
-//import { useStateOfEach } from './hooks.js'
-import { useHolyContext, PrayerContext, useRosarioStateOfEach } from '../hooks'
+import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from  '../../oracionesComunes'
+import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '../../../components' 
+import { useHolyContext, PrayerContext } from '../../../hooks'
+import { useRosarioStateOfEach } from '../morphe/state'
 
 function Prayers({misterio, index}) {
 

@@ -1,9 +1,10 @@
 'use client'
-import Rezo from './Rezo.jsx'
-import Rosario from './Rosario.jsx'
-import { Menu } from './ui-client.jsx'
-import {HolyContext, useRosario, useTitle, useToggleSimple, useRoute, useCoronillaMisericordia  } from '../hooks'
-import CoronillaMisericordia from './CoronillaMisericordia.jsx'
+import {Rezo,
+ Menu } from '../components'
+import { Rosario, CoronillaMisericordia  } from '../prayers'
+ 
+import {HolyContext, useTitle, useToggleSimple, useRoute} from '../hooks'
+import {useRosario, useCoronillaMisericordia} from '../prayers'
 
 export default function Carousel() {
   const { state, dispatch } = useRosario() //HYLE

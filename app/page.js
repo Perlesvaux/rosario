@@ -1,4 +1,4 @@
-import Carousel from './Carousel.jsx'
+import { Carousel } from '../components'
 
 export default function Home() {
   return <Carousel />

@@ -1,3 +1,4 @@
+"use client"
 import { useHolyContext } from "../hooks"
 
 import { useEffect, useState, useCallback } from 'react'

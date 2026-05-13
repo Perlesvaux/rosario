@@ -6,8 +6,11 @@ import {
   useState,
 } from 'react'
 
-import { luminosos, gozosos, gloriosos, dolorosos } from './rosario.js'
-import { coronillaMisericordia } from './coronillaMisericordia.js'
+import { luminosos, gozosos, gloriosos, dolorosos,
+coronillaMisericordia
+
+} from '../prayers'
+//import {  } from './prayers/coronillaMisericordia/morphe/schema.js'
 
 
 export const misterio_del_dia = () => {

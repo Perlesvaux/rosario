@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 //import { misterio_del_dia } from './prayers.js'
-import RegisterWorker from './RegisterWorker.jsx'
+import {RegisterWorker} from '../components'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

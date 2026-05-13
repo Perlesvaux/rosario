@@ -2,8 +2,8 @@ import {
   useReducer,
   useCallback,
 } from 'react'
-import { useHolyContext } from '../context/useHolyContext'
-import { PRESET, LIMIT, vibrate } from './utils'
+import { useHolyContext } from '../../../hooks'
+import { PRESET, LIMIT, vibrate } from '../../utils'
 
   const updateShallow = (state, updates, actual, section) => {
     return {
