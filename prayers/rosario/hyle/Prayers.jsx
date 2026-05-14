@@ -23,18 +23,48 @@ function Prayers({misterio, index}) {
 
       <Steps>
 
-        <Misterio misterio={misterio}/>
 
 
-        <PadreNuestro />
 
-        <DecenaAveMaria />
+      {
+        Object.keys(currentState)
+          .filter((eachKey)=> eachKey != "actual")
+          .map( (each, indx)=>
+          {
 
-        <Gloria />
+            switch (each) {
+              case "misterio":
+                return <Misterio misterio={misterio} key={indx}/>
 
-        { !isSimple &&
-          <Jaculatorias />
-        }
+              case "padrenuestro":
+                return  <PadreNuestro key={indx} />
+
+              case "avemaria":
+                return  <DecenaAveMaria key={indx} />
+
+              case "gloria":
+                return <Gloria key={indx} />
+
+              case "jaculatorias":
+                  if (isSimple) return
+                return <Jaculatorias key={indx} />
+
+              default:
+                return `undefined case: ${each}`
+            }
+
+            }
+        )
+
+
+
+
+      }
+
+
+
+
+
 
       </Steps>
 
