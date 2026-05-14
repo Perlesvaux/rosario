@@ -1,5 +1,5 @@
 import { usePrayerContext } from '@/hooks'
-import { Contricion, Invocacion, Peticiones, FeEsperanzaCaridad, SenalDeLaCruz, Misterio, DecenaAveMaria, Jaculatorias, Gloria, PadreNuestro } from '.'
+import { Contricion, Invocacion, Peticiones, FeEsperanzaCaridad, SenalDeLaCruz, Misterio, DecenaAveMaria, Jaculatorias, Gloria, PadreNuestro, Salve, Final } from '.'
 import { Credo } from './Credo'
 
 
@@ -20,20 +20,16 @@ export function RenderPrayer(){
             return <SenalDeLaCruz key={indx} />
 
             case "invocacion":
-              if (isSimple) return
               return <Invocacion key={indx} />
 
             case "contricion":
-              if (isSimple) return
             return <Contricion key={indx} />
             case "credo":
             return <Credo key={indx}/>
             case "peticiones":
-              if (isSimple) return 
             return <Peticiones key={indx} />
 
             case "avemarias":
-            if (!isSimple) return 
             return <FeEsperanzaCaridad key={indx}/>
             
 
@@ -52,11 +48,24 @@ export function RenderPrayer(){
               return <Gloria key={indx} />
 
             case "jaculatorias":
-              if (isSimple) return
               return <Jaculatorias key={indx} />
+
+            case "salve":
+            return <Salve key={indx}/>
+
+            case "final":
+            return <Final key={indx} />
+
+
+
+
+
+
+
 
             default:
               return `Missing component for: "${each}"`
+
           }
 
         }
