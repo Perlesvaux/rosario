@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from  '../../oracionesComunes'
 import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '@/components' 
-import { PadreNuestro, Gloria, Jaculatorias, DecenaAveMaria, Misterio } from '@/oratio'
+import { PadreNuestro, Gloria, Jaculatorias, DecenaAveMaria, Misterio, RenderPrayer } from '@/oratio'
 import { useHolyContext, PrayerContext } from '@/hooks'
 import { useRosarioStateOfEach } from '../morphe/state'
 
@@ -11,7 +11,7 @@ function Prayers({misterio, index}) {
 
   const {show, currentState, next, prev} = useRosarioStateOfEach("mysteries",index)
 
-  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple}}>
+  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple, misterio}}>
     <Slide>
 
       <Frame
@@ -26,40 +26,7 @@ function Prayers({misterio, index}) {
 
 
 
-      {
-        Object.keys(currentState)
-          .filter((eachKey)=> eachKey != "actual")
-          .map( (each, indx)=>
-          {
-
-            switch (each) {
-              case "misterio":
-                return <Misterio misterio={misterio} key={indx}/>
-
-              case "padrenuestro":
-                return  <PadreNuestro key={indx} />
-
-              case "avemaria":
-                return  <DecenaAveMaria key={indx} />
-
-              case "gloria":
-                return <Gloria key={indx} />
-
-              case "jaculatorias":
-                  if (isSimple) return
-                return <Jaculatorias key={indx} />
-
-              default:
-                return `undefined case: ${each}`
-            }
-
-            }
-        )
-
-
-
-
-      }
+        <RenderPrayer />
 
 
 
