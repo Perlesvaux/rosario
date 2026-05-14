@@ -1,15 +1,14 @@
 import { memo } from 'react';
-import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from  '../../oracionesComunes'
-import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '@/components' 
-import { PadreNuestro, Gloria, Jaculatorias, DecenaAveMaria, Misterio, RenderPrayer } from '@/oratio'
+import { Slide, Frame, Steps  } from '@/components' 
+import { RenderPrayer } from '@/oratio'
 import { useHolyContext, PrayerContext } from '@/hooks'
 import { useRosarioStateOfEach } from '../morphe/state'
 
 function Prayers({misterio, index}) {
 
-  const {isSimple} = useHolyContext()
+  const { isSimple } = useHolyContext()
 
-  const {show, currentState, next, prev} = useRosarioStateOfEach("mysteries",index)
+  const { show, currentState, next, prev } = useRosarioStateOfEach("mysteries",index)
 
   return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple, misterio}}>
     <Slide>
@@ -23,15 +22,7 @@ function Prayers({misterio, index}) {
 
       <Steps>
 
-
-
-
         <RenderPrayer />
-
-
-
-
-
 
       </Steps>
 
@@ -40,64 +31,4 @@ function Prayers({misterio, index}) {
 }
 
 export default memo(Prayers)
-
-
-
-export function SimplePrayers({misterio, index}) {
-
-  const {show, currentState, next, prev} = useShowSimplePrayers(index)
-
-  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show}}>
-    <Slide>
-
-      <Frame
-        src={misterio.imagen}
-        alt={misterio.titulo}
-        advance={next}
-        retrocede={prev}
-      />
-
-      <Steps>
-
-        <Prayer title="Misterio" to="misterio"  > 
-          <article className="pt-4">
-            <h2 className="text-base md:text-xl font-bold text-gray-900">Misterio</h2>
-            <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-1 text-gray-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
-            <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-1 text-gray-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
-            <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-1 text-gray-800 text-sm md:text-base">{misterio.leyenda}</div>
-            <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-1 text-gray-800 text-sm md:text-base">{misterio.l}</div>
-            <div className="bg-gray-700 border-l-4 border-gray-900 px-4 py-1 text-gray-50 text-sm md:text-base">{misterio.r}</div>
-          </article>
-        </Prayer>
-
-        <Prayer title="Padre Nuestro" to="padrenuestro" > 
-          <Dialogus
-            titulo="Padre Nuestro"
-            lider={ padreNuestro.l } 
-            respuesta={ padreNuestro.r } 
-          />
-        </Prayer>
-
-        <Beads>
-          <Dialogus
-            titulo="Ave María (x10)"
-            lider={ aveMaria.l } 
-            respuesta={ aveMaria.r }
-          />
-        </Beads>
-
-        <Prayer title="Gloria" to="gloria"  >
-          <Dialogus
-            titulo="Gloria"
-            lider={gloria.l}
-            respuesta={gloria.r}
-          />
-        </Prayer>
-
-      </Steps>
-
-    </Slide>
-  </PrayerContext.Provider>)
-}
-
 

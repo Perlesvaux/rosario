@@ -14,6 +14,8 @@ export function RenderPrayer(){
 
           switch (each) {
 
+            // Intro
+
             case "senal":
             return <SenalDeLaCruz key={indx} />
 
