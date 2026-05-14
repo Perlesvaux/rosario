@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import { padreNuestro, aveMaria, gloria, jaculatoria_1, jaculatoria_2 } from  '../../oracionesComunes'
-import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '../../../components' 
-import { useHolyContext, PrayerContext } from '../../../hooks'
+import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '@/components' 
+import { PadreNuestro, Gloria, Jaculatorias, DecenaAveMaria, Misterio } from '@/oratio'
+import { useHolyContext, PrayerContext } from '@/hooks'
 import { useRosarioStateOfEach } from '../morphe/state'
 
 function Prayers({misterio, index}) {
@@ -22,48 +23,17 @@ function Prayers({misterio, index}) {
 
       <Steps>
 
-        <Prayer title="Misterio" to="misterio"  > 
-          <article className="pt-4">
-            <h2 className="text-base md:text-xl font-bold text-gray-900">Misterio</h2>
-            <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-1 text-gray-800 text-sm md:text-base font-bold">{misterio.titulo}</div>
-            <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-1 text-gray-800 text-sm md:text-base">Fruto del misterio: {misterio.fruto}</div>
-            <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-1 text-gray-800 text-sm md:text-base">{misterio.leyenda}</div>
-            <div className="bg-gray-50 border-l-4 border-gray-400 px-4 py-1 text-gray-800 text-sm md:text-base">{misterio.l}</div>
-            <div className="bg-gray-700 border-l-4 border-gray-900 px-4 py-1 text-gray-50 text-sm md:text-base">{misterio.r}</div>
-          </article>
-        </Prayer>
+        <Misterio misterio={misterio}/>
 
-        <Prayer title="Padre Nuestro" to="padrenuestro" > 
-          <Dialogus
-            titulo="Padre Nuestro"
-            lider={ padreNuestro.l } 
-            respuesta={ padreNuestro.r } 
-          />
-        </Prayer>
 
-        <Beads to="avemaria" titulo="Ave María">
-          <Dialogus
-            titulo="Ave María (x10)"
-            lider={ aveMaria.l } 
-            respuesta={ aveMaria.r }
-          />
-        </Beads>
+        <PadreNuestro />
 
-        <Prayer title="Gloria" to="gloria"  >
-          <Dialogus
-            titulo="Gloria"
-            lider={gloria.l}
-            respuesta={gloria.r}
-          />
-        </Prayer>
+        <DecenaAveMaria />
+
+        <Gloria />
 
         { !isSimple &&
-          <Prayer title="Jaculatorias" to="jaculatorias" >
-            <Dialogus titulo="Jaculatorias" >
-              <Vox lider={jaculatoria_1.l} respuesta={jaculatoria_1.r} />
-              <Vox lider={jaculatoria_2.l} respuesta={jaculatoria_2.r} />
-            </Dialogus>
-          </Prayer>
+          <Jaculatorias />
         }
 
       </Steps>
