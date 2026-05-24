@@ -8,6 +8,8 @@ import { useCoronillaMisericordiaStateOf } from '../morphe/state'
 
 import introImg from '../../../public/intro.webp'
 
+import {RenderPrayer} from '@/oratio'
+
 function CoronillaIntro ({header}) {
 
   //const {isSimple} = useHolyContext()
@@ -27,52 +29,7 @@ function CoronillaIntro ({header}) {
       />
 
       <Steps>
-
-        <Prayer title="Señal de la Cruz" to="senal">
-          <Introductio 
-            titulo="Señal de la Cruz"
-            leyenda={senal}
-          /> 
-        </Prayer>
-
-
-        <Prayer title="Oración de Santa Faustina" to="faustina">
-          <Introductio 
-            titulo="Oración de Santa Faustina"
-            leyenda={faustina}
-          /> 
-        </Prayer>
-
-
-        <Prayer title="Padre Nuestro" to="padrenuestro" > 
-          <Dialogus
-            titulo="Padre Nuestro"
-            lider={ padreNuestro.l } 
-            respuesta={ padreNuestro.r } 
-          />
-        </Prayer>
-
-        <Prayer  title="Ave Maria" to="avemaria" >
-          <Dialogus
-            titulo="Ave María"
-            lider={ aveMaria.l } 
-            respuesta={ aveMaria.r }
-          />
-        </Prayer>
-
-
-
-        <Prayer title="Credo de los Apóstoles" to="credo" >
-          <Introductio
-            titulo="Credo de los Apóstoles"
-            leyenda={credo}
-          />
-        </Prayer>
-
-
-
-
-
+        <RenderPrayer />
       </Steps>
 
     </Slide>

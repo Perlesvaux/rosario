@@ -14,8 +14,12 @@ export {Salve} from './Salve'
 
 export {LetaniasLauretanas, LetaniasLauretanasInicio} from './LetaniasLauretanas'
 export {Oremos} from './Oremos'
+export {Faustina} from './Faustina'
 export {AveMariaPurisima} from './AveMariaPurisima'
+export {AveMaria} from './AveMaria'
 
+export {DoxologiaFinal} from './DoxologiaFinal'
+export {OracionFinal} from './OracionFinal'
 
 export { RenderPrayer } from './RenderPrayer'
 

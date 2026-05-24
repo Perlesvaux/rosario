@@ -28,7 +28,7 @@ const coronillaMisericordia = {
       senal: false,
       faustina: false,
       padrenuestro: false,
-      avemaria: false,
+      avemaria1: false,
       credo: false,
       actual: 0,
     },
@@ -80,7 +80,7 @@ const updates =(state)=> {
           0: { senal: false },
           1: { faustina: false },
           2: { padrenuestro: false },
-          3: { avemaria: false },
+          3: { avemaria1: false },
           4: { credo: false },
         },
 
@@ -93,7 +93,7 @@ const updates =(state)=> {
             1: { senal: true },
             2: { faustina: true },
             3: { padrenuestro: true },
-            4: { avemaria: true },
+            4: { avemaria1: true },
             5: { credo: true },
         },
 

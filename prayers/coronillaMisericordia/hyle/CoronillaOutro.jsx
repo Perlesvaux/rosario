@@ -5,6 +5,8 @@ import {useHolyContext, PrayerContext } from '../../../hooks'
 import outroImg from '../../../public/outro.webp'
 import { useCoronillaMisericordiaStateOf } from '../morphe/state'
 
+import {RenderPrayer} from '@/oratio'
+
 function CoronillaOutro ({header}){
 
   const {show, currentState, next, prev} = useCoronillaMisericordiaStateOf("outro")
@@ -20,23 +22,8 @@ function CoronillaOutro ({header}){
       />
 
       <Steps>
-
-        <Prayer title="Doxología final" to="doxologiafinal">
-          <Introductio
-            titulo="Doxología final (x3)" 
-            leyenda={doxologiaFinal}
-          />
-        </Prayer>
-
-        <Prayer title="Final" to="oracionfinal">
-          <Introductio
-            titulo="Oracion Final" 
-            leyenda={oracionFinal}
-          />
-        </Prayer>
-
+        <RenderPrayer />
       </Steps>
-
 
     </Slide>
   </PrayerContext.Provider>)
