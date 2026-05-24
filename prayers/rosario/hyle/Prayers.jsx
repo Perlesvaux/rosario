@@ -11,6 +11,7 @@ function Prayers({misterio, index}) {
   const { show, currentState, next, prev } = useRosarioStateOfEach("mysteries",index)
 
   return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple, misterio}}>
+
     <Slide>
 
       <Frame
@@ -27,6 +28,7 @@ function Prayers({misterio, index}) {
       </Steps>
 
     </Slide>
+
   </PrayerContext.Provider>)
 }
 

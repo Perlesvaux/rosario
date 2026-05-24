@@ -13,6 +13,7 @@ function Intro ({header}) {
   const {show, currentState, next, prev} = useRosarioStateOf("intro")
 
   return ( <PrayerContext.Provider value={{header, next, currentState, show, isSimple}}>
+
     <Slide>
 
       <Frame
@@ -29,6 +30,7 @@ function Intro ({header}) {
       </Steps>
 
     </Slide>
+
   </PrayerContext.Provider>)
 }
 export default memo(Intro)

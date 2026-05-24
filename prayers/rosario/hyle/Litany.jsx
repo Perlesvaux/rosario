@@ -8,13 +8,17 @@ import { useHolyContext, PrayerContext } from '../../../hooks'
 import { useRosarioStateOf } from '../morphe/state'
 import litanyImg from '../../../public/litany.webp'
 
+import { RenderPrayer } from '@/oratio';
+
 function Litany ({header}){
 
   const {isSimple} = useHolyContext()
 
   const {show, currentState, next, prev} = useRosarioStateOf("litany")
+  console.log(currentState)
 
   return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, isSimple}}>
+
 
     {
       !isSimple && <Slide> 
@@ -27,56 +31,7 @@ function Litany ({header}){
       />
 
       <Steps>
-        <Prayer title="Inicio" to="inicio">
-          <Introductio 
-            titulo="Oración previa a Letanías"
-            leyenda="¡Oh Señor! Ten misericordia de nosotros. Escucha nuestras súplicas."
-          /> 
-        </Prayer>
-
-        <Prayer title="Letanías" to="letanias">
-
-            <Dialogus titulo="Letanías">
-            <div className="flex flex-col gap-1">
-              {letanias_1.map((letania, indx)=><div key={indx}><Dictum  lider={letania.l} respuesta={letania.r} /></div>)}
-
-              {letanias_2.map((letania, indx)=><div key={indx}><Dictum  lider={letania.l} respuesta={letania.r} /></div>)}
-
-              {letanias_3.map((letania, indx)=><div key={indx}><Dictum  lider={letania} respuesta="Ruega por nosotros." /></div>)}
-
-              {letanias_4.map((letania, indx)=><div key={indx}><Dictum lider={letania.l} respuesta={letania.r} /></div> )}
-
-              <Vox lider={letanias_final.l} respuesta={letanias_final.r} />
-
-            </div>
-            </Dialogus>
-
-        </Prayer>
-
-        <Prayer title="Oremos" to="oremos">
-          <Dialogus
-            titulo="Oremos"
-            lider={oremos.l} 
-            respuesta={oremos.r}
-          />
-        </Prayer>
-
-        <Prayer title="Ave Maria Purisima" to="avemariapurisima">
-          <Dialogus titulo="Ave María Purisima">
-            <div className="flex flex-col gap-1">
-              {aveMariaPurisima.map((letania, indx)=> <div key={indx}><Dictum lider={letania.l} respuesta={letania.r} /> </div> )}
-            </div>
-          </Dialogus>
-        </Prayer>
-
-        <Prayer title="Final" to="final">
-          <Dialogus titulo="Final">
-            <div className="flex flex-col gap-1">
-              {jaculatorias_finales.map((letania, indx)=><div  key={indx}><Vox lider={letania.l} respuesta={letania.r} /></div>)}
-            </div>
-          </Dialogus>
-        </Prayer>
-
+        <RenderPrayer />
       </Steps>
 
     </Slide>

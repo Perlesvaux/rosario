@@ -12,6 +12,9 @@ export {FeEsperanzaCaridad} from './FeEsperanzaCaridad'
 export {Final} from './Final'
 export {Salve} from './Salve'
 
+export {LetaniasLauretanas, LetaniasLauretanasInicio} from './LetaniasLauretanas'
+export {Oremos} from './Oremos'
+export {AveMariaPurisima} from './AveMariaPurisima'
 
 
 export { RenderPrayer } from './RenderPrayer'

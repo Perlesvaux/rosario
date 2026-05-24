@@ -1,7 +1,6 @@
 import { memo } from 'react';
-import { padreNuestro, aveMaria, fe, esperanza, caridad, gloria, salve, jaculatorias_finales} from '../../oracionesComunes'
-import { Dialogus, Introductio, Slide, Frame, Vox, Prayer, Steps } from '@/components' 
-import {useHolyContext, PrayerContext} from '../../../hooks'
+import { Slide, Frame, Steps } from '@/components' 
+import {useHolyContext, PrayerContext} from '@/hooks'
 import outroImg from '@/public/outro.webp'
 import { useRosarioStateOf } from '../morphe/state'
 import { RenderPrayer } from '@/oratio';

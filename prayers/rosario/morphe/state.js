@@ -94,6 +94,7 @@ const rosario = {
       inicio: false,
       letanias: false,
       oremos: false,
+      avemariapurisima:false,
       final: false,
       actual: 0,
     }

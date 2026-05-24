@@ -1,5 +1,5 @@
 import { usePrayerContext } from '@/hooks'
-import { Contricion, Invocacion, Peticiones, FeEsperanzaCaridad, SenalDeLaCruz, Misterio, DecenaAveMaria, Jaculatorias, Gloria, PadreNuestro, Salve, Final } from '.'
+import { Contricion, Invocacion, Peticiones, FeEsperanzaCaridad, SenalDeLaCruz, Misterio, DecenaAveMaria, Jaculatorias, Gloria, PadreNuestro, Salve, Final, LetaniasLauretanas, LetaniasLauretanasInicio, AveMariaPurisima, Oremos } from '.'
 import { Credo } from './Credo'
 
 
@@ -14,7 +14,7 @@ export function RenderPrayer(){
 
           switch (each) {
 
-            // Intro
+            // Rosario[intro]
 
             case "senal":
             return <SenalDeLaCruz key={indx} />
@@ -56,6 +56,19 @@ export function RenderPrayer(){
             case "final":
             return <Final key={indx} />
 
+
+            // Rosario[litanies]
+            case "inicio":
+            return <LetaniasLauretanasInicio key={indx}/>
+
+            case "letanias":
+            return <LetaniasLauretanas key={indx} />
+
+            case "oremos":
+            return <Oremos key={indx}/>  
+
+            case "avemariapurisima":
+            return <AveMariaPurisima key={indx}/> 
 
 
 
