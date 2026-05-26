@@ -1,4 +1,4 @@
-import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '@/components' 
+import { Dialogus, Beads  } from '@/components' 
 
 export function DecenaAveMaria(){
   return <Beads to="avemaria" titulo="Ave María">

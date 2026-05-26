@@ -1,8 +1,8 @@
 import { memo } from 'react';
-import { padreEterno, dolorosaPasion } from '../../oracionesComunes'
-import { Dialogus, Slide, Frame,  Prayer, Steps, Beads  } from '../../../components' 
-import { useHolyContext, PrayerContext } from '../../../hooks'
+import { Slide, Frame, Steps  } from '@/components' 
+import { PrayerContext } from '@/hooks'
 import { useCoronillaMisericordiaStateOfEach } from '../morphe/state'
+import { RenderPrayer } from '@/oratio';
 
 function CoronillaPrayers({misterio, index}) {
 
@@ -19,23 +19,7 @@ function CoronillaPrayers({misterio, index}) {
       />
 
       <Steps>
-
-        <Prayer title="Padre Eterno ..." to="padreeterno" > 
-          <Dialogus
-            titulo="Padre Eterno"
-            lider={ padreEterno.l } 
-            respuesta={ padreEterno.r } 
-          />
-        </Prayer>
-
-        <Beads to="dolorosapasion" titulo="Dolorosa Pasión">
-          <Dialogus
-            titulo="Por su dolorosa pasión... (x10)"
-            lider={ dolorosaPasion.l } 
-            respuesta={ dolorosaPasion.r }
-          />
-        </Beads>
-
+        <RenderPrayer />
       </Steps>
 
     </Slide>

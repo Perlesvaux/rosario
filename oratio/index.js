@@ -21,5 +21,7 @@ export {AveMaria} from './AveMaria'
 export {DoxologiaFinal} from './DoxologiaFinal'
 export {OracionFinal} from './OracionFinal'
 
+export {PadreEterno} from './PadreEterno'
+export {DecenaDolorosaPasion} from './DecenaDolorosaPasion'
 export { RenderPrayer } from './RenderPrayer'
 
