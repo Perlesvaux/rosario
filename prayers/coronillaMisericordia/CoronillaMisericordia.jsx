@@ -4,7 +4,7 @@ import CoronillaIntro from './hyle/CoronillaIntro.jsx'
 import CoronillaOutro from './hyle/CoronillaOutro.jsx'
 
 
-import { useHolyContext } from '../../hooks'
+import { useHolyContext } from '@/hooks'
 
 export default function CoronillaMisericordia (){
   const {name, items} = useHolyContext()

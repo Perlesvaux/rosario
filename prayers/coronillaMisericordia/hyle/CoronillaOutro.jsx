@@ -1,11 +1,9 @@
 import { memo } from 'react';
-import { doxologiaFinal, oracionFinal } from '../../oracionesComunes'
-import { Dialogus, Introductio, Extra, Facio, Susurri, Dictum, Slide, Frame, Vox , Prayer, Steps   } from '../../../components'
-import {useHolyContext, PrayerContext } from '../../../hooks'
-import outroImg from '../../../public/outro.webp'
+import { Slide, Frame, Steps  } from '@/components' 
+import { PrayerContext } from '@/hooks'
 import { useCoronillaMisericordiaStateOf } from '../morphe/state'
-
-import {RenderPrayer} from '@/oratio'
+import { RenderPrayer } from '@/oratio'
+import outroImg from '@/public/outro.webp'
 
 function CoronillaOutro ({header}){
 

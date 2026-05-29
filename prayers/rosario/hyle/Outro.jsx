@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { Slide, Frame, Steps } from '@/components' 
-import {useHolyContext, PrayerContext} from '@/hooks'
-import outroImg from '@/public/outro.webp'
+import { useHolyContext, PrayerContext } from '@/hooks'
 import { useRosarioStateOf } from '../morphe/state'
 import { RenderPrayer } from '@/oratio';
+import outroImg from '@/public/outro.webp'
 
 function Outro ({header}){
 

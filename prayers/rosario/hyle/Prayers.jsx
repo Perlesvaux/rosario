@@ -1,8 +1,8 @@
 import { memo } from 'react';
-import { Slide, Frame, Steps  } from '@/components' 
-import { RenderPrayer } from '@/oratio'
+import { Slide, Frame, Steps } from '@/components' 
 import { useHolyContext, PrayerContext } from '@/hooks'
 import { useRosarioStateOfEach } from '../morphe/state'
+import { RenderPrayer } from '@/oratio'
 
 function Prayers({misterio, index}) {
 

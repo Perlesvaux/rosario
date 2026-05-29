@@ -1,9 +1,8 @@
 import { memo } from 'react';
 import { Slide, Frame, Steps  } from '@/components'
 import { useHolyContext, PrayerContext } from '@/hooks'
-import {RenderPrayer} from '@/oratio'
 import { useRosarioStateOf } from '../morphe/state'
-
+import { RenderPrayer } from '@/oratio'
 import introImg from '@/public/intro.webp'
 
 function Intro ({header}) {
