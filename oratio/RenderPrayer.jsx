@@ -84,10 +84,10 @@ export function RenderPrayer(){
             return <OracionFinal key={indx}/> 
 
 
-            case "padreeterno":
+            case "padreeterno1":
             return <PadreEterno key={indx}/>
 
-            case "dolorosapasion":
+            case "dolorosapasion10":
             return <DecenaDolorosaPasion key={indx}/>
 
 

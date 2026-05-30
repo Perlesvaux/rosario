@@ -31,16 +31,16 @@ const coronillaMisericordia = {
     credo1:new Set([4]) , 
   }
   ,
-  //mysteries: [
-  //  ['padreeterno1', 'dolorosapasion10'],
-  //  ['padreeterno1', 'dolorosapasion10'],
-  //  ['padreeterno1', 'dolorosapasion10'],
-  //  ['padreeterno1', 'dolorosapasion10'],
-  //  ['padreeterno1', 'dolorosapasion10'],
-  //],
+  mysteries: [
+    { padreeterno1: new Set([5]), dolorosapasion10:  new Set([6,7,8, 9,10,11 ,12,13,14 ,15])},
+    { padreeterno1: new Set([16]), dolorosapasion10: new Set([17,18,19, 20,21,22, 23,24,25, 26])},
+    { padreeterno1: new Set([27]), dolorosapasion10: new Set([28,29,30, 31,32,33, 34,35,36, 37])},
+    { padreeterno1: new Set([38]), dolorosapasion10: new Set([39,40,41, 42,43,44, 45,46,47, 48])},
+    { padreeterno1: new Set([49]), dolorosapasion10: new Set([50,51,52, 53,54,55, 56,57,58, 59])},
+  ],
   outro: {
-    doxologiafinal1: new Set([5]), 
-    oracionfinal1: new Set([6])
+    doxologiafinal1: new Set([60]), 
+    oracionfinal1: new Set([61])
   },
   actual:0
 }
@@ -168,6 +168,25 @@ const coronillaMisericordiaReducer = (state, action) => {
     }
 
 
+    case "advance mysteries": {
+      //const actual = mysteries.advance.actual(index)
+      // Indicates GLORIA reached
+      //if (actual === LIMIT.dolorosapasion+1) vibrate(PRESET.hard)
+        // Indicates ongoing AVEMARIA
+        //else if (actual > 2 && actual <= 10) vibrate(PRESET.mid)
+          // Normal button press feedback
+          //else vibrate(PRESET.soft)
+      //return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
+      vibrate(PRESET.faint)
+      return {...state, actual: state.actual++ }
+
+    }
+    case "previous mysteries": {
+      vibrate(PRESET.faint)
+      return {...state, actual: state.actual--}
+    }
+
+
     //case "advance outro":{
     //  vibrate(PRESET.soft)
     //  return commit(state, outro.advance.cmd, outro.advance.actual, "outro")
@@ -223,18 +242,25 @@ export function useCoronillaMisericordiaStateOfEach(section, index){
   const currentState = coronillaMisericordiaState[section][index] 
   const show = useCallback((to)=> {
 
-    const isDolorosaPasion = (to === "dolorosapasion" && currentState.actual > 0 && currentState.actual <= 10)
-    const conditions = updates(coronillaMisericordiaState)
-    
-    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-    const mapping = {};
 
-    for (const [key, value] of Object.entries(conditions[section].previous.cmd)) {
-      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-      mapping[innerKey] = parseInt(key); // Store the index as a number
-    }
+    console.log(coronillaMisericordiaState.actual)
+    console.log( currentState[to] )
+    console.log(to)
 
-    return mapping[to] === currentState.actual || isDolorosaPasion;
+    return currentState[to].has(coronillaMisericordiaState.actual)
+
+    //const isDolorosaPasion = (to === "dolorosapasion" && currentState.actual > 0 && currentState.actual <= 10)
+    //const conditions = updates(coronillaMisericordiaState)
+    //
+    //// Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
+    //const mapping = {};
+    //
+    //for (const [key, value] of Object.entries(conditions[section].previous.cmd)) {
+    //  const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
+    //  mapping[innerKey] = parseInt(key); // Store the index as a number
+    //}
+    //
+    //return mapping[to] === currentState.actual || isDolorosaPasion;
   }
 
   , [currentState, section, coronillaMisericordiaState])
@@ -249,9 +275,9 @@ export function useCoronillaMisericordiaStateOf(section) {
 
   const show = useCallback((to)=> {
 
-    console.log(coronillaMisericordiaState.actual)
-    console.log( currentState[to] )
-    console.log( to )
+    //console.log(coronillaMisericordiaState.actual)
+    //console.log( currentState[to] )
+    //console.log( to )
     
     return currentState[to].has(coronillaMisericordiaState.actual)
 

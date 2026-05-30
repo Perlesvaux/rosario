@@ -1,7 +1,7 @@
 import { Dialogus, Beads  } from '@/components' 
 
 export function DecenaDolorosaPasion(){
-  return <Beads to="dolorosapasion" titulo="Dolorosa Pasión">
+  return <Beads to="dolorosapasion10" titulo="Dolorosa Pasión">
     <Dialogus
       titulo="Ave María (x10)"
       lider={ "Por Su dolorosa Pasión" } 
