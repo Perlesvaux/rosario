@@ -77,8 +77,8 @@ export default function StreakTracker() {
   const { streak, load, complete } = useStreak();
 
   //const wasRosaryPrayedToday = false
-  const wasRosaryPrayedToday = state.complete.mysteries.every(mystery => mystery.avemaria) 
-    || state.simple.mysteries.every(mystery => mystery.avemaria);
+  //const wasRosaryPrayedToday = state.complete.mysteries.every(mystery => mystery.avemaria) 
+  //  || state.simple.mysteries.every(mystery => mystery.avemaria);
 
   //debugger
 
@@ -90,11 +90,11 @@ export default function StreakTracker() {
   }, [load]);
 
   // Update when prayed
-  useEffect(() => {
-    if (wasRosaryPrayedToday) {
-      complete()
-    }
-  }, [wasRosaryPrayedToday, complete]);
+  //useEffect(() => {
+  //  if (wasRosaryPrayedToday) {
+  //    complete()
+  //  }
+  //}, [wasRosaryPrayedToday, complete]);
 
 
   return <div className={

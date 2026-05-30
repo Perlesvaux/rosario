@@ -23,9 +23,7 @@ function Intro ({header}) {
       />
 
       <Steps>
-
         <RenderPrayer />
-
       </Steps>
 
     </Slide>

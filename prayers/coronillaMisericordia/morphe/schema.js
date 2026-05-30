@@ -1,5 +1,5 @@
 
-import caratula from '../../../public/coronillaMisericordia.webp'
+import caratula from '@/public/coronillaMisericordia.webp'
 
 export const coronillaMisericordia = {
   nombre:"CORONILLA A LA DIVINA MISERICORDIA",

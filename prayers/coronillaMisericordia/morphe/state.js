@@ -2,7 +2,7 @@ import {
   useReducer,
   useCallback,
 } from 'react'
-import { useHolyContext } from '../../../hooks'
+import { useHolyContext } from '@/hooks'
 import { PRESET, LIMIT, vibrate } from '../../utils'
 
   const updateShallow = (state, updates, actual, section) => {
@@ -23,49 +23,28 @@ const updateDeep = (state, updates, actual, section, index) => {
 
 
 const coronillaMisericordia = {
-
-    intro : {
-      senal: false,
-      faustina: false,
-      padrenuestro: false,
-      avemaria1: false,
-      credo: false,
-      actual: 0,
-    },
-    mysteries: [
-      {
-        padreeterno: false,
-        dolorosapasion: false,
-        actual: 0,
-      },
-      {
-        padreeterno: false,
-        dolorosapasion: false,
-        actual: 0,
-      },
-      {
-        padreeterno: false,
-        dolorosapasion: false,
-        actual: 0,
-      },
-      {
-        padreeterno: false,
-        dolorosapasion: false,
-        actual: 0,
-      },
-      {
-        padreeterno: false,
-        dolorosapasion: false,
-        actual: 0,
-      },
-
-    ],
-    outro:{
-      doxologiafinal: false,
-      oracionfinal: false,
-      actual: 0,
-    },
+  intro : {
+    senal1:new Set([0]) ,
+    faustina1:new Set([1]) , 
+    padrenuestro1:new Set([2]) , 
+    avemaria1:new Set([3]) , 
+    credo1:new Set([4]) , 
+  }
+  ,
+  //mysteries: [
+  //  ['padreeterno1', 'dolorosapasion10'],
+  //  ['padreeterno1', 'dolorosapasion10'],
+  //  ['padreeterno1', 'dolorosapasion10'],
+  //  ['padreeterno1', 'dolorosapasion10'],
+  //  ['padreeterno1', 'dolorosapasion10'],
+  //],
+  outro: {
+    doxologiafinal1: new Set([5]), 
+    oracionfinal1: new Set([6])
+  },
+  actual:0
 }
+
 
 
 
@@ -163,73 +142,59 @@ const updates =(state)=> {
 
 const coronillaMisericordiaReducer = (state, action) => {
 
-
-  const commitEach =(state, updates, actual, section, index)=>{
-    // Only for 'mystery' section
-    return {
-      ...state,
-      ...updateDeep(state, updates, actual, section, index),
-    };
-  }
-
-  const commit = (state, updates, actual, section)=>{
-    return {
-      ...state,
-      ...updateShallow(state, updates, actual, section)
-    };
-  }
-
   const { type, index } = action;
-
-  const { intro, outro, mysteries } = updates(state)
 
   switch (type) {
 
-
     case "advance intro":{
       vibrate(PRESET.soft)
-      return commit(state, intro.advance.cmd, intro.advance.actual, "intro")
+      return {...state, actual: state.actual++ }
     }
 
     case "previous intro": {
       vibrate(PRESET.faint)
-      return commit(state, intro.previous.cmd, intro.previous.actual, "intro")
+      return {...state, actual: state.actual--}
     }
 
 
     case "advance outro":{
       vibrate(PRESET.soft)
-      return commit(state, outro.advance.cmd, outro.advance.actual, "outro")
+      return {...state, actual: state.actual++ }
     }
 
     case "previous outro": {
       vibrate(PRESET.faint)
-      return commit(state, outro.previous.cmd, outro.previous.actual, "outro")
+      return {...state, actual: state.actual--}
     }
 
 
-
-    case "advance mysteries": {
-      const actual = mysteries.advance.actual(index)
-      // Indicates GLORIA reached
-      if (actual === LIMIT.dolorosapasion+1) vibrate(PRESET.hard)
-        // Indicates ongoing AVEMARIA
-        else if (actual > 2 && actual <= 10) vibrate(PRESET.mid)
-          // Normal button press feedback
-          else vibrate(PRESET.soft)
-      return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
-    }
-
-    case "previous mysteries": {
-      vibrate(PRESET.faint)
-      return commitEach(state, mysteries.previous.cmd, mysteries.previous.actual(index), "mysteries", index);
-    }
-
-
-
-
-
-
+    //case "advance outro":{
+    //  vibrate(PRESET.soft)
+    //  return commit(state, outro.advance.cmd, outro.advance.actual, "outro")
+    //}
+    //
+    //case "previous outro": {
+    //  vibrate(PRESET.faint)
+    //  return commit(state, outro.previous.cmd, outro.previous.actual, "outro")
+    //}
+    //
+    //
+    //
+    //case "advance mysteries": {
+    //  const actual = mysteries.advance.actual(index)
+    //  // Indicates GLORIA reached
+    //  if (actual === LIMIT.dolorosapasion+1) vibrate(PRESET.hard)
+    //    // Indicates ongoing AVEMARIA
+    //    else if (actual > 2 && actual <= 10) vibrate(PRESET.mid)
+    //      // Normal button press feedback
+    //      else vibrate(PRESET.soft)
+    //  return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
+    //}
+    //
+    //case "previous mysteries": {
+    //  vibrate(PRESET.faint)
+    //  return commitEach(state, mysteries.previous.cmd, mysteries.previous.actual(index), "mysteries", index);
+    //}
 
 
     case "reset": {
@@ -283,18 +248,33 @@ export function useCoronillaMisericordiaStateOf(section) {
   const currentState = coronillaMisericordiaState[section]
 
   const show = useCallback((to)=> {
-    const conditions = updates(coronillaMisericordiaState)
-    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-    const mapping = {};
 
-    for (const [key, value] of Object.entries(conditions[section].previous.cmd)) {
-      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-      mapping[innerKey] = parseInt(key); // Store the index as a number
-    }
+    console.log(coronillaMisericordiaState.actual)
+    console.log( currentState[to] )
+    console.log( to )
+    
+    return currentState[to].has(coronillaMisericordiaState.actual)
 
-    return mapping[to] === currentState.actual;
+
+    //return to==="senal1" && coronillaMisericordiaState.actual===0
+    //return currentState[to]
+
+
+    //const conditions = updates(coronillaMisericordiaState)
+    //// Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
+    //const mapping = {};
+    //
+    //for (const [key, value] of Object.entries(conditions[section].previous.cmd)) {
+    //  const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
+    //  mapping[innerKey] = parseInt(key); // Store the index as a number
+    //}
+    //
+    //return mapping[to] === currentState.actual;
   }
   , [currentState, section, coronillaMisericordiaState])
+
+
+  //const show = ()=>{ return }
 
   return { show, currentState, next, prev }
 }

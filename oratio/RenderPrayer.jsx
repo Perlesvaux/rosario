@@ -7,6 +7,7 @@ export function RenderPrayer(){
   const {misterio, currentState, isSimple} = usePrayerContext()
   return <> 
     {
+
       Object.keys(currentState)
       .filter((eachKey)=> eachKey != "actual")
       .map( (each, indx)=>
@@ -16,7 +17,7 @@ export function RenderPrayer(){
 
             // Rosario[intro]
 
-            case "senal":
+            case "senal1":
             return <SenalDeLaCruz key={indx} />
 
             case "invocacion":
@@ -24,7 +25,7 @@ export function RenderPrayer(){
 
             case "contricion":
             return <Contricion key={indx} />
-            case "credo":
+            case "credo1":
             return <Credo key={indx}/>
             case "peticiones":
             return <Peticiones key={indx} />
@@ -38,7 +39,7 @@ export function RenderPrayer(){
             case "misterio":
               return <Misterio misterio={misterio} key={indx}/>
 
-            case "padrenuestro":
+            case "padrenuestro1":
               return  <PadreNuestro key={indx} />
 
             case "avemaria":
@@ -70,16 +71,16 @@ export function RenderPrayer(){
             case "avemariapurisima":
             return <AveMariaPurisima key={indx}/> 
 
-            case "faustina":
+            case "faustina1":
             return <Faustina key={indx}/> 
 
             case "avemaria1":
             return <AveMaria key={indx}/> 
 
-            case "doxologiafinal":
+            case "doxologiafinal1":
             return <DoxologiaFinal key={indx}/> 
 
-            case "oracionfinal":
+            case "oracionfinal1":
             return <OracionFinal key={indx}/> 
 
 
@@ -103,4 +104,6 @@ export function RenderPrayer(){
 
 
 }
-
+      //Object.keys(currentState)
+      //.filter((eachKey)=> eachKey != "actual")
+      //.map( (each, indx)=>

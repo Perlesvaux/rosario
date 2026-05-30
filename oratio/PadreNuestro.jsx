@@ -2,7 +2,7 @@ import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '@/component
 
 export function PadreNuestro(){
 
-  return <Prayer title="Padre Nuestro" to="padrenuestro" > 
+  return <Prayer title="Padre Nuestro" to="padrenuestro1" > 
     <Dialogus
       titulo="Padre Nuestro"
       lider={ "Padre nuestro que estás en el cielo, santificado sea Tu Nombre; venga a nosotros Tu Reino; hágase tu voluntad, en la tierra como en el cielo." } 

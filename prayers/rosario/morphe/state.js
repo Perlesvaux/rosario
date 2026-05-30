@@ -29,134 +29,29 @@ import { PRESET, vibrate } from '../../utils'
 const rosario = {
 
   complete: {
-
-    intro : {
-      senal: false,
-      invocacion: false,
-      contricion: false,
-      credo: false,
-      peticiones: false,
-      actual: 0,
-    },
+    intro : ['senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1'],
     mysteries: [
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        jaculatorias: false,
-        actual: 0,
-      },
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        jaculatorias: false,
-        actual: 0,
-      },
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        jaculatorias: false,
-        actual: 0,
-      },
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        jaculatorias: false,
-        actual: 0,
-      },
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        jaculatorias: false,
-        actual: 0,
-      },
-
-
+      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
+      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
+      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
+      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
+      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
     ],
-    outro:{
-      peticiones: false,
-      padrenuestro: false,
-      avemarias: false,
-      gloria: false,
-      salve: false,
-      actual: 0,
-    },
-    litany: {
-      inicio: false,
-      letanias: false,
-      oremos: false,
-      avemariapurisima:false,
-      final: false,
-      actual: 0,
-    }
-
+    outro:[ 'peticiones1', 'padrenuestro1', 'avemarias1',  'gloria1',  'salve1' ],
+    litany: [ 'inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1' ]
   },
 
 
   simple: {
-
-    intro : {
-      senal: false,
-      credo: false,
-      avemarias: false,
-      gloria: false,
-      actual: 0,
-    },
+    intro : ['senal1', 'credo1', 'avemarias3', 'gloria1'],
     mysteries: [
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        actual: 0,
-      },
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        actual: 0,
-      },
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        actual: 0,
-      },
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        actual: 0,
-      },
-      {
-        misterio: false,
-        padrenuestro: false,
-        avemaria: false,
-        gloria: false,
-        actual: 0,
-      },
-
-
+      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
+      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
+      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
+      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
+      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
     ],
-    outro:{
-      salve: false,
-      final: false,
-      actual: 0,
-    },
-
-
+    outro:['salve', 'final', 'actual']
   }
 
 
@@ -417,56 +312,56 @@ const rosarioReducer = (state, action) => {
 
   switch (type) {
 
-    case "advance mysteries": {
-      const actual = mysteries.advance.actual(index)
-      // Indicates GLORIA reached
-      if (actual.complete === 12) vibrate(PRESET.hard)
-        // Indicates ongoing AVEMARIA
-        else if (actual.complete > 2 && actual.complete <= 11) vibrate(PRESET.mid)
-          // Normal button press feedback
-          else vibrate(PRESET.soft)
-      return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
-    }
-
-    case "previous mysteries": {
-      vibrate(PRESET.faint)
-      return commitEach(state, mysteries.previous.cmd, mysteries.previous.actual(index), "mysteries", index);
-    }
-
-    case "advance intro":{
-      vibrate(PRESET.soft)
-      return commit(state, intro.advance.cmd, intro.advance.actual, "intro")
-    }
-
-    case "previous intro": {
-      vibrate(PRESET.faint)
-      return commit(state, intro.previous.cmd, intro.previous.actual, "intro")
-    }
-
-    case "advance outro": {
-      vibrate(PRESET.soft)
-      return commit(state, outro.advance.cmd, outro.advance.actual, "outro")
-    }
-
-    case "previous outro": {
-      vibrate(PRESET.faint)
-      return commit(state, outro.previous.cmd, outro.previous.actual, "outro")
-    }
-
-
-    case "advance litany": {
-      vibrate(PRESET.soft)
-      return commit(state, litany.advance.cmd, litany.advance.actual, "litany")
-    }
-
-    case "previous litany": {
-      vibrate(PRESET.faint)
-      return commit(state, litany.previous.cmd, litany.previous.actual, "litany")
-    }
-
-    case "reset": {
-      return rosario
-    }
+    //case "advance mysteries": {
+    //  const actual = mysteries.advance.actual(index)
+    //  // Indicates GLORIA reached
+    //  if (actual.complete === 12) vibrate(PRESET.hard)
+    //    // Indicates ongoing AVEMARIA
+    //    else if (actual.complete > 2 && actual.complete <= 11) vibrate(PRESET.mid)
+    //      // Normal button press feedback
+    //      else vibrate(PRESET.soft)
+    //  return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
+    //}
+    //
+    //case "previous mysteries": {
+    //  vibrate(PRESET.faint)
+    //  return commitEach(state, mysteries.previous.cmd, mysteries.previous.actual(index), "mysteries", index);
+    //}
+    //
+    //case "advance intro":{
+    //  vibrate(PRESET.soft)
+    //  return commit(state, intro.advance.cmd, intro.advance.actual, "intro")
+    //}
+    //
+    //case "previous intro": {
+    //  vibrate(PRESET.faint)
+    //  return commit(state, intro.previous.cmd, intro.previous.actual, "intro")
+    //}
+    //
+    //case "advance outro": {
+    //  vibrate(PRESET.soft)
+    //  return commit(state, outro.advance.cmd, outro.advance.actual, "outro")
+    //}
+    //
+    //case "previous outro": {
+    //  vibrate(PRESET.faint)
+    //  return commit(state, outro.previous.cmd, outro.previous.actual, "outro")
+    //}
+    //
+    //
+    //case "advance litany": {
+    //  vibrate(PRESET.soft)
+    //  return commit(state, litany.advance.cmd, litany.advance.actual, "litany")
+    //}
+    //
+    //case "previous litany": {
+    //  vibrate(PRESET.faint)
+    //  return commit(state, litany.previous.cmd, litany.previous.actual, "litany")
+    //}
+    //
+    //case "reset": {
+    //  return rosario
+    //}
 
     default:
       return `undefined case: ${type}`
