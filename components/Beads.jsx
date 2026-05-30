@@ -19,7 +19,7 @@ export default function Beads ({children, to, titulo}) {
     if (currentState.actual == LIMIT[to]) ref.current.hidePopover();
   }
 
-  return <BeadContext.Provider value={{ to }}>
+  return <>
 
     <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
       <article className="flex flex-col  gap-4">
@@ -36,19 +36,19 @@ export default function Beads ({children, to, titulo}) {
       { titulo } {isShown && <>→</>} <BeadCount count={currentState.actual}/>
     </button>
 
-  </BeadContext.Provider>
+  </>
 
 }
 
 
 function Bead ({onClick}){
-  const { to } = useBeadContext()
+  //const { to } = useBeadContext()
   const { currentState } = usePrayerContext()
 
 
   return <button 
     onClick={onClick}
-    className={`${currentState.actual>=LIMIT[to]? 'bg-rose-700 ':'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}
+    className={`${currentState.actual>9? 'bg-rose-700 ':'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}
     > 
      <BeadCount count={currentState.actual} />
   </button>
@@ -58,20 +58,21 @@ function Bead ({onClick}){
 
 
   const BeadCount = ({count}) => {
-    const { to } = useBeadContext()
+    //const { to } = useBeadContext()
 
-    const decrease = {
-      dolorosapasion:0,
-      avemaria:1,
-    }
+    //const decrease = {
+    //  dolorosapasion:0,
+    //  avemaria:1,
+    //}
 
-
-    if (to==="dolorosapasion" && count-(LIMIT.dolorosapasion-9) < 0) return  
-    if (to==="dolorosapasion" && count >= (LIMIT.dolorosapasion+1)) return
-
-    if (to==="avemaria" && count-(LIMIT.avemaria-9) < 0) return  
-    if (to==="avemaria" && count >= (LIMIT.avemaria+1) ) return
-    return <>  <strong className="font-bold">{ count-decrease[to] }</strong>/<span className="text-xs">10</span></>
+    //
+    //if (to==="dolorosapasion" && count-(LIMIT.dolorosapasion-9) < 0) return  
+    //if (to==="dolorosapasion" && count >= (LIMIT.dolorosapasion+1)) return
+    //
+    //if (to==="avemaria" && count-(LIMIT.avemaria-9) < 0) return  
+    //if (to==="avemaria" && count >= (LIMIT.avemaria+1) ) return
+    if (count>10) return
+    return <>  <strong className="font-bold">{ count<11? count : "" }</strong>/<span className="text-xs">10</span></>
   }
 
 
