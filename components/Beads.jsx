@@ -71,7 +71,7 @@ function Bead ({onClick}){
     //
     //if (to==="avemaria" && count-(LIMIT.avemaria-9) < 0) return  
     //if (to==="avemaria" && count >= (LIMIT.avemaria+1) ) return
-    if (count>10) return
+    if (count<=0 || count>10) return
     return <>  <strong className="font-bold">{ count<11? count : "" }</strong>/<span className="text-xs">10</span></>
   }
 

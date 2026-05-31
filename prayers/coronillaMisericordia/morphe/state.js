@@ -177,11 +177,14 @@ const coronillaMisericordiaReducer = (state, action) => {
           // Normal button press feedback
           //else vibrate(PRESET.soft)
       //return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
-      vibrate(PRESET.faint)
+      //const actual = (state.mysteries[index].actual >= 10) ? 11 : state.mysteries[index].actual++
+      const actual = state.mysteries[index].actual++
+      if (actual===11) vibrate(PRESET.hard) 
+      vibrate(PRESET.mid)
       return {
         ...state,
         mysteries: state['mysteries'].map((item, i) => 
-          index === i ? { ...item, actual: state.mysteries[i].actual++  } : item
+          index === i ? { ...item, actual: actual  } : item
         )
       }
 
@@ -252,30 +255,14 @@ export function useCoronillaMisericordiaStateOfEach(section, index){
   const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous ${section}`, index: index }) }, [coronillaMisericordiaDispatch, index, section])
   const currentState = coronillaMisericordiaState[section][index] 
   const show = useCallback((to)=> {
-
-
     console.log(coronillaMisericordiaState.actual)
     console.log( currentState[to] )
     console.log(to)
     console.log(currentState.actual)
-
     return currentState[to].has(currentState.actual)
-
-    //const isDolorosaPasion = (to === "dolorosapasion" && currentState.actual > 0 && currentState.actual <= 10)
-    //const conditions = updates(coronillaMisericordiaState)
-    //
-    //// Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-    //const mapping = {};
-    //
-    //for (const [key, value] of Object.entries(conditions[section].previous.cmd)) {
-    //  const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-    //  mapping[innerKey] = parseInt(key); // Store the index as a number
-    //}
-    //
-    //return mapping[to] === currentState.actual || isDolorosaPasion;
   }
 
-  , [currentState, section, coronillaMisericordiaState])
+  , [coronillaMisericordiaState, currentState])
   return { show, currentState, next, prev }
 }
 
@@ -286,33 +273,9 @@ export function useCoronillaMisericordiaStateOf(section) {
   const currentState = coronillaMisericordiaState[section]
 
   const show = useCallback((to)=> {
-
-    //console.log(coronillaMisericordiaState.actual)
-    //console.log( currentState[to] )
-    //console.log( to )
-    
     return currentState[to].has(coronillaMisericordiaState.actual)
-
-
-    //return to==="senal1" && coronillaMisericordiaState.actual===0
-    //return currentState[to]
-
-
-    //const conditions = updates(coronillaMisericordiaState)
-    //// Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-    //const mapping = {};
-    //
-    //for (const [key, value] of Object.entries(conditions[section].previous.cmd)) {
-    //  const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-    //  mapping[innerKey] = parseInt(key); // Store the index as a number
-    //}
-    //
-    //return mapping[to] === currentState.actual;
   }
-  , [currentState, section, coronillaMisericordiaState])
-
-
-  //const show = ()=>{ return }
+  , [coronillaMisericordiaState, currentState])
 
   return { show, currentState, next, prev }
 }
