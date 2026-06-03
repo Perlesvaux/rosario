@@ -1,7 +1,7 @@
 import { Dialogus, Beads  } from '@/components' 
 
 export function DecenaAveMaria(){
-  return <Beads to="avemaria" titulo="Ave María">
+  return <Beads to="avemaria10" titulo="Ave María">
     <Dialogus
       titulo="Ave María (x10)"
       lider={ "Dios te salve María, llena eres de gracia, el Señor es contigo. Bendita eres entre todas las mujeres y bendito es el fruto de tu vientre, Jesús." } 

@@ -20,55 +20,55 @@ export function RenderPrayer(){
             case "senal1":
             return <SenalDeLaCruz key={indx} />
 
-            case "invocacion":
+            case "invocacion1":
               return <Invocacion key={indx} />
 
-            case "contricion":
+            case "contricion1":
             return <Contricion key={indx} />
             case "credo1":
             return <Credo key={indx}/>
-            case "peticiones":
+            case "peticiones1":
             return <Peticiones key={indx} />
 
-            case "avemarias":
+            case "avemarias3":
             return <FeEsperanzaCaridad key={indx}/>
             
 
 
             // Rosario[mysteries]
-            case "misterio":
+            case "misterio1":
               return <Misterio misterio={misterio} key={indx}/>
 
             case "padrenuestro1":
               return  <PadreNuestro key={indx} />
 
-            case "avemaria":
+            case "avemaria10":
               return  <DecenaAveMaria key={indx} />
 
-            case "gloria":
+            case "gloria1":
               return <Gloria key={indx} />
 
-            case "jaculatorias":
+            case "jaculatorias1":
               return <Jaculatorias key={indx} />
 
-            case "salve":
+            case "salve1":
             return <Salve key={indx}/>
 
-            case "final":
+            case "final1":
             return <Final key={indx} />
 
 
             // Rosario[litanies]
-            case "inicio":
+            case "inicio1":
             return <LetaniasLauretanasInicio key={indx}/>
 
-            case "letanias":
+            case "letanias1":
             return <LetaniasLauretanas key={indx} />
 
-            case "oremos":
+            case "oremos1":
             return <Oremos key={indx}/>  
 
-            case "avemariapurisima":
+            case "avemariapurisima3":
             return <AveMariaPurisima key={indx}/> 
 
             case "faustina1":

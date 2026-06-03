@@ -3,7 +3,7 @@ import {
   useCallback,
   useMemo,
 } from 'react'
-import { useHolyContext } from '../../../hooks'
+import { useHolyContext } from '@/hooks'
 import { PRESET, vibrate } from '../../utils'
 
   const updateShallow = (state, updates, actual, section, part) => {
@@ -29,339 +29,326 @@ import { PRESET, vibrate } from '../../utils'
 const rosario = {
 
   complete: {
-    intro : ['senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1'],
+    intro : { 
+      senal1:new Set([0]) , 
+      invocacion1:new Set([1]), 
+      contricion1:new Set([2]), 
+      credo1:new Set([3]), 
+      peticiones1:new Set([4]) 
+    },
     mysteries: [
-      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
-      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
-      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
-      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
-      ['misterio1','padrenuestro1','avemaria10','gloria1','jaculatorias1'],
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
     ],
-    outro:[ 'peticiones1', 'padrenuestro1', 'avemarias1',  'gloria1',  'salve1' ],
-    litany: [ 'inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1' ]
+    outro: {peticiones1:new Set([5]), padrenuestro1:new Set([6]), avemarias3:new Set([7]), gloria1:new Set([8]), salve1:new Set([9])},
+    litany: {inicio1:new Set([10]), letanias1:new Set([11]), oremos1:new Set([12]), avemariapurisima3: new Set([13]), final1:new Set([14])},
+    actual:0,
   },
 
 
   simple: {
-    intro : ['senal1', 'credo1', 'avemarias3', 'gloria1'],
+    intro : { senal1:new Set([0]), credo1:new Set([1]), avemarias3:new Set([2]) , gloria1:new Set([3]) },
     mysteries: [
-      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
-      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
-      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
-      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
-      ['misterio1', 'padrenuestro1','avemaria10','gloria1' ],
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
     ],
-    outro:['salve', 'final', 'actual']
+    outro:{ salve1:new Set([4]), final1:new Set([5]) },
+    actual:0,
   }
-
 
 }
 
 
 
-const updates =(state)=> {
-  return {
-
-    mysteries:{
-
-      previous: {
-        cmd:{
-
-          complete:{
-            0: { misterio: false },
-            1: { padrenuestro: false },
-            11: { avemaria: false },
-            12: { gloria: false },
-            13: { jaculatorias: false },
-          },
-          simple:{
-            0: { misterio: false },
-            1: { padrenuestro: false },
-            11: { avemaria: false },
-            12: { gloria: false },
-          }
-        },
-
-        actual: (index)=> {
-          return {
-            complete: state.complete.mysteries[index].actual > 0 ? state.complete.mysteries[index].actual - 1 : 0 ,
-            simple: state.simple.mysteries[index].actual > 0 ? state.simple.mysteries[index].actual - 1 : 0
-          }
-        }
-
-      } ,
-      advance: {
-        cmd:{
-
-          complete:{
-            1: { misterio: true },
-            2: { padrenuestro: true },
-            12: { avemaria: true },
-            13: { gloria: true },
-            14: { jaculatorias: true },
-          },
-          simple:{
-            1: { misterio: true },
-            2: { padrenuestro: true },
-            12: { avemaria: true },
-            13: { gloria: true },
-          }
-        },
-
-        actual: (index)=> {
-          return {
-            complete: state.complete.mysteries[index].actual < 14 ? state.complete.mysteries[index].actual + 1 : 14,
-            simple: state.simple.mysteries[index].actual < 14 ? state.simple.mysteries[index].actual + 1 : 14
-          }
-        }
-      }
-
-    },
-
-
-    intro:{
-
-      previous: {
-
-        cmd:{
-
-          complete:{
-            0: { senal: false },
-            1: { invocacion: false },
-            2: { contricion: false },
-            3: { credo: false },
-            4: { peticiones: false },
-          },
-
-          simple:{
-            0: { senal: false },
-            1: { credo: false },
-            2: { avemarias: false },
-            3: { gloria: false },
-          }
-        },
-
-        actual: {
-          complete: state.complete.intro.actual > 0 ? state.complete.intro.actual - 1 : 0,
-          simple: state.simple.intro.actual > 0 ? state.simple.intro.actual - 1 : 0
-        }
-      },
-
-      advance: {
-        cmd:{
-
-          complete:{
-            1: { senal: true },
-            2: { invocacion: true },
-            3: { contricion: true },
-            4: { credo: true },
-            5: { peticiones: true },
-          },
-          simple: {
-            1: { senal: true },
-            2: { credo: true },
-            3: { avemarias: true },
-            4: { gloria: true },
-          }
-        },
-
-        actual: {
-          complete:state.complete.intro.actual < 5 ? state.complete.intro.actual + 1 : 5,
-          simple:state.simple.intro.actual < 5 ? state.simple.intro.actual + 1 : 5
-        }
-      },
-    },
-
-
-    outro: {
-      previous: {
-        cmd:{
-          complete:{
-            0: { peticiones: false },
-            1: { padrenuestro: false },
-            2: { avemarias: false },
-            3: { gloria: false },
-            4: { salve: false },
-          },
-
-          simple:{
-            0: { salve: false },
-            1: { final: false },
-          }
-        },
-
-        actual:{
-          complete: state.complete.outro.actual > 0 ? state.complete.outro.actual - 1 : 0,
-          simple: state.simple.outro.actual > 0 ? state.simple.outro.actual - 1 : 0
-        }
-
-
-      },
-
-      advance: {
-
-        cmd:{
-          complete:{
-            1: { peticiones: true },
-            2: { padrenuestro: true },
-            3: { avemarias: true },
-            4: { gloria: true },
-            5: { salve: true },
-          },
-
-          simple:{
-            1: { salve: true },
-            2: { final: true },
-          }
-
-        },
-
-
-
-        actual: {
-          complete:state.complete.outro.actual < 5 ? state.complete.outro.actual + 1 : 5,
-          simple: state.simple.outro.actual < 5 ? state.simple.outro.actual + 1 : 5
-        }
-
-      }
-    },
-
-    litany: {
-      previous:{
-        cmd:{
-
-          complete:{
-            0: { inicio: false },
-            1: { letanias: false },
-            2: { oremos: false },
-            3: { avemariapurisima: false },
-            4: { final: false },
-          }
-        },
-
-        actual: {
-          complete: state.complete.litany.actual > 0 ? state.complete.litany.actual - 1 : 0
-        }
-
-      },
-
-      advance: {
-        cmd:{
-
-          complete:{
-            1: { inicio: true },
-            2: { letanias: true },
-            3: { oremos: true },
-            4: { avemariapurisima: true },
-            5: { final: true },
-          }
-        },
-
-        actual: {
-          complete: state.complete.litany.actual < 5 ? state.complete.litany.actual + 1 : 5
-        }
-      }
-    }
-
-
-
-
-  }
-
-
-
-
-}
+//const updates =(state)=> {
+//  return {
+//
+//    mysteries:{
+//
+//      previous: {
+//        cmd:{
+//
+//          complete:{
+//            0: { misterio: false },
+//            1: { padrenuestro: false },
+//            11: { avemaria: false },
+//            12: { gloria: false },
+//            13: { jaculatorias: false },
+//          },
+//          simple:{
+//            0: { misterio: false },
+//            1: { padrenuestro: false },
+//            11: { avemaria: false },
+//            12: { gloria: false },
+//          }
+//        },
+//
+//        actual: (index)=> {
+//          return {
+//            complete: state.complete.mysteries[index].actual > 0 ? state.complete.mysteries[index].actual - 1 : 0 ,
+//            simple: state.simple.mysteries[index].actual > 0 ? state.simple.mysteries[index].actual - 1 : 0
+//          }
+//        }
+//
+//      } ,
+//      advance: {
+//        cmd:{
+//
+//          complete:{
+//            1: { misterio: true },
+//            2: { padrenuestro: true },
+//            12: { avemaria: true },
+//            13: { gloria: true },
+//            14: { jaculatorias: true },
+//          },
+//          simple:{
+//            1: { misterio: true },
+//            2: { padrenuestro: true },
+//            12: { avemaria: true },
+//            13: { gloria: true },
+//          }
+//        },
+//
+//        actual: (index)=> {
+//          return {
+//            complete: state.complete.mysteries[index].actual < 14 ? state.complete.mysteries[index].actual + 1 : 14,
+//            simple: state.simple.mysteries[index].actual < 14 ? state.simple.mysteries[index].actual + 1 : 14
+//          }
+//        }
+//      }
+//
+//    },
+//
+//
+//    intro:{
+//
+//      previous: {
+//
+//        cmd:{
+//
+//          complete:{
+//            0: { senal: false },
+//            1: { invocacion: false },
+//            2: { contricion: false },
+//            3: { credo: false },
+//            4: { peticiones: false },
+//          },
+//
+//          simple:{
+//            0: { senal: false },
+//            1: { credo: false },
+//            2: { avemarias: false },
+//            3: { gloria: false },
+//          }
+//        },
+//
+//        actual: {
+//          complete: state.complete.intro.actual > 0 ? state.complete.intro.actual - 1 : 0,
+//          simple: state.simple.intro.actual > 0 ? state.simple.intro.actual - 1 : 0
+//        }
+//      },
+//
+//      advance: {
+//        cmd:{
+//
+//          complete:{
+//            1: { senal: true },
+//            2: { invocacion: true },
+//            3: { contricion: true },
+//            4: { credo: true },
+//            5: { peticiones: true },
+//          },
+//          simple: {
+//            1: { senal: true },
+//            2: { credo: true },
+//            3: { avemarias: true },
+//            4: { gloria: true },
+//          }
+//        },
+//
+//        actual: {
+//          complete:state.complete.intro.actual < 5 ? state.complete.intro.actual + 1 : 5,
+//          simple:state.simple.intro.actual < 5 ? state.simple.intro.actual + 1 : 5
+//        }
+//      },
+//    },
+//
+//
+//    outro: {
+//      previous: {
+//        cmd:{
+//          complete:{
+//            0: { peticiones: false },
+//            1: { padrenuestro: false },
+//            2: { avemarias: false },
+//            3: { gloria: false },
+//            4: { salve: false },
+//          },
+//
+//          simple:{
+//            0: { salve: false },
+//            1: { final: false },
+//          }
+//        },
+//
+//        actual:{
+//          complete: state.complete.outro.actual > 0 ? state.complete.outro.actual - 1 : 0,
+//          simple: state.simple.outro.actual > 0 ? state.simple.outro.actual - 1 : 0
+//        }
+//
+//
+//      },
+//
+//      advance: {
+//
+//        cmd:{
+//          complete:{
+//            1: { peticiones: true },
+//            2: { padrenuestro: true },
+//            3: { avemarias: true },
+//            4: { gloria: true },
+//            5: { salve: true },
+//          },
+//
+//          simple:{
+//            1: { salve: true },
+//            2: { final: true },
+//          }
+//
+//        },
+//
+//
+//
+//        actual: {
+//          complete:state.complete.outro.actual < 5 ? state.complete.outro.actual + 1 : 5,
+//          simple: state.simple.outro.actual < 5 ? state.simple.outro.actual + 1 : 5
+//        }
+//
+//      }
+//    },
+//
+//    litany: {
+//      previous:{
+//        cmd:{
+//
+//          complete:{
+//            0: { inicio: false },
+//            1: { letanias: false },
+//            2: { oremos: false },
+//            3: { avemariapurisima: false },
+//            4: { final: false },
+//          }
+//        },
+//
+//        actual: {
+//          complete: state.complete.litany.actual > 0 ? state.complete.litany.actual - 1 : 0
+//        }
+//
+//      },
+//
+//      advance: {
+//        cmd:{
+//
+//          complete:{
+//            1: { inicio: true },
+//            2: { letanias: true },
+//            3: { oremos: true },
+//            4: { avemariapurisima: true },
+//            5: { final: true },
+//          }
+//        },
+//
+//        actual: {
+//          complete: state.complete.litany.actual < 5 ? state.complete.litany.actual + 1 : 5
+//        }
+//      }
+//    }
+//
+//
+//
+//
+//  }
+//
+//
+//
+//
+//}
 
 
 
 const rosarioReducer = (state, action) => {
 
 
-  const commitEach =(state, updates, actual, section, index)=>{
-    // Only for 'mystery' section
-    return {
-      ...state,
-      ...updateDeep(state, updates, actual, section, index, "complete"),
-      ...updateDeep(state, updates, actual, section, index, "simple")
-    };
-  }
-
-  const commit = (state, updates, actual, section)=>{
-
-
-    if (state.complete[section] && state.simple[section])
-    {
-      return {
-        ...state,
-        ...updateShallow(state,updates,actual,section, "complete"),
-        ...updateShallow(state, updates, actual, section, "simple")
-      };
-    }
-
-    // state.simple doesn't have any 'litany' key
-    return {
-      ...state,
-      ...updateShallow(state, updates, actual, section, "complete")
-    };
-  }
-
   const { type, index } = action;
 
-  const { intro, outro, litany, mysteries } = updates(state)
+  //const { intro, outro, litany, mysteries } = updates(state)
 
   switch (type) {
 
-    //case "advance mysteries": {
-    //  const actual = mysteries.advance.actual(index)
-    //  // Indicates GLORIA reached
-    //  if (actual.complete === 12) vibrate(PRESET.hard)
-    //    // Indicates ongoing AVEMARIA
-    //    else if (actual.complete > 2 && actual.complete <= 11) vibrate(PRESET.mid)
-    //      // Normal button press feedback
-    //      else vibrate(PRESET.soft)
-    //  return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
-    //}
-    //
-    //case "previous mysteries": {
-    //  vibrate(PRESET.faint)
-    //  return commitEach(state, mysteries.previous.cmd, mysteries.previous.actual(index), "mysteries", index);
-    //}
-    //
-    //case "advance intro":{
-    //  vibrate(PRESET.soft)
-    //  return commit(state, intro.advance.cmd, intro.advance.actual, "intro")
-    //}
-    //
-    //case "previous intro": {
-    //  vibrate(PRESET.faint)
-    //  return commit(state, intro.previous.cmd, intro.previous.actual, "intro")
-    //}
-    //
-    //case "advance outro": {
-    //  vibrate(PRESET.soft)
-    //  return commit(state, outro.advance.cmd, outro.advance.actual, "outro")
-    //}
-    //
-    //case "previous outro": {
-    //  vibrate(PRESET.faint)
-    //  return commit(state, outro.previous.cmd, outro.previous.actual, "outro")
-    //}
-    //
-    //
-    //case "advance litany": {
-    //  vibrate(PRESET.soft)
-    //  return commit(state, litany.advance.cmd, litany.advance.actual, "litany")
-    //}
-    //
-    //case "previous litany": {
-    //  vibrate(PRESET.faint)
-    //  return commit(state, litany.previous.cmd, litany.previous.actual, "litany")
-    //}
-    //
-    //case "reset": {
-    //  return rosario
-    //}
+    case "advance":{
+      vibrate(PRESET.soft)
+      return {...state,  
+        complete: {...state.complete, actual: state.complete.actual++}, 
+        simple: {...state.simple, actual: state.simple.actual++} 
+      }
+    }
+
+    case "previous": {
+      vibrate(PRESET.faint)
+      //return {...state, actual: state.actual--}
+      //return {...state,  complete: {...state.complete, actual: state.complete.actual--} }
+      return {...state,  
+        complete: {...state.complete, actual: state.complete.actual--}, 
+        simple: {...state.simple, actual: state.simple.actual--} 
+      }
+    }
+
+    case "advance mysteries": {
+      //const actual = mysteries.advance.actual(index)
+      // Indicates GLORIA reached
+      //if (actual === LIMIT.dolorosapasion+1) vibrate(PRESET.hard)
+        // Indicates ongoing AVEMARIA
+        //else if (actual > 2 && actual <= 10) vibrate(PRESET.mid)
+          // Normal button press feedback
+          //else vibrate(PRESET.soft)
+      //return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
+      //const actual = (state.mysteries[index].actual >= 10) ? 11 : state.mysteries[index].actual++
+
+      const actual = state.complete.mysteries[index].actual++
+      if (actual===11) vibrate(PRESET.hard) 
+      vibrate(PRESET.mid)
+      return {
+        ...state,
+        complete:{...state.complete,
+
+          mysteries: state.complete['mysteries'].map((item, i) => 
+            index === i ? { ...item, actual: actual  } : item
+          )
+
+
+        }
+        
+      }
+
+
+    }
+
+    case "previous mysteries": {
+      vibrate(PRESET.faint)
+      return {
+        ...state,
+        mysteries: state['mysteries'].map((item, i) => 
+          index === i ? { ...item, actual: state.mysteries[i].actual--  } : item
+        )
+      }
+    }
+
 
     default:
       return `undefined case: ${type}`
@@ -377,56 +364,95 @@ export function useRosario(){
 
 
 
-
 export function useRosarioStateOfEach(section, index){
   const {state, dispatch, isSimple} = useHolyContext();
   const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index, section])
   const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index, section])
-  const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
+  //const currentState = state[section][index] 
+  //const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
+
+  const currentState = isSimple? state.simple[section][index] : state.complete[section][index];
+  const globalActual = isSimple? state.simple[section][index].actual : state.complete[section][index].actual;
+
+
   const show = useCallback((to)=> {
-
-
-    const isAvemaria = (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11)
-    const conditions = updates(state)
-    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-    const mapping = {};
-
-    for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
-      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-      mapping[innerKey] = parseInt(key); // Store the index as a number
-    }
-
-    return mapping[to] === currentState.actual || isAvemaria;
+    //console.log(currentState)
+    console.log(currentState[to])
+    console.log(globalActual)
+    return currentState[to].has(globalActual)
   }
-
-
-    , [currentState, isSimple, section, state])
+  , [currentState])
   return { show, currentState, next, prev }
 }
+
 
 export function useRosarioStateOf(section) {
   const {state, dispatch, isSimple} = useHolyContext();
-  const next = useCallback(()=>{dispatch({type: `advance ${section}`})}, [dispatch, section])
-  const prev = useCallback(()=>{dispatch({type: `previous ${section}`})}, [dispatch, section])
+  const next = useCallback(()=>{dispatch({type: `advance`})}, [dispatch])
+  const prev = useCallback(()=>{dispatch({type: `previous`})}, [dispatch])
+  //const currentState = state[section]
   const currentState = isSimple? state.simple[section] : state.complete[section];
-
+  const globalActual = isSimple? state.simple.actual : state.complete.actual;
 
   const show = useCallback((to)=> {
-    const conditions = updates(state)
-    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-    const mapping = {};
-
-    for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
-      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-      mapping[innerKey] = parseInt(key); // Store the index as a number
-    }
-
-    return mapping[to] === currentState.actual;
+    //console.log(currentState)
+    //console.log(to)
+    //console.log(state)
+    return currentState[to].has(globalActual)
   }
-
-
-    , [currentState, isSimple, section, state])
-
+  , [state, currentState, globalActual])
   return { show, currentState, next, prev }
 }
+
+//export function useRosarioStateOfEach(section, index){
+//  const {state, dispatch, isSimple} = useHolyContext();
+//  const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index, section])
+//  const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index, section])
+//  const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
+//  const show = useCallback((to)=> {
+//
+//
+//    const isAvemaria = (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11)
+//    const conditions = updates(state)
+//    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
+//    const mapping = {};
+//
+//    for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
+//      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
+//      mapping[innerKey] = parseInt(key); // Store the index as a number
+//    }
+//
+//    return mapping[to] === currentState.actual || isAvemaria;
+//  }
+//
+//
+//    , [currentState, isSimple, section, state])
+//  return { show, currentState, next, prev }
+//}
+//
+//export function useRosarioStateOf(section) {
+//  const {state, dispatch, isSimple} = useHolyContext();
+//  const next = useCallback(()=>{dispatch({type: `advance ${section}`})}, [dispatch, section])
+//  const prev = useCallback(()=>{dispatch({type: `previous ${section}`})}, [dispatch, section])
+//  const currentState = isSimple? state.simple[section] : state.complete[section];
+//
+//
+//  const show = useCallback((to)=> {
+//    const conditions = updates(state)
+//    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
+//    const mapping = {};
+//
+//    for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
+//      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
+//      mapping[innerKey] = parseInt(key); // Store the index as a number
+//    }
+//
+//    return mapping[to] === currentState.actual;
+//  }
+//
+//
+//    , [currentState, isSimple, section, state])
+//
+//  return { show, currentState, next, prev }
+//}
 

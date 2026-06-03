@@ -8,7 +8,7 @@ export const jaculatorias_finales = [
 ]
 
 export function Final() {
-  return <Prayer title="Final" to="final">
+  return <Prayer title="Final" to="final1">
       <Dialogus titulo="Final">
         <div className="flex flex-col gap-1">
           {jaculatorias_finales.map((letania, indx)=><div  key={indx}><Vox lider={letania.l} respuesta={letania.r} /></div>)}

@@ -2,7 +2,7 @@ import { Dialogus, Vox, Introductio, Dictum, Prayer } from '@/components'
 
 export function LetaniasLauretanasInicio () {
 
-  return <Prayer title="Inicio" to="inicio">
+  return <Prayer title="Inicio" to="inicio1">
       <Introductio 
         titulo="Oración previa a Letanías"
         leyenda="¡Oh Señor! Ten misericordia de nosotros. Escucha nuestras súplicas."
@@ -13,7 +13,7 @@ export function LetaniasLauretanasInicio () {
 
 export function LetaniasLauretanas(){
 
-  return <Prayer title="Letanías" to="letanias">
+  return <Prayer title="Letanías" to="letanias1">
 
       <Dialogus titulo="Letanías">
 

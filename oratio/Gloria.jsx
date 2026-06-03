@@ -1,7 +1,7 @@
 import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '@/components' 
 
 export function Gloria () {
-  return <Prayer title="Gloria" to="gloria"  >
+  return <Prayer title="Gloria" to="gloria1"  >
     <Dialogus
       titulo="Gloria"
       lider={ "Gloria al Padre, y al Hijo, y al Espíritu Santo."}

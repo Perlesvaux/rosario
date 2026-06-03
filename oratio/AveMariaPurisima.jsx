@@ -2,7 +2,7 @@ import {Prayer, Dialogus, Dictum} from '@/components'
 
 export function AveMariaPurisima () {
 
-  return <Prayer title="Ave Maria Purisima" to="avemariapurisima">
+  return <Prayer title="Ave Maria Purisima" to="avemariapurisima3">
       <Dialogus titulo="Ave María Purisima">
         <div className="flex flex-col gap-1">
           {aveMariaPurisima.map((letania, indx)=> <div key={indx}><Dictum lider={letania.l} respuesta={letania.r} /> </div> )}

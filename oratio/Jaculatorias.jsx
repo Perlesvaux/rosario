@@ -1,7 +1,7 @@
 import { Dialogus, Vox, Slide, Frame,  Prayer, Steps, Beads  } from '@/components' 
 
 export function Jaculatorias () {
-  return <Prayer title="Jaculatorias" to="jaculatorias" >
+  return <Prayer title="Jaculatorias" to="jaculatorias1" >
     <Dialogus titulo="Jaculatorias" >
       <Vox 
         lider={ "María, madre de gracia, madre de misericordia,  en la vida y en la muerte ampáranos gran señora,"} 

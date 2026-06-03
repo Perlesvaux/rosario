@@ -3,7 +3,7 @@ import { Dialogus, Prayer } from '@/components'
 
 export function FeEsperanzaCaridad () {
 
-  return <Prayer title="Fe, Esperanza y Caridad" to="avemarias">
+  return <Prayer title="Fe, Esperanza y Caridad" to="avemarias3">
       <Dialogus titulo="Fe, Esperanza y Caridad"  >
         <div className="px-4" >
           <Dialogus

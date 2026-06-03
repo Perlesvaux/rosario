@@ -146,26 +146,17 @@ const coronillaMisericordiaReducer = (state, action) => {
 
   switch (type) {
 
-    case "advance intro":{
+    case "advance":{
       vibrate(PRESET.soft)
       return {...state, actual: state.actual++ }
     }
 
-    case "previous intro": {
+    case "previous": {
       vibrate(PRESET.faint)
       return {...state, actual: state.actual--}
     }
 
 
-    case "advance outro":{
-      vibrate(PRESET.soft)
-      return {...state, actual: state.actual++ }
-    }
-
-    case "previous outro": {
-      vibrate(PRESET.faint)
-      return {...state, actual: state.actual--}
-    }
 
 
     case "advance mysteries": {
@@ -255,28 +246,23 @@ export function useCoronillaMisericordiaStateOfEach(section, index){
   const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous ${section}`, index: index }) }, [coronillaMisericordiaDispatch, index, section])
   const currentState = coronillaMisericordiaState[section][index] 
   const show = useCallback((to)=> {
-    console.log(coronillaMisericordiaState.actual)
-    console.log( currentState[to] )
-    console.log(to)
-    console.log(currentState.actual)
     return currentState[to].has(currentState.actual)
   }
-
-  , [coronillaMisericordiaState, currentState])
+  , [currentState])
   return { show, currentState, next, prev }
 }
 
+
 export function useCoronillaMisericordiaStateOf(section) {
   const {coronillaMisericordiaState, coronillaMisericordiaDispatch} = useHolyContext();
-  const next = useCallback(()=>{coronillaMisericordiaDispatch({type: `advance ${section}`})}, [coronillaMisericordiaDispatch, section])
-  const prev = useCallback(()=>{coronillaMisericordiaDispatch({type: `previous ${section}`})}, [coronillaMisericordiaDispatch, section])
+  const next = useCallback(()=>{coronillaMisericordiaDispatch({type: `advance`})}, [coronillaMisericordiaDispatch])
+  const prev = useCallback(()=>{coronillaMisericordiaDispatch({type: `previous`})}, [coronillaMisericordiaDispatch])
   const currentState = coronillaMisericordiaState[section]
 
   const show = useCallback((to)=> {
     return currentState[to].has(coronillaMisericordiaState.actual)
   }
   , [coronillaMisericordiaState, currentState])
-
   return { show, currentState, next, prev }
 }
 

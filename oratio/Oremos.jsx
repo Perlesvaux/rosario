@@ -2,7 +2,7 @@ import {Prayer, Dialogus} from '@/components'
 
 export function Oremos () {
 
-  return <Prayer title="Oremos" to="oremos">
+  return <Prayer title="Oremos" to="oremos1">
       <Dialogus
         titulo="Oremos"
         lider={oremos.l} 
