@@ -35,7 +35,11 @@ const rosario = {
     },
     outro: {
       elements: [ 'peticiones1', 'padrenuestro1',  'avemarias3', 'gloria1', 'salve1' ],
-      actual:0
+      actual:0,
+    },
+    litany: {
+      elements:['inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1'],
+      actual:0,
     },
     //intro : { 
     //  senal1:new Set([0]) , 
@@ -360,7 +364,7 @@ const rosarioReducer = (state, action) => {
     }
 
     case "reset": {
-      return coronillaMisericordia
+      return state
     }
 
     default:

@@ -14,6 +14,8 @@ export default function Rosario (){
     { condition && 
       <> 
         <Intro header={name} />
+        <Outro header={name} />
+        <Litany header={name}/>
       </>
     }
 

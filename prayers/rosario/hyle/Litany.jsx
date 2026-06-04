@@ -10,9 +10,9 @@ function Litany ({header}){
 
   const {isSimple} = useHolyContext()
 
-  const {show, currentState, next, prev} = useRosarioStateOf("litany")
+  const {show, currentState, next, prev, markPrayer} = useRosarioStateOf(isSimple? "simple":"complete","litany")
 
-  return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, isSimple}}>
+  return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, isSimple, markPrayer}}>
 
 
     {
