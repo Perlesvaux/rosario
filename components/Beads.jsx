@@ -5,11 +5,13 @@ import { LIMIT } from '../prayers/utils'
 import { Exit } from './ui.jsx'
 
 export default function Beads ({children, to, titulo}) {
-  const {next, currentState, show, header} = usePrayerContext()
+  //const {next, currentState, show, header} = usePrayerContext()
+  const {next, currentState, markPrayer, show, header} = usePrayerContext()
   const ref = useRef(null)
   const identifier = `${titulo}-${header}`
 
-  let isShown = show(to) 
+  let isShown = show(to) === to
+  let wasPrayed = markPrayer(to)
   // to: "avemaria" or "dolorosapasion"
   // titulo: "Ave Maria" or "Por su Dolorosa Pasion..."
 
@@ -29,8 +31,10 @@ export default function Beads ({children, to, titulo}) {
       </article>
     </div>
 
-    <button popoverTarget={identifier} className={` ${currentState[to]? 'text-black/90' : 'text-gray-500/60'}  px-4   text-black  text-base text-left  underline underline-offset-2  rounded-r-lg hover:opacity-75 focus:outline-none   ${isShown? " bg-gray-800/90 text-white/90 ": "" } `}>
-        {currentState[to]
+    <button popoverTarget={identifier} 
+      className={`${wasPrayed? 'text-black/90' : 'text-gray-500/60'}  px-4   text-black  text-base text-left  underline underline-offset-2  rounded-r-lg hover:opacity-75 focus:outline-none 
+        ${isShown? " bg-gray-800/90 text-white/90 ": "" } `}>
+        {wasPrayed && !isShown
         ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
         : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity={isShown?".77":".33"} fill={isShown?"#ffffff" : "#434343"}><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
       { titulo } {isShown && <>→</>} <BeadCount count={currentState.actual}/>
