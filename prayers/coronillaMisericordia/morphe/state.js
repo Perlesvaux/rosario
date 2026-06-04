@@ -22,6 +22,13 @@ const updateDeep = (state, updates, actual, section, index) => {
 }
 
 
+const decades = ['padreeterno1', 
+  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
+  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
+  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
+  'dolorosapasion10',
+]
+
 const coronillaMisericordia = {
   intro :
 
@@ -35,14 +42,34 @@ const coronillaMisericordia = {
     ],
     actual:0,
   },
-  //mysteries: [
-  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-  //],
-  //
+  mysteries: [
+    { 
+      elements: ['padreeterno1', 'dolorosapasion10'],
+      decades: decades,
+      actual:0
+    },
+    { 
+      elements: ['padreeterno1', 'dolorosapasion10'],
+      decades: decades,
+      actual:0
+    },
+    { 
+      elements: ['padreeterno1', 'dolorosapasion10'],
+      decades: decades,
+      actual:0
+    },
+    { 
+      elements: ['padreeterno1', 'dolorosapasion10'],
+      decades: decades,
+      actual:0
+    },
+    { 
+      elements: ['padreeterno1', 'dolorosapasion10'],
+      decades: decades,
+      actual:0
+    },
+  ],
+
   outro: { 
     elements:[
       'doxologiafinal1', 
@@ -66,95 +93,95 @@ const coronillaMisericordia = {
   //},
 
 
-const updates =(state)=> {
-  return {
-
-    intro:{
-
-      previous: {
-
-        cmd:{
-          0: { senal: false },
-          1: { faustina: false },
-          2: { padrenuestro: false },
-          3: { avemaria1: false },
-          4: { credo: false },
-        },
-
-        actual: state.intro.actual > 0 ? state.intro.actual - 1 : 0,
-        
-      },
-
-      advance: {
-        cmd:{
-            1: { senal: true },
-            2: { faustina: true },
-            3: { padrenuestro: true },
-            4: { avemaria1: true },
-            5: { credo: true },
-        },
-
-        actual: state.intro.actual < 5 ? state.intro.actual + 1 : 5
-      },
-    },
-
-
-
-    outro: {
-      previous: {
-        cmd:{
-          0: { doxologiafinal: false },
-          1: { oracionfinal: false },
-        },
-
-        actual: state.outro.actual > 0 ? state.outro.actual - 1 : 0,
-      },
-
-      advance: {
-
-        cmd:{
-          1: { doxologiafinal: true },
-          2: { oracionfinal: true },
-        },
-
-        actual: state.outro.actual < 2 ? state.outro.actual + 1 : 2,
-      }
-    },
-
-
-
-    mysteries:{
-
-      previous: {
-        cmd:{
-          0: { padreeterno: false },
-          10: { dolorosapasion: false },
-        },
-
-        actual: (index)=> {
-          return state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0 
-        }
-      } ,
-
-      advance: {
-        cmd:{
-          1: { padreeterno: true },
-          11: { dolorosapasion: true },
-        },
-
-        actual: (index)=> {
-          return state.mysteries[index].actual < 11 ? state.mysteries[index].actual + 1 : 11
-        }
-      }
-
-    },
-
-  }
-
-//padreEterno = "P
-//dolorosaPasion =
-
-}
+//const updates =(state)=> {
+//  return {
+//
+//    intro:{
+//
+//      previous: {
+//
+//        cmd:{
+//          0: { senal: false },
+//          1: { faustina: false },
+//          2: { padrenuestro: false },
+//          3: { avemaria1: false },
+//          4: { credo: false },
+//        },
+//
+//        actual: state.intro.actual > 0 ? state.intro.actual - 1 : 0,
+//
+//      },
+//
+//      advance: {
+//        cmd:{
+//            1: { senal: true },
+//            2: { faustina: true },
+//            3: { padrenuestro: true },
+//            4: { avemaria1: true },
+//            5: { credo: true },
+//        },
+//
+//        actual: state.intro.actual < 5 ? state.intro.actual + 1 : 5
+//      },
+//    },
+//
+//
+//
+//    outro: {
+//      previous: {
+//        cmd:{
+//          0: { doxologiafinal: false },
+//          1: { oracionfinal: false },
+//        },
+//
+//        actual: state.outro.actual > 0 ? state.outro.actual - 1 : 0,
+//      },
+//
+//      advance: {
+//
+//        cmd:{
+//          1: { doxologiafinal: true },
+//          2: { oracionfinal: true },
+//        },
+//
+//        actual: state.outro.actual < 2 ? state.outro.actual + 1 : 2,
+//      }
+//    },
+//
+//
+//
+//    mysteries:{
+//
+//      previous: {
+//        cmd:{
+//          0: { padreeterno: false },
+//          10: { dolorosapasion: false },
+//        },
+//
+//        actual: (index)=> {
+//          return state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0 
+//        }
+//      } ,
+//
+//      advance: {
+//        cmd:{
+//          1: { padreeterno: true },
+//          11: { dolorosapasion: true },
+//        },
+//
+//        actual: (index)=> {
+//          return state.mysteries[index].actual < 11 ? state.mysteries[index].actual + 1 : 11
+//        }
+//      }
+//
+//    },
+//
+//  }
+//
+////padreEterno = "P
+////dolorosaPasion =
+//
+//}
 
 
 
@@ -270,11 +297,24 @@ export function useCoronillaMisericordiaStateOfEach(section, index){
   const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance ${section}`, index: index }) },  [coronillaMisericordiaDispatch, index, section])
   const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous ${section}`, index: index }) }, [coronillaMisericordiaDispatch, index, section])
   const currentState = coronillaMisericordiaState[section][index] 
+
+  const markPrayer = useCallback((to)=>{
+    //return coronillaMisericordiaState.actual >  currentState.indexOf(to)
+    return currentState.actual > currentState.decades.indexOf(to)
+    //console.log(currentState.actual)
+  }
+  ,[currentState])
+
+
   const show = useCallback((to)=> {
     //return currentState[to].has(currentState.actual)
+    //
+    console.log(`in ${index}: showing: ${currentState.decades[currentState.actual]} actual: ${currentState.actual}`)
+
+    return currentState.decades[currentState.actual]
   }
-  , [currentState])
-  return { show, currentState, next, prev }
+  , [currentState, index])
+  return { show, currentState, next, prev, markPrayer }
 }
 
 
@@ -286,6 +326,7 @@ export function useCoronillaMisericordiaStateOf(section) {
 
   const markPrayer = useCallback((to)=>{
     //return coronillaMisericordiaState.actual >  currentState.indexOf(to)
+    console.log(currentState.actual)
     return currentState.actual > currentState.elements.indexOf(to)
   }
   ,[currentState])

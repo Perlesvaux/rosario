@@ -6,9 +6,9 @@ import { RenderPrayer } from '@/oratio';
 
 function CoronillaPrayers({misterio, index}) {
 
-  const {show, currentState, next, prev} = useCoronillaMisericordiaStateOfEach("mysteries",index)
+  const {show, currentState, next, prev, markPrayer} = useCoronillaMisericordiaStateOfEach("mysteries",index)
 
-  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show}}>
+  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, markPrayer}}>
     <Slide>
 
       <Frame
