@@ -29,7 +29,7 @@ const updateDeep = (state, updates, actual, section, index) => {
 //  'dolorosapasion10',
 //]
 
-function beadsFrom(elements) {
+function beadsFrom(elements, offset) {
   const result = [];
 
   for (const item of elements) {
@@ -44,7 +44,7 @@ function beadsFrom(elements) {
     }
   }
 
-  return { elements, decades: result};
+  return { elements, decades: result, actual:offset, MIN:offset};
 }
 
 // Example usage:
@@ -68,36 +68,11 @@ const coronillaMisericordia = {
     actual:0,
   },
   mysteries: [
-    { 
-      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
-      //elements: ['padreeterno1', 'dolorosapasion10'],
-      //decades: decades,
-      actual:0
-    },
-    { 
-      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
-      //elements: ['padreeterno1', 'dolorosapasion10'],
-      //decades: decades,
-      actual:0
-    },
-    { 
-      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
-      //elements: ['padreeterno1', 'dolorosapasion10'],
-      //decades: decades,
-      actual:0
-    },
-    { 
-      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
-      //elements: ['padreeterno1', 'dolorosapasion10'],
-      //decades: decades,
-      actual:0
-    },
-    { 
-      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
-      //elements: ['padreeterno1', 'dolorosapasion10'],
-      //decades: decades,
-      actual:0
-    },
+    { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
+    { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
+    { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
+    { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
+    { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
   ],
 
   outro: { 
@@ -222,53 +197,48 @@ const coronillaMisericordiaReducer = (state, action) => {
   switch (type) {
 
     case "advance":{
+      const MAX = state[section].elements.length
+      const actual = (MAX>=state[section].actual)? state[section].actual++ : MAX
       vibrate(PRESET.soft)
       return {
         ...state,
         [section]: 
-        { ...state[section], actual:state[section].actual++ }
+        { ...state[section], actual:actual }
       }
     }
 
     case "previous":{
+      const MIN = 0
+      const actual = (MIN<=state[section].actual)? state[section].actual-- : MIN
       vibrate(PRESET.soft)
       return {
         ...state,
         [section]: 
-        { ...state[section], actual:state[section].actual-- }
+        { ...state[section], actual:actual }
       }
     }
 
-
-
     case "advance mysteries": {
-      //const actual = mysteries.advance.actual(index)
-      // Indicates GLORIA reached
-      //if (actual === LIMIT.dolorosapasion+1) vibrate(PRESET.hard)
-        // Indicates ongoing AVEMARIA
-        //else if (actual > 2 && actual <= 10) vibrate(PRESET.mid)
-          // Normal button press feedback
-          //else vibrate(PRESET.soft)
-      //return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
-      //const actual = (state.mysteries[index].actual >= 10) ? 11 : state.mysteries[index].actual++
-      const actual = state.mysteries[index].actual++
-      if (actual===11) vibrate(PRESET.hard) 
+      const MAX = state[section][index].decades.length
+      const actual = (MAX>=state[section][index].actual)? state[section][index].actual++ : MAX
+      if (actual===11) { vibrate(PRESET.hard); console.log('HARD!') }
       vibrate(PRESET.mid)
       return {
         ...state,
-        mysteries: state['mysteries'].map((item, i) => 
+        [section]: state[section].map((item, i) => 
           index === i ? { ...item, actual: actual  } : item
         )
       }
-
     }
 
     case "previous mysteries": {
+      const MIN = state[section][index].MIN
+      const actual = (MIN<=state[section][index].actual)? state[section][index].actual-- : MIN
       vibrate(PRESET.faint)
       return {
         ...state,
-        mysteries: state['mysteries'].map((item, i) => 
-          index === i ? { ...item, actual: state.mysteries[i].actual--  } : item
+        [section]: state[section].map((item, i) => 
+          index === i ? { ...item, actual: actual  } : item
         )
       }
     }
@@ -324,12 +294,13 @@ export function useCoronillaMisericordia(){
 
 export function useCoronillaMisericordiaStateOfEach(section, index){
   const {coronillaMisericordiaState, coronillaMisericordiaDispatch} = useHolyContext();
-  const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance ${section}`, index: index }) },  [coronillaMisericordiaDispatch, index, section])
-  const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous ${section}`, index: index }) }, [coronillaMisericordiaDispatch, index, section])
+  const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance mysteries`,  index: index, section }) },  [coronillaMisericordiaDispatch, index, section])
+  const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous mysteries`, index: index, section }) },  [coronillaMisericordiaDispatch, index, section])
   const currentState = coronillaMisericordiaState[section][index] 
 
   const markPrayer = useCallback((to)=>{
     //return coronillaMisericordiaState.actual >  currentState.indexOf(to)
+    console.log(currentState.actual)
     return currentState.actual > currentState.decades.indexOf(to)
     //console.log(currentState.actual)
   }
@@ -339,11 +310,11 @@ export function useCoronillaMisericordiaStateOfEach(section, index){
   const show = useCallback((to)=> {
     //return currentState[to].has(currentState.actual)
     //
-    console.log(`in ${index}: showing: ${currentState.decades[currentState.actual]} actual: ${currentState.actual}`)
+    //console.log(`in ${index}: showing: ${currentState.decades[currentState.actual]} actual: ${currentState.actual}`)
 
     return currentState.decades[currentState.actual]
   }
-  , [currentState, index])
+  , [currentState])
   return { show, currentState, next, prev, markPrayer }
 }
 
@@ -356,7 +327,7 @@ export function useCoronillaMisericordiaStateOf(section) {
 
   const markPrayer = useCallback((to)=>{
     //return coronillaMisericordiaState.actual >  currentState.indexOf(to)
-    console.log(currentState.actual)
+    //console.log(currentState.actual)
     return currentState.actual > currentState.elements.indexOf(to)
   }
   ,[currentState])
