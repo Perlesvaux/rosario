@@ -11,7 +11,7 @@ export function Prayer ({children, to, title}) {
   const identifier = `${to}-${header}`
   //debugger
 
-  let isShown = show(to) === to
+  let isShown = show() === to
   let wasPrayed = markPrayer(to)
 
   const setAndClose =() => {

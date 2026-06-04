@@ -155,7 +155,7 @@ export function useCoronillaMisericordiaStateOfEach(section, index){
   }
   ,[currentState])
 
-  const show = useCallback((to)=> {
+  const show = useCallback(()=> {
     return currentState.decades[currentState.actual]
   }
   , [currentState])
@@ -174,7 +174,7 @@ export function useCoronillaMisericordiaStateOf(section) {
   }
   ,[currentState])
 
-  const show = useCallback((to)=> {
+  const show = useCallback(()=> {
     return currentState.elements[currentState.actual]
   }
   , [currentState])

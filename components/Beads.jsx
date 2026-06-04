@@ -11,7 +11,7 @@ export default function Beads ({children, to, titulo}) {
   const identifier = `${titulo}-${header}`
 
   let isShown = show() === to
-  let wasPrayed = markPrayer()
+  let wasPrayed = markPrayer(to)
   // to: "avemaria" or "dolorosapasion"
   // titulo: "Ave Maria" or "Por su Dolorosa Pasion..."
 
