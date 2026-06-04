@@ -8,7 +8,7 @@ export function RenderPrayer(){
   return <> 
     {
 
-      currentState
+      currentState.elements
       .map( (each, indx)=>
       {
 

@@ -7,9 +7,9 @@ import outroImg from '@/public/outro.webp'
 
 function CoronillaOutro ({header}){
 
-  const {show, currentState, next, prev} = useCoronillaMisericordiaStateOf("outro")
+  const {show, currentState, next, prev, markPrayer} = useCoronillaMisericordiaStateOf("outro")
 
-  return ( <PrayerContext.Provider value={{header:`Oraciones Finales`, next, currentState, show}}>
+  return ( <PrayerContext.Provider value={{header:`Oraciones Finales`, next, currentState, show, markPrayer}}>
     <Slide> 
 
       <Frame 

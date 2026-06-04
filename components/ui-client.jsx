@@ -1,45 +1,23 @@
 "use client"
 import { Add } from "./ui.jsx"
-//import {  } from "./hooks.js"
 
 import { useHolyContext, usePrayerContext } from "../hooks"
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import StreakTracker from './StreakTracker.jsx'
 
 export function Prayer ({children, to, title}) {
   const {next, currentState, markPrayer, show, header} = usePrayerContext()
-  //const {coronillaMisericordiaState} = useHolyContext()
   const ref = useRef(null)
   const identifier = `${to}-${header}`
   //debugger
-  //const [wasPrayed, setWasPrayed] = useState(false)
-
-  //const pending = "bg-gray-600"
-  //const clear = "bg-teal-600"
 
   let isShown = show(to) === to
-
-  //let wasPrayed =  coronillaMisericordiaState.actual >  currentState.indexOf(to)
-  console.log(markPrayer())
   let wasPrayed = markPrayer(to)
-
-  //useEffect(()=>{
-  //
-  //  console.log('hello world!')
-  //
-  //  setWasPrayed(isShown)
-  //  console.log(`${to}${wasPrayed}`)
-  //
-  //
-  //
-  //
-  //},[isShown])
 
   const setAndClose =() => {
     next()
     ref.current.hidePopover();
   }
-  //console.log(show(to))
 
   return <>
     <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>

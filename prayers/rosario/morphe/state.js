@@ -30,13 +30,16 @@ const rosario = {
 
   complete: {
     intro : 
-    [
-      'senal1', 
-      'invocacion1', 
-      'contricion1', 
-      'credo1', 
-      'peticiones1' 
-    ]
+    {
+      elements:[
+        'senal1', 
+        'invocacion1', 
+        'contricion1', 
+        'credo1', 
+        'peticiones1' 
+      ],
+      actual:0,
+    }
     ,
     //intro : { 
     //  senal1:new Set([0]) , 
@@ -54,7 +57,7 @@ const rosario = {
     //],
     //outro: {peticiones1:new Set([5]), padrenuestro1:new Set([6]), avemarias3:new Set([7]), gloria1:new Set([8]), salve1:new Set([9])},
     //litany: {inicio1:new Set([10]), letanias1:new Set([11]), oremos1:new Set([12]), avemariapurisima3: new Set([13]), final1:new Set([14])},
-    actual:0,
+    //actual:0,
   },
 
 
