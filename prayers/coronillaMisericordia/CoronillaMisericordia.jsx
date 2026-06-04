@@ -16,6 +16,7 @@ export default function CoronillaMisericordia (){
     { condition && 
       <> 
        <CoronillaIntro  header={name} />
+       <CoronillaOutro  header={name} />
       </>
     }
 

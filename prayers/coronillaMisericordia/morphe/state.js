@@ -34,7 +34,7 @@ const coronillaMisericordia = {
       'credo1', 
     ],
     actual:0,
-  }
+  },
   //mysteries: [
   //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
   //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
@@ -43,11 +43,13 @@ const coronillaMisericordia = {
   //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
   //],
   //
-  //outro: [
-  //  'doxologiafinal1', 
-  //  'oracionfinal1',
-  //],
-  //actual:0
+  outro: { 
+    elements:[
+      'doxologiafinal1', 
+      'oracionfinal1',
+    ],
+    actual:0 
+  }
 }
 //{
 //    senal1:new Set([0]) ,
