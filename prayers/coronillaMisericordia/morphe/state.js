@@ -22,13 +22,6 @@ const updateDeep = (state, updates, actual, section, index) => {
 }
 
 
-//const decades = ['padreeterno1', 
-//  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
-//  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
-//  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
-//  'dolorosapasion10',
-//]
-
 function beadsFrom(elements, offset) {
   const result = [];
 
@@ -46,12 +39,6 @@ function beadsFrom(elements, offset) {
 
   return { elements, decades: result, actual:offset, MIN:offset};
 }
-
-// Example usage:
-//const output = beadsFrom(['padreeterno1', 'dolorosapasion10']);
-//console.log(output);
-
-
 
 
 const coronillaMisericordia = {
@@ -83,111 +70,6 @@ const coronillaMisericordia = {
     actual:0 
   }
 }
-//{
-//    senal1:new Set([0]) ,
-//    faustina1:new Set([1]) , 
-//    padrenuestro1:new Set([2]) , 
-//    avemaria1:new Set([3]) , 
-//    credo1:new Set([4]) , 
-//  }
-
-
-  //outro: {
-  //  doxologiafinal1: new Set([5]), 
-  //  oracionfinal1: new Set([6])
-  //},
-
-
-//const updates =(state)=> {
-//  return {
-//
-//    intro:{
-//
-//      previous: {
-//
-//        cmd:{
-//          0: { senal: false },
-//          1: { faustina: false },
-//          2: { padrenuestro: false },
-//          3: { avemaria1: false },
-//          4: { credo: false },
-//        },
-//
-//        actual: state.intro.actual > 0 ? state.intro.actual - 1 : 0,
-//
-//      },
-//
-//      advance: {
-//        cmd:{
-//            1: { senal: true },
-//            2: { faustina: true },
-//            3: { padrenuestro: true },
-//            4: { avemaria1: true },
-//            5: { credo: true },
-//        },
-//
-//        actual: state.intro.actual < 5 ? state.intro.actual + 1 : 5
-//      },
-//    },
-//
-//
-//
-//    outro: {
-//      previous: {
-//        cmd:{
-//          0: { doxologiafinal: false },
-//          1: { oracionfinal: false },
-//        },
-//
-//        actual: state.outro.actual > 0 ? state.outro.actual - 1 : 0,
-//      },
-//
-//      advance: {
-//
-//        cmd:{
-//          1: { doxologiafinal: true },
-//          2: { oracionfinal: true },
-//        },
-//
-//        actual: state.outro.actual < 2 ? state.outro.actual + 1 : 2,
-//      }
-//    },
-//
-//
-//
-//    mysteries:{
-//
-//      previous: {
-//        cmd:{
-//          0: { padreeterno: false },
-//          10: { dolorosapasion: false },
-//        },
-//
-//        actual: (index)=> {
-//          return state.mysteries[index].actual > 0 ? state.mysteries[index].actual - 1 : 0 
-//        }
-//      } ,
-//
-//      advance: {
-//        cmd:{
-//          1: { padreeterno: true },
-//          11: { dolorosapasion: true },
-//        },
-//
-//        actual: (index)=> {
-//          return state.mysteries[index].actual < 11 ? state.mysteries[index].actual + 1 : 11
-//        }
-//      }
-//
-//    },
-//
-//  }
-//
-////padreEterno = "P
-////dolorosaPasion =
-//
-//}
-
 
 
 const coronillaMisericordiaReducer = (state, action) => {
@@ -243,36 +125,6 @@ const coronillaMisericordiaReducer = (state, action) => {
       }
     }
 
-
-    //case "advance outro":{
-    //  vibrate(PRESET.soft)
-    //  return commit(state, outro.advance.cmd, outro.advance.actual, "outro")
-    //}
-    //
-    //case "previous outro": {
-    //  vibrate(PRESET.faint)
-    //  return commit(state, outro.previous.cmd, outro.previous.actual, "outro")
-    //}
-    //
-    //
-    //
-    //case "advance mysteries": {
-    //  const actual = mysteries.advance.actual(index)
-    //  // Indicates GLORIA reached
-    //  if (actual === LIMIT.dolorosapasion+1) vibrate(PRESET.hard)
-    //    // Indicates ongoing AVEMARIA
-    //    else if (actual > 2 && actual <= 10) vibrate(PRESET.mid)
-    //      // Normal button press feedback
-    //      else vibrate(PRESET.soft)
-    //  return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
-    //}
-    //
-    //case "previous mysteries": {
-    //  vibrate(PRESET.faint)
-    //  return commitEach(state, mysteries.previous.cmd, mysteries.previous.actual(index), "mysteries", index);
-    //}
-
-
     case "reset": {
       return coronillaMisericordia
     }
@@ -299,19 +151,11 @@ export function useCoronillaMisericordiaStateOfEach(section, index){
   const currentState = coronillaMisericordiaState[section][index] 
 
   const markPrayer = useCallback((to)=>{
-    //return coronillaMisericordiaState.actual >  currentState.indexOf(to)
-    console.log(currentState.actual)
     return currentState.actual > currentState.decades.indexOf(to)
-    //console.log(currentState.actual)
   }
   ,[currentState])
 
-
   const show = useCallback((to)=> {
-    //return currentState[to].has(currentState.actual)
-    //
-    //console.log(`in ${index}: showing: ${currentState.decades[currentState.actual]} actual: ${currentState.actual}`)
-
     return currentState.decades[currentState.actual]
   }
   , [currentState])
@@ -326,15 +170,11 @@ export function useCoronillaMisericordiaStateOf(section) {
   const currentState = coronillaMisericordiaState[section]
 
   const markPrayer = useCallback((to)=>{
-    //return coronillaMisericordiaState.actual >  currentState.indexOf(to)
-    //console.log(currentState.actual)
     return currentState.actual > currentState.elements.indexOf(to)
   }
   ,[currentState])
 
   const show = useCallback((to)=> {
-    //return currentState[to].has(coronillaMisericordiaState.actual)
-    //console.log(currentState[coronillaMisericordiaState.actual])
     return currentState.elements[currentState.actual]
   }
   , [currentState])

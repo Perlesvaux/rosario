@@ -29,18 +29,14 @@ import { PRESET, vibrate } from '../../utils'
 const rosario = {
 
   complete: {
-    intro : 
-    {
-      elements:[
-        'senal1', 
-        'invocacion1', 
-        'contricion1', 
-        'credo1', 
-        'peticiones1' 
-      ],
+    intro : {
+      elements:[ 'senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1' ],
       actual:0,
-    }
-    ,
+    },
+    outro: {
+      elements: [ 'peticiones1', 'padrenuestro1',  'avemarias3', 'gloria1', 'salve1' ],
+      actual:0
+    },
     //intro : { 
     //  senal1:new Set([0]) , 
     //  invocacion1:new Set([1]), 
@@ -62,7 +58,16 @@ const rosario = {
 
 
   simple: {
-    intro : { senal1:new Set([0]), credo1:new Set([1]), avemarias3:new Set([2]) , gloria1:new Set([3]) },
+
+    intro : {
+      elements:[ 'senal1', 'credo1', 'avemarias3', 'gloria1' ],
+      actual:0,
+    },
+    outro: {
+      elements: [ 'salve1', 'final1' ],
+      actual:0
+    },
+    //intro : { senal1:new Set([0]), credo1:new Set([1]), avemarias3:new Set([2]) , gloria1:new Set([3]) },
     //mysteries: [
     //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
     //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
@@ -71,7 +76,6 @@ const rosario = {
     //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
     //],
     //outro:{ salve1:new Set([4]), final1:new Set([5]) },
-    actual:0,
   }
 
 }
@@ -405,19 +409,35 @@ export function useRosarioStateOf(section) {
   //const currentState = state[section]
   const currentState = isSimple? state.simple[section] : state.complete[section];
   const globalActual = isSimple? state.simple.actual : state.complete.actual;
+  //
+  //const markPrayer = useCallback((to)=>{
+  //  return
+  //}
+  //  ,[])
+  //
+  //const show = useCallback((to)=> {
+  //  //console.log(currentState)
+  //  //console.log(to)
+  //  //console.log(state)
+  //  //return currentState[to].has(globalActual)
+  //}
+  //, [state, currentState, globalActual])
+
+
 
   const markPrayer = useCallback((to)=>{
-    return
+    return currentState.actual > currentState.elements.indexOf(to)
   }
-    ,[])
+  ,[currentState])
 
   const show = useCallback((to)=> {
-    //console.log(currentState)
-    //console.log(to)
-    //console.log(state)
-    //return currentState[to].has(globalActual)
+    return currentState.elements[currentState.actual]
   }
-  , [state, currentState, globalActual])
+  , [currentState])
+  return { show, currentState, next, prev, markPrayer }
+
+
+
   return { show, currentState, next, prev, markPrayer }
 }
 
