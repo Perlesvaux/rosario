@@ -22,12 +22,37 @@ const updateDeep = (state, updates, actual, section, index) => {
 }
 
 
-const decades = ['padreeterno1', 
-  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
-  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
-  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
-  'dolorosapasion10',
-]
+//const decades = ['padreeterno1', 
+//  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
+//  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
+//  'dolorosapasion10','dolorosapasion10','dolorosapasion10',
+//  'dolorosapasion10',
+//]
+
+function beadsFrom(elements) {
+  const result = [];
+
+  for (const item of elements) {
+    // Extract the number at the end of the string
+    const match = item.match(/\d+$/);
+    if (match) {
+      const count = parseInt(match[0], 10);
+      // Append the item 'count' times to the result
+      for (let i = 0; i < count; i++) {
+        result.push(item);
+      }
+    }
+  }
+
+  return { elements, decades: result};
+}
+
+// Example usage:
+//const output = beadsFrom(['padreeterno1', 'dolorosapasion10']);
+//console.log(output);
+
+
+
 
 const coronillaMisericordia = {
   intro :
@@ -44,28 +69,33 @@ const coronillaMisericordia = {
   },
   mysteries: [
     { 
-      elements: ['padreeterno1', 'dolorosapasion10'],
-      decades: decades,
+      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
+      //elements: ['padreeterno1', 'dolorosapasion10'],
+      //decades: decades,
       actual:0
     },
     { 
-      elements: ['padreeterno1', 'dolorosapasion10'],
-      decades: decades,
+      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
+      //elements: ['padreeterno1', 'dolorosapasion10'],
+      //decades: decades,
       actual:0
     },
     { 
-      elements: ['padreeterno1', 'dolorosapasion10'],
-      decades: decades,
+      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
+      //elements: ['padreeterno1', 'dolorosapasion10'],
+      //decades: decades,
       actual:0
     },
     { 
-      elements: ['padreeterno1', 'dolorosapasion10'],
-      decades: decades,
+      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
+      //elements: ['padreeterno1', 'dolorosapasion10'],
+      //decades: decades,
       actual:0
     },
     { 
-      elements: ['padreeterno1', 'dolorosapasion10'],
-      decades: decades,
+      ...beadsFrom(['padreeterno1', 'dolorosapasion10']),
+      //elements: ['padreeterno1', 'dolorosapasion10'],
+      //decades: decades,
       actual:0
     },
   ],
