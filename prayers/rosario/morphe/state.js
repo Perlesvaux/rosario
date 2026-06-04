@@ -300,71 +300,68 @@ const rosario = {
 
 const rosarioReducer = (state, action) => {
 
-
-  const { type, index } = action;
-
-  //const { intro, outro, litany, mysteries } = updates(state)
+  const { type, index, section, prayer } = action;
 
   switch (type) {
 
     case "advance":{
+      const MAX = state[prayer][section].elements.length
+      const actual = (MAX>=state[prayer][section].actual)? state[prayer][section].actual++ : MAX
       vibrate(PRESET.soft)
-      return {...state,  
-        complete: {...state.complete, actual: state.complete.actual++}, 
-        simple: {...state.simple, actual: state.simple.actual++} 
+      return {
+        ...state,
+        [prayer]: { ...state[prayer],  
+          [section]:  { ...state[prayer][section], actual:actual 
+          }
+        }
       }
     }
 
-    case "previous": {
-      vibrate(PRESET.faint)
-      //return {...state, actual: state.actual--}
-      //return {...state,  complete: {...state.complete, actual: state.complete.actual--} }
-      return {...state,  
-        complete: {...state.complete, actual: state.complete.actual--}, 
-        simple: {...state.simple, actual: state.simple.actual--} 
+    case "previous":{
+      const MIN = 0
+      const actual = (MIN<=state[prayer][section].actual)? state[prayer][section].actual-- : MIN
+      vibrate(PRESET.soft)
+      return {
+        ...state,
+        [prayer]: { ...state[prayer],  
+          [section]:  { ...state[prayer][section], actual:actual 
+          }
+        }
       }
     }
 
     case "advance mysteries": {
-      //const actual = mysteries.advance.actual(index)
-      // Indicates GLORIA reached
-      //if (actual === LIMIT.dolorosapasion+1) vibrate(PRESET.hard)
-        // Indicates ongoing AVEMARIA
-        //else if (actual > 2 && actual <= 10) vibrate(PRESET.mid)
-          // Normal button press feedback
-          //else vibrate(PRESET.soft)
-      //return commitEach(state, mysteries.advance.cmd, actual, "mysteries", index);
-      //const actual = (state.mysteries[index].actual >= 10) ? 11 : state.mysteries[index].actual++
-
-      const actual = state.complete.mysteries[index].actual++
-      if (actual===11) vibrate(PRESET.hard) 
+      const MAX = state[prayer][section][index].decades.length
+      const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
+      if (actual===11) { vibrate(PRESET.hard); console.log('HARD!') }
       vibrate(PRESET.mid)
       return {
         ...state,
-        complete:{...state.complete,
-
-          mysteries: state.complete['mysteries'].map((item, i) => 
+        [prayer]: { ...state[prayer],
+          [section]: state[prayer][section].map((item, i) => 
             index === i ? { ...item, actual: actual  } : item
           )
-
-
         }
-        
       }
-
-
     }
 
     case "previous mysteries": {
+      const MIN = state[prayer][section][index].MIN
+      const actual = (MIN<=state[prayer][section][index].actual)? state[prayer][section][index].actual-- : MIN
       vibrate(PRESET.faint)
       return {
         ...state,
-        mysteries: state['mysteries'].map((item, i) => 
-          index === i ? { ...item, actual: state.mysteries[i].actual--  } : item
-        )
+        [prayer]: { ...state[prayer],
+          [section]: state[prayer][section].map((item, i) => 
+            index === i ? { ...item, actual: actual  } : item
+          )
+        }
       }
     }
 
+    case "reset": {
+      return coronillaMisericordia
+    }
 
     default:
       return `undefined case: ${type}`
@@ -380,116 +377,100 @@ export function useRosario(){
 
 
 
-export function useRosarioStateOfEach(section, index){
-  const {state, dispatch, isSimple} = useHolyContext();
-  const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index, section])
-  const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index, section])
-  //const currentState = state[section][index] 
-  //const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
+//export function useRosarioStateOfEach(section, index){
+//  const {state, dispatch, isSimple} = useHolyContext();
+//  const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index, section])
+//  const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index, section])
+//  //const currentState = state[section][index] 
+//  //const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
+//
+//  const currentState = isSimple? state.simple[section][index] : state.complete[section][index];
+//  const globalActual = isSimple? state.simple[section][index].actual : state.complete[section][index].actual;
+//
+//
+//  const show = useCallback((to)=> {
+//    //console.log(currentState)
+//    console.log(currentState[to])
+//    console.log(globalActual)
+//    //return currentState[to].has(globalActual)
+//  }
+//  , [currentState])
+//  return { show, currentState, next, prev }
+//}
+//
+//
+//export function useRosarioStateOf(section) {
+//  const {state, dispatch, isSimple} = useHolyContext();
+//  const next = useCallback(()=>{dispatch({type: `advance`})}, [dispatch])
+//  const prev = useCallback(()=>{dispatch({type: `previous`})}, [dispatch])
+//  //const currentState = state[section]
+//  const currentState = isSimple? state.simple[section] : state.complete[section];
+//  const globalActual = isSimple? state.simple.actual : state.complete.actual;
+//  //
+//  //const markPrayer = useCallback((to)=>{
+//  //  return
+//  //}
+//  //  ,[])
+//  //
+//  //const show = useCallback((to)=> {
+//  //  //console.log(currentState)
+//  //  //console.log(to)
+//  //  //console.log(state)
+//  //  //return currentState[to].has(globalActual)
+//  //}
+//  //, [state, currentState, globalActual])
+//
+//
+//
+//  const markPrayer = useCallback((to)=>{
+//    return currentState.actual > currentState.elements.indexOf(to)
+//  }
+//  ,[currentState])
+//
+//  const show = useCallback((to)=> {
+//    return currentState.elements[currentState.actual]
+//  }
+//  , [currentState])
+//  return { show, currentState, next, prev, markPrayer }
+//
+//
+//
+//  return { show, currentState, next, prev, markPrayer }
+//}
 
-  const currentState = isSimple? state.simple[section][index] : state.complete[section][index];
-  const globalActual = isSimple? state.simple[section][index].actual : state.complete[section][index].actual;
+export function useRosarioStateOfEach(prayer, section, index){
+  const {state, dispatch} = useHolyContext();
+  const next = useCallback(()=>{ dispatch({type: `advance mysteries`,  index: index, section, prayer }) }, [dispatch, index, section, prayer])
+  const prev = useCallback(()=>{ dispatch({type: `previous mysteries`, index: index, section, prayer }) }, [dispatch, index, section, prayer])
+  const currentState = state[prayer][section][index] 
 
+  const markPrayer = useCallback((to)=>{
+    return currentState.actual > currentState.decades.indexOf(to)
+  }
+  ,[currentState])
 
-  const show = useCallback((to)=> {
-    //console.log(currentState)
-    console.log(currentState[to])
-    console.log(globalActual)
-    //return currentState[to].has(globalActual)
+  const show = useCallback(()=> {
+    return currentState.decades[currentState.actual]
   }
   , [currentState])
-  return { show, currentState, next, prev }
+  return { show, currentState, next, prev, markPrayer }
 }
 
 
-export function useRosarioStateOf(section) {
-  const {state, dispatch, isSimple} = useHolyContext();
-  const next = useCallback(()=>{dispatch({type: `advance`})}, [dispatch])
-  const prev = useCallback(()=>{dispatch({type: `previous`})}, [dispatch])
-  //const currentState = state[section]
-  const currentState = isSimple? state.simple[section] : state.complete[section];
-  const globalActual = isSimple? state.simple.actual : state.complete.actual;
-  //
-  //const markPrayer = useCallback((to)=>{
-  //  return
-  //}
-  //  ,[])
-  //
-  //const show = useCallback((to)=> {
-  //  //console.log(currentState)
-  //  //console.log(to)
-  //  //console.log(state)
-  //  //return currentState[to].has(globalActual)
-  //}
-  //, [state, currentState, globalActual])
-
-
+export function useRosarioStateOf(prayer, section) {
+  const {state, dispatch} = useHolyContext();
+  const next = useCallback(()=>{dispatch({type: `advance`,  section, prayer})}, [dispatch, section, prayer])
+  const prev = useCallback(()=>{dispatch({type: `previous`, section, prayer})}, [dispatch, section, prayer])
+  const currentState = state[prayer][section]
 
   const markPrayer = useCallback((to)=>{
     return currentState.actual > currentState.elements.indexOf(to)
   }
   ,[currentState])
 
-  const show = useCallback((to)=> {
+  const show = useCallback(()=> {
     return currentState.elements[currentState.actual]
   }
   , [currentState])
   return { show, currentState, next, prev, markPrayer }
-
-
-
-  return { show, currentState, next, prev, markPrayer }
 }
-
-//export function useRosarioStateOfEach(section, index){
-//  const {state, dispatch, isSimple} = useHolyContext();
-//  const next = useCallback(()=>{ dispatch({type: `advance ${section}`, index: index }) },  [dispatch, index, section])
-//  const prev = useCallback(()=>{ dispatch({type: `previous ${section}`, index: index }) }, [dispatch, index, section])
-//  const currentState = isSimple?state.simple[section][index] :  state.complete[section][index]
-//  const show = useCallback((to)=> {
-//
-//
-//    const isAvemaria = (to === "avemaria" && currentState.actual > 1 && currentState.actual <= 11)
-//    const conditions = updates(state)
-//    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-//    const mapping = {};
-//
-//    for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
-//      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-//      mapping[innerKey] = parseInt(key); // Store the index as a number
-//    }
-//
-//    return mapping[to] === currentState.actual || isAvemaria;
-//  }
-//
-//
-//    , [currentState, isSimple, section, state])
-//  return { show, currentState, next, prev }
-//}
-//
-//export function useRosarioStateOf(section) {
-//  const {state, dispatch, isSimple} = useHolyContext();
-//  const next = useCallback(()=>{dispatch({type: `advance ${section}`})}, [dispatch, section])
-//  const prev = useCallback(()=>{dispatch({type: `previous ${section}`})}, [dispatch, section])
-//  const currentState = isSimple? state.simple[section] : state.complete[section];
-//
-//
-//  const show = useCallback((to)=> {
-//    const conditions = updates(state)
-//    // Build reverse mapping: { "senal": 0, "invocacion": 1, ... }
-//    const mapping = {};
-//
-//    for (const [key, value] of Object.entries(conditions[section].previous.cmd[isSimple? "simple": "complete"])) {
-//      const innerKey = Object.keys(value)[0]; // e.g., "senal", "invocacion", etc.
-//      mapping[innerKey] = parseInt(key); // Store the index as a number
-//    }
-//
-//    return mapping[to] === currentState.actual;
-//  }
-//
-//
-//    , [currentState, isSimple, section, state])
-//
-//  return { show, currentState, next, prev }
-//}
-
