@@ -23,27 +23,35 @@ const updateDeep = (state, updates, actual, section, index) => {
 
 
 const coronillaMisericordia = {
-  intro : {
-    senal1:new Set([0]) ,
-    faustina1:new Set([1]) , 
-    padrenuestro1:new Set([2]) , 
-    avemaria1:new Set([3]) , 
-    credo1:new Set([4]) , 
-  }
-  ,
-  mysteries: [
-    { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-    { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-    { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-    { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
-    { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
+  intro :
+
+  [
+    'senal1',
+    'faustina1', 
+    'padrenuestro1', 
+    'avemaria1', 
+    'credo1', 
   ],
-  outro: {
-    doxologiafinal1: new Set([5]), 
-    oracionfinal1: new Set([6])
-  },
+  //mysteries: [
+  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
+  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
+  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
+  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
+  //  { padreeterno1: new Set([0]), dolorosapasion10: new Set([1,2,3,4,5,6,7,8,9,10]), actual:0},
+  //],
+  //outro: {
+  //  doxologiafinal1: new Set([5]), 
+  //  oracionfinal1: new Set([6])
+  //},
   actual:0
 }
+//{
+//    senal1:new Set([0]) ,
+//    faustina1:new Set([1]) , 
+//    padrenuestro1:new Set([2]) , 
+//    avemaria1:new Set([3]) , 
+//    credo1:new Set([4]) , 
+//  }
 
 
 
@@ -246,7 +254,7 @@ export function useCoronillaMisericordiaStateOfEach(section, index){
   const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous ${section}`, index: index }) }, [coronillaMisericordiaDispatch, index, section])
   const currentState = coronillaMisericordiaState[section][index] 
   const show = useCallback((to)=> {
-    return currentState[to].has(currentState.actual)
+    //return currentState[to].has(currentState.actual)
   }
   , [currentState])
   return { show, currentState, next, prev }
@@ -259,11 +267,18 @@ export function useCoronillaMisericordiaStateOf(section) {
   const prev = useCallback(()=>{coronillaMisericordiaDispatch({type: `previous`})}, [coronillaMisericordiaDispatch])
   const currentState = coronillaMisericordiaState[section]
 
+  const markPrayer = useCallback((to)=>{
+    return coronillaMisericordiaState.actual >  currentState.indexOf(to)
+  }
+  ,[coronillaMisericordiaState, currentState])
+
   const show = useCallback((to)=> {
-    return currentState[to].has(coronillaMisericordiaState.actual)
+    //return currentState[to].has(coronillaMisericordiaState.actual)
+    console.log(currentState[coronillaMisericordiaState.actual])
+    return currentState[coronillaMisericordiaState.actual]
   }
   , [coronillaMisericordiaState, currentState])
-  return { show, currentState, next, prev }
+  return { show, currentState, next, prev, markPrayer }
 }
 
 

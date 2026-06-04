@@ -29,36 +29,45 @@ import { PRESET, vibrate } from '../../utils'
 const rosario = {
 
   complete: {
-    intro : { 
-      senal1:new Set([0]) , 
-      invocacion1:new Set([1]), 
-      contricion1:new Set([2]), 
-      credo1:new Set([3]), 
-      peticiones1:new Set([4]) 
-    },
-    mysteries: [
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-    ],
-    outro: {peticiones1:new Set([5]), padrenuestro1:new Set([6]), avemarias3:new Set([7]), gloria1:new Set([8]), salve1:new Set([9])},
-    litany: {inicio1:new Set([10]), letanias1:new Set([11]), oremos1:new Set([12]), avemariapurisima3: new Set([13]), final1:new Set([14])},
+    intro : 
+    [
+      'senal1', 
+      'invocacion1', 
+      'contricion1', 
+      'credo1', 
+      'peticiones1' 
+    ]
+    ,
+    //intro : { 
+    //  senal1:new Set([0]) , 
+    //  invocacion1:new Set([1]), 
+    //  contricion1:new Set([2]), 
+    //  credo1:new Set([3]), 
+    //  peticiones1:new Set([4]) 
+    //},
+    //mysteries: [
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
+    //],
+    //outro: {peticiones1:new Set([5]), padrenuestro1:new Set([6]), avemarias3:new Set([7]), gloria1:new Set([8]), salve1:new Set([9])},
+    //litany: {inicio1:new Set([10]), letanias1:new Set([11]), oremos1:new Set([12]), avemariapurisima3: new Set([13]), final1:new Set([14])},
     actual:0,
   },
 
 
   simple: {
     intro : { senal1:new Set([0]), credo1:new Set([1]), avemarias3:new Set([2]) , gloria1:new Set([3]) },
-    mysteries: [
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
-      {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
-    ],
-    outro:{ salve1:new Set([4]), final1:new Set([5]) },
+    //mysteries: [
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]), actual:-1},
+    //],
+    //outro:{ salve1:new Set([4]), final1:new Set([5]) },
     actual:0,
   }
 
@@ -379,7 +388,7 @@ export function useRosarioStateOfEach(section, index){
     //console.log(currentState)
     console.log(currentState[to])
     console.log(globalActual)
-    return currentState[to].has(globalActual)
+    //return currentState[to].has(globalActual)
   }
   , [currentState])
   return { show, currentState, next, prev }
@@ -394,14 +403,19 @@ export function useRosarioStateOf(section) {
   const currentState = isSimple? state.simple[section] : state.complete[section];
   const globalActual = isSimple? state.simple.actual : state.complete.actual;
 
+  const markPrayer = useCallback((to)=>{
+    return
+  }
+    ,[])
+
   const show = useCallback((to)=> {
     //console.log(currentState)
     //console.log(to)
     //console.log(state)
-    return currentState[to].has(globalActual)
+    //return currentState[to].has(globalActual)
   }
   , [state, currentState, globalActual])
-  return { show, currentState, next, prev }
+  return { show, currentState, next, prev, markPrayer }
 }
 
 //export function useRosarioStateOfEach(section, index){

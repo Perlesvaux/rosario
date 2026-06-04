@@ -16,8 +16,6 @@ export default function CoronillaMisericordia (){
     { condition && 
       <> 
        <CoronillaIntro  header={name} />
-        {items.map((item, indx) => <CoronillaPrayers key={indx} misterio={item} index={indx} />)}
-       <CoronillaOutro  header={name} />
       </>
     }
 

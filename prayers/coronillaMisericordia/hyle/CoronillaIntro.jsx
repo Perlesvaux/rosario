@@ -7,9 +7,9 @@ import introImg from '@/public/intro.webp'
 
 function CoronillaIntro ({header}) {
 
-  const {show, currentState, next, prev} = useCoronillaMisericordiaStateOf("intro")
+  const {show, currentState, markPrayer, next, prev} = useCoronillaMisericordiaStateOf("intro")
 
-  return ( <PrayerContext.Provider value={{header, next, currentState, show}}>
+  return ( <PrayerContext.Provider value={{header, next, currentState, show, markPrayer}}>
     <Slide>
 
       <Frame

@@ -8,8 +8,7 @@ export function RenderPrayer(){
   return <> 
     {
 
-      Object.keys(currentState)
-      .filter((eachKey)=> eachKey != "actual")
+      currentState
       .map( (each, indx)=>
       {
 

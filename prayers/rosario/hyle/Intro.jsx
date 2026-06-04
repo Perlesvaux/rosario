@@ -9,9 +9,9 @@ function Intro ({header}) {
 
   const {isSimple} = useHolyContext()
 
-  const {show, currentState, next, prev} = useRosarioStateOf("intro")
+  const {show, currentState, next, prev, markPrayer} = useRosarioStateOf("intro")
 
-  return ( <PrayerContext.Provider value={{header, next, currentState, show, isSimple}}>
+  return ( <PrayerContext.Provider value={{header, next, currentState, show, isSimple, markPrayer}}>
 
     <Slide>
 
