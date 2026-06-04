@@ -18,7 +18,7 @@ export default function Beads ({children, to, titulo}) {
 
   const setAndCloseRosary =() => {
     next()
-    if (currentState.actual == LIMIT[to]) ref.current.hidePopover();
+    if (currentState.actual == 10) ref.current.hidePopover();
   }
 
   return <>
