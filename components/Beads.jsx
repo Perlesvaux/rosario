@@ -18,7 +18,7 @@ export default function Beads ({children, to, titulo}) {
 
   const setAndCloseRosary =() => {
     next()
-    if (currentState.actual == 10) ref.current.hidePopover();
+    if (currentState.actual == 10+currentState.offset) ref.current.hidePopover();
   }
 
   return <>
@@ -37,7 +37,7 @@ export default function Beads ({children, to, titulo}) {
         {wasPrayed && !isShown
         ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
         : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity={isShown?".77":".33"} fill={isShown?"#ffffff" : "#434343"}><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
-      { titulo } {isShown && <>→</>} <BeadCount count={currentState.actual}/>
+      { titulo } {isShown && <>→</>} <BeadCount state={currentState}/>
     </button>
 
   </>
@@ -52,22 +52,25 @@ function Bead ({onClick}){
 
   return <button 
     onClick={onClick}
-    className={`${currentState.actual>9? 'bg-rose-700 ':'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}
+    className={`${currentState.actual-currentState.offset>9? 'bg-rose-700 ':'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}
     > 
-     <BeadCount count={currentState.actual} />
+     <BeadCount state={currentState} />
   </button>
     
 
 }
 
 
-  const BeadCount = ({count}) => {
+  const BeadCount = ({state}) => {
     //const { to } = useBeadContext()
+
+     const count = state.actual-state.offset
 
     //const decrease = {
     //  dolorosapasion:0,
     //  avemaria:1,
     //}
+       
 
     //
     //if (to==="dolorosapasion" && count-(LIMIT.dolorosapasion-9) < 0) return  

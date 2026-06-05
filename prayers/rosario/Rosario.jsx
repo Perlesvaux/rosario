@@ -14,6 +14,7 @@ export default function Rosario (){
     { condition && 
       <> 
         <Intro header={name} />
+        {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
         <Outro header={name} />
         <Litany header={name}/>
       </>

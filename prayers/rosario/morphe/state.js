@@ -26,6 +26,24 @@ import { PRESET, vibrate } from '../../utils'
   }
 
 
+function beadsFrom(elements, offset) {
+  const result = [];
+
+  for (const item of elements) {
+    // Extract the number at the end of the string
+    const match = item.match(/\d+$/);
+    if (match) {
+      const count = parseInt(match[0], 10);
+      // Append the item 'count' times to the result
+      for (let i = 0; i < count; i++) {
+        result.push(item);
+      }
+    }
+  }
+
+  return { elements, decades: result, actual:0, offset:offset-1};
+}
+
 const rosario = {
 
   complete: {
@@ -33,6 +51,13 @@ const rosario = {
       elements:[ 'senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1' ],
       actual:0,
     },
+    mysteries: [
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2)},
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2)},
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2)},
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2)},
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2)},
+    ],
     outro: {
       elements: [ 'peticiones1', 'padrenuestro1',  'avemarias3', 'gloria1', 'salve1' ],
       actual:0,
@@ -41,23 +66,6 @@ const rosario = {
       elements:['inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1'],
       actual:0,
     },
-    //intro : { 
-    //  senal1:new Set([0]) , 
-    //  invocacion1:new Set([1]), 
-    //  contricion1:new Set([2]), 
-    //  credo1:new Set([3]), 
-    //  peticiones1:new Set([4]) 
-    //},
-    //mysteries: [
-    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-    //  {misterio1:new Set([-1]),padrenuestro1:new Set([0]),avemaria10:new Set([1,2,3,4,5,6,7,8,9,10]),gloria1:new Set([11]),jaculatorias1:new Set([12]), actual:-1},
-    //],
-    //outro: {peticiones1:new Set([5]), padrenuestro1:new Set([6]), avemarias3:new Set([7]), gloria1:new Set([8]), salve1:new Set([9])},
-    //litany: {inicio1:new Set([10]), letanias1:new Set([11]), oremos1:new Set([12]), avemariapurisima3: new Set([13]), final1:new Set([14])},
-    //actual:0,
   },
 
 
@@ -67,6 +75,13 @@ const rosario = {
       elements:[ 'senal1', 'credo1', 'avemarias3', 'gloria1' ],
       actual:0,
     },
+    mysteries: [
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2)},
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2)},
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2)},
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2)},
+      { ...beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2)},
+    ],
     outro: {
       elements: [ 'salve1', 'final1' ],
       actual:0
@@ -350,7 +365,8 @@ const rosarioReducer = (state, action) => {
     }
 
     case "previous mysteries": {
-      const MIN = state[prayer][section][index].MIN
+      //const MIN = state[prayer][section][index].MIN
+      const MIN=0
       const actual = (MIN<=state[prayer][section][index].actual)? state[prayer][section][index].actual-- : MIN
       vibrate(PRESET.faint)
       return {
@@ -446,6 +462,8 @@ export function useRosarioStateOfEach(prayer, section, index){
   const {state, dispatch} = useHolyContext();
   const next = useCallback(()=>{ dispatch({type: `advance mysteries`,  index: index, section, prayer }) }, [dispatch, index, section, prayer])
   const prev = useCallback(()=>{ dispatch({type: `previous mysteries`, index: index, section, prayer }) }, [dispatch, index, section, prayer])
+  console.log("****")
+  console.log(state[prayer])
   const currentState = state[prayer][section][index] 
 
   const markPrayer = useCallback((to)=>{

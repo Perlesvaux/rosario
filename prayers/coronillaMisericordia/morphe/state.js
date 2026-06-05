@@ -37,7 +37,7 @@ function beadsFrom(elements, offset) {
     }
   }
 
-  return { elements, decades: result, actual:offset, MIN:offset};
+  return { elements, decades: result, actual:0, offset:offset-1};
 }
 
 
@@ -48,11 +48,11 @@ const coronillaMisericordia = {
       actual:0,
     },
     mysteries: [
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 0)},
+      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
+      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
+      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
+      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
+      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
     ],
     outro: { 
       elements:[ 'doxologiafinal1', 'oracionfinal1' ],
@@ -110,7 +110,8 @@ const coronillaMisericordiaReducer = (state, action) => {
     }
 
     case "previous mysteries": {
-      const MIN = state[prayer][section][index].MIN
+      //const MIN = state[prayer][section][index].MIN
+      const MIN=0
       const actual = (MIN<=state[prayer][section][index].actual)? state[prayer][section][index].actual-- : MIN
       vibrate(PRESET.faint)
       return {
@@ -144,8 +145,8 @@ export function useCoronillaMisericordia(){
 
 export function useCoronillaMisericordiaStateOfEach(prayer, section, index){
   const {coronillaMisericordiaState, coronillaMisericordiaDispatch} = useHolyContext();
-  const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance mysteries`,  index: index, section, prayer }) }, [coronillaMisericordiaDispatch, index, section, prayer])
-  const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous mysteries`, index: index, section, prayer }) }, [coronillaMisericordiaDispatch, index, section, prayer])
+  const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance mysteries`,  index, section, prayer }) }, [coronillaMisericordiaDispatch, index, section, prayer])
+  const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous mysteries`, index, section, prayer }) }, [coronillaMisericordiaDispatch, index, section, prayer])
   const currentState = coronillaMisericordiaState[prayer][section][index] 
 
   const markPrayer = useCallback((to)=>{

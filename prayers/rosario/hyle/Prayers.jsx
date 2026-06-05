@@ -8,9 +8,9 @@ function Prayers({misterio, index}) {
 
   const { isSimple } = useHolyContext()
 
-  const { show, currentState, next, prev } = useRosarioStateOfEach("mysteries",index)
+  const { show, currentState, next, prev, markPrayer } = useRosarioStateOfEach(isSimple? "simple":"complete", "mysteries",index)
 
-  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple, misterio}}>
+  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple, misterio, markPrayer}}>
 
     <Slide>
 
