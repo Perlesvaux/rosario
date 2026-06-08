@@ -37,7 +37,14 @@ function beadsFrom(elements, offset) {
     }
   }
 
-  return { elements, decades: result, actual:0, offset:offset-1};
+  //return { elements, decades: result, actual:0, offset:offset-1, limit};
+  return Array.from({ length: 5 }, () => ({
+    elements, 
+    decades: result, 
+    actual: 0, 
+    offset: offset - 1, 
+    limit: offset + 10,
+  }));
 }
 
 
@@ -47,13 +54,7 @@ const coronillaMisericordia = {
       elements: ['senal1', 'faustina1', 'padrenuestro1', 'avemaria1', 'credo1', ],
       actual:0,
     },
-    mysteries: [
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
-      { ...beadsFrom(['padreeterno1', 'dolorosapasion10'], 1)},
-    ],
+    mysteries: beadsFrom(['padreeterno1', 'dolorosapasion10'], 1),
     outro: { 
       elements:[ 'doxologiafinal1', 'oracionfinal1' ],
       actual:0 
@@ -95,9 +96,11 @@ const coronillaMisericordiaReducer = (state, action) => {
     }
 
     case "advance mysteries": {
-      const MAX = state[prayer][section][index].decades.length
+      //const MAX = state[prayer][section][index].decades.length
+      const MAX = state[prayer][section][index].limit
       const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
-      if (actual===11) { vibrate(PRESET.hard); console.log('HARD!') }
+      //if (actual===11) { vibrate(PRESET.hard); console.log('HARD!') }
+      if (actual===MAX) { vibrate(PRESET.hard); console.log('HARD!') }
       vibrate(PRESET.mid)
       return {
         ...state,
