@@ -7,17 +7,15 @@ import {
   useCallback
 } from 'react'
 
-import { luminosos, gozosos, gloriosos, dolorosos,
-coronillaMisericordia
-
-} from '../prayers'
-import { useHolyContext } from './context/useHolyContext'
-//import { useHolyContext } from './context/useHolyContext'
-//import {  } from './prayers/coronillaMisericordia/morphe/schema.js'
-
+import { 
+  luminosos, 
+  gozosos, 
+  gloriosos, 
+  dolorosos,
+  coronillaMisericordia
+} from '@/prayers'
 
 export const misterio_del_dia = () => {
-  // Add here new routes, such as 'Coronilla a la Divina Misericordia'
   const today = new Date().getDay()
   console.log(new Date())
   if (today === 1 || today === 6) return gozosos
@@ -26,10 +24,7 @@ export const misterio_del_dia = () => {
   if (today === 4) return luminosos
 }
 
-
-
 const routesReducer = (state, action) => {
-
   // Add here new routes, such as 'Coronilla a la Divina Misericordia'
   const { type } = action;
 
@@ -56,20 +51,14 @@ const routesReducer = (state, action) => {
     default:
       return dolorosos
   }
-
 }
-
-
 
 export function useRoute() {
   const [route, routeDispatch] = useReducer( routesReducer, null, misterio_del_dia )
   const ref = useRef()
   const [isReady, setIsReady] = useState(false)
-
-
-  const[isSimple, setSimple] = useState(true)
+  const [isSimple, setSimple] = useState(true)
   const toggle = useCallback(() => { setSimple(!isSimple) }, [isSimple])
-  //return {isSimple, toggle}
 
   const { lista, rezo, nombre:name } = route
 
@@ -99,9 +88,5 @@ export function useRoute() {
   const items = useMemo(()=> lista, [lista])
 
   return {name, items, select, ref, backToSquareOne, isReady, choice, toggle, isSimple}
-
 }
-
-
-
 

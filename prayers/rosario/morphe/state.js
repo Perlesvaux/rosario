@@ -1,29 +1,9 @@
 import {  
   useReducer,
   useCallback,
-  useMemo,
 } from 'react'
+
 import { useHolyContext } from '@/hooks'
-import { PRESET, vibrate } from '../../utils'
-
-  const updateShallow = (state, updates, actual, section, part) => {
-    return {
-      [part]: {
-        ...state[part],
-        [section]: { ...state[part][section], ...updates[part][actual[part]], actual:actual[part] }
-      }}
-  }
-
-  const updateDeep = (state, updates, actual, section, index, part) => {
-    return {
-      [part]:{
-        ...state[part],
-        [section]: state[part][section].map((item, i) => 
-          index === i ? { ...item, ...updates[part][actual[part]], actual:actual[part]  } : item
-        )
-      }
-    }
-  }
 
 const rosario = () =>{
 
@@ -98,6 +78,7 @@ const rosario = () =>{
     }
   }
 
+  // Add here new prayers here such as 'Coronilla a la Divina Misericordia'. key name should match rezo i.e.: misericordia here should match rezo:misericordia
 
 
   return rosario
@@ -142,7 +123,6 @@ const rosarioReducer = (state, action) => {
       const MAX = state[prayer][section][index].decades.length
       const LIMIT = state[prayer][section][index].limit
       const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
-      //if (actual===11) { vibrate(PRESET.hard); console.log('HARD!') }
       if (actual===LIMIT) { vibrate(PRESET.hard); console.log('HARD!') }
       vibrate(PRESET.mid)
       return {
@@ -156,7 +136,6 @@ const rosarioReducer = (state, action) => {
     }
 
     case "previous mysteries": {
-      //const MIN = state[prayer][section][index].MIN
       const MIN=0
       const actual = (MIN<=state[prayer][section][index].actual)? state[prayer][section][index].actual-- : MIN
       vibrate(PRESET.faint)
@@ -171,11 +150,7 @@ const rosarioReducer = (state, action) => {
     }
 
     case "reset": {
-      const rosarioRef = rosario(); // Store reference
-      console.log('reset called');
-      console.log('Is same reference?', rosario() === rosarioRef);
-      console.log('Original rosario:', rosario());
-      return { ...rosario() }; // Use copy
+      return rosario()
     }
 
     default:
@@ -189,6 +164,7 @@ export function useRosario(){
   const [ state, dispatch ] = useReducer( rosarioReducer, null, rosario )
   return { state, dispatch }
 }
+
 
 export function useRosarioState(prayer, section, index = null) {
   const { state, dispatch } = useHolyContext();
@@ -231,44 +207,37 @@ export function useRosarioState(prayer, section, index = null) {
 }
 
 
+export const PRESET = {
+  hard:[80,9,80,9,80],
+  mid: 60,
+  soft: 50,
+  faint: 40,
+}
+
+const vibrate = (intensity) => {
+  if (navigator.vibrate) navigator.vibrate(intensity)
+}
 
 
-
-//export function useRosarioStateOfEach(prayer, section, index){
-//  const {state, dispatch} = useHolyContext();
-//  const next = useCallback(()=>{ dispatch({type: `advance mysteries`,  index: index, section, prayer }) }, [dispatch, index, section, prayer])
-//  const prev = useCallback(()=>{ dispatch({type: `previous mysteries`, index: index, section, prayer }) }, [dispatch, index, section, prayer])
-//  console.log("****")
-//  console.log(state[prayer])
-//  const currentState = state[prayer][section][index] 
-//
-//  const markPrayer = useCallback((to)=>{
-//    return currentState.actual > currentState.decades.indexOf(to)
-//  }
-//  ,[currentState])
-//
-//  const show = useCallback(()=> {
-//    return currentState.decades[currentState.actual]
-//  }
-//  , [currentState])
-//  return { show, currentState, next, prev, markPrayer }
-//}
-//
-//
-//export function useRosarioStateOf(prayer, section) {
-//  const {state, dispatch} = useHolyContext();
-//  const next = useCallback(()=>{dispatch({type: `advance`,  section, prayer})}, [dispatch, section, prayer])
-//  const prev = useCallback(()=>{dispatch({type: `previous`, section, prayer})}, [dispatch, section, prayer])
-//  const currentState = state[prayer][section]
-//
-//  const markPrayer = useCallback((to)=>{
-//    return currentState.actual > currentState.elements.indexOf(to)
-//  }
-//  ,[currentState])
-//
-//  const show = useCallback(()=> {
-//    return currentState.elements[currentState.actual]
-//  }
-//  , [currentState])
-//  return { show, currentState, next, prev, markPrayer }
-//}
+  //Legacy. No longer used, but very helpful for insight when managing complex state
+  //
+  //const updateShallow = (state, updates, actual, section, part) => {
+  //  return {
+  //    [part]: {
+  //      ...state[part],
+  //      [section]: { ...state[part][section], ...updates[part][actual[part]], actual:actual[part] }
+  //    }}
+  //}
+  //
+  //const updateDeep = (state, updates, actual, section, index, part) => {
+  //  return {
+  //    [part]:{
+  //      ...state[part],
+  //      [section]: state[part][section].map((item, i) => 
+  //        index === i ? { ...item, ...updates[part][actual[part]], actual:actual[part]  } : item
+  //      )
+  //    }
+  //  }
+  //}
+  //
+  //
