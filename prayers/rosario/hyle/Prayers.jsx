@@ -1,14 +1,15 @@
 import { memo } from 'react';
 import { Slide, Frame, Steps } from '@/components' 
 import { useHolyContext, PrayerContext } from '@/hooks'
-import { useRosarioStateOfEach } from '../morphe/state'
+//import { useRosarioStateOfEach } from '../morphe/state'
+import { useRosarioState } from '../morphe/state'
 import { RenderPrayer } from '@/oratio'
 
 function Prayers({misterio, index}) {
 
   const { isSimple } = useHolyContext()
 
-  const { show, currentState, next, prev, markPrayer } = useRosarioStateOfEach(isSimple? "simple":"complete", "mysteries",index)
+  const { show, currentState, next, prev, markPrayer } = useRosarioState(isSimple? "simple":"complete", "mysteries",index)
 
   return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple, misterio, markPrayer}}>
 

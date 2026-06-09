@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Slide, Frame, Steps } from '@/components'
 import { useHolyContext, PrayerContext } from '@/hooks'
-import { useRosarioStateOf } from '../morphe/state'
+import { useRosarioState } from '../morphe/state'
 import { RenderPrayer } from '@/oratio';
 import litanyImg from '@/public/litany.webp'
 
@@ -10,7 +10,7 @@ function Litany ({header}){
 
   const {isSimple} = useHolyContext()
 
-  const {show, currentState, next, prev, markPrayer} = useRosarioStateOf(isSimple? "simple":"complete","litany")
+  const {show, currentState, next, prev, markPrayer} = useRosarioState(isSimple? "simple":"complete","litany")
 
   return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, isSimple, markPrayer}}>
 

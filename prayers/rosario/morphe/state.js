@@ -119,11 +119,11 @@ const rosarioReducer = (state, action) => {
     }
 
     case "advance mysteries": {
-      //const MAX = state[prayer][section][index].decades.length
-      const MAX = state[prayer][section][index].limit
+      const MAX = state[prayer][section][index].decades.length
+      const LIMIT = state[prayer][section][index].limit
       const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
       //if (actual===11) { vibrate(PRESET.hard); console.log('HARD!') }
-      if (actual===MAX) { vibrate(PRESET.hard); console.log('HARD!') }
+      if (actual===LIMIT) { vibrate(PRESET.hard); console.log('HARD!') }
       vibrate(PRESET.mid)
       return {
         ...state,
@@ -166,42 +166,85 @@ export function useRosario(){
   return { state, dispatch }
 }
 
-
-export function useRosarioStateOfEach(prayer, section, index){
-  const {state, dispatch} = useHolyContext();
-  const next = useCallback(()=>{ dispatch({type: `advance mysteries`,  index: index, section, prayer }) }, [dispatch, index, section, prayer])
-  const prev = useCallback(()=>{ dispatch({type: `previous mysteries`, index: index, section, prayer }) }, [dispatch, index, section, prayer])
-  console.log("****")
-  console.log(state[prayer])
-  const currentState = state[prayer][section][index] 
-
-  const markPrayer = useCallback((to)=>{
-    return currentState.actual > currentState.decades.indexOf(to)
-  }
-  ,[currentState])
-
-  const show = useCallback(()=> {
-    return currentState.decades[currentState.actual]
-  }
-  , [currentState])
-  return { show, currentState, next, prev, markPrayer }
+export function useRosarioState(prayer, section, index = null) {
+  const { state, dispatch } = useHolyContext();
+  
+  const isDeepLevel = index !== null;
+  const currentState = isDeepLevel 
+    ? state[prayer][section][index]
+    : state[prayer][section];
+  
+  const arrayKey = isDeepLevel ? 'decades' : 'elements';
+  const advanceType = isDeepLevel ? 'advance mysteries' : 'advance';
+  const prevType = isDeepLevel ? 'previous mysteries' : 'previous';
+  
+  const actions = {
+    next: useCallback(() => {
+      dispatch({ 
+        type: advanceType, 
+        ...(isDeepLevel && { index }), 
+        section, 
+        prayer 
+      });
+    }, [advanceType, isDeepLevel, index, section, prayer, dispatch]),
+    
+    prev: useCallback(() => {
+      dispatch({ 
+        type: prevType, 
+        ...(isDeepLevel && { index }), 
+        section, 
+        prayer 
+      });
+    }, [prevType, isDeepLevel, index, section, prayer, dispatch])
+  };
+  
+  return {
+    show: useCallback(() => currentState[arrayKey][currentState.actual], [currentState, arrayKey]),
+    currentState,
+    markPrayer: useCallback((to) => currentState.actual > currentState[arrayKey].indexOf(to), [currentState, arrayKey]),
+    ...actions
+  };
 }
 
 
-export function useRosarioStateOf(prayer, section) {
-  const {state, dispatch} = useHolyContext();
-  const next = useCallback(()=>{dispatch({type: `advance`,  section, prayer})}, [dispatch, section, prayer])
-  const prev = useCallback(()=>{dispatch({type: `previous`, section, prayer})}, [dispatch, section, prayer])
-  const currentState = state[prayer][section]
 
-  const markPrayer = useCallback((to)=>{
-    return currentState.actual > currentState.elements.indexOf(to)
-  }
-  ,[currentState])
 
-  const show = useCallback(()=> {
-    return currentState.elements[currentState.actual]
-  }
-  , [currentState])
-  return { show, currentState, next, prev, markPrayer }
-}
+
+//export function useRosarioStateOfEach(prayer, section, index){
+//  const {state, dispatch} = useHolyContext();
+//  const next = useCallback(()=>{ dispatch({type: `advance mysteries`,  index: index, section, prayer }) }, [dispatch, index, section, prayer])
+//  const prev = useCallback(()=>{ dispatch({type: `previous mysteries`, index: index, section, prayer }) }, [dispatch, index, section, prayer])
+//  console.log("****")
+//  console.log(state[prayer])
+//  const currentState = state[prayer][section][index] 
+//
+//  const markPrayer = useCallback((to)=>{
+//    return currentState.actual > currentState.decades.indexOf(to)
+//  }
+//  ,[currentState])
+//
+//  const show = useCallback(()=> {
+//    return currentState.decades[currentState.actual]
+//  }
+//  , [currentState])
+//  return { show, currentState, next, prev, markPrayer }
+//}
+//
+//
+//export function useRosarioStateOf(prayer, section) {
+//  const {state, dispatch} = useHolyContext();
+//  const next = useCallback(()=>{dispatch({type: `advance`,  section, prayer})}, [dispatch, section, prayer])
+//  const prev = useCallback(()=>{dispatch({type: `previous`, section, prayer})}, [dispatch, section, prayer])
+//  const currentState = state[prayer][section]
+//
+//  const markPrayer = useCallback((to)=>{
+//    return currentState.actual > currentState.elements.indexOf(to)
+//  }
+//  ,[currentState])
+//
+//  const show = useCallback(()=> {
+//    return currentState.elements[currentState.actual]
+//  }
+//  , [currentState])
+//  return { show, currentState, next, prev, markPrayer }
+//}

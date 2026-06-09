@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import { Slide, Frame, Steps  } from '@/components'
 import { PrayerContext } from '@/hooks'
-import { useCoronillaMisericordiaStateOf } from '../morphe/state'
+import { useCoronillaMisericordiaState } from '../morphe/state'
 import { RenderPrayer } from '@/oratio'
 import introImg from '@/public/intro.webp'
 
 function CoronillaIntro ({header}) {
 
-  const {show, currentState, markPrayer, next, prev} = useCoronillaMisericordiaStateOf("misericordia","intro")
+  const {show, currentState, markPrayer, next, prev} = useCoronillaMisericordiaState("misericordia","intro")
 
   return ( <PrayerContext.Provider value={{header, next, currentState, show, markPrayer}}>
     <Slide>

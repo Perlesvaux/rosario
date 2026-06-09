@@ -96,11 +96,11 @@ const coronillaMisericordiaReducer = (state, action) => {
     }
 
     case "advance mysteries": {
-      //const MAX = state[prayer][section][index].decades.length
-      const MAX = state[prayer][section][index].limit
+      const MAX = state[prayer][section][index].decades.length
+      const LIMIT = state[prayer][section][index].limit
       const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
       //if (actual===11) { vibrate(PRESET.hard); console.log('HARD!') }
-      if (actual===MAX) { vibrate(PRESET.hard); console.log('HARD!') }
+      if (actual===LIMIT) { vibrate(PRESET.hard); console.log('HARD!') }
       vibrate(PRESET.mid)
       return {
         ...state,
@@ -144,43 +144,81 @@ export function useCoronillaMisericordia(){
 }
 
 
-
-
-export function useCoronillaMisericordiaStateOfEach(prayer, section, index){
-  const {coronillaMisericordiaState, coronillaMisericordiaDispatch} = useHolyContext();
-  const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance mysteries`,  index, section, prayer }) }, [coronillaMisericordiaDispatch, index, section, prayer])
-  const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous mysteries`, index, section, prayer }) }, [coronillaMisericordiaDispatch, index, section, prayer])
-  const currentState = coronillaMisericordiaState[prayer][section][index] 
-
-  const markPrayer = useCallback((to)=>{
-    return currentState.actual > currentState.decades.indexOf(to)
-  }
-  ,[currentState])
-
-  const show = useCallback(()=> {
-    return currentState.decades[currentState.actual]
-  }
-  , [currentState])
-  return { show, currentState, next, prev, markPrayer }
+export function useCoronillaMisericordiaState(prayer, section, index = null) {
+  const { coronillaMisericordiaState, coronillaMisericordiaDispatch } = useHolyContext();
+  
+  const isDeepLevel = index !== null;
+  const state = isDeepLevel 
+    ? coronillaMisericordiaState[prayer][section][index]
+    : coronillaMisericordiaState[prayer][section];
+  
+  const arrayKey = isDeepLevel ? 'decades' : 'elements';
+  const advanceType = isDeepLevel ? 'advance mysteries' : 'advance';
+  const prevType = isDeepLevel ? 'previous mysteries' : 'previous';
+  
+  const actions = {
+    next: useCallback(() => {
+      coronillaMisericordiaDispatch({ 
+        type: advanceType, 
+        ...(isDeepLevel && { index }), 
+        section, 
+        prayer 
+      });
+    }, [advanceType, isDeepLevel, index, section, prayer, coronillaMisericordiaDispatch]),
+    
+    prev: useCallback(() => {
+      coronillaMisericordiaDispatch({ 
+        type: prevType, 
+        ...(isDeepLevel && { index }), 
+        section, 
+        prayer 
+      });
+    }, [prevType, isDeepLevel, index, section, prayer, coronillaMisericordiaDispatch])
+  };
+  
+  return {
+    show: useCallback(() => state[arrayKey][state.actual], [state, arrayKey]),
+    currentState: state,
+    markPrayer: useCallback((to) => state.actual > state[arrayKey].indexOf(to), [state, arrayKey]),
+    ...actions
+  };
 }
 
-
-export function useCoronillaMisericordiaStateOf(prayer, section) {
-  const {coronillaMisericordiaState, coronillaMisericordiaDispatch} = useHolyContext();
-  const next = useCallback(()=>{coronillaMisericordiaDispatch({type: `advance`,  section, prayer})}, [coronillaMisericordiaDispatch, section, prayer])
-  const prev = useCallback(()=>{coronillaMisericordiaDispatch({type: `previous`, section, prayer})}, [coronillaMisericordiaDispatch, section, prayer])
-  const currentState = coronillaMisericordiaState[prayer][section]
-
-  const markPrayer = useCallback((to)=>{
-    return currentState.actual > currentState.elements.indexOf(to)
-  }
-  ,[currentState])
-
-  const show = useCallback(()=> {
-    return currentState.elements[currentState.actual]
-  }
-  , [currentState])
-  return { show, currentState, next, prev, markPrayer }
-}
+//export function useCoronillaMisericordiaStateOfEach(prayer, section, index){
+//  const {coronillaMisericordiaState, coronillaMisericordiaDispatch} = useHolyContext();
+//  const next = useCallback(()=>{ coronillaMisericordiaDispatch({type: `advance mysteries`,  index, section, prayer }) }, [coronillaMisericordiaDispatch, index, section, prayer])
+//  const prev = useCallback(()=>{ coronillaMisericordiaDispatch({type: `previous mysteries`, index, section, prayer }) }, [coronillaMisericordiaDispatch, index, section, prayer])
+//  const currentState = coronillaMisericordiaState[prayer][section][index] 
+//
+//  const markPrayer = useCallback((to)=>{
+//    return currentState.actual > currentState.decades.indexOf(to)
+//  }
+//  ,[currentState])
+//
+//  const show = useCallback(()=> {
+//    return currentState.decades[currentState.actual]
+//  }
+//  , [currentState])
+//  return { show, currentState, next, prev, markPrayer }
+//}
+//
+//
+//export function useCoronillaMisericordiaStateOf(prayer, section) {
+//  const {coronillaMisericordiaState, coronillaMisericordiaDispatch} = useHolyContext();
+//  const next = useCallback(()=>{coronillaMisericordiaDispatch({type: `advance`,  section, prayer})}, [coronillaMisericordiaDispatch, section, prayer])
+//  const prev = useCallback(()=>{coronillaMisericordiaDispatch({type: `previous`, section, prayer})}, [coronillaMisericordiaDispatch, section, prayer])
+//  const currentState = coronillaMisericordiaState[prayer][section]
+//
+//  const markPrayer = useCallback((to)=>{
+//    return currentState.actual > currentState.elements.indexOf(to)
+//  }
+//  ,[currentState])
+//
+//  const show = useCallback(()=> {
+//    return currentState.elements[currentState.actual]
+//  }
+//  , [currentState])
+//  return { show, currentState, next, prev, markPrayer }
+//}
 
 
