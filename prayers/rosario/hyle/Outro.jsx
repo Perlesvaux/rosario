@@ -7,12 +7,14 @@ import outroImg from '@/public/outro.webp'
 
 function Outro ({header}){
 
-  const {isSimple} = useHolyContext()
+  const {choice} = useHolyContext()
+
+  //const {show, currentState, next, prev, markPrayer} = useRosarioState( choice() ,"intro")
 
   //const {show, currentState, next, prev} = useRosarioStateOf("outro")
-  const {show, currentState, next, prev, markPrayer} = useRosarioState( isSimple? "simple":"complete" ,"outro")
+  const {show, currentState, next, prev, markPrayer} = useRosarioState( choice() ,"outro")
 
-  return ( <PrayerContext.Provider value={{header:`${header} - Oraciones Finales`, next, currentState, show, isSimple, markPrayer}}>
+  return ( <PrayerContext.Provider value={{header:`${header} - Oraciones Finales`, next, currentState, show, markPrayer}}>
     <Slide> 
 
       <Frame 

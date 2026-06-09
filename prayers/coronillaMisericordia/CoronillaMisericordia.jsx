@@ -11,17 +11,17 @@ export default function CoronillaMisericordia (){
   //
   const condition = name==="CORONILLA A LA DIVINA MISERICORDIA"
   //
-  return <> 
-
-    { condition && 
-      <> 
-       <CoronillaIntro  header={name} />
-        {items.map((item, indx) => <CoronillaPrayers key={indx} misterio={item} index={indx} />)}
-       <CoronillaOutro  header={name} />
-      </>
-    }
-
-  </>
+  //return <> 
+  //
+  //  { condition && 
+  //    <> 
+  //     <CoronillaIntro  header={name} />
+  //      {items.map((item, indx) => <CoronillaPrayers key={indx} misterio={item} index={indx} />)}
+  //     <CoronillaOutro  header={name} />
+  //    </>
+  //  }
+  //
+  //</>
 
 }
        // {items.map((item, indx) => <CoronillaPrayers key={indx} misterio={item} index={indx} />)}

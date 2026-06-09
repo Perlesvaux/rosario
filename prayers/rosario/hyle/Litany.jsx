@@ -8,31 +8,33 @@ import litanyImg from '@/public/litany.webp'
 
 function Litany ({header}){
 
-  const {isSimple} = useHolyContext()
+  const {choice, isSimple} = useHolyContext()
 
-  const {show, currentState, next, prev, markPrayer} = useRosarioState(isSimple? "simple":"complete","litany")
+  const {show, currentState, next, prev, markPrayer} = useRosarioState(choice(),"litany")
+  const condition = !isSimple && typeof currentState !== "undefined"
 
-  return ( <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, isSimple, markPrayer}}>
+  return ( <>
+    { condition &&
+      <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, markPrayer}}>
 
+        <Slide> 
 
-    {
-      !isSimple && <Slide> 
+          <Frame
+            src={litanyImg}
+            alt="Que renueve la faz de la tierra!" 
+            advance={next}
+            retrocede={prev}
+          />
 
-      <Frame
-        src={litanyImg}
-        alt="Que renueve la faz de la tierra!" 
-        advance={next}
-        retrocede={prev}
-      />
+          <Steps>
+            <RenderPrayer />
+          </Steps>
 
-      <Steps>
-        <RenderPrayer />
-      </Steps>
+        </Slide>
 
-    </Slide>
-
+      </PrayerContext.Provider>
     }
-  </PrayerContext.Provider>)
+  </>)
 }
 
 export default memo(Litany)

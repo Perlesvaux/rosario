@@ -4,12 +4,15 @@ import {
   useEffect,
   useMemo,
   useState,
+  useCallback
 } from 'react'
 
 import { luminosos, gozosos, gloriosos, dolorosos,
 coronillaMisericordia
 
 } from '../prayers'
+import { useHolyContext } from './context/useHolyContext'
+//import { useHolyContext } from './context/useHolyContext'
 //import {  } from './prayers/coronillaMisericordia/morphe/schema.js'
 
 
@@ -63,6 +66,13 @@ export function useRoute() {
   const ref = useRef()
   const [isReady, setIsReady] = useState(false)
 
+
+  const[isSimple, setSimple] = useState(true)
+  const toggle = useCallback(() => { setSimple(!isSimple) }, [isSimple])
+  //return {isSimple, toggle}
+
+  const { lista, rezo, nombre:name } = route
+
   useEffect(() => {
     routeDispatch({ type: "hoy" })
     setIsReady(true)
@@ -77,10 +87,16 @@ export function useRoute() {
     routeDispatch({type:e.currentTarget.name})
   }
 
-  const { lista, nombre:name } = route
+  const choice = () => {
+    if (rezo==='rosario'){
+      return isSimple? 'simple' : 'complete'
+    }
+    return rezo
+  }
+
   const items = useMemo(()=> lista, [lista])
 
-  return {name, items, select, ref, backToSquareOne, isReady}
+  return {name, items, select, ref, backToSquareOne, isReady, choice, toggle, isSimple}
 
 }
 

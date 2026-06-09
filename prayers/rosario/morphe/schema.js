@@ -25,6 +25,7 @@ import luminosos5 from '../../../public/luminosos5.jpg'
 
 
 export const gozosos = {
+  rezo:"rosario",
   nombre:"GOZOSOS",
   lista: [
   {
@@ -76,6 +77,7 @@ export const gozosos = {
 }
 
 export const dolorosos = {
+  rezo:"rosario",
   nombre: "DOLOROSOS",
   lista: [
   {
@@ -129,6 +131,7 @@ export const dolorosos = {
 
 
 export const gloriosos = {
+  rezo:"rosario",
   nombre: "GLORIOSOS",
   lista: [
   {
@@ -182,6 +185,7 @@ export const gloriosos = {
 
 
 export const luminosos = {
+  rezo:"rosario",
   nombre: "LUMINOSOS",
   lista: [
   {

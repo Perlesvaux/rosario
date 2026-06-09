@@ -2,6 +2,7 @@
 import caratula from '@/public/coronillaMisericordia.webp'
 
 export const coronillaMisericordia = {
+  rezo:"misericordia",
   nombre:"CORONILLA A LA DIVINA MISERICORDIA",
   lista: [
   {

@@ -7,11 +7,12 @@ import introImg from '@/public/intro.webp'
 
 function Intro ({header}) {
 
-  const {isSimple} = useHolyContext()
+  const {choice} = useHolyContext()
 
-  const {show, currentState, next, prev, markPrayer} = useRosarioState( isSimple? "simple":"complete" ,"intro")
+  const {show, currentState, next, prev, markPrayer} = useRosarioState( choice() ,"intro")
 
-  return ( <PrayerContext.Provider value={{header, next, currentState, show, isSimple, markPrayer}}>
+  // {next, currentState, markPrayer, show, header} = usePrayerContext() uses these 
+  return ( <PrayerContext.Provider value={{header, next, currentState, show, markPrayer}}>
 
     <Slide>
 

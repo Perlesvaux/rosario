@@ -25,65 +25,85 @@ import { PRESET, vibrate } from '../../utils'
     }
   }
 
+const rosario = () =>{
 
-function beadsFrom(elements, offset) {
-  const result = [];
+  function beadsFrom(elements, offset) {
+    const result = [];
 
-  for (const item of elements) {
-    // Extract the number at the end of the string
-    const match = item.match(/\d+$/);
-    if (match) {
-      const count = parseInt(match[0], 10);
-      // Append the item 'count' times to the result
-      for (let i = 0; i < count; i++) {
-        result.push(item);
+    for (const item of elements) {
+      // Extract the number at the end of the string
+      const match = item.match(/\d+$/);
+      if (match) {
+        const count = parseInt(match[0], 10);
+        // Append the item 'count' times to the result
+        for (let i = 0; i < count; i++) {
+          result.push(item);
+        }
+      }
+    }
+
+    //return { elements, decades: result, actual:0, offset:offset-1, limit};
+    return Array.from({ length: 5 }, () => ({
+      elements, 
+      decades: result, 
+      actual: 0, 
+      offset: offset - 1, 
+      limit: offset + 10,
+    }));
+  }
+
+  const rosario = {
+
+    complete: {
+      intro : {
+        elements:[ 'senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1' ],
+        actual:0,
+      },
+      mysteries: beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2),
+      outro: {
+        elements: [ 'peticiones1', 'padrenuestro1',  'avemarias3', 'gloria1', 'salve1' ],
+        actual:0,
+      },
+      litany: {
+        elements:['inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1'],
+        actual:0,
+      },
+    },
+
+
+    simple: {
+
+      intro : {
+        elements:[ 'senal1', 'credo1', 'avemarias3', 'gloria1' ],
+        actual:0,
+      },
+      mysteries: beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2),
+      outro: {
+        elements: [ 'salve1', 'final1' ],
+        actual:0
+      },
+    },
+
+
+    misericordia: {
+      intro : {
+        elements: ['senal1', 'faustina1', 'padrenuestro1', 'avemaria1', 'credo1', ],
+        actual:0,
+      },
+      mysteries: beadsFrom(['padreeterno1', 'dolorosapasion10'], 1),
+      outro: { 
+        elements:[ 'doxologiafinal1', 'oracionfinal1' ],
+        actual:0 
       }
     }
   }
 
-  //return { elements, decades: result, actual:0, offset:offset-1, limit};
-  return Array.from({ length: 5 }, () => ({
-    elements, 
-    decades: result, 
-    actual: 0, 
-    offset: offset - 1, 
-    limit: offset + 10,
-  }));
-}
-
-const rosario = {
-
-  complete: {
-    intro : {
-      elements:[ 'senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1' ],
-      actual:0,
-    },
-    mysteries: beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2),
-    outro: {
-      elements: [ 'peticiones1', 'padrenuestro1',  'avemarias3', 'gloria1', 'salve1' ],
-      actual:0,
-    },
-    litany: {
-      elements:['inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1'],
-      actual:0,
-    },
-  },
 
 
-  simple: {
-
-    intro : {
-      elements:[ 'senal1', 'credo1', 'avemarias3', 'gloria1' ],
-      actual:0,
-    },
-    mysteries: beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2),
-    outro: {
-      elements: [ 'salve1', 'final1' ],
-      actual:0
-    },
-  }
+  return rosario
 
 }
+
 
 
 const rosarioReducer = (state, action) => {
@@ -151,7 +171,11 @@ const rosarioReducer = (state, action) => {
     }
 
     case "reset": {
-      return state
+      const rosarioRef = rosario(); // Store reference
+      console.log('reset called');
+      console.log('Is same reference?', rosario() === rosarioRef);
+      console.log('Original rosario:', rosario());
+      return { ...rosario() }; // Use copy
     }
 
     default:
@@ -162,7 +186,7 @@ const rosarioReducer = (state, action) => {
 
 
 export function useRosario(){
-  const [ state, dispatch ] = useReducer( rosarioReducer, rosario )
+  const [ state, dispatch ] = useReducer( rosarioReducer, null, rosario )
   return { state, dispatch }
 }
 

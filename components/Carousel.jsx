@@ -4,20 +4,21 @@ import {Rezo,
 import { Rosario, CoronillaMisericordia  } from '../prayers'
  
 import {HolyContext, useTitle, useToggleSimple, useRoute} from '../hooks'
-import {useRosario, useCoronillaMisericordia} from '../prayers'
+import {useRosario} from '../prayers'
+//import {useRosario, useCoronillaMisericordia} from '../prayers'
 
 export default function Carousel() {
   const { state, dispatch } = useRosario() //HYLE
-  const { coronillaMisericordiaState, coronillaMisericordiaDispatch } = useCoronillaMisericordia() //HYLE
+  //const { coronillaMisericordiaState, coronillaMisericordiaDispatch } = useCoronillaMisericordia() //HYLE
 
-  const {name, items, select, backToSquareOne, ref, isReady} = useRoute() //MORPHE
+  const {name, items, select, backToSquareOne, ref, isReady, choice, toggle, isSimple} = useRoute() //MORPHE
 
-  const {isSimple, toggle} = useToggleSimple()
+  //const {isSimple, toggle} = useToggleSimple()
 
 
   useTitle(name)
 
-  return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne, name, items, isReady, isSimple, toggle, coronillaMisericordiaState, coronillaMisericordiaDispatch }}>
+  return (<HolyContext.Provider value={{ state, dispatch, select, backToSquareOne, name, items, isReady, isSimple, toggle, choice }}>
     <div className="flex justify-center items-center">
       <div className="max-w-lg">
 
@@ -28,9 +29,6 @@ export default function Carousel() {
             <Rezo>
 
               <Rosario />
-              <CoronillaMisericordia />
-
-
 
             </Rezo>
 
