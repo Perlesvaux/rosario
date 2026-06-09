@@ -73,12 +73,12 @@ const useStreak = () => {
 };
 
 export default function StreakTracker() {
-  const { state, simpleState } = useHolyContext();
+  const { state } = useHolyContext();
   const { streak, load, complete } = useStreak();
 
   //const wasRosaryPrayedToday = false
-  //const wasRosaryPrayedToday = state.complete.mysteries.every(mystery => mystery.avemaria) 
-  //  || state.simple.mysteries.every(mystery => mystery.avemaria);
+  const wasRosaryPrayedToday = state.complete.mysteries.every(mystery => mystery.actual >= mystery.limit  ) 
+    || state.simple.mysteries.every(mystery => mystery.actual >= mystery.limit);
 
   //debugger
 
@@ -90,11 +90,11 @@ export default function StreakTracker() {
   }, [load]);
 
   // Update when prayed
-  //useEffect(() => {
-  //  if (wasRosaryPrayedToday) {
-  //    complete()
-  //  }
-  //}, [wasRosaryPrayedToday, complete]);
+  useEffect(() => {
+    if (wasRosaryPrayedToday) {
+      complete()
+    }
+  }, [wasRosaryPrayedToday, complete]);
 
 
   return <div className={
