@@ -87,12 +87,14 @@ export function useRoute() {
     routeDispatch({type:e.currentTarget.name})
   }
 
-  const choice = () => {
+  const escogerRezo = () => {
     if (rezo==='rosario'){
       return isSimple? 'simple' : 'complete'
     }
     return rezo
   }
+
+  const choice = escogerRezo()
 
   const items = useMemo(()=> lista, [lista])
 

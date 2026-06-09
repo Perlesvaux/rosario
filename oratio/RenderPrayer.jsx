@@ -5,8 +5,6 @@ import { Credo } from './Credo'
 
 export function RenderPrayer(){
   const {misterio, currentState} = usePrayerContext()
-  console.log(`renderprayer:`)
-  console.log(currentState)
   return <> 
     {
 

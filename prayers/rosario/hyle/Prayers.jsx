@@ -9,13 +9,7 @@ function Prayers({misterio, index}) {
 
   const { isSimple, choice } = useHolyContext()
 
-  //const { choice } = useHolyContext()
-
-  console.log(`${choice()} actual`)
-  //const { show, currentState, next, prev, markPrayer } = useRosarioState(isSimple? "simple":"complete", "mysteries",index)
-  const { show, currentState, next, prev, markPrayer } = useRosarioState(choice(), "mysteries",index)
-
-  //console.log(currentState)
+  const { show, currentState, next, prev, markPrayer } = useRosarioState(choice, "mysteries",index)
 
   return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple, misterio, markPrayer}}>
 

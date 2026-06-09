@@ -9,8 +9,7 @@ import litanyImg from '@/public/litany.webp'
 function Litany ({header}){
 
   const {choice, isSimple} = useHolyContext()
-
-  const {show, currentState, next, prev, markPrayer} = useRosarioState(choice(),"litany")
+  const {show, currentState, next, prev, markPrayer} = useRosarioState(choice,"litany")
   const condition = !isSimple && typeof currentState !== "undefined"
 
   return ( <>

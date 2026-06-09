@@ -9,7 +9,7 @@ function Intro ({header}) {
 
   const {choice} = useHolyContext()
 
-  const {show, currentState, next, prev, markPrayer} = useRosarioState( choice() ,"intro")
+  const {show, currentState, next, prev, markPrayer} = useRosarioState( choice ,"intro")
 
   // {next, currentState, markPrayer, show, header} = usePrayerContext() uses these 
   return ( <PrayerContext.Provider value={{header, next, currentState, show, markPrayer}}>
