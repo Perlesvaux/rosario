@@ -1,7 +1,4 @@
-import {  
-  useReducer,
-  useCallback,
-} from 'react'
+import {  useReducer, useCallback } from 'react'
 
 import { useHolyContext } from '@/hooks'
 

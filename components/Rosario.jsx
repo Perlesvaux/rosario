@@ -1,21 +1,26 @@
-import Pray from './Pray.jsx'
 import { memo } from 'react'
-
+import { Pray } from '.'
+import { useHolyContext } from '@/hooks'
 import introImg from '@/public/intro.webp'
 import outroImg from '@/public/outro.webp'
 import litanyImg from '@/public/litany.webp'
 
-import { useHolyContext } from '@/hooks'
-
 function Rosario (){
   const {name, items} = useHolyContext()
   return <> 
-    <Pray header={name} src={introImg} section="intro" />
-    {items.map((item, indx) => <Pray key={indx} header={item.titulo} src={item.imagen} section="mysteries" index={indx} misterio={item} />)}
-    <Pray header={name} src={outroImg} section="outro" />
-    <Pray header={`${name} - Letanías`} src={litanyImg} section="litany" />
+    <Pray section="intro" header={name} src={introImg}/>
+    {
+      items.map((item, indx) => 
+        <Pray section="mysteries" 
+          key={indx} 
+          header={item.titulo} 
+          src={item.imagen} 
+          index={indx} 
+          misterio={item} />)
+    }
+    <Pray section="outro" header={name} src={outroImg} />
+    <Pray section="litany" header={`${name} - Letanías`} src={litanyImg} />
   </>
-
 }
 
 export default memo(Rosario)

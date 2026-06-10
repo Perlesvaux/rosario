@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import { Slide, Frame, Steps  } from '@/components'
+import { Slide, Frame, Steps  } from '.'
 import { useHolyContext, PrayerContext } from '@/hooks'
-import { useRosarioState } from '.'
+import { useRosarioState } from '@/prayers'
 import { RenderPrayer } from '@/oratio'
 
 function Pray ({header, src, section, misterio, index=null }) {
@@ -17,23 +17,18 @@ function Pray ({header, src, section, misterio, index=null }) {
   const condition = typeof currentState !== "undefined"
   if (!condition) return
 
-  // {next, currentState, markPrayer, show, header} = usePrayerContext() uses these 
   return ( <PrayerContext.Provider value={{header:h, next, currentState, show, markPrayer, misterio}}>
     <Slide>
-
       <Frame
         src={src}
         alt={header}
         advance={next}
         retrocede={prev}
       />
-
       <Steps>
         <RenderPrayer />
       </Steps>
-
     </Slide>
-
   </PrayerContext.Provider>)
 }
 export default memo(Pray)

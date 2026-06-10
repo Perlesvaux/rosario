@@ -1,7 +1,15 @@
-export { default as  Rosario } from './Rosario'
+"use client"
+
 export { 
   useRosario,
   useRosarioState,
 } from './state'
-export { luminosos, gozosos, gloriosos, dolorosos, coronillaMisericordia } from './schema'
+
+export { 
+  luminosos, 
+  gozosos, 
+  gloriosos, 
+  dolorosos, 
+  coronillaMisericordia
+} from './schema'
 
