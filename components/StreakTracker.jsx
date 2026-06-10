@@ -1,6 +1,5 @@
 "use client"
-import { useHolyContext } from "../hooks"
-
+import { useHolyContext } from "@/hooks"
 import { useEffect, useState, useCallback } from 'react'
 
 const initial = { last: null, count: 0 }
@@ -101,7 +100,7 @@ export default function StreakTracker() {
     `${ doneForToday
 ? "bg-gray-800/90 text-white"
 : "bg-red-600/90 text-white animate-pulse"
-} font-black rounded-full h-8 w-8 flex items-center justify-center`
+} font-black rounded-full h-8 w-8 flex items-center justify-center shadow-xl/30`
   }>
     {streak.count}
   </div>;

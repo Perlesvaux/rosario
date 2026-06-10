@@ -17,7 +17,6 @@ import {
 
 export const misterio_del_dia = () => {
   const today = new Date().getDay()
-  console.log(new Date())
   if (today === 1 || today === 6) return gozosos
   if (today === 2 || today === 5) return dolorosos
   if (today === 3 || today === 0) return gloriosos
@@ -72,7 +71,6 @@ export function useRoute() {
   }
 
   const select = (e) => {
-    console.log(e.currentTarget.name)
     routeDispatch({type:e.currentTarget.name})
   }
 

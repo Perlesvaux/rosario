@@ -3,8 +3,8 @@ export const requestWakeLock = async () => {
   try {
     if ('wakeLock' in navigator) {
       wakeLock = await navigator.wakeLock.request('screen');
-      console.log('Wake lock is active!');
-      wakeLock.addEventListener('release', ()=>{ console.log('Wake lock released!') });
+      //console.log('Wake lock is active!');
+      //wakeLock.addEventListener('release', ()=>{ console.log('Wake lock released!') });
     }
   } 
   catch (err) {

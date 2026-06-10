@@ -1,4 +1,4 @@
-import { Carousel } from '../components'
+import { Carousel } from '@/components'
 
 export default function Home() {
   return <Carousel />

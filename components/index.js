@@ -18,6 +18,5 @@ export {
   Steps, 
   Prayer,
   Menu, 
-  Help,
   ToggleSimple,
 } from './ui-client'
