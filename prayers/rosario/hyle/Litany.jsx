@@ -12,28 +12,26 @@ function Litany ({header}){
   const {show, currentState, next, prev, markPrayer} = useRosarioState(choice,"litany")
   const condition = !isSimple && typeof currentState !== "undefined"
 
-  return ( <>
-    { condition &&
-      <PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, markPrayer}}>
+  if (!condition) return
+  return (<PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, markPrayer}}>
 
-        <Slide> 
+    <Slide> 
 
-          <Frame
-            src={litanyImg}
-            alt="Que renueve la faz de la tierra!" 
-            advance={next}
-            retrocede={prev}
-          />
+      <Frame
+        src={litanyImg}
+        alt="Que renueve la faz de la tierra!" 
+        advance={next}
+        retrocede={prev}
+      />
 
-          <Steps>
-            <RenderPrayer />
-          </Steps>
+      <Steps>
+        <RenderPrayer />
+      </Steps>
 
-        </Slide>
+    </Slide>
 
-      </PrayerContext.Provider>
-    }
-  </>)
+  </PrayerContext.Provider>
+  )
 }
 
 export default memo(Litany)
