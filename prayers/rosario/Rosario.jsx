@@ -19,9 +19,9 @@ function Rosario (){
   const {name, items} = useHolyContext()
   return <> 
     <Pray header={name} src={introImg} section="intro" />
-    {items.map((item, indx) => <Prayers key={indx} misterio={item} index={indx} />)}
+    {items.map((item, indx) => <Pray key={indx} header={item.titulo} src={item.imagen} section="mysteries" index={indx} misterio={item} />)}
     <Pray header={name} src={outroImg} section="outro" />
-    <Pray header={name} src={litanyImg} section="litany" />
+    <Pray header={`${name} - Letanías`} src={litanyImg} section="litany" />
   </>
 
 }

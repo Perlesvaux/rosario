@@ -4,17 +4,21 @@ import { useHolyContext, PrayerContext } from '@/hooks'
 import { useRosarioState } from './morphe/state'
 import { RenderPrayer } from '@/oratio'
 
-function Pray ({header, src, section }) {
+function Pray ({header, src, section, misterio, index=null }) {
 
   const {choice} = useHolyContext()
 
-  const {show, currentState, next, prev, markPrayer} = useRosarioState( choice, section)
+  const h = (index===null) ?  header : misterio.encabezado
+
+  const {show, currentState, next, prev, markPrayer} = index===null
+    ? useRosarioState( choice, section ) 
+    : useRosarioState(choice, section, index)
 
   const condition = typeof currentState !== "undefined"
   if (!condition) return
 
   // {next, currentState, markPrayer, show, header} = usePrayerContext() uses these 
-  return ( <PrayerContext.Provider value={{header, next, currentState, show, markPrayer}}>
+  return ( <PrayerContext.Provider value={{header:h, next, currentState, show, markPrayer, misterio}}>
     <Slide>
 
       <Frame

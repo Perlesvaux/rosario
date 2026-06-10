@@ -11,7 +11,7 @@ function Prayers({misterio, index}) {
   const { show, currentState, next, prev, markPrayer } = useRosarioState(choice, "mysteries",index)
 
   //return ( <PrayerContext.Provider value={{header, next, currentState, show, markPrayer}}>
-  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, isSimple, misterio, markPrayer}}>
+  return ( <PrayerContext.Provider value={{header:misterio.encabezado, next, currentState, show, misterio, markPrayer}}>
 
     <Slide>
 
