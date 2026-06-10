@@ -123,8 +123,13 @@ const rosarioReducer = (state, action) => {
       const MAX = state[prayer][section][index].decades.length
       const LIMIT = state[prayer][section][index].limit
       const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
-      if (actual===LIMIT) { vibrate(PRESET.hard); console.log('HARD!') }
-      vibrate(PRESET.mid)
+
+      if (actual===LIMIT) { 
+        vibrate(PRESET.hard); 
+      } else {
+        vibrate(PRESET.mid)
+      }
+
       return {
         ...state,
         [prayer]: { ...state[prayer],
