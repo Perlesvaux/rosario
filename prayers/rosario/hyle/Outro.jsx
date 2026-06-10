@@ -10,7 +10,8 @@ function Outro ({header}){
   const {choice} = useHolyContext()
   const {show, currentState, next, prev, markPrayer} = useRosarioState(choice, "outro")
 
-  return ( <PrayerContext.Provider value={{header:`${header} - Oraciones Finales`, next, currentState, show, markPrayer}}>
+  //return ( <PrayerContext.Provider value={{header:`${header} - Oraciones Finales`, next, currentState, show, markPrayer}}>
+  return ( <PrayerContext.Provider value={{header, next, currentState, show, markPrayer}}>
     <Slide> 
 
       <Frame 

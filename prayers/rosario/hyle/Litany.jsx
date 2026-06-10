@@ -10,10 +10,13 @@ function Litany ({header}){
 
   const {choice, isSimple} = useHolyContext()
   const {show, currentState, next, prev, markPrayer} = useRosarioState(choice,"litany")
-  const condition = !isSimple && typeof currentState !== "undefined"
+  //const condition = !isSimple && typeof currentState !== "undefined"
+  const condition = typeof currentState !== "undefined"
+  //console.log('litany ' + condition )
 
   if (!condition) return
-  return (<PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, markPrayer}}>
+  //return (<PrayerContext.Provider value={{header:`${header} - Letanías Lauretanas`, next, currentState, show, markPrayer}}>
+  return ( <PrayerContext.Provider value={{header, next, currentState, show, markPrayer}}>
 
     <Slide> 
 
