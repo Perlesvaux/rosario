@@ -1,3 +1,5 @@
+"use client"
+
 import {  useReducer, useCallback } from 'react'
 
 import { useHolyContext } from '@/hooks'
@@ -92,7 +94,10 @@ const rosarioReducer = (state, action) => {
 
     case "advance":{
       const MAX = state[prayer][section].elements.length
-      const actual = (MAX>=state[prayer][section].actual)? state[prayer][section].actual++ : MAX
+      const currentActual = state[prayer][section].actual
+      const actual = currentActual + 1
+      if (actual > MAX) return state
+      //const actual = (MAX>=state[prayer][section].actual)? state[prayer][section].actual++ : MAX
       vibrate(PRESET.soft)
       return {
         ...state,
@@ -105,7 +110,10 @@ const rosarioReducer = (state, action) => {
 
     case "previous":{
       const MIN = 0
-      const actual = (MIN<=state[prayer][section].actual)? state[prayer][section].actual-- : MIN
+      const currentActual = state[prayer][section].actual
+      const actual = currentActual - 1
+      if (actual < MIN) return state
+      //const actual = (MIN<=state[prayer][section].actual)? state[prayer][section].actual-- : MIN
       vibrate(PRESET.soft)
       return {
         ...state,
@@ -117,15 +125,20 @@ const rosarioReducer = (state, action) => {
     }
 
     case "advance mysteries": {
-      const MAX = state[prayer][section][index].decades.length
       const LIMIT = state[prayer][section][index].limit
-      const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
+      const MAX = state[prayer][section][index].decades.length
+      const currentActual = state[prayer][section][index].actual
+      const actual = currentActual + 1
+
+      //const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
 
       if (actual===LIMIT) { 
         vibrate(PRESET.hard); 
       } else {
         vibrate(PRESET.mid)
       }
+
+      if (actual>MAX) return state
 
       return {
         ...state,
@@ -139,8 +152,12 @@ const rosarioReducer = (state, action) => {
 
     case "previous mysteries": {
       const MIN=0
-      const actual = (MIN<=state[prayer][section][index].actual)? state[prayer][section][index].actual-- : MIN
+      const currentActual = state[prayer][section][index].actual
+      const actual = currentActual - 1
+      //const actual = (MIN<=state[prayer][section][index].actual)? state[prayer][section][index].actual-- : MIN
       vibrate(PRESET.faint)
+
+      if (actual<MIN) return state
       return {
         ...state,
         [prayer]: { ...state[prayer],

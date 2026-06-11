@@ -1,3 +1,4 @@
+"use client"
 import { useEffect } from 'react'
 import {requestWakeLock, releaseWakeLock} from './wakelock.js'
 export function useWakeLock() {
