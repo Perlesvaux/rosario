@@ -7,7 +7,9 @@ export function useRegisterSW() {
     if (
       process.env.NODE_ENV === "production" &&
       "serviceWorker" in navigator
-    ) {
+    ) 
+    {
+      console.log("registration should occur here")
       navigator.serviceWorker.register("/sw.js");
     }
   }, []);

@@ -1,36 +1,117 @@
-const cacheName = "v1.10";
+const CACHE = "v1.11";
 
-self.addEventListener("install", e => {
+const SHOULD_CACHE = ({ request, url }) => {
+  if (request.method !== "GET") return false;
+
+  if (url.origin !== self.location.origin) return false;
+
+  // Never cache Next.js development stuff
+  if (url.pathname.startsWith("/_next/webpack")) return false;
+  if (url.pathname.startsWith("/_next/static/chunks/pages")) return false;
+  if (url.pathname.includes("hot-update")) return false;
+  if (url.pathname.includes("__next")) return false;
+
+  // Don't cache API routes
+  if (url.pathname.startsWith("/api")) return false;
+
+  // Ignore browser extensions
+  if (
+    url.protocol === "chrome-extension:" ||
+    url.protocol === "moz-extension:"
+  )
+    return false;
+
+  return true;
+};
+
+self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-self.addEventListener("activate", e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== cacheName).map(k => caches.delete(k)))
-    )
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    (async () => {
+      const names = await caches.keys();
+
+      await Promise.all(
+        names.map((name) => {
+          if (name !== CACHE) {
+            return caches.delete(name);
+          }
+        })
+      );
+
+      await self.clients.claim();
+    })()
   );
-  self.clients.claim();
 });
 
-self.addEventListener("fetch", e => {
-  const url = new URL(e.request.url);
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
 
-  // Never cache Next.js internals — chunks, HMR, RSC payloads, etc.
-  if (url.pathname.startsWith("/_next/")) return;
+  if (!SHOULD_CACHE({ request, url })) {
+    return;
+  }
 
-  e.respondWith(
-    fetch(e.request)
-      .then(res => {
-        if (res && res.ok) {
-          const clone = res.clone();
-          caches.open(cacheName).then(cache => cache.put(e.request, clone));
+  event.respondWith(
+    (async () => {
+      try {
+        const response = await fetch(request);
+
+        if (response.ok) {
+          const cache = await caches.open(CACHE);
+          cache.put(request, response.clone());
         }
-        return res;
-      })
-      .catch(() => caches.match(e.request))
+
+        return response;
+      } catch {
+        const cached = await caches.match(request);
+
+        if (cached) {
+          return cached;
+        }
+
+        throw new Error("Network unavailable");
+      }
+    })()
   );
 });
+
+
+//const cacheName = "v1.10";
+//
+//self.addEventListener("install", e => {
+//  self.skipWaiting();
+//});
+//
+//self.addEventListener("activate", e => {
+//  e.waitUntil(
+//    caches.keys().then(keys =>
+//      Promise.all(keys.filter(k => k !== cacheName).map(k => caches.delete(k)))
+//    )
+//  );
+//  self.clients.claim();
+//});
+//
+//self.addEventListener("fetch", e => {
+//  const url = new URL(e.request.url);
+//
+//  // Never cache Next.js internals — chunks, HMR, RSC payloads, etc.
+//  if (url.pathname.startsWith("/_next/")) return;
+//
+//  e.respondWith(
+//    fetch(e.request)
+//      .then(res => {
+//        if (res && res.ok) {
+//          const clone = res.clone();
+//          caches.open(cacheName).then(cache => cache.put(e.request, clone));
+//        }
+//        return res;
+//      })
+//      .catch(() => caches.match(e.request))
+//  );
+//});
 
 //const cacheName = "v1.9";
 //
