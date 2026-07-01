@@ -1,4 +1,4 @@
-const cacheName = "v1.9";
+const cacheName = "v1.10";
 
 self.addEventListener("install", e => {
   self.skipWaiting();
@@ -10,11 +10,15 @@ self.addEventListener("activate", e => {
       Promise.all(keys.filter(k => k !== cacheName).map(k => caches.delete(k)))
     )
   );
-
   self.clients.claim();
 });
 
 self.addEventListener("fetch", e => {
+  const url = new URL(e.request.url);
+
+  // Never cache Next.js internals — chunks, HMR, RSC payloads, etc.
+  if (url.pathname.startsWith("/_next/")) return;
+
   e.respondWith(
     fetch(e.request)
       .then(res => {
@@ -27,6 +31,36 @@ self.addEventListener("fetch", e => {
       .catch(() => caches.match(e.request))
   );
 });
+
+//const cacheName = "v1.9";
+//
+//self.addEventListener("install", e => {
+//  self.skipWaiting();
+//});
+//
+//self.addEventListener("activate", e => {
+//  e.waitUntil(
+//    caches.keys().then(keys =>
+//      Promise.all(keys.filter(k => k !== cacheName).map(k => caches.delete(k)))
+//    )
+//  );
+//
+//  self.clients.claim();
+//});
+//
+//self.addEventListener("fetch", e => {
+//  e.respondWith(
+//    fetch(e.request)
+//      .then(res => {
+//        if (res && res.ok) {
+//          const clone = res.clone();
+//          caches.open(cacheName).then(cache => cache.put(e.request, clone));
+//        }
+//        return res;
+//      })
+//      .catch(() => caches.match(e.request))
+//  );
+//});
 
 //const cacheName = 'v1.8';
 //
