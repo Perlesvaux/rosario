@@ -2,8 +2,8 @@ import {Prayer, Dialogus, Vox} from '@/components'
 
 export const jaculatorias_finales = [
   {"l":"Sagrado Corazón de Jesús,", "r":"en tí confío."},
-  {"l":"Dulce Corazón de María,", "r":"sed la salvación del alma mía. AMÉN"},
-  {"l":"En el nombre del Padre, del hijo y del Espíritu Santo.", "r": "AMÉN"},
+  {"l":"Dulce Corazón de María,", "r":"sed la salvación del alma mía."},
+  {"l":"En el nombre del Padre, del hijo y del Espíritu Santo.", "r": "AMÉN."},
   {"l":"¡Que la paz del señor sea con nosotros,", "r": "y con su espíritu."},
 ]
 
