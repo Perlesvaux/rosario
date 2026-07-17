@@ -1,5 +1,5 @@
 "use client"
-import {useWakeLock, useRegisterSW} from '../hooks'
+import {useWakeLock, useRegisterSW} from '@/hooks'
 
 export default function RegisterWorker(){
   useWakeLock() 

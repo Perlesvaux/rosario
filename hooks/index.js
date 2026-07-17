@@ -8,6 +8,7 @@ export { useRegisterSW } from './useRegisterSW'
 export { useTitle } from './useTitle'
 export { useRoute } from './useRoute'
 
+export { useBeep } from './useBeep'
 
 //export { senal, invocacion, contricion, credo, fe, esperanza, caridad, gloria, aveMaria, 
 //letanias_1, letanias_2, letanias_3, letanias_4, letanias_final, oremos, aveMariaPurisima, jaculatorias_finales,

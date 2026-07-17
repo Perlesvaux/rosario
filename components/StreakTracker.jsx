@@ -1,5 +1,5 @@
 "use client"
-import { useHolyContext } from "@/hooks"
+import { useHolyContext, useBeep } from "@/hooks"
 import { useEffect, useState, useCallback } from 'react'
 
 const initial = { last: null, count: 0 }
@@ -17,6 +17,7 @@ const yesterday = () => {
 // Extract streak logic to custom hook
 const useStreak = () => {
   const [streak, setStreak] = useState(initial);
+  const beeper = useBeep()
 
   const loadStreak = useCallback(() => {
     const data = JSON.parse(localStorage.getItem("streak")) || {
@@ -64,6 +65,7 @@ const useStreak = () => {
   },[]);
 
   const complete = useCallback(()=>{
+    beeper()
     setStreak(()=>markDone())
   }, []);
 

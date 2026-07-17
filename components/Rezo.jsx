@@ -1,6 +1,6 @@
-import introImg from '../public/intro.webp'
+import introImg from '@/public/intro.webp'
 import { Slide, Frame } from './ui.jsx'
-import { useHolyContext  } from '../hooks'
+import { useHolyContext  } from '@/hooks'
 
 export default function Rezo ({children}) {
   
