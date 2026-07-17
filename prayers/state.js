@@ -2,7 +2,8 @@
 
 import {  useReducer, useCallback } from 'react'
 
-import { useHolyContext } from '@/hooks'
+import { useHolyContext, useBeep } from '@/hooks'
+import { useEffect } from 'react';
 
 const rosario = () =>{
 
@@ -28,24 +29,30 @@ const rosario = () =>{
       actual: 0, 
       offset: offset - 1, 
       limit: offset + 10,
+      isBeeping:false, 
+      intensity:PRESET.soft ,
     }));
   }
+
+  const essentials = () => {
+    return { actual: 0, isBeeping:false, intensity:PRESET.soft }
+  } 
 
   const rosario = {
 
     complete: {
       intro : {
         elements:[ 'senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1' ],
-        actual:0,
+        ...essentials(),
       },
       mysteries: beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2),
       outro: {
         elements: [ 'peticiones1', 'padrenuestro1',  'avemarias3', 'gloria1', 'salve1' ],
-        actual:0,
+        ...essentials(),
       },
       litany: {
         elements:['inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1'],
-        actual:0,
+        ...essentials(),
       },
     },
 
@@ -54,12 +61,12 @@ const rosario = () =>{
 
       intro : {
         elements:[ 'senal1', 'credo1', 'avemarias3', 'gloria1' ],
-        actual:0,
+        ...essentials(),
       },
       mysteries: beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2),
       outro: {
         elements: [ 'salve1', 'final1' ],
-        actual:0
+        ...essentials(),
       },
     },
 
@@ -67,12 +74,12 @@ const rosario = () =>{
     misericordia: {
       intro : {
         elements: ['senal1', 'faustina1', 'padrenuestro1', 'avemaria1', 'credo1', ],
-        actual:0,
+        ...essentials(),
       },
       mysteries: beadsFrom(['padreeterno1', 'dolorosapasion10'], 1),
       outro: { 
         elements:[ 'doxologiafinal1', 'oracionfinal1' ],
-        actual:0 
+        ...essentials(),
       }
     }
   }
@@ -98,11 +105,14 @@ const rosarioReducer = (state, action) => {
       const actual = currentActual + 1
       if (actual > MAX) return state
       //const actual = (MAX>=state[prayer][section].actual)? state[prayer][section].actual++ : MAX
-      vibrate(PRESET.soft)
+      //vibrate(PRESET.soft)
       return {
         ...state,
         [prayer]: { ...state[prayer],  
-          [section]:  { ...state[prayer][section], actual:actual 
+          [section]:  { ...state[prayer][section], 
+            actual:actual,
+            intensity:PRESET.soft,
+            
           }
         }
       }
@@ -114,11 +124,14 @@ const rosarioReducer = (state, action) => {
       const actual = currentActual - 1
       if (actual < MIN) return state
       //const actual = (MIN<=state[prayer][section].actual)? state[prayer][section].actual-- : MIN
-      vibrate(PRESET.soft)
+      //vibrate(PRESET.soft)
       return {
         ...state,
         [prayer]: { ...state[prayer],  
-          [section]:  { ...state[prayer][section], actual:actual 
+          [section]:  { ...state[prayer][section], 
+            actual:actual, 
+            intensity:PRESET.soft,
+
           }
         }
       }
@@ -132,11 +145,11 @@ const rosarioReducer = (state, action) => {
 
       //const actual = (MAX>=state[prayer][section][index].actual)? state[prayer][section][index].actual++ : MAX
 
-      if (actual===LIMIT) { 
-        vibrate(PRESET.hard); 
-      } else {
-        vibrate(PRESET.mid)
-      }
+      //if (actual===LIMIT) { 
+      //  vibrate(PRESET.hard); 
+      //} else {
+      //  vibrate(PRESET.mid)
+      //}
 
       if (actual>MAX) return state
 
@@ -144,7 +157,12 @@ const rosarioReducer = (state, action) => {
         ...state,
         [prayer]: { ...state[prayer],
           [section]: state[prayer][section].map((item, i) => 
-            index === i ? { ...item, actual: actual  } : item
+            index === i ? { ...item, 
+              actual: actual, 
+              intentsity: actual === LIMIT ? PRESET.hard : PRESET.mid,
+              isBeeping: actual === LIMIT ? true : false,
+
+            } : item
           )
         }
       }
@@ -155,14 +173,19 @@ const rosarioReducer = (state, action) => {
       const currentActual = state[prayer][section][index].actual
       const actual = currentActual - 1
       //const actual = (MIN<=state[prayer][section][index].actual)? state[prayer][section][index].actual-- : MIN
-      vibrate(PRESET.faint)
+      //vibrate(PRESET.faint)
 
       if (actual<MIN) return state
       return {
         ...state,
         [prayer]: { ...state[prayer],
           [section]: state[prayer][section].map((item, i) => 
-            index === i ? { ...item, actual: actual  } : item
+            index === i ? { ...item, 
+              actual: actual,
+              intensity:PRESET.faint,
+              isBeeping: false,
+
+            } : item
           )
         }
       }
@@ -187,6 +210,11 @@ export function useRosario(){
 
 export function useRosarioState(prayer, section, index = null) {
   const { state, dispatch } = useHolyContext();
+
+  const  beeper = useBeep()
+
+
+
   
   const isDeepLevel = index !== null;
   const currentState = isDeepLevel 
@@ -196,6 +224,29 @@ export function useRosarioState(prayer, section, index = null) {
   const arrayKey = isDeepLevel ? 'decades' : 'elements';
   const advanceType = isDeepLevel ? 'advance mysteries' : 'advance';
   const prevType = isDeepLevel ? 'previous mysteries' : 'previous';
+
+
+  useEffect(()=>{
+    if (currentState)  {
+
+      if (currentState.isBeeping) {
+        console.log(`~ BEEP! ~`)
+        beeper()
+
+        
+      }
+
+      if (currentState.intensity) {
+        vibrate(currentState.intensity) ;
+        console.log(`virating at: ${currentState.intensity}`)
+      }
+    }
+
+
+  },[currentState, beeper])
+
+
+
   
   const actions = {
     next: useCallback(() => {
