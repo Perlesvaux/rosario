@@ -4,7 +4,7 @@ export default function manifest() {
     short_name: 'Rosario',
     description: 'Guia para rezar el Santo Rosario',
     start_url: '/',
-    display: 'standalone',
+    display: 'fullscreen',
     orientation: 'portrait',
     background_color: '#ffffff',
     theme_color: '#000000',

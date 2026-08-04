@@ -7,6 +7,8 @@ export { default as Beads } from './Beads'
 export { default as Pray } from './Pray'
 export { default as Rosario } from './Rosario'
 
+export { CloseButton } from './CloseButton'
+
 export { 
   Frame, Slide, 
   Add, Exit,
