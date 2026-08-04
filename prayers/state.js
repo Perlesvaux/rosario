@@ -29,13 +29,13 @@ const rosario = () =>{
       actual: 0, 
       offset: offset - 1, 
       limit: offset + 10,
-      isBeeping:false, 
+      trackName:false, 
       intensity:PRESET.soft ,
     }));
   }
 
   const essentials = () => {
-    return { actual: 0, isBeeping:false, intensity:PRESET.soft }
+    return { actual: 0, trackName:false, intensity:PRESET.soft }
   } 
 
   const rosario = {
@@ -130,7 +130,7 @@ const rosarioReducer = (state, action) => {
         [prayer]: { ...state[prayer],  
           [section]:  { ...state[prayer][section], 
             actual:actual, 
-            intensity:PRESET.soft,
+            intensity:PRESET.faint,
 
           }
         }
@@ -160,7 +160,7 @@ const rosarioReducer = (state, action) => {
             index === i ? { ...item, 
               actual: actual, 
               intentsity: actual === LIMIT ? PRESET.hard : PRESET.mid,
-              isBeeping: actual === LIMIT ? true : false,
+              trackName: actual === LIMIT ? 'victory' : 'none',
 
             } : item
           )
@@ -183,7 +183,7 @@ const rosarioReducer = (state, action) => {
             index === i ? { ...item, 
               actual: actual,
               intensity:PRESET.faint,
-              isBeeping: false,
+              trackName: 'none',
 
             } : item
           )
@@ -229,21 +229,21 @@ export function useRosarioState(prayer, section, index = null) {
   useEffect(()=>{
     if (currentState)  {
 
-      if (currentState.isBeeping) {
-        console.log(`~ BEEP! ~`)
-        beeper()
-
-        
+      if (currentState.trackName) {
+        console.log(`~ BEEP! ~: ${currentState.trackName} ${index}`)
+        beeper(currentState.trackName)
       }
+
+
 
       if (currentState.intensity) {
         vibrate(currentState.intensity) ;
-        console.log(`virating at: ${currentState.intensity}`)
+        console.log(`vibrating at: ${currentState.intensity}`)
       }
     }
 
 
-  },[currentState, beeper])
+  },[currentState])
 
 
 
