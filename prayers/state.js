@@ -29,13 +29,13 @@ const rosario = () =>{
       actual: 0, 
       offset: offset - 1, 
       limit: offset + 10,
-      trackName:false, 
+      trackName:'none', 
       intensity:PRESET.soft ,
     }));
   }
 
   const essentials = () => {
-    return { actual: 0, trackName:false, intensity:PRESET.soft }
+    return { actual: 0, trackName:'none', intensity:PRESET.soft }
   } 
 
   const rosario = {
@@ -227,11 +227,10 @@ export function useRosarioState(prayer, section, index = null) {
     if (currentState)  {
 
       //if (currentState.trackName) {
-      //  console.log(`~ BEEP! ~: ${currentState.trackName} ${index}`)
+      //  console.log(`~ BEEP! ~: ${currentState.trackName}`)
       //  beeper(currentState.trackName)
       //}
 
-      console.log(currentState)
       if (currentState.intensity) {
         vibrate(currentState.intensity) ;
         console.log(`vibrating at: ${currentState.intensity}`)
@@ -239,7 +238,9 @@ export function useRosarioState(prayer, section, index = null) {
     }
 
 
-  },[currentState ])
+  },[currentState, 
+      //beeper, 
+    ])
 
 
 
