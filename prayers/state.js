@@ -34,54 +34,38 @@ const rosario = () =>{
     }));
   }
 
-  const essentials = () => {
-    return { actual: 0, trackName:'none', intensity:PRESET.soft }
-  } 
+  const factor = (list) => {
+    return  {
+      elements: [...list],
+      actual: 0, 
+      trackName:'none', 
+      intensity:PRESET.soft 
+    }
+  }
 
   const rosario = {
 
     complete: {
-      intro : {
-        elements:[ 'senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1' ],
-        ...essentials(),
-      },
+      intro : factor([ 'senal1', 'invocacion1', 'contricion1', 'credo1', 'peticiones1' ]),
       mysteries: beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1', 'jaculatorias1'], 2),
-      outro: {
-        elements: [ 'peticiones1', 'padrenuestro1',  'avemarias3', 'gloria1', 'salve1' ],
-        ...essentials(),
-      },
-      litany: {
-        elements:['inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1'],
-        ...essentials(),
-      },
+      outro: factor([ 'peticiones1', 'padrenuestro1',  'avemarias3', 'gloria1', 'salve1' ]),
+      litany: factor(['inicio1', 'letanias1', 'oremos1', 'avemariapurisima3', 'final1']),
     },
 
 
     simple: {
-
-      intro : {
-        elements:[ 'senal1', 'credo1', 'avemarias3', 'gloria1' ],
-        ...essentials(),
-      },
+      intro : factor([ 'senal1', 'credo1', 'avemarias3', 'gloria1' ]) ,
       mysteries: beadsFrom(['misterio1', 'padrenuestro1', 'avemaria10', 'gloria1'], 2),
-      outro: {
-        elements: [ 'salve1', 'final1' ],
-        ...essentials(),
-      },
+      outro: factor([ 'salve1', 'final1' ]),
     },
 
 
     misericordia: {
-      intro : {
-        elements: ['senal1', 'faustina1', 'padrenuestro1', 'avemaria1', 'credo1', ],
-        ...essentials(),
-      },
+      intro : factor(['senal1', 'faustina1', 'padrenuestro1', 'avemaria1', 'credo1', ]),
       mysteries: beadsFrom(['padreeterno1', 'dolorosapasion10'], 1),
-      outro: { 
-        elements:[ 'doxologiafinal1', 'oracionfinal1' ],
-        ...essentials(),
-      }
+      outro: factor([ 'doxologiafinal1', 'oracionfinal1' ]),
     }
+
   }
 
   // Add here new prayers here such as 'Coronilla a la Divina Misericordia'. key name should match rezo i.e.: misericordia here should match rezo:misericordia
@@ -233,7 +217,7 @@ export function useRosarioState(prayer, section, index = null) {
 
       if (currentState.intensity) {
         vibrate(currentState.intensity) ;
-        console.log(`vibrating at: ${currentState.intensity}`)
+        //console.log(`vibrating at: ${currentState.intensity}`)
       }
     }
 
