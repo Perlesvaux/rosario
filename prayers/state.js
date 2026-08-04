@@ -159,7 +159,7 @@ const rosarioReducer = (state, action) => {
           [section]: state[prayer][section].map((item, i) => 
             index === i ? { ...item, 
               actual: actual, 
-              intentsity: actual === LIMIT ? PRESET.hard : PRESET.mid,
+              intensity: actual === LIMIT ? PRESET.hard : PRESET.mid,
               trackName: actual === LIMIT ? 'victory' : 'none',
 
             } : item
@@ -211,10 +211,7 @@ export function useRosario(){
 export function useRosarioState(prayer, section, index = null) {
   const { state, dispatch } = useHolyContext();
 
-  const  beeper = useBeep()
-
-
-
+  //const  beeper = useBeep()
   
   const isDeepLevel = index !== null;
   const currentState = isDeepLevel 
@@ -229,13 +226,12 @@ export function useRosarioState(prayer, section, index = null) {
   useEffect(()=>{
     if (currentState)  {
 
-      if (currentState.trackName) {
-        console.log(`~ BEEP! ~: ${currentState.trackName} ${index}`)
-        beeper(currentState.trackName)
-      }
+      //if (currentState.trackName) {
+      //  console.log(`~ BEEP! ~: ${currentState.trackName} ${index}`)
+      //  beeper(currentState.trackName)
+      //}
 
-
-
+      console.log(currentState)
       if (currentState.intensity) {
         vibrate(currentState.intensity) ;
         console.log(`vibrating at: ${currentState.intensity}`)
@@ -243,7 +239,7 @@ export function useRosarioState(prayer, section, index = null) {
     }
 
 
-  },[currentState])
+  },[currentState ])
 
 
 
