@@ -18,11 +18,14 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: `Santo Rosario`,
   description: "¿Nunca has rezado el rosario? ¿No sabes cuáles misterios tocan hoy? ¡Esta aplicación es para ti!",
+    languages: {
+      'es': '/',
+    },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

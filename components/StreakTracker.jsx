@@ -103,7 +103,7 @@ export default function StreakTracker() {
     `${ doneForToday
 ? "bg-gray-800/90 text-white"
 : "bg-red-600/90 text-white animate-pulse"
-} font-black rounded-full h-8 w-8 flex items-center justify-center shadow-xl/30`
+} font-black rounded-full h-8 w-8 flex items-center justify-center`
   }>
     {streak.count}
   </div>;
