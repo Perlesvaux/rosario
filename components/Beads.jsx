@@ -1,11 +1,13 @@
 'use client'
 import { useRef } from 'react'
-import { usePrayerContext, useBeadContext, BeadContext } from "../hooks"
+import { CloseButton } from '.'
+import { usePrayerContext, useBeadContext, BeadContext } from "@/hooks"
 import { Exit } from './ui.jsx'
 
-export default function Beads ({children, to, titulo}) {
+
+export default function Beads({ children, to, titulo }) {
   //const {next, currentState, show, header} = usePrayerContext()
-  const {next, currentState, markPrayer, show, header} = usePrayerContext()
+  const { next, currentState, markPrayer, show, header } = usePrayerContext()
   const ref = useRef(null)
   const identifier = `${titulo}-${header}`
 
@@ -15,28 +17,30 @@ export default function Beads ({children, to, titulo}) {
   // titulo: "Ave Maria" or "Por su Dolorosa Pasion..."
 
 
-  const setAndCloseRosary =() => {
+  const setAndCloseRosary = () => {
     next()
-    if (currentState.actual == 10+currentState.offset) ref.current.hidePopover();
+    if (currentState.actual == 10 + currentState.offset) ref.current.hidePopover();
   }
 
   return <>
 
-    <div ref={ref} popover="auto" id={identifier} className={ `bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow` }>
+    <div ref={ref} popover="auto" id={identifier} className={`bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow`}>
       <article className="flex flex-col  gap-4">
         {children}
-        { isShown && <Bead onClick={setAndCloseRosary} /> }
-        <Exit onClick={()=> ref.current.hidePopover()}/>
+        {isShown
+          ? <Bead onClick={setAndCloseRosary} />
+          : <CloseButton onClick={() => ref.current.hidePopover()} />}
+        <Exit onClick={() => ref.current.hidePopover()} />
       </article>
     </div>
 
-    <button popoverTarget={identifier} 
-      className={`${wasPrayed? 'text-black/90' : 'text-gray-500/60'}  px-4   text-black  text-base text-left  underline underline-offset-2  rounded-r-lg hover:opacity-75 focus:outline-none 
-        ${isShown? " bg-gray-800/90 text-white/90 ": "" } `}>
-        {wasPrayed && !isShown
-        ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>
-        : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity={isShown?".77":".33"} fill={isShown?"#ffffff" : "#434343"}><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z"/></svg>}
-      { titulo } {isShown && <>→</>} <BeadCount state={currentState}/>
+    <button popoverTarget={identifier}
+      className={`${wasPrayed ? 'text-black/90' : 'text-gray-500/60'}  px-4   text-black  text-base text-left  underline underline-offset-2  rounded-r-lg hover:opacity-75 focus:outline-none 
+        ${isShown ? " bg-gray-800/90 text-white/90 " : ""} `}>
+      {wasPrayed && !isShown
+        ? <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity=".90" fill="#434343"><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z" /></svg>
+        : <svg className="inline pr-1" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" opacity={isShown ? ".77" : ".33"} fill={isShown ? "#ffffff" : "#434343"}><path d="M336-144v-192H144v-288h192v-192h288v192h192v288H624v192H336Zm72-72h144v-192h192v-144H552v-192H408v192H216v144h192v192Zm72-264Z" /></svg>}
+      {titulo} {isShown && <>→</>} <BeadCount state={currentState} />
     </button>
 
   </>
@@ -44,41 +48,41 @@ export default function Beads ({children, to, titulo}) {
 }
 
 
-function Bead ({onClick}){
+function Bead({ onClick }) {
   //const { to } = useBeadContext()
   const { currentState } = usePrayerContext()
 
 
-  return <button 
+  return <button
     onClick={onClick}
-    className={`${currentState.actual-currentState.offset>9? 'bg-rose-700 ':'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}
-    > 
-     <BeadCount state={currentState} />
+    className={`${currentState.actual - currentState.offset > 9 ? 'bg-rose-700 ' : 'bg-gray-800'}  px-4 py-2 text-white rounded hover:bg-blue-500 transition flex items-center justify-center`}
+  >
+    <BeadCount state={currentState} />
   </button>
-    
+
 
 }
 
 
-  const BeadCount = ({state}) => {
-    //const { to } = useBeadContext()
+const BeadCount = ({ state }) => {
+  //const { to } = useBeadContext()
 
-     const count = state.actual-state.offset
+  const count = state.actual - state.offset
 
-    //const decrease = {
-    //  dolorosapasion:0,
-    //  avemaria:1,
-    //}
-       
+  //const decrease = {
+  //  dolorosapasion:0,
+  //  avemaria:1,
+  //}
 
-    //
-    //if (to==="dolorosapasion" && count-(LIMIT.dolorosapasion-9) < 0) return  
-    //if (to==="dolorosapasion" && count >= (LIMIT.dolorosapasion+1)) return
-    //
-    //if (to==="avemaria" && count-(LIMIT.avemaria-9) < 0) return  
-    //if (to==="avemaria" && count >= (LIMIT.avemaria+1) ) return
-    if (count<=0 || count>10) return
-    return <>  <strong className="font-bold">{ count<11? count : "" }</strong>/<span className="text-xs">10</span></>
-  }
+
+  //
+  //if (to==="dolorosapasion" && count-(LIMIT.dolorosapasion-9) < 0) return  
+  //if (to==="dolorosapasion" && count >= (LIMIT.dolorosapasion+1)) return
+  //
+  //if (to==="avemaria" && count-(LIMIT.avemaria-9) < 0) return  
+  //if (to==="avemaria" && count >= (LIMIT.avemaria+1) ) return
+  if (count <= 0 || count > 10) return
+  return <>  <strong className="font-bold">{count < 11 ? count : ""}</strong>/<span className="text-xs">10</span></>
+}
 
 
