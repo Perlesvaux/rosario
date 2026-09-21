@@ -1,7 +1,8 @@
 "use client"
+import {Add, Exit, CloseButton} from "./"
 import { useHolyContext } from "@/hooks"
 //import { useHolyContext, useBeep } from "@/hooks"
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 
 const initial = { last: null, count: 0 }
 
@@ -61,9 +62,26 @@ const useStreak = () => {
   }, [loadStreak]);
 
 
+  const updateStreak = useCallback((manuallySetValue)=>{
+    const data = loadStreak(); // Use loadStreak to ensure consistency
+    const todayStr = today();
+    const newData = {...data, last: todayStr, count:manuallySetValue}
+    // newData.last = todayStr
+    // newData.count = manuallySetValue
+    localStorage.setItem("streak", JSON.stringify(newData))
+    console.log(newData)
+    return newData
+
+  },[loadStreak])
+
+
   const load = useCallback(()=>{
     setStreak(()=>loadStreak())
   },[]);
+
+  const update = useCallback((manuallySetValue)=>{
+    setStreak(updateStreak(manuallySetValue))
+  }, [])
 
   const complete = useCallback(()=>{
     //beeper()
@@ -71,7 +89,7 @@ const useStreak = () => {
   }, []);
 
 
-  return { streak, load, complete };
+  return { streak, load, complete, update };
 };
 
 export default function StreakTracker() {
@@ -105,6 +123,74 @@ export default function StreakTracker() {
 : "bg-red-600/90 text-white animate-pulse"
 } font-black rounded-full h-8 w-8 flex items-center justify-center`
   }>
-    {streak.count}
+    <SetStreakCount count={streak.count} />
+    
   </div>;
 }
+
+
+
+
+
+
+
+
+
+function SetStreakCount({count}) {
+
+  const { streak, update, load } = useStreak();
+
+  const [current, setCurrent] = useState(streak)
+// const {next, markPrayer, show, header} = usePrayerContext()
+  const ref = useRef(null)
+  // const identifier = `${to}-${header}`
+  //debugger
+
+  let isShown = true
+  let wasPrayed = true
+
+  const setAndClose =() => {
+    // next()
+    ref.current.hidePopover();
+  }
+
+  const updateCurrent = (e)=> setCurrent( {...current, count: e.currentTarget.value} )
+
+  useEffect(()=>{
+    load()
+    
+    
+  }
+  ,[load])
+
+  return (<>
+    <div ref={ref} popover="auto" id="streak-tracker" className={`bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow`}>
+      <article className="flex flex-col gap-4">
+
+        <div>
+          {console.log(streak)} 
+          {streak.count}→   
+          <input type="number" onChange={updateCurrent} value={current.count} />
+        </div>
+        
+        
+          
+        <CloseButton onClick={() => update(current.count) } />
+        <Exit onClick={() => ref.current.hidePopover()} />
+
+      </article>
+    </div>
+
+    <button popoverTarget="streak-tracker"
+       className="rounded-full h-8 w-8 flex items-center justify-center"
+      >
+      
+        {streak.count}
+      
+    </button>
+  </>)
+}
+
+
+
+
