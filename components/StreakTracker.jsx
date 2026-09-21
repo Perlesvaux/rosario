@@ -92,16 +92,45 @@ const useStreak = () => {
   return { streak, load, complete, update };
 };
 
+
+
+
+
+
+
+
 export default function StreakTracker() {
   const { state } = useHolyContext();
-  const { streak, load, complete } = useStreak();
+  const { streak, load, complete, update } = useStreak();
+  
+  // These are used to manually update streak
+  const ref = useRef(null)
+  const [ current, setCurrent ] = useState({...streak})
+  const updateCurrent = (e)=> setCurrent( {...current, count: e.currentTarget.value} )
+  const setAndClose =() => {
+  // console.log(!Number(current.count))
+  //   if (!Number(current.count)) return 
+  if (!/^[+-]?\d+(\.\d+)?$/.test(current.count)) return
+    
 
-  //const wasRosaryPrayedToday = false
+  // console.log(/^[+-]?\d+(\.\d+)?$/.test(current.count))
+
+
+
+    update(current.count) 
+    ref.current.hidePopover();
+  }
+  
+
+
+
+  // Condition: checks whether rosary has been prayed today.
   const wasRosaryPrayedToday = state.complete.mysteries.every(mystery => mystery.actual >= mystery.limit  ) 
     || state.simple.mysteries.every(mystery => mystery.actual >= mystery.limit);
 
   //debugger
 
+  // Condition: checks whether "last day prayed" and "today" are the same.
   const doneForToday = today()==streak.last
 
   // Initial load
@@ -117,14 +146,59 @@ export default function StreakTracker() {
   }, [wasRosaryPrayedToday, complete]);
 
 
+  useEffect(() => {
+  setCurrent({...streak});
+}, [streak]);
+
+
+
   return <div className={
     `${ doneForToday
 ? "bg-gray-800/90 text-white"
 : "bg-red-600/90 text-white animate-pulse"
 } font-black rounded-full h-8 w-8 flex items-center justify-center`
   }>
-    <SetStreakCount count={streak.count} />
-    
+
+
+
+
+
+
+<>
+    <div ref={ref} popover="auto" id="streak-tracker" className={`bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow`}>
+      <article className="flex flex-col gap-4">
+
+        <div>
+          {console.log(`- streak ${streak.count}`)} 
+          {console.log(`- current ${current.count}`)} 
+          {streak.count}→   
+          <input type="number" onChange={updateCurrent} value={current.count} min="0" pattern="^[0-9]+$" />
+        </div>
+        
+        
+          
+        <CloseButton onClick={setAndClose} />
+        <Exit onClick={() => ref.current.hidePopover()} />
+
+      </article>
+    </div>
+
+    <button popoverTarget="streak-tracker"
+       className="rounded-full h-8 w-8 flex items-center justify-center"
+      >
+      
+        {streak.count}
+      
+    </button>
+  </>
+
+
+
+
+
+
+
+
   </div>;
 }
 
