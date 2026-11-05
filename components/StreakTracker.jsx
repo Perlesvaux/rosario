@@ -146,9 +146,9 @@ export default function StreakTracker() {
   }, [wasRosaryPrayedToday, complete]);
 
 
-  useEffect(() => {
-  setCurrent({...streak});
-}, [streak]);
+//  useEffect(() => {
+//  setCurrent({...streak});
+//}, [streak]);
 
 
 

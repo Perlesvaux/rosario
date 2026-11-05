@@ -9,6 +9,8 @@ export { default as Rosario } from './Rosario'
 
 export { CloseButton } from './CloseButton'
 
+export { HoldButton } from './HoldButton'
+
 export { 
   Frame, Slide, 
   Add, Exit,
