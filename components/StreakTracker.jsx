@@ -18,83 +18,53 @@ const yesterday = () => {
 
 // Extract streak logic to custom hook
 const useStreak = () => {
+
   const [streak, setStreak] = useState(initial);
-  //const beeper = useBeep()
 
-  const loadStreak = useCallback(() => {
-    const data = JSON.parse(localStorage.getItem("streak")) || {
-      last: null,
-      count: 0
-    };
-
-    // Clear streak if last was before yesterday
+  const loadStreak = () => {
+    const data = JSON.parse(localStorage.getItem("streak")) || initial;
     if (data.last) {
       const lastDate = new Date(data.last);
       const yest = new Date(yesterday());
-
       if (lastDate < yest) {
         localStorage.setItem("streak", JSON.stringify(initial));
         return initial;
       }
     }
-
     return data;
-  }, []);
+  };
 
-  const markDone = useCallback(() => {
-    const data = loadStreak(); // Use loadStreak to ensure consistency
+  const markDone = (data) => {
     const todayStr = today();
-
-    // Do nothing if you already prayed today
     if (data.last === todayStr) return data;
 
-    // If last day prayed was yesterday, increase counter.
-    const newData = { ...data };
-    if (data.last === yesterday()) {
-      newData.count++;
-    } else {
-      newData.count = 1;
-    }
+    const newData = data.last === yesterday()
+      ? { ...data, count: data.count + 1, last: todayStr }
+      : { last: todayStr, count: 1 };
 
-    newData.last = todayStr;
     localStorage.setItem("streak", JSON.stringify(newData));
     return newData;
-  }, [loadStreak]);
+  };
+
+  const update = (rawCount) => {
+    const count = Math.max(0, Math.floor(Number(rawCount)) || 0);
+    const newData = { last: today(), count };
+    localStorage.setItem("streak", JSON.stringify(newData));
+    setStreak(newData);
+  };
 
 
-  const updateStreak = useCallback((manuallySetValue)=>{
-    const data = loadStreak(); // Use loadStreak to ensure consistency
-    const todayStr = today();
-    const newData = {...data, last: todayStr, count:manuallySetValue}
-    // newData.last = todayStr
-    // newData.count = manuallySetValue
-    localStorage.setItem("streak", JSON.stringify(newData))
-    console.log(newData)
-    return newData
+  const load = () => setStreak(loadStreak);
 
-  },[loadStreak])
-
-
-  const load = useCallback(()=>{
-    setStreak(()=>loadStreak())
-  },[]);
-
-  const update = useCallback((manuallySetValue)=>{
-    setStreak(updateStreak(manuallySetValue))
-  }, [])
-
-  const complete = useCallback(()=>{
-    //beeper()
-    setStreak(()=>markDone())
-  }, []);
+  const complete = () => setStreak(markDone);
 
 
   return { streak, load, complete, update };
-};
 
 
 
 
+}
 
 
 
@@ -102,25 +72,25 @@ const useStreak = () => {
 export default function StreakTracker() {
   const { state } = useHolyContext();
   const { streak, load, complete, update } = useStreak();
-  
+
   // These are used to manually update streak
   const ref = useRef(null)
   const [ current, setCurrent ] = useState({...streak})
   const updateCurrent = (e)=> setCurrent( {...current, count: e.currentTarget.value} )
   const setAndClose =() => {
-  // console.log(!Number(current.count))
-  //   if (!Number(current.count)) return 
-  if (!/^[+-]?\d+(\.\d+)?$/.test(current.count)) return
-    
+    // console.log(!Number(current.count))
+    //   if (!Number(current.count)) return 
+    if (!/^[+-]?\d+(\.\d+)?$/.test(current.count)) return
 
-  // console.log(/^[+-]?\d+(\.\d+)?$/.test(current.count))
+
+    // console.log(/^[+-]?\d+(\.\d+)?$/.test(current.count))
 
 
 
     update(current.count) 
     ref.current.hidePopover();
   }
-  
+
 
 
 
@@ -136,7 +106,7 @@ export default function StreakTracker() {
   // Initial load
   useEffect(() => {
     load()
-  }, [load]);
+  }, []);
 
   // Update when prayed
   useEffect(() => {
@@ -146,9 +116,9 @@ export default function StreakTracker() {
   }, [wasRosaryPrayedToday, complete]);
 
 
-//  useEffect(() => {
-//  setCurrent({...streak});
-//}, [streak]);
+  //  useEffect(() => {
+  //  setCurrent({...streak});
+  //}, [streak]);
 
 
 
@@ -164,33 +134,33 @@ export default function StreakTracker() {
 
 
 
-<>
-    <div ref={ref} popover="auto" id="streak-tracker" className={`bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow`}>
-      <article className="flex flex-col gap-4">
+    <>
+      <div ref={ref} popover="auto" id="streak-tracker" className={`bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow`}>
+        <article className="flex flex-col gap-4">
 
-        <div>
-          {console.log(`- streak ${streak.count}`)} 
-          {console.log(`- current ${current.count}`)} 
-          {streak.count}→   
-          <input type="number" onChange={updateCurrent} value={current.count} min="0" pattern="^[0-9]+$" />
-        </div>
-        
-        
-          
-        <CloseButton onClick={setAndClose} />
-        <Exit onClick={() => ref.current.hidePopover()} />
+          <div>
+            {console.log(`- streak ${streak.count}`)} 
+            {console.log(`- current ${current.count}`)} 
+            {streak.count}→   
+            <input type="number" onChange={updateCurrent} value={current.count} min="0" pattern="^[0-9]+$" />
+          </div>
 
-      </article>
-    </div>
 
-    <button popoverTarget="streak-tracker"
-       className="rounded-full h-8 w-8 flex items-center justify-center"
+
+          <CloseButton onClick={setAndClose} />
+          <Exit onClick={() => ref.current.hidePopover()} />
+
+        </article>
+      </div>
+
+      <button popoverTarget="streak-tracker"
+        className="rounded-full h-8 w-8 flex items-center justify-center"
       >
-      
+
         {streak.count}
-      
-    </button>
-  </>
+
+      </button>
+    </>
 
 
 
@@ -210,60 +180,142 @@ export default function StreakTracker() {
 
 
 
-function SetStreakCount({count}) {
+//function SetStreakCount({count}) {
+//
+//  const { streak, update, load } = useStreak();
+//
+//  const [current, setCurrent] = useState(streak)
+//// const {next, markPrayer, show, header} = usePrayerContext()
+//  const ref = useRef(null)
+//  // const identifier = `${to}-${header}`
+//  //debugger
+//
+//  let isShown = true
+//  let wasPrayed = true
+//
+//  const setAndClose =() => {
+//    // next()
+//    ref.current.hidePopover();
+//  }
+//
+//  const updateCurrent = (e)=> setCurrent( {...current, count: e.currentTarget.value} )
+//
+//  //useEffect(()=>{
+//  //  load()
+//  //
+//  //
+//  //}
+//  //,[load])
+//
+//  return (<>
+//    <div ref={ref} popover="auto" id="streak-tracker" className={`bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow`}>
+//      <article className="flex flex-col gap-4">
+//
+//        <div>
+//          {console.log(streak)} 
+//          {streak.count}→   
+//          <input type="number" onChange={updateCurrent} value={current.count} />
+//        </div>
+//
+//
+//
+//        <CloseButton onClick={() => update(current.count) } />
+//        <Exit onClick={() => ref.current.hidePopover()} />
+//
+//      </article>
+//    </div>
+//
+//    <button popoverTarget="streak-tracker"
+//       className="rounded-full h-8 w-8 flex items-center justify-center"
+//      >
+//
+//        {streak.count}
+//
+//    </button>
+//  </>)
+//}
 
-  const { streak, update, load } = useStreak();
 
-  const [current, setCurrent] = useState(streak)
-// const {next, markPrayer, show, header} = usePrayerContext()
-  const ref = useRef(null)
-  // const identifier = `${to}-${header}`
-  //debugger
 
-  let isShown = true
-  let wasPrayed = true
 
-  const setAndClose =() => {
-    // next()
-    ref.current.hidePopover();
-  }
 
-  const updateCurrent = (e)=> setCurrent( {...current, count: e.currentTarget.value} )
 
-  useEffect(()=>{
-    load()
-    
-    
-  }
-  ,[load])
+//const useStreak = () => {
+//  const [streak, setStreak] = useState(initial);
+//  //const beeper = useBeep()
+//
+//  const loadStreak = useCallback(() => {
+//    const data = JSON.parse(localStorage.getItem("streak")) || {
+//      last: null,
+//      count: 0
+//    };
+//
+//    // Clear streak if last was before yesterday
+//    if (data.last) {
+//      const lastDate = new Date(data.last);
+//      const yest = new Date(yesterday());
+//
+//      if (lastDate < yest) {
+//        localStorage.setItem("streak", JSON.stringify(initial));
+//        return initial;
+//      }
+//    }
+//
+//    return data;
+//  }, []);
+//
+//  const markDone = useCallback(() => {
+//    const data = loadStreak(); // Use loadStreak to ensure consistency
+//    const todayStr = today();
+//
+//    // Do nothing if you already prayed today
+//    if (data.last === todayStr) return data;
+//
+//    // If last day prayed was yesterday, increase counter.
+//    const newData = { ...data };
+//    if (data.last === yesterday()) {
+//      newData.count++;
+//    } else {
+//      newData.count = 1;
+//    }
+//
+//    newData.last = todayStr;
+//    localStorage.setItem("streak", JSON.stringify(newData));
+//    return newData;
+//  }, [loadStreak]);
+//
+//
+//  const updateStreak = useCallback((manuallySetValue)=>{
+//    const data = loadStreak(); // Use loadStreak to ensure consistency
+//    const todayStr = today();
+//    const newData = {...data, last: todayStr, count:manuallySetValue}
+//    // newData.last = todayStr
+//    // newData.count = manuallySetValue
+//    localStorage.setItem("streak", JSON.stringify(newData))
+//    console.log(newData)
+//    return newData
+//
+//  },[loadStreak])
+//
+//
+//  const load = useCallback(()=>{
+//    setStreak(()=>loadStreak())
+//  },[]);
+//
+//  const update = useCallback((manuallySetValue)=>{
+//    setStreak(updateStreak(manuallySetValue))
+//  }, [])
+//
+//  const complete = useCallback(()=>{
+//    //beeper()
+//    setStreak(()=>markDone())
+//  }, []);
+//
+//
+//  return { streak, load, complete, update };
+//};
 
-  return (<>
-    <div ref={ref} popover="auto" id="streak-tracker" className={`bg-gray-300  px-4 py-2 text-rose-800  overflow-hidden w-full border rounded shadow`}>
-      <article className="flex flex-col gap-4">
 
-        <div>
-          {console.log(streak)} 
-          {streak.count}→   
-          <input type="number" onChange={updateCurrent} value={current.count} />
-        </div>
-        
-        
-          
-        <CloseButton onClick={() => update(current.count) } />
-        <Exit onClick={() => ref.current.hidePopover()} />
-
-      </article>
-    </div>
-
-    <button popoverTarget="streak-tracker"
-       className="rounded-full h-8 w-8 flex items-center justify-center"
-      >
-      
-        {streak.count}
-      
-    </button>
-  </>)
-}
 
 
 
