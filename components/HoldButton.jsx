@@ -1,7 +1,7 @@
 "use client"
 import { useRef, useEffect } from 'react';
 
-export default function HoldButton() {
+export function HoldButton({action}) {
   const timerRef = useRef(null);
 
   // Clean up timer on unmount
@@ -14,8 +14,9 @@ export default function HoldButton() {
     if (timerRef.current) return; 
     
     timerRef.current = setTimeout(() => {
-      console.log("Action triggered after 5 seconds!");
+      //console.log("Action triggered after 5 seconds!");
       // Your action goes here
+      action()
       timerRef.current = null; 
     }, 5000);
   };
@@ -28,7 +29,7 @@ export default function HoldButton() {
   };
 
   return (
-    <button
+    <button  className="py-2 col-span-1 bg-gray-800 text-white rounded text-sm"
       onMouseDown={startPress}
       onMouseUp={cancelPress}
       onMouseLeave={cancelPress}
@@ -36,7 +37,11 @@ export default function HoldButton() {
       onTouchEnd={cancelPress}
       onTouchCancel={cancelPress}
     >
-      Press and hold for 5s
+      Manten presionado 5s para confirmar
     </button>
   );
 }
+
+
+
+

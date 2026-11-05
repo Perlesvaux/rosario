@@ -1,5 +1,5 @@
 "use client"
-import {Add, Exit, CloseButton} from "./"
+import {Add, Exit, CloseButton, HoldButton} from "./"
 import { useHolyContext } from "@/hooks"
 //import { useHolyContext, useBeep } from "@/hooks"
 import { useEffect, useState, useCallback, useRef } from 'react'
@@ -19,7 +19,6 @@ const yesterday = () => {
 // Extract streak logic to custom hook
 const useStreak = () => {
 
-  const [streak, setStreak] = useState(initial);
 
   const loadStreak = () => {
     const data = JSON.parse(localStorage.getItem("streak")) || initial;
@@ -33,6 +32,8 @@ const useStreak = () => {
     }
     return data;
   };
+
+  const [streak, setStreak] = useState(loadStreak);
 
   const markDone = (data) => {
     const todayStr = today();
@@ -58,6 +59,10 @@ const useStreak = () => {
 
   const complete = () => setStreak(markDone);
 
+  // Initial load
+  //useEffect(() => {
+  //  load()
+  //}, []);
 
   return { streak, load, complete, update };
 
@@ -76,20 +81,20 @@ export default function StreakTracker() {
   // These are used to manually update streak
   const ref = useRef(null)
   const [ current, setCurrent ] = useState({...streak})
-  const updateCurrent = (e)=> setCurrent( {...current, count: e.currentTarget.value} )
-  const setAndClose =() => {
-    // console.log(!Number(current.count))
-    //   if (!Number(current.count)) return 
-    if (!/^[+-]?\d+(\.\d+)?$/.test(current.count)) return
+//const updateCurrent = (e) => setCurrent(prev => ({ ...prev, count: e.currentTarget.value }));
+  //const updateCurrent = (e)=> setCurrent( {...current, count: e.currentTarget.value} )
+const updateCurrent = (e) => {
+  const value = e.currentTarget.value; // Read synchronously, currentTarget is still valid at this point
+  setCurrent(prev => ({ ...prev, count: value }));
+};
 
 
-    // console.log(/^[+-]?\d+(\.\d+)?$/.test(current.count))
-
-
-
-    update(current.count) 
-    ref.current.hidePopover();
-  }
+const setAndClose = () => {
+  const n = Number(current.count);
+  if (!Number.isInteger(n) || n < 0) return;
+  update(n);
+  ref.current.hidePopover();
+};
 
 
 
@@ -103,10 +108,10 @@ export default function StreakTracker() {
   // Condition: checks whether "last day prayed" and "today" are the same.
   const doneForToday = today()==streak.last
 
-  // Initial load
-  useEffect(() => {
-    load()
-  }, []);
+  //// Initial load
+  //useEffect(() => {
+  //  load()
+  //}, []);
 
   // Update when prayed
   useEffect(() => {
@@ -115,12 +120,14 @@ export default function StreakTracker() {
     }
   }, [wasRosaryPrayedToday, complete]);
 
+  //useEffect(() => {
+  //  setCurrent(streak)
+  //}, [streak])
+  
 
-  //  useEffect(() => {
-  //  setCurrent({...streak});
-  //}, [streak]);
 
 
+  //if (!streak) return
 
   return <div className={
     `${ doneForToday
@@ -147,8 +154,8 @@ export default function StreakTracker() {
 
 
 
-          <CloseButton onClick={setAndClose} />
           <Exit onClick={() => ref.current.hidePopover()} />
+          <HoldButton action={setAndClose}/>
 
         </article>
       </div>
