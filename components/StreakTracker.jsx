@@ -154,7 +154,7 @@ export default function StreakTracker() {
       </div>
 
       <button popoverTarget="streak-tracker"
-        className="rounded-full h-8 w-8 flex items-center justify-center"
+        className="rounded-full h-8 w-8 flex items-center justify-center text-[0.625rem]"
       >
 
         {streak.count}

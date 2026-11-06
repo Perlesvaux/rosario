@@ -29,7 +29,13 @@ export function HoldButton({action}) {
   };
 
   return (
-    <button  className="py-2 col-span-1 bg-gray-800 text-white rounded text-sm"
+    <button  
+      className="
+        py-2 col-span-1 bg-gray-800 text-white rounded text-sm
+        select-none touch-manipulation
+        [-webkit-touch-callout:none]
+      "
+      style={{ WebkitTouchCallout: 'none' }}
       onMouseDown={startPress}
       onMouseUp={cancelPress}
       onMouseLeave={cancelPress}
